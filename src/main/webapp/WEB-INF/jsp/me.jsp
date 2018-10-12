@@ -12,6 +12,6 @@
 </head>
 <body>
                  <h1>欢迎来到睿智HR管理系统</h1>
-                 <div style="height: "></div>
+                 <div></div>
 </body>
 </html>
