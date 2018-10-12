@@ -293,22 +293,22 @@
     *********************************************************************************************************************************************************** -->
     <!--main content start-->
     <section id="main-content">
-        <section class="wrapper site-min-height">
+        <section class="wrapper">
 
             <div class="row mt" >
-                <div class="col-lg-12" style="margin-top:-25px;margin-left:-16px">
-                    <iframe src="me" height="660px" width="1320px" id="ifra">
-                        <p>Your browser does not support iframes.</p>
-                    </iframe>
-                </div>
+            <div class="col-lg-12" style="margin-top:-25px;margin-left:-16px">
+                <iframe src="me" height="660px" width="1320px" id="ifra">
+                    <p>Your browser does not support iframes.</p>
+                </iframe>
             </div>
+        </div>
 
         </section><! --/wrapper -->
     </section><!-- /MAIN CONTENT -->
 
     <!--main content end-->
     <!--footer start-->
-    <footer class="site-footer">
+   <%-- <footer class="site-footer">
 
         <div class="text-center">
             2014 - Alvarez.is - More Templates <a href="#" target="_blank" title="睿智HR">睿智HR</a> - Collect from <a href="http://www.cssmoban.com/" title="睿智HR" target="_blank">睿智HR</a>
@@ -316,7 +316,7 @@
                 <i class="fa fa-angle-up"></i>
             </a>
         </div>
-    </footer>
+    </footer>--%>
     <!--footer end-->
 </section>
 
