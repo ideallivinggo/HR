@@ -41,7 +41,7 @@ public class YapplyController {
         return service.queryAllEmp();
     }
     /**
-     * 添加招聘 申 请
+     * 添加招聘 申 请1
      */
     @RequestMapping("addRecYLP")
     public String addRec(Recruitment recruitment) {
