@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.aaa.rzhr.dao.EmpMapper">
+    <select id="getByName"  parameterType="String" resultType="Emp">
+        SELECT  * FROM  emp
+         <if test="name !=null">
+        where empnumber=#{name}
+         </if>
+    </select>
+    <insert id="addEmp" parameterType="Emp">
+        INSERT INTO   `emp` (empnumber,`empname`,`password`,salt) values(#{empnumber},#{empname},#{password},#{salt})
+    </insert>
+    <select id="queryallempX" resultType="Emp">
+            SELECT * FROM  emp
+    </select>
+
+    <select id="QqueryEmp" resultType="java.util.Map" parameterType="Map" >
+        select * from emp e left join id_type idtype on e.typeid = idtype.typeid
+        left join education edu on e.eduid = edu.eduid
+        left join dept d on e.deptid = d.deptid
+        left join emp_type et on e.emptypeid = et.emptypeid
+        left join position p on e.poid = p.poid
+        <if test="deptid!=null">
+            WHERE e.deptid=#{deptid}
+        </if>
+        <if test="empname!=null and empname!=''">
+            WHERE e.empname LIKE CONCAT(CONCAT('%',#{empname},'%'))
+        </if>
+    </select>
+    <select id="QqueryEmpIf" resultType="java.util.Map">
+        select * from emp e
+        left join id_type idtype on e.typeid = idtype.typeid
+        left join education edu on e.eduid = edu.eduid
+        left join dept d on e.deptid = d.deptid
+        left join emp_type et on e.emptypeid = et.emptypeid
+        left join position p on e.poid = p.poid
+
+        <if test="empid!=null">
+            where empid=#{empid}
+        </if>
+    </select>
+    <delete id="DelEmpYqx" parameterType="String">
+        delete from emp where empid in (${str})
+    </delete>
+
+</mapper>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.aaa.rzhr.dao.RolePermissionMapper">
+    <select id="getAllRPByRid"  parameterType="int" resultType="Role_Permission">
+        SELECT  * FROM  role_permission  where roid=#{rid}
+    </select>
+    <select id="getAllRPByAllRid" parameterType="java.util.Set" resultType="Role_Permission">
+   SELECT  * FROM  role_permission  where roid in
+       <foreach item="rid"  collection="rid" open="(" separator="," close=")">
+           #{rid,jdbcType=INTEGER}
+       </foreach>
+    </select>
+
+    <delete id="delRolePermissionX" parameterType="Integer" >
+        DELETE FROM role_permission where roid=#{roid}
+    </delete>
+
+    <insert id="addRolePermisssionX">
+
+        INSERT into role_permission (roid,pid) VALUES
+        <foreach collection="list" item="role_permission" separator=",">
+            (#{role_permission.roid},#{role_permission.pid})
+        </foreach>
+
+    </insert>
+
+</mapper>

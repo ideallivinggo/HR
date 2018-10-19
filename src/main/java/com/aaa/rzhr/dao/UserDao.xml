@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.aaa.rzhr.dao.UserDao">
+    <!--个人信息的查询 -->
+    <select id="L_query_user" resultType="java.util.Map">
+     select * from emp e
+left join id_type idtype on e.typeid = idtype.typeid
+left join dept d on e.deptid = d.deptid
+left join recruitment r on r.empid=e.empid
+left join position p on p.posid=e.poid WHERE e.empid=#{empid}
+    </select>
+<!--请假的添加-->
+    <insert id="L_add_leave"  parameterType="java.util.Map">
+        insert into apply_leave(empid,leaoverdate,leaday,leatype,leareason,leaenterdate) values(#{0},#{1},#{2},#{3},#{4},#{5})
+    </insert>
+
+
+</mapper>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.aaa.rzhr.dao.EmpRoleMapper">
+    <select id="SelectByEmp"  parameterType="Emp" resultType="Emp_Role">
+        SELECT  * FROM  emp_role where empid=#{empid}
+    </select>
+    <select id="selectByEmprid" parameterType="Emp" resultType="int">
+        SELECT roid FROM  emp_role WHERE empid=#{empid}
+    </select>
+    <delete id="delEmpRoleByempid" parameterType="Integer" >
+       DELETE FROM emp_role WHERE empid=#{empid}
+    </delete>
+
+    <insert id="saveEmpRole" parameterType="List">
+          INSERT into emp_role (empid,roid) VALUES
+          <foreach collection="list" item="emp_roles" separator=",">
+              (#{emp_roles.empid},#{emp_roles.roid})
+          </foreach>
+    </insert>
+
+
+</mapper>

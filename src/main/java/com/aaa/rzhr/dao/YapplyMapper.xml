@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--mapper路径-->
+<mapper namespace="com.aaa.rzhr.dao.YapplyMapper">
+    <!--查看职业-->
+    <select id="queryAllPos" resultType="Position">
+       select * from position
+    </select>
+    <!--查看部门-->
+    <select id="queryAllDept" resultType="Dept">
+        select * from dept
+    </select>
+    <!--查看员工申请人-->
+    <select id="queryAllEmp" resultType="Emp">
+        select * from emp e inner join dept d on e.deptid=d.deptid where e.deptid=4
+    </select>
+    <!--添加招聘申请-->
+    <insert id="addRec" parameterType="Recruitment">
+        INSERT  INTO recruitment(empid, deptid, recaddress, poid, recnumber, recreachdate, recsex,
+                                  receducation, recage, recsuffer, recmajor, recrequire, recstate)
+           values(#{empid}, #{deptid}, #{recaddress}, #{poid}, #{recnumber}, #{recreachdate}, #{recsex},
+                  #{receducation}, #{recage}, #{recsuffer}, #{recmajor}, #{recrequire}, #{recstate} )
+    </insert>
+    <!--查看招聘信息-->
+    <select id="queryAllRec" resultType="java.util.Map" parameterType="int">
+        SELECT * FROM  recruitment r
+        LEFT JOIN emp e ON r.empid = e.empid
+        LEFT JOIN dept d ON r.deptid = d.deptid
+        LEFT JOIN position p ON r.poid = p.poid
+        WHERE 1 = 1
+        <if test="_parameter != null">
+           AND recid = #{_parameter}
+        </if>
+    </select>
+    <!--修改招聘需求-->
+    <update id="updateRec" parameterType="Recruitment">
+        UPDATE recruitment SET  recreachdate=#{recreachdate}, recsex=#{recsex},receducation= #{receducation}, recage=#{recage},
+         recsuffer=#{recsuffer}, recmajor=#{recmajor}, recrequire=#{recrequire}
+         WHERE recid=#{recid}
+    </update>
+
+    <!--添加简历-->
+    <insert id="addResEntering" parameterType="Resume">
+        INSERT INTO resume(resumename, sex, education, age, phone, resmajor, resposition, emali, resdate, resstate)
+        VALUES (#{resumename}, #{sex}, #{education}, #{age}, #{phone}, #{resmajor}, #{resposition}, #{emali}, #{resdate}, #{resstate})
+    </insert>
+    <!--查看简历-->
+    <select id="queryAllRes"  resultType="java.util.Map" parameterType="Map">
+        select * from resume WHERE  1 = 1
+        <choose>
+            <when test="resid != null">
+                AND resid = #{resid}
+            </when>
+            <otherwise>
+                <if test="resstate != null">
+                    AND resstate = #{resstate}
+                </if>
+                <if test="education != ''">
+                    AND education = #{education}
+                </if>
+                <if test="sex != ''">
+                    AND sex = #{sex}
+                </if>
+            </otherwise>
+        </choose>
+
+        <!--<if test="resid != null">
+            AND resid = #{resid}
+        </if>
+        <if test="resstate != null">
+           AND resstate = #{resstate}
+        </if>
+        <if test="education != ''">
+            AND education = #{education}
+        </if>
+        <if test="sex != ''">
+            AND sex = #{sex}
+        </if>
+-->
+
+    </select>
+    <!--简历筛选选中-->
+    <update id="updateResOne" parameterType="Map">
+        UPDATE resume set resstate = ${resstate}  WHERE resid in (${s})
+   </update>
+</mapper>
