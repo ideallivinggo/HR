@@ -55,4 +55,10 @@ public class RoleServiceImpl implements RoleService {
     public List<Role> listrolex() {
         return roleMapper.listrolex();
     }
+
+    @Override
+    public int addRoleX(Role r) {
+
+        return roleMapper.addRoleX(r);
+    }
 }

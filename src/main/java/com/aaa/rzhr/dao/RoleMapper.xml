@@ -11,4 +11,7 @@
 
         SELECT  * FROM  role
     </select>
+    <insert id="addRoleX" parameterType="Role" keyColumn="roid" keyProperty="roid" useGeneratedKeys="true">
+        INSERT  INTO  role (roname) VALUE  (#{roname})
+    </insert>
 </mapper>

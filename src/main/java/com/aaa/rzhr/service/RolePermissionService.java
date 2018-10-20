@@ -11,4 +11,7 @@ public interface RolePermissionService {
     int delRolePermissionX(Integer roid);
     //保存角色权限表
     int saveRolePermissionX(List<String> liststr,Integer roid);
+    //保存角色权限表
+    int saveRolePermissionX(List<String> liststr,String roname);
+
 }

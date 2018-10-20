@@ -10,4 +10,6 @@ import java.util.List;
 public interface RoleMapper {
      Role getRole(int roid);
      List<Role>  listrolex();
+     //添加角色
+     int  addRoleX(Role r);
 }

@@ -10,5 +10,7 @@ public interface RoleService {
      List<Role> listRoles(String empName);
      List<Role> listRoles(Emp emp);
      List<Role>  listrolex();
+     //添加角色
+     int  addRoleX(Role r);
 
 }

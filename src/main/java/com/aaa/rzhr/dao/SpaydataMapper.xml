@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.aaa.rzhr.dao.SpaydataMapper">
+    <select id="Sgetpaydata" resultType="Payrolldata">
+        SELECT * FROM payrolldata
+    </select>
+    <select id="Sgetlate" resultType="Latedata">
+        SELECT * FROM latedata
+    </select>
+    <delete id="Sdelpaydata">
+        DELETE FROM latedata
+    </delete>
+    <insert id="Saddpaydata" parameterType="java.util.Map">
+         INSERT INTO latedata(latone, lattwo, latpunish)  VALUES (#{latone},#{lattwo},#{latpunish})
+    </insert>
+<update id="Supdpdata1" parameterType="java.util.Map">
+    UPDATE payrolldata SET payrbase=#{payrbase},payrdays=#{payrdays} WHERE payrid=1
+</update>
+    <update id="Supdpdata2" parameterType="java.util.Map">
+        UPDATE payrolldata SET payrbase=#{payrbase},payrdays=#{payrdays},payrhour=#{payrhour} WHERE payrid=2
+    </update>
+    <update id="Supdpdata3" parameterType="java.util.Map">
+   UPDATE payrolldata SET payrbase=#{payrbase},payrdays=#{payrdays},payrhour=#{payrhour} WHERE payrid=3
+    </update>
+    <update id="Supdpdata4" parameterType="java.util.Map">
+        UPDATE payrolldata SET payrbase=#{payrbase},payrdays=#{payrdays},payrhour=#{payrhour},payrpacific=#{payrpacific},payrweekend=#{payrweekend},payrlegal=#{payrlegal} WHERE payrid=4
+    </update>
+    <update id="Supdpdata5" parameterType="java.util.Map">
+        UPDATE payrolldata SET payrbase=#{payrbase},payjixiao=#{payjixiao} WHERE payrid=5
+    </update>
+
+</mapper>

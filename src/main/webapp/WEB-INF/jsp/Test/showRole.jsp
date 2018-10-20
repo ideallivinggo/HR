@@ -66,19 +66,27 @@
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                 <h4 class="modal-title">添加角色</h4>
+
+
             </div>
             <div class="modal-body" >
-                编辑权限
+
 
                 <form class="layui-form" action="">
 
                     <div class="layui-form-item">
 
                         <div class="layui-input-block" >
+                            <i class="layui-icon layui-icon-face-smile" style="font-size: 15px; color: #1E9FFF;">角色名称</i>
+                         <br/>  <br/>  <input id="rolename" required  lay-verify="required" placeholder="请输入角色名称" autocomplete="off" class="layui-input">
+                            <br/>      <i class="layui-icon layui-icon-group" style="font-size: 15px; color: #1E9FFF;">配置权限</i>
+                            <br/>    <div id="addrp">
 
 
+                                      </div>
                         </div>
                     </div>
+
 
                 </form>
                 <script>
@@ -91,7 +99,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                <button type="button" class="btn btn-primary"  onclick="savePermission()" >保存</button>
+                <button type="button" class="btn btn-primary"  onclick="saveaddRole()" >保存</button>
             </div>
         </div>
     </div>
@@ -277,13 +285,58 @@
            success:function (data) {
                if(data=="ok"){
                   window.location.href="/config/showRole";
-                     alert("OK")
+
                }
            }})
    }
 
     function addRole() {
-         alert("99999999")
+        $.ajax({
+            url:'/config/queryallPermissionX',
+            type:'post',
+            dataType:'json',
+            async:false,
+            success:function (data) {
+                var input="";
+                for(var i=0;i<data.length;i++){
+                    input+="<input type='checkbox' value='"+data[i].pid+"' id='"+data[i].pid+"' class='rcpp' title='"+data[i].name+"'>";
+                }
+               $("#addrp").html(input);
+                layui.use('form', function(){
+                    var form=layui.form;
+                    form.render();
+                });
+            }
+        })
+    }
+    function saveaddRole() {
+
+         var addrolepid="";
+        $(".rcpp").each(function () {
+            if($(this).prop("checked")==true){
+                addrolepid+=$(this).val()+",";
+            }
+        })
+
+          $.ajax({
+              url:'/config/addRoleX',
+              data:{
+                  'pidstr':addrolepid,
+                   'roname':$("#rolename").val()
+              },
+              dataType:'text',
+              success:function (data) {
+                  if(data=="okokoko"){
+                      window.location.href="/config/showRole";
+                  }
+              }
+
+
+          })
+
+
+
+
     }
 
 </script>

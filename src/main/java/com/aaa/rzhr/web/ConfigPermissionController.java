@@ -127,6 +127,17 @@ public class ConfigPermissionController {
         return "ok";
     }
 
+    @RequestMapping("addRoleX")
+public  @ResponseBody String addRoleX(String pidstr,String roname){
+        System.out.println(pidstr);
+        System.out.println(roname);
+        String[] pst=   pidstr.split(",");
+        List<String> list= Arrays.asList(pst);
+        rolePermissionService.saveRolePermissionX(list,roname);
+
+
+        return "okokoko";
+}
 
 
 
