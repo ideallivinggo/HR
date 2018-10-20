@@ -33,6 +33,7 @@ public class UserController {
     public @ResponseBody List<Map> L_query_user(Integer empid, HttpServletRequest request){
     List<Map> list=userService.L_query_user(empid);
     HttpSession session=request.getSession();
+    System.out.println("你是傻逼  你知道吗");
     session.setAttribute("emp",list.get(0));
      return  list;
 }
