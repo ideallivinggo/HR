@@ -32,6 +32,7 @@ public class SpaydataController {
     @RequestMapping("/updlatesjp")
     public @ResponseBody boolean updlatedata(String lat1,String lat2,String latp) {
         boolean flag=service.Sdelpaydata();
+        System.out.println("sjp====");
         System.out.println(flag);
         if(flag==true) {
             System.out.println("success");
