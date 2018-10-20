@@ -139,6 +139,14 @@ public  @ResponseBody String addRoleX(String pidstr,String roname){
         return "okokoko";
 }
 
+  @RequestMapping("queryMenuX")
+  public  String  queryMenuX(){
+      System.out.println("查询菜单");
+
+
+
+    return "";
+  }
 
 
 

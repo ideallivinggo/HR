@@ -31,7 +31,7 @@ public class EmpController {
      @RequestMapping("testadduser")
      public String testadEmp(){
          System.out.println("进入主页面testadduser");
-         System.out.println("添加用户");
+         System.out.println("添加用户++++++++++++++++++++++++++++");
 
          String salt = new SecureRandomNumberGenerator().nextBytes().toString();
          int times = 2;
