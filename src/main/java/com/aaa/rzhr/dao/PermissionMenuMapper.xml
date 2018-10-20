@@ -15,5 +15,15 @@
     <select id="getAllPermission" resultType="Permission_Menu">
         SELECT  * FROM  permission_menu
     </select>
+    <select id="getAllMenuByMenu" parameterType="Menu" resultType="Permission_Menu">
+         SELECT  * FROM  permission_menu where mid =#{mid}
+    </select>
+    <insert id="savePermissionMenuX" parameterType="permission_menu">
+            INSERT into permission_menu (mid,pid) VALUES
+            <foreach collection="list" item="permission_menu" separator=",">
+                (#{permission_menu.mid},#{permission_menu.pid})
+            </foreach>
+
+    </insert>
 
 </mapper>

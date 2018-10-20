@@ -41,12 +41,8 @@ public class LogingControllerx {
             subject.login(token);
               Session s=  subject.getSession();
                  Emp emp=empService.getByName(subject.getPrincipal().toString());
-            System.out.println(emp.getEmpnumber()+"///////////////////////////////////////////////////////////////////////////////////////");
-
             s.setAttribute("emp",emp);
-
-
-            return "okok";
+             return "okok";
         } catch (AuthenticationException e) {
            // e.printStackTrace();
             return "nono";

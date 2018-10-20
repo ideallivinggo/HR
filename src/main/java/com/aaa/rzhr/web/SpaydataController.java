@@ -3,6 +3,7 @@ package com.aaa.rzhr.web;
 
 import com.aaa.rzhr.pojo.Latedata;
 import com.aaa.rzhr.service.SpaydataService;
+import com.alibaba.fastjson.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -33,6 +34,9 @@ public class SpaydataController {
     public @ResponseBody boolean updlatedata(String lat1,String lat2,String latp) {
         boolean flag=service.Sdelpaydata();
         System.out.println(flag);
+
+
+
         if(flag==true) {
             System.out.println("success");
             String[] latone = lat1.split(",");

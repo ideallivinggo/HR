@@ -28,6 +28,11 @@ public class ConfigPermissionController {
     PermissionService permissionService;
     @Autowired
     RolePermissionService  rolePermissionService;
+    @Autowired
+    MenuService menuService;
+    @Autowired
+    PermissionMenuService permissionMenuService;
+
 
 
 
@@ -140,13 +145,35 @@ public  @ResponseBody String addRoleX(String pidstr,String roname){
 }
 
   @RequestMapping("queryMenuX")
-  public  String  queryMenuX(){
+  public  String  queryMenuX(Model model){
       System.out.println("查询菜单");
+// List<Menu> lsit
+      List<Menu> menus = menuService.getallMenu();
+       model.addAttribute("menus",menus);
+       Map<Menu,List<Permission>> listPermission=new HashMap<>();
+           for (Menu menu:menus){
+                List<Permission> permissions=permissionMenuService.getAllMenuByMenu(menu);
 
-
-
-    return "";
+               listPermission.put(menu,permissions);
+           }
+    model.addAttribute("listPermission",listPermission);
+      return "Test/showMenu";
   }
+    @RequestMapping("queryMenuajaxX")
+    public  @ResponseBody List<Permission>  queryMenuX(){
+            List<Permission> list=permissionService.QueryAll();
+      return list;
+
+    }
+    @RequestMapping("getallpermissBymidX")
+    public @ResponseBody List<Permission> getallpermissionmenuBymid(Integer midmid){
+          Menu m=new Menu();
+          m.setMid(midmid);
+        List<Permission> list = permissionMenuService.getAllMenuByMenu(m);
+        return list;
+
+    }
+
 
 
 

@@ -14,7 +14,7 @@ import javax.servlet.ServletResponse;
 import java.util.Set;
 
 @SuppressWarnings("ALL")
-public class URLPathMatchingFilter extends PathMatchingFilter {
+public class  URLPathMatchingFilter extends PathMatchingFilter {
     @Autowired
     PermissionService permissionService;
 

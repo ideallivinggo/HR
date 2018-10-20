@@ -23,6 +23,7 @@ public class DatabaseRealm extends AuthorizingRealm {
 
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
+        System.out.println("---------------------------------------------------------------");
         UsernamePasswordToken t= (UsernamePasswordToken) token;
         String empName=token.getPrincipal().toString();
         Emp emp= empService.getByName(empName);
