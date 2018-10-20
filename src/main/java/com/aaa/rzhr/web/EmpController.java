@@ -59,6 +59,10 @@ public class EmpController {
     @RequestMapping("QqueryEmpIf")
     public @ResponseBody
     List<Map> QqueryEmpIf(Integer empid, HttpServletRequest request){
+ 
+
+        System.out.println(empid+"sqqqqqqqqqqqqqqqqqs");
+ 
 
         List<Map> list = empService.QqueryEmpIf(empid);
         HttpSession session = request.getSession();
