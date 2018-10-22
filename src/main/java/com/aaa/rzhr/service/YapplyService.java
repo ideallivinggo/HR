@@ -50,6 +50,19 @@ public interface YapplyService {
      * 晒选简历信息
      */
     void updateResOne(Integer resstate, String s);
+    /**
+     * 添加面试
+     * */
+    void addIntone(Interviewone interviewone);
+    /**
+     * 查看面试
+     * */
+    PageInfo<Map> queryAllInte(Interviewone interviewone, Integer pageNum);
+    List<Map> queryOneInte(Interviewone interviewone);
+    /**
+     * 清除面试,修改简历成状态3（回收站）
+     * */
+    void updateInte(Interviewone interviewone, Integer resstate, String s);
 
 
 }

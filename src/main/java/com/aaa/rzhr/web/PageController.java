@@ -115,7 +115,11 @@ public String Qemp(){
     public String Ytalents(){
         return "Ytalents";
     }
-    //----------------------------------宋金鹏-------------------------
+    @RequestMapping("Yinterview")
+    public String Yinterview(){
+        return "Yinterview";
+    }
+   //----------------------------------宋金鹏-------------------------
     @RequestMapping("spaydata")
     public String Spaydata(){
         return "Spaydata";
