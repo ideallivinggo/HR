@@ -4,9 +4,12 @@ import com.aaa.rzhr.pojo.Emp;
 import com.aaa.rzhr.pojo.TreeVO;
 import com.aaa.rzhr.service.EmpService;
 import com.aaa.rzhr.service.TreeService;
+import com.aaa.rzhr.service.UserService;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.crypto.SecureRandomNumberGenerator;
+import org.apache.shiro.crypto.hash.SimpleHash;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
 import org.apache.shiro.web.util.WebUtils;
@@ -30,6 +33,7 @@ public class LogingControllerx {
 
     @Autowired
     EmpService empService;
+    UserService userService;
 
  @RequestMapping("checkuser")
     public @ResponseBody String  login(String empname, String emppassword, ServletRequest request){
@@ -40,15 +44,33 @@ public class LogingControllerx {
         try {
             subject.login(token);
               Session s=  subject.getSession();
-                 Emp emp=empService.getByName(subject.getPrincipal().toString());
+            Emp emp=empService.getByName(subject.getPrincipal().toString());
             s.setAttribute("emp",emp);
-             return "okok";
+            return "okok";
         } catch (AuthenticationException e) {
-           // e.printStackTrace();
             return "nono";
         }
-
     }
+
+      @RequestMapping("L_update_pwd")
+      public @ResponseBody String updatePassword(String empnumber,String password,String repassword){
+
+
+          System.out.println(empnumber+"empnumber");
+          String salt = new SecureRandomNumberGenerator().nextBytes().toString();
+          int times = 2;
+          String algorithmName = "md5";
+          System.out.println(salt);
+         String encodedPassword = new SimpleHash(algorithmName, repassword, salt, times).toString();
+          System.out.println("***************************"+encodedPassword+"!!!!!");
+          Emp emp=new Emp();
+           emp.setEmpnumber(empnumber);
+           emp.setPassword(encodedPassword);
+           emp.setSalt(salt);
+         // userService.L_update_pwd(emp);
+        return "1";
+      }
+
      @RequestMapping("logout")
     public String  logout(){
          System.out.println("注销登录");

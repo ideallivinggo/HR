@@ -3,7 +3,7 @@
   User: 15G5567
   Date: 2018/10/15
   Time: 9:39
-  To change this template use File | Settings | File Templates.
+  To change tdis template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
@@ -14,7 +14,7 @@
     <style>
         #top {
             background:url('assets/img/ess-background.png');
-            width:100%;
+            widtd:100%;
             height: 120px;
             text-align:center;
         }
@@ -36,7 +36,7 @@
             margin-top:30px;
         }
         #center div img{
-            width: 150px;
+            widtd: 150px;
             height: 150px;
             margin-left:20px;
         }
@@ -48,23 +48,19 @@
         }
         #bottom{
             margin-left: 140px;
-            width:1000px;
+            widtd:1000px;
             height: 300px;
 
         }
         #bottom_1{
+            width: 990px;
             height: 25px;
             border-bottom:1px solid #19AA8D;
-            width: auto;
+            widtd: auto;
         }
-        #bottom_1 input{
-            height: 20px;
-            width: 150px;
-            border:1px solid #19AA8D;
-            margin-left:474px;
-        }
+
         #bottom_1 button{
-            width: 120px;
+            widtd: 120px;
             height: 25px;
            background-color: #fff;
            border: none;
@@ -72,11 +68,11 @@
         }
 
         #yin_3 img{
-            width: 150px;
+            widtd: 150px;
             height: 150px;
         }
         #yin_3 div{
-            width: 150px;
+            widtd: 150px;
             height: 150px;
             float: left;
             border: 1px solid #19AA8D;
@@ -97,27 +93,45 @@
             height: 180px;
         }
         #yin_1{
-            width: auto;
+            width: 990px;
             height:500px;
             background-color: #19AA8D;
             display: none;
         }
         #yin_2{
-            width: auto;
+            width: 990px;
             height:500px;
             background-color:#5cb85c;
             display: none;
         }
         #yin_3{
-            display:none;
+            width: 990px;
+            display:block;
         }
+        #yin_2 table tr {
+            height: 40px;
+
+
+        }
+        #yin_2 table tr td{
+             width:450px;
+        }
+        #yin_1 table tr {
+            height: 40px;
+
+
+        }
+        #yin_1 table tr td{
+            width:450px;
+        }
+
 
 
 
     </style>
 </head>
 <body>
-<div style="height:auto;width:100%;background-color: #F3F3F3;margin-top: 0px">
+<div style="height:auto;widtd:100%;background-color: #F3F3F3;margin-top: 0px">
     <div id="top">
         <div id="f1"></div>
         <div id="f2">${emp.empnumber}</div>
@@ -133,14 +147,27 @@
     <div id="bottom">
 
         <div id="bottom_1">
-            <button id="bottom_1_1" onclick="o1()" style="background-color:#19AA8D">待审批事项</button>
+            <button id="bottom_1_1" onclick="o1()" >待审批事项</button>
             <button id="bottom_1_2" onclick="o2()">我的申请</button>
-            <button id="bottom_1_3" onclick="o3()">发起申请</button>
-            <input type="text" placeholder="请输入关键字"/>
+            <button id="bottom_1_3" style="background-color:#19AA8D" onclick="o3()">发起申请</button>
         </div>
         <div id="bottom_2">
-            <div id="yin_1"></div>
-            <div id="yin_2"></div>
+            <div id="yin_1">
+                <table>
+
+                    <tbody id="mybody1">
+
+                    </tbody>
+                </table>
+            </div>
+            <div id="yin_2">
+                <table>
+
+                    <tbody id="mybody">
+
+                    </tbody>
+                </table>
+            </div>
             <div id="yin_3">
                 <div onclick="i1()"><img src="assets/img/s1.PNG"/></div>
                 <div onclick="i2()"><img src="assets/img/s6.PNG"/></div>
@@ -172,7 +199,7 @@
     }
     function i1() {
         alert("请假申请");
-//个人中心
+//请假申请
 
         $.ajax({
                 url:"L_query_user",
@@ -192,19 +219,81 @@
     var b2 = document.getElementById('bottom_1_2');
     var b1 = document.getElementById('bottom_1_1');
     var y3 = document.getElementById('yin_3');
+    var y2 = document.getElementById('yin_2');
+    var y1 = document.getElementById('yin_1');
     function o1(){
         b2.style.background='#fff';
         b3.style.background='#fff';
         b1.style.background='#19AA8D';
+        y1.style.display='block';
         y3.style.display='none';
-        alert("hello world");
+        y2.style.display='none';
+        $.ajax({
+                url:"L_query_leave",
+                type:"post",
+                data:{"empid":$("#empidid").val(),"leasate":0},
+                dataType:"json",
+                success:function (data) {
+                    alert(data);
+                    $("#mybody1").html("");
+                    for(var i=0;i<data.length;i++){
+                        var tab="<table>";
+                        var tab1="</table>";
+                        var tr="<tr>";
+                        tr+="<td>休假申请</td>";
+                        tr+="<td>"+'申请时间:'+data[i].shendate+"</td>";
+                        tr+="<td>请假状态：审核中</td>";
+                        tr+="</tr>";
+                        tr+="<td>"+'姓名:'+data[i].empname+"</td>";
+                        tr+="<td>"+'类型:'+data[i].leatype+"</td>";
+                        tr+="</tr>";
+                        tr+="<td>"+'理由:'+data[i].leareason+"</td>";
+                        tr+="<td>"+'请假时间/天数:'+data[i].leaenterdate+'/'+data[i].leaday+"天</td>";
+                        tr+="</tr>";
+
+                        $("#mybody1").append(tab+tr+tab1);
+
+                    }
+                }
+            }
+        )
     }
     function o2(){
-
         b1.style.background='#fff';
         b3.style.background='#fff';
         b2.style.background='#19AA8D';
         y3.style.display='none';
+        y2.style.display='block';
+        y1.style.display='none';
+        $.ajax({
+                url:"L_query_leave",
+                type:"post",
+                data:{"empid":$("#empidid").val()},
+                dataType:"json",
+                success:function (data) {
+                   alert(data);
+                    $("#mybody").html("");
+                    for(var i=0;i<data.length;i++){
+                        var tab="<table>";
+                        var tab1="</table>";
+                        var tr="<tr>";
+                        tr+="<td>休假申请</td>";
+                        tr+="<td>"+'申请时间:'+data[i].shendate+"</td>";
+                        tr+="<td>请假状态：审核中</td>";
+                        tr+="</tr>";
+                        tr+="<td>"+'姓名:'+data[i].empname+"</td>";
+                        tr+="<td>"+'类型:'+data[i].leatype+"</td>";
+                        tr+="</tr>";
+                        tr+="<td>"+'理由:'+data[i].leareason+"</td>";
+                        tr+="<td>"+'请假时间/天数:'+data[i].leaenterdate+'/'+data[i].leaday+"天</td>";
+                        tr+="</tr>";
+
+                        $("#mybody").append(tab+tr+tab1);
+
+                    }
+                }
+            }
+        )
         alert("hello world222");
     }
     function o3(){
@@ -212,11 +301,14 @@
         b1.style.background='#fff';
         b2.style.background='#fff';
         b3.style.background='#19AA8D';
+        y2.style.display='none';
         y3.style.display='block';
+        y1.style.display='none';
         alert("hello world.3333");
     }
 
 function  d6() {
     window.location.href="L_list";
 }
+
 </script>
