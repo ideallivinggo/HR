@@ -18,7 +18,7 @@ public interface EmpService {
 
      //-----------------------------------------------///
      /** 查询员工 */
-     public PageInfo<Map> QqueryEmp(Integer pageNum, @Param("deptid")Integer deptid, @Param("empname")String empname);
+     public PageInfo<Map> QqueryEmp(Integer pageNum,Integer deptid,String empname,Integer poid,Integer emptypeid);
      /**
       * 条件查询
       * */

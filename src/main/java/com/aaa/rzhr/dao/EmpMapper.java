@@ -22,7 +22,7 @@ public interface EmpMapper {
 
     //------------------------------------------------------------------////
     /** 查询员工 */
-    public List<Map> QqueryEmp(@Param("deptid")Integer deptid, @Param("empname")String empname);
+    public List<Map> QqueryEmp(@Param("deptid")Integer deptid, @Param("empname")String empname,@Param("poid") Integer poid,@Param("emptypeid") Integer emptypeid);
     /**
      * 条件查询
      * */

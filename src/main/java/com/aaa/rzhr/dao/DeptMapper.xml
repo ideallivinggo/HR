@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.aaa.rzhr.dao.DeptMapper">
+     <select id="QueryDeptYqx" resultType="java.util.Map" parameterType="Map">
+         SELECT * FROM dept
+     </select>
+    <insert id="addDept" parameterType="String">
+          INSERT  INTO dept(deptname) VALUES(#{deptName})
+    </insert>
+    <delete id="delDept" parameterType="Integer">
+          DELETE FROM dept WHERE deptid = #{deptId}
+    </delete>
+</mapper>

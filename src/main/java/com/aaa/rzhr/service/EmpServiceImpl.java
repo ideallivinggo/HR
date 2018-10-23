@@ -37,9 +37,9 @@ public class EmpServiceImpl implements EmpService {
         return empMapper.queryallempX();
     }
     @Override
-    public PageInfo<Map> QqueryEmp(Integer pageNum, @Param("deptid")Integer deptid, @Param("empname")String empname) {
+    public PageInfo<Map> QqueryEmp(Integer pageNum,Integer deptid,String empname,Integer poid,Integer emptypeid) {
         PageHelper.startPage(pageNum,10);
-        List<Map> list = empMapper.QqueryEmp(deptid,empname);
+        List<Map> list = empMapper.QqueryEmp(deptid,empname,poid,emptypeid);
         PageInfo<Map> info = new PageInfo<Map>(list);
         return info;
     }

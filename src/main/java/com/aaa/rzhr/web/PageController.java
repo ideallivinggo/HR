@@ -58,6 +58,14 @@ public String Qemp(){
 
         return "QoneEmp";
     }
+    @RequestMapping("QupdateEmp")
+    public String QupdateEmp(){
+        return "QupdateEmp";
+    }
+    @RequestMapping("Qdept")
+    public String Qdept(){
+        return "Qdept";
+    }
     ///----------------------------------李佳鹏区--------------------------------//
 
     /**

@@ -29,6 +29,12 @@
         <if test="empname!=null and empname!=''">
             WHERE e.empname LIKE CONCAT(CONCAT('%',#{empname},'%'))
         </if>
+        <if test="poid!=null and poid!=''">
+            WHERE  e.poid = #{poid}
+        </if>
+        <if test="emptypeid!=null and emptypeid!=''">
+            WHERE e.emptypeid = #{emptypeid}
+        </if>
     </select>
     <select id="QqueryEmpIf" resultType="java.util.Map">
         select * from emp e

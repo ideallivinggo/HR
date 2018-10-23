@@ -51,9 +51,9 @@ public class EmpController {
 
     @RequestMapping("QqueryEmp")
     public @ResponseBody
-    PageInfo<Map> QqueryEmp(Integer pageNum, Integer deptid, String empname){
+    PageInfo<Map> QqueryEmp(Integer pageNum, Integer deptid, String empname,Integer poid,Integer emptypeid){
         System.out.println("查询"+"部门"+deptid+"姓名"+empname);
-        PageInfo<Map> info = empService.QqueryEmp(pageNum,deptid,empname);
+        PageInfo<Map> info = empService.QqueryEmp(pageNum,deptid,empname,poid,emptypeid);
         System.out.println(info);
         return info;
     }
@@ -61,7 +61,6 @@ public class EmpController {
     public @ResponseBody
     List<Map> QqueryEmpIf(Integer empid, HttpServletRequest request){
         System.out.println(empid+"sqqqqqqqqqqqqqqqqqs");
-
         List<Map> list = empService.QqueryEmpIf(empid);
         HttpSession session = request.getSession();
         session.setAttribute("list",list.get(0));
@@ -75,7 +74,4 @@ public class EmpController {
         empService.DelEmpYqx(ss);
         return "true";
     }
-
-
-
 }
