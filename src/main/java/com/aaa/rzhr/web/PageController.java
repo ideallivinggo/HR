@@ -120,4 +120,8 @@ public String Qemp(){
     public String Spaydata(){
         return "Spaydata";
     }
+    @RequestMapping("sxztz")
+    public String Sxztz(){
+        return "Sxztz";
+    }
 }
