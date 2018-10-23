@@ -119,6 +119,10 @@ public String Qemp(){
     public String Yinterview(){
         return "Yinterview";
     }
+    @RequestMapping("Yinterviewtwo")
+    public String Yinterviewtwo(){
+        return "Yinterviewtwo";
+    }
    //----------------------------------宋金鹏-------------------------
     @RequestMapping("spaydata")
     public String Spaydata(){

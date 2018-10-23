@@ -56,17 +56,26 @@ public interface YapplyMapper {
      * */
     void addIntone(Interviewone interviewone);
     /**
-     * 查看面试
+     * 查看第一次面试
      * */
     List<Map> queryAllInte(Interviewone interviewone);
     /**
-     * 清除面试修改简历状态
+     * 修改第一次面试
      * */
     void updateInte(Interviewone interviewone);
+
     /**
      * 通过后添加第二次面试
      * */
-    //void addIntTwo(in interviewone);
+    void addIntTwo(Interviewtwo Interviewtwo);
+    /**
+     * 查看第二次面试
+     * */
+    List<Map> queryAllInteTwo(Interviewtwo interviewtwo);
+    /**
+     * 修改第二次面试
+     * */
+    void updateInteTwo(Interviewtwo interviewtwo);
 
 
 

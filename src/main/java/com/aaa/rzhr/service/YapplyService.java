@@ -51,18 +51,33 @@ public interface YapplyService {
      */
     void updateResOne(Integer resstate, String s);
     /**
-     * 添加面试
+     * 添加第一次面试
      * */
     void addIntone(Interviewone interviewone);
     /**
-     * 查看面试
+     * 查看第一次面试
      * */
     PageInfo<Map> queryAllInte(Interviewone interviewone, Integer pageNum);
     List<Map> queryOneInte(Interviewone interviewone);
+
     /**
-     * 清除面试,修改简历成状态3（回收站）
+     * 清除过期和不过的面试,修改简历成状态3（简历回收站）
      * */
     void updateInte(Interviewone interviewone, Integer resstate, String s);
+
+    /**
+     * 通过后添加第二次面试和删除第一次面试状态4（第一次面试回收站）
+     * */
+    void addIntTwo(Interviewtwo Interviewtwo, Interviewone interviewone);
+    /**
+     * 查看第二次面试
+     * */
+    PageInfo<Map> queryAllInteTwo(Interviewtwo interviewtwo, Integer pageNum);
+    List<Map> queryOneInteTwo(Interviewtwo interviewtwo);
+    /**
+     * 修改第二次面试
+     * */
+    void updateInteTwo(Interviewtwo interviewtwo);
 
 
 }

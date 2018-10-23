@@ -105,7 +105,7 @@
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                 <h4 class="modal-title"  style="font-size:28px;font-weight:bold;font-family:'楷体';margin-left: 50px">
-                    发送邮件
+                    发送第一次面试邀请
                 </h4>
             </div>
             <div class="modal-body">
@@ -154,7 +154,7 @@
 
                         <div class="layui-form-item">
                             <div class="layui-inline">
-                                <label class="layui-form-label">面试时间&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                                <label class="layui-form-label">一面时间&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
                                 <input class="layui-input" id="test1">
                             </div>
                         </div>
@@ -242,7 +242,7 @@
             }
         })
     }
-    //发邮件待面试2
+    //发邮件等待第一次面试
     function sendmail() {
         var resid=$("#resid").val();//id
         var emali=$("#emali").val();//邮箱
@@ -250,6 +250,7 @@
         var senddate=$("#senddate").val();//发送时间
         var inodate=$("#test1").val();//面试时间
         if(inodate != "" & inodate >= senddate){
+            //发送邮件面试信息
             $.ajax({
                 url:"updateResOne",
                 type:"post",
@@ -258,6 +259,7 @@
                 success:function(data) {
                 }
             })
+            //把简历添加到第一次面试
             $.ajax({
                 url:"addIntoneYLP",
                 type:"post",

@@ -1,14 +1,14 @@
 <%--
   Created by IntelliJ IDEA.
   User: YLP
-  Date: 2018-10-20
-  Time: 21:40
+  Date: 2018-10-22
+  Time: 11:22
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>第一次面试</title>
+    <title>第二次面试</title>
     <script type="text/javascript" src="../../assets/js/jquery.js"></script>
     <script type="text/javascript" src="../../assets/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="../../assets/css/bootstrap.css" type="text/css">
@@ -29,17 +29,17 @@
     <div class="layui-form">
         <div class="layui-form-item">
             <div class="layui-inline" style="margin: 0px">
-                <select id="inostate">
+                <select id="intstate">
                     <option value="0">待面试</option>
                     <option value="1">已通过</option>
                     <option value="2">回收站</option>
                 </select>
             </div>
             <div class="layui-inline" style="margin: 0px" >
-                <input type="button" class="layui-btn" onclick="queryAllInte(1)" value="查询" style="width: 100px">
+                <input type="button" class="layui-btn" onclick="queryAllInteTwo(1)" value="查询" style="width: 100px">
             </div>
             <div class="layui-inline" style="margin-left: 850px" >
-                <a href="Yinterviewtwo"><button class="layui-btn">查看第二次面试</button></a>
+                <a href="Yinterview"><button class="layui-btn">查看第一次面试</button></a>
             </div>
         </div>
     </div>
@@ -88,11 +88,11 @@
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                 <h4 class="modal-title"  style="font-size:28px;font-weight:bold;font-family:'楷体';margin-left: 50px">
-                    第一次面试信息填写
+                    第二次面试信息填写
                 </h4>
             </div>
             <div class="modal-body">
-                <form class="layui-form" id="inteForm" >
+                <form class="layui-form" id="TwoForm" >
                     <div class="layui-form-item">
                         <div class="layui-inline">
                             <label class="layui-form-label">姓名</label>
@@ -117,7 +117,7 @@
                         <div class="layui-inline">
                             <label class="layui-form-label">面试轮次</label>
                             <div class="layui-input-block">
-                                <input id="inonumber" class="layui-input" disabled>
+                                <input id="intnumber" class="layui-input" disabled>
                             </div>
                         </div>
                     </div>
@@ -125,14 +125,14 @@
                         <div class="layui-inline">
                             <label class="layui-form-label">面试时间</label>
                             <div class="layui-input-block">
-                                <input id="inodate" class="layui-input" disabled>
+                                <input id="intdate" class="layui-input" disabled>
                             </div>
                         </div>
                         <div class="layui-inline">
                             <label class="layui-form-label">面试状态</label>
                             <div class="layui-input-block">
-                                <input  name="inostate" value="1"  title="通过" type="radio" checked>
-                                <input  name="inostate" value="2"  title="未通过" type="radio">
+                                <input  name="intstate" value="1"  title="通过" type="radio" checked>
+                                <input  name="intstate" value="2"  title="未通过" type="radio">
                             </div>
                         </div>
                     </div>
@@ -140,28 +140,27 @@
                         <div class="layui-inline" >
                             <label class="layui-form-label">面试官</label>
                             <div class="layui-input-block">
-                                <input name="inname" class="layui-input" style="width: 520px;">
+                                <input name="intname" class="layui-input" style="width: 520px;">
                             </div>
                         </div>
                     </div>
                     <div class="layui-form-item layui-form-text">
                         <label class="layui-form-label">面试备注</label>
                         <div class="layui-input-block" style="width: 520px">
-                                    <textarea name="inonotes"  placeholder="请输入面试信息" class="layui-textarea" ></textarea>
+                            <textarea name="intnotes"  placeholder="请输入面试信息" class="layui-textarea" ></textarea>
                         </div>
                     </div>
-                    <div <%--style="display: none"--%>>
-                        面试id<input name="inoid" id="inoid">
+                    <div<%-- style="display: none"--%>>
+                        面试id<input name="intid" id="intid">
                         简历id<input id="resid">
                     </div>
-
-                    <input type="button" class="layui-btn layui-btn-fluid" onclick="mianshi()" value="保存" style="letter-spacing:15px;"/>
+                    <input type="button" class="layui-btn layui-btn-fluid" onclick="mianshi2()" value="保存" style="letter-spacing:15px;"/>
                 </form>
             </div>
         </div><!-- /.modal-content -->
     </div><!-- /.modal -->
 </div>
-<!-- 模态框查询面试信息填写（Modal） -->
+<!-- 模态框邀请入职信息填写（Modal） -->
 <div class="modal fade" id="myModal2" >
     <div class="modal-dialog" style="width: 700px;" >
         <div class="modal-content">
@@ -239,59 +238,59 @@
     });
     //自动查询
     $(function(){
-        queryAllInte(1);
+        queryAllInteTwo(1);
         //$("#myModal").modal("show");//模态框开启
     });
 
     //查看面试
-    function queryAllInte(pageNum) {
-        var inostate=$("#inostate").val();
+    function queryAllInteTwo(pageNum) {
+        var intstate=$("#intstate").val();
         $.ajax({
-            url: "queryAllInteYLP",
+            url: "queryAllInteTwoYLP",
             type: "post",
-            data:{inostate:inostate, pageNum:pageNum},
+            data:{intstate:intstate, pageNum:pageNum},
             dataType: "json",
             async:false,
             success: function (data) {
                 $("#mytab").html("");
                 for ( var i = 0; i < data.list.length; i++) {
                     var tr="<tr>";
-                    tr+="<td>"+data.list[i].inoid+"</td>";
+                    tr+="<td>"+data.list[i].intid+"</td>";
                     tr+="<td>"+data.list[i].resumename+"</td>";
                     tr+="<td>"+data.list[i].sex+"</td>";
                     tr+="<td>"+data.list[i].age+"</td>";
                     tr+="<td>"+data.list[i].education+"</td>";
                     tr+="<td>"+data.list[i].resmajor+"</td>";
                     tr+="<td>"+data.list[i].resposition+"</td>";
-                    tr+="<td>"+data.list[i].inonumber+"</td>";
-                    tr+="<td>"+data.list[i].inodate+"</td>";
-                    if(data.list[i].inname==undefined){data.list[i].inname=" ";}
-                    tr+="<td>"+data.list[i].inname+"</td>";
-                    if(data.list[i].inonotes==undefined){data.list[i].inonotes=" ";}
-                    tr+="<td>"+data.list[i].inonotes+"</td>";
-                    if(data.list[i].inodate < shijian & data.list[i].inostate==0){
+                    tr+="<td>"+data.list[i].intnumber+"</td>";
+                    tr+="<td>"+data.list[i].intdate+"</td>";
+                    if(data.list[i].intname==undefined){data.list[i].intname=" ";}
+                    tr+="<td>"+data.list[i].intname+"</td>";
+                    if(data.list[i].intnotes==undefined){data.list[i].intnotes=" ";}
+                    tr+="<td>"+data.list[i].intnotes+"</td>";
+                    if(data.list[i].intdate < shijian & data.list[i].intstate==0){
                         tr+="<td style='color: red'>已过期</td>";
-                        tr+="<td><button onclick='qingchu("+data.list[i].inoid+","+data.list[i].resid+")'>清除</button></td>";
+                        tr+="<td><button onclick='qingchu("+data.list[i].intid+")'>清除</button></td>";
                         tr+="</tr>";
                     }
-                    if(data.list[i].inodate == shijian & data.list[i].inostate==0){
+                    if(data.list[i].intdate == shijian & data.list[i].intstate==0){
                         tr+="<td>待面试</td>";
-                        tr+="<td><button data-toggle='modal' data-target='#myModal' onclick='queryOneInte("+data.list[i].inoid+")'>操作</button></td>";
+                        tr+="<td><button data-toggle='modal' data-target='#myModal' onclick='queryOneInte("+data.list[i].intid+")'>操作</button></td>";
                         tr+="</tr>";
                     }
-                    if(data.list[i].inodate > shijian & data.list[i].inostate==0){
+                    if(data.list[i].intdate > shijian & data.list[i].intstate==0){
                         tr+="<td>时间未到</td>";
                         tr+="<td><button>操作</button></td>";
                         tr+="</tr>";
                     }
-                    if(data.list[i].inostate==2){
+                    if(data.list[i].intstate==2){
                         tr+="<td>回收站</td>";
                         tr+="<td></td>";
                         tr+="</tr>";
                     }
-                    if(data.list[i].inostate==1){
+                    if(data.list[i].intstate==1){
                         tr+="<td>已通过</td>";
-                        tr+="<td><button data-toggle='modal' data-target='#myModal2' onclick='queryOneInte("+data.list[i].inoid+")'>面试邀请</button></td>";
+                        tr+="<td>等待审批</td>";
                         tr+="</tr>";
                     }
 
@@ -303,55 +302,38 @@
             }
         })
     }
-   //过期清除
-    function qingchu(obj1,obj2) {
-        var inostate=2;//已过期
-        var resstate=3;//简历回收站
-       $.ajax({
-            url: "updateInteYLP",
+    //过期清除
+    function qingchu(obj) {
+        alert(obj);
+        var intstate=2;//已过期
+        $.ajax({
+            url: "updateInteTwoYLP",
             type: "post",
-            data: {inoid:obj1,inostate:inostate, resstate:resstate, s:obj2},
+            data: {intid:obj,intstate:intstate},
             dataType: "text",
             success: function (data) {
-                queryAllInte(1);
-            }
-        })
-    }
-    //面试记录
-    function mianshi() {
-        var resid=$("#resid").val();//id
-        var resstate=3;//简历回收站
-        $.ajax({
-            url:"updateInteYLP?s="+resid+"&resstate="+resstate,
-            type:"post",
-            data:$("#inteForm").serialize(),
-            dataType: "text",
-            success:function(data) {
-                if(data=="true"){alert("面试完成");}
-                queryAllInte(1);
-                $("#myModal").modal("hide");
+                queryAllInteTwo(1);
             }
         })
     }
     //单个信息
     function queryOneInte(obj) {
-
         $.ajax({
-            url: "queryOneInteYLP",
+            url: "queryOneInteTwoYLP",
             type: "post",
-            data:{inoid:obj},
+            data:{intid:obj},
             dataType: "json",
             success: function (data) {
-                $("#inoid").val(data[0].inoid);
-                $("#inoid2").val(data[0].inoid);
+
+                $("#intid").val(data[0].intid);
                 $("#resid").val(data[0].resid);
                 $("#resid2").val(data[0].resid);
-                $("#inonumber").val(data[0].inonumber);
+                $("#intnumber").val(data[0].intnumber);
                 $("#resumename").val(data[0].resumename);
                 $("#resumename2").val(data[0].resumename);
                 $("#phone").val(data[0].phone);
                 $("#emali").val(data[0].emali);
-                $("#inodate").val(data[0].inodate);
+                $("#intdate").val(data[0].intdate);
                 $("#education").val(data[0].education);
                 $("#resmajor").val(data[0].resmajor);
                 $("#inname").val(data[0].inname);
@@ -359,6 +341,22 @@
             }
         })
     }
+    //第二次面试记录
+    function mianshi2() {
+        $.ajax({
+            url:"updateInteTwoYLP",
+            type:"post",
+            data:$("#TwoForm").serialize(),
+            dataType: "text",
+            success:function(data) {
+                if(data=="true"){alert("面试完成");}
+                queryAllInteTwo(1);
+                $("#myModal").modal("hide");
+               // $("#TwoForm").reset();
+            }
+        })
+    }
+
 
     //发邮件等待第二次面试
     function sendmail() {
@@ -372,8 +370,8 @@
             $.ajax({
                 url:"addIntTwoYLP",
                 type:"post",
-                data:{resid:resid,intdate:intdate,intnumber:2,intstate:0,//添加第二次面试
-                    inoid:inoid,inostate:2,//第一次面试加入回收站
+                data:{resid:resid,intdate:intdate,intnumber:2,intstate:0,
+                    inoid:inoid,inostate:2,
                     emali:emali, notice:notice},
                 dataType: "text",
                 success:function(data) {
@@ -394,12 +392,12 @@
     $("#prepage").click(function(){
         //得到下一页的页码
         var nowPage=parseInt($("#nowPage").html());
-        queryAllRes(nowPage-1);
+        queryAllInteTwo(nowPage-1);
     });
     $("#nextpage").click(function(){
         //得到下一页的页码
         var nowPage=parseInt($("#nowPage").html());
-        queryAllRes(nowPage+1);
+        queryAllInteTwo(nowPage+1);
     });
 
     //系统时间
@@ -418,4 +416,3 @@
 
 </script>
 </html>
-
