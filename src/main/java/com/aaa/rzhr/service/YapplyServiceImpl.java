@@ -65,6 +65,7 @@ public class YapplyServiceImpl implements YapplyService {
         return info;
     }
 
+    //查看单个
     @Override
     public List<Map> queryOneRes(Resume resume) {
         return yapplyMapper.queryAllRes(resume);
@@ -76,5 +77,28 @@ public class YapplyServiceImpl implements YapplyService {
         yapplyMapper.updateResOne(resstate, s);
     }
 
+    @Override
+    public void addIntone(Interviewone interviewone) {
+        yapplyMapper.addIntone(interviewone);
+    }
+
+    @Override
+    public  PageInfo<Map> queryAllInte(Interviewone interviewone, Integer pageNum) {
+        PageHelper.startPage(pageNum,10);
+        List<Map> list=yapplyMapper.queryAllInte(interviewone);
+        PageInfo<Map> info = new PageInfo<Map>(list);
+        return info;
+    }
+    //查看单个
+    @Override
+    public List<Map> queryOneInte(Interviewone interviewone) {
+        return yapplyMapper.queryAllInte(interviewone);
+    }
+
+    @Override
+    public void updateInte(Interviewone interviewone,Integer resstate, String s) {
+        yapplyMapper.updateInte(interviewone);
+        yapplyMapper.updateResOne(resstate,s);
+    }
 
 }

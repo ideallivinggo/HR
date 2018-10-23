@@ -51,6 +51,24 @@ public interface YapplyMapper {
      */
     void  updateResOne(@Param("resstate") Integer resstate, @Param("s") String s);
 
+    /**
+     * 添加第一次面试
+     * */
+    void addIntone(Interviewone interviewone);
+    /**
+     * 查看面试
+     * */
+    List<Map> queryAllInte(Interviewone interviewone);
+    /**
+     * 清除面试修改简历状态
+     * */
+    void updateInte(Interviewone interviewone);
+    /**
+     * 通过后添加第二次面试
+     * */
+    //void addIntTwo(in interviewone);
+
+
 
 
 

@@ -66,7 +66,7 @@ public class YapplyController {
     /**
      * 添加简历
      */
-    @RequestMapping("addResEnteringYlp")
+    @RequestMapping("addResEnteringYlP")
     public String addResEntering(Resume resume) {
         service.addResEntering(resume);
         return "true";
@@ -102,11 +102,42 @@ public class YapplyController {
     public String updateResOne(Integer resstate, String s,String emali, String notice) {
         //单个筛选
         service.updateResOne(resstate,s);
-        mailService.sendSimpleMail(emali,"面试通知",notice);
+        //mailService.sendSimpleMail(emali,"面试通知",notice);
         return "true";
     }
+    /**
+     * 添加面试
+     */
+    @RequestMapping("addIntoneYLP")
+    public String addIntone(Interviewone interviewone) {
+        service.addIntone(interviewone);
+        return "true";
+    }
+    /**
+     * 分页查询面试
+     * */
+    @RequestMapping("queryAllInteYLP")
+    public  PageInfo<Map> queryAllInte(Interviewone interviewone, Integer pageNum) {
+        return service.queryAllInte(interviewone, pageNum);
+    }
+    /**
+     * 查看单个面试
+     */
+    @RequestMapping("queryOneInteYLP")
+    public List<Map> queryOneInte(Interviewone interviewone) {
+        return service.queryOneInte(interviewone);
+    }
 
-
+    /**
+     * 清除过期和不过面试,或添加通过面试
+     * */
+    @RequestMapping("updateInteYLP")
+    public String updateInte(Interviewone interviewone,Integer resstate, String s){
+        System.out.println(s+"------s--------");
+        System.out.println(resstate+"-----resstate---------");
+        service.updateInte(interviewone, resstate, s);
+        return "true";
+    }
 
 
 

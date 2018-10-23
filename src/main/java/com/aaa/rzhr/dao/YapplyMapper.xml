@@ -66,23 +66,47 @@
             </otherwise>
         </choose>
 
-        <!--<if test="resid != null">
-            AND resid = #{resid}
-        </if>
-        <if test="resstate != null">
-           AND resstate = #{resstate}
-        </if>
-        <if test="education != ''">
-            AND education = #{education}
-        </if>
-        <if test="sex != ''">
-            AND sex = #{sex}
-        </if>
--->
 
     </select>
     <!--简历筛选选中-->
     <update id="updateResOne" parameterType="Map">
         UPDATE resume set resstate = ${resstate}  WHERE resid in (${s})
    </update>
+    <!--添加面试-->
+    <insert id="addIntone" parameterType="Interviewone">
+        INSERT  INTO interviewone(resid, inoposition, inodate, inonumber, inostate, inonotes, inname)
+        VALUES (#{resid}, #{inoposition}, #{inodate}, #{inonumber}, #{inostate}, #{inonotes}, #{inname})
+    </insert>
+    <!--查看面试-->
+    <select id="queryAllInte" resultType="java.util.Map" parameterType="Map">
+        SELECT r.*, i.inoid, i.inonumber, i.inostate, i.inonotes, i.inname,
+        str_to_date(inodate,'%Y-%m-%d') inodate FROM interviewone i
+        INNER JOIN resume r ON i.resid = r.resid WHERE 1=1
+        <choose>
+            <when test="inoid != null">
+                AND inoid = #{inoid}
+            </when>
+            <otherwise>
+                <if test="inostate != null">
+                    AND inostate = #{inostate}
+                </if>
+                ORDER BY inodate
+            </otherwise>
+        </choose>
+    </select>
+    <!--清除过期面试-->
+    <update id="updateInte" parameterType="Interviewone">
+         UPDATE interviewone SET
+        <if test="inname != null">
+            inname=#{inname},
+        </if>
+        <if test="inonotes != null">
+            inonotes=#{inonotes},
+        </if>
+        <if test="inostate != null">
+            inostate=#{inostate}
+        </if>
+         WHERE inoid=#{inoid}
+    </update>
+
 </mapper>
