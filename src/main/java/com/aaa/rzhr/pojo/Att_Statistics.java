@@ -1,18 +1,18 @@
 package com.aaa.rzhr.pojo;
 
-
+//ssssssssssssssssssss
 public class Att_Statistics {
 
-  private long staid;
+  private Integer staid;
   private String stagsname;
   private String statjmonth;
 
 
-  public long getStaid() {
+  public Integer getStaid() {
     return staid;
   }
 
-  public void setStaid(long staid) {
+  public void setStaid(Integer staid) {
     this.staid = staid;
   }
 

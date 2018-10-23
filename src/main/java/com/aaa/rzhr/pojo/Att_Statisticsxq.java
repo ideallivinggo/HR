@@ -1,11 +1,11 @@
 package com.aaa.rzhr.pojo;
 
-
+///soutsssssssssss
 public class Att_Statisticsxq {
 
-  private long worid;
-  private long staid;
-  private long empid;
+  private Integer worid;
+  private double staid;
+  private double empid;
   private double worday;
   private double worbelate;
   private double worpaffairs;
@@ -15,29 +15,29 @@ public class Att_Statisticsxq {
   private double worklatesum;
 
 
-  public long getWorid() {
+  public Integer getWorid() {
     return worid;
   }
 
-  public void setWorid(long worid) {
+  public void setWorid(Integer worid) {
     this.worid = worid;
   }
 
 
-  public long getStaid() {
+  public double getStaid() {
     return staid;
   }
 
-  public void setStaid(long staid) {
+  public void setStaid(double staid) {
     this.staid = staid;
   }
 
 
-  public long getEmpid() {
+  public double getEmpid() {
     return empid;
   }
 
-  public void setEmpid(long empid) {
+  public void setEmpid(double empid) {
     this.empid = empid;
   }
 
