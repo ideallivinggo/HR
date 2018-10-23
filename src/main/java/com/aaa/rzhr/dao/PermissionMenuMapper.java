@@ -1,5 +1,7 @@
 package com.aaa.rzhr.dao;
 
+import com.aaa.rzhr.pojo.Menu;
+import com.aaa.rzhr.pojo.Permission;
 import com.aaa.rzhr.pojo.Permission_Menu;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -15,4 +17,6 @@ import java.util.Set;
 public interface PermissionMenuMapper {
     List<Permission_Menu> getAllMenuByPid(@Param("pid") Set<Integer> pid);
     List<Permission_Menu> getAllPermission();
+    List<Permission_Menu> getAllMenuByMenu(Menu menu);
+    int  savePermissionMenuX(List<Permission_Menu> list);
 }

@@ -48,44 +48,38 @@
             <a href="/config/showRole">    <button type="button" class="btn btn-theme">角色管理</button></a>
         </div>
         <div class="btn-group">
-            <a href="/config/queryMenuX">     <button type="button" class="btn btn-theme">菜单管理</button></a>
+             <button type="button" class="btn btn-theme">菜单管理</button>
         </div>
     </div>
 </div><!--/showback -->
-
-
-
-
-
-
 
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title" id="myModalLabel">拥有角色</h4>
+                <h4 class="modal-title" id="myModalLabel">拥有子菜单（权限）</h4>
             </div>
             <div class="modal-body" >
-                编辑用户角色
+                编辑子菜单
 
-                        <form class="layui-form" action="">
+                <form class="layui-form" action="">
 
-                            <div class="layui-form-item">
+                    <div class="layui-form-item">
 
-                                <div class="layui-input-block" id="showrole">
+                        <div class="layui-input-block" id="showrole">
+                            <div id="menuinput"></div>
 
+                        </div>
+                    </div>
 
-                                </div>
-                            </div>
+                </form>
+                <script>
+                    //Demo
+                    layui.use('form', function(){
 
-                        </form>
-                        <script>
-                            //Demo
-                            layui.use('form', function(){
-
-                            });
-                        </script>
+                    });
+                </script>
 
 
             </div>
@@ -101,39 +95,35 @@
     <div class="col-md-12">
         <div class="content-panel">
             <table class="table table-striped table-advance table-hover">
-                <h4><i class="fa fa-angle-right"></i> 员工角色详情</h4>
+                <h4><i class="fa fa-angle-right"></i>菜单详情</h4>
                 <hr>
                 <thead>
                 <tr>
-                    <th><i class="fa fa-bullhorn"></i>员工工号</th>
-                    <th class="hidden-phone"><i class="fa fa-question-circle"></i> 拥有角色</th>
-                    <th><i class="fa fa-bookmark"></i>当前拥有权限</th>
-                    <th><i class=" fa fa-edit"></i> 修改角色</th>
+                    <th><i class="fa fa-bullhorn"></i>父菜单id</th>
+                    <th class="hidden-phone"><i class="fa fa-question-circle">菜单名称</i></th>
+                    <th><i class="fa fa-bookmark"></i>子菜单（就是权限）</th>
+                    <th><i class=" fa fa-edit"></i> 修改</th>
 
                 </tr>
                 </thead>
                 <tbody>
 
-                <c:forEach items="${list}" var="emp">
+                <c:forEach items="${menus}" var="menu">
                     <tr>
-                    <td>   ${emp.empid}</td>
-                    <td>   ${emp.empnumber}</td>
-                    <td>
-                        <c:forEach items="${emp_role[emp]}" var="role" varStatus="status">
-                            <i class="layui-icon layui-icon-friends" style="font-size: 20px; color:#406762;"></i>
-                            ${role.roname} &nbsp;&nbsp;&nbsp;
-                        <c:if test="${status.count%8==0}"> <br/></c:if>
+                        <td>${menu.mid}</td>
+                        <td>${menu.mname}</td>
+                        <td>
+                            <c:forEach items="${listPermission[menu]}" var="permission">
+                                <i class="layui-icon layui-icon-list" style="font-size: 15px; color:#406762;">${permission.name}&nbsp;&nbsp;&nbsp;</i>
+                            </c:forEach>
 
-                        </c:forEach>
 
-                    </td>
-                    <td>
-
-                          <button class="btn btn-primary btn-xs" data-toggle="modal" data-target="#myModal" onclick="queryrole(${emp.empid})" ><i class="fa fa-pencil"></i></button>
-
-                    </td>
+                        </td>
+                        <td><button class="btn btn-primary btn-xs" data-toggle="modal" data-target="#myModal"  onclick="editMenu('${menu.mid}')"><i class="fa fa-pencil"></i></button></td>
                     </tr>
+
                 </c:forEach>
+
 
 
 
@@ -160,79 +150,77 @@
 <!--script for this page-->
 
 <script>
-    //custom select box
+     var mid="";
+  function editMenu(obj) {
 
-
-  var  empid;
-    function queryrole(obj) {
-        empid=obj;
-          $.ajax({
-                  url:'/config/queryRoleX',
-                  type:'post',
-                  dataType:'json',
-                  async:false,
-                  success:function (data) {
-                      var input="";
-                     for(var i=0;i<data.length;i++){
-
-                         input+="<input type='checkbox' value='"+data[i].roid+"' id='"+data[i].roid+"' class='rc' title='"+data[i].roname+"'>";
-
-                     }
-                      $("#showrole").html(input);
-                      layui.use('form', function(){
-                          var form=layui.form;
-                          form.render();
-                      });
-                  }
-    })
-        $.ajax({
-            url:'/config/queryEmpRoleByEmpX',
+       mid=obj;
+       $.ajax({
+            url:'queryMenuajaxX',
             type:'post',
-            data:{
-                'empid':obj
-            },
             dataType:'json',
-            success:function (data) {
-                for(var i=0;i<data.length;i++){
-                    $("#"+data[i].roid).prop('checked', true);
-                }
-          layui.use('form', function(){
-                    var form=layui.form;
-                    form.render();
-                });
-            }
+           async:false,
+           success:function (data) {
+               var input="";
+               for(var i=0;i<data.length;i++){
 
-        })
-    }
-    function saveemprole() {
-          var endroidstr="";
-
-       $(".rc").each(function () {
-            if($(this).prop("checked")==true){
-                endroidstr+=$(this).val()+",";
-            }
+                   input+="<input type='checkbox' value='"+data[i].pid+"' id='"+data[i].pid+"' class='rc' title='"+data[i].name+"'>";
+               }
+               $("#menuinput").html(input);
+               layui.use('form', function(){
+                   var form=layui.form;
+                   form.render();
+               });
+           }
        })
+      $.ajax({
+          url:'getallpermissBymidX',
+          type:'post',
+          data:{'midmid':obj},
+          dataType:'json',
+          success:function (data) {
+              for(var i=0;i<data.length;i++){
+                  $("#"+data[i].pid).prop('checked', true);
+              }
+              layui.use('form', function(){
+                  var form=layui.form;
+                  form.render();
+              });
+          }
+      })
 
-        $.ajax({
-            url:'/config/SaveEmpRoleX',
-            type:'post',
-            data:{
-                'endroidstr':endroidstr,
-                'empid':empid
-            },
-            dataType:'text',
-            success:function (data) {
+  }
+     function saveemprole() {
+         var endroidstr="";
+
+         $(".rc").each(function () {
+             if($(this).prop("checked")==true){
+                 endroidstr+=$(this).val()+",";
+             }
+         })
+          alert(endroidstr)
+
+         /*$.ajax({
+             url:'/config/SaveEmpRoleX',
+             type:'post',
+             data:{
+                 'endroidstr':endroidstr,
+                 'mid':mid
+             },
+             dataType:'text',
+             success:function (data) {
 
                  if(data=="ok"){
 
                      window.location.href="/config/permissionconfig";
 
-            }
+                 }
 
-            }})
-    }
+             }})*/
+     }
+
 
 </script>
 
 </body>
+
 </html>

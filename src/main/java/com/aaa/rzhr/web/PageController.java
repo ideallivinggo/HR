@@ -123,9 +123,22 @@ public String Qemp(){
     public String Ytalents(){
         return "Ytalents";
     }
-    //----------------------------------宋金鹏-------------------------
+    @RequestMapping("Yinterview")
+    public String Yinterview(){
+        return "Yinterview";
+    }
+    @RequestMapping("Yinterviewtwo")
+    public String Yinterviewtwo(){
+        return "Yinterviewtwo";
+    }
+   //----------------------------------宋金鹏-------------------------
     @RequestMapping("spaydata")
     public String Spaydata(){
         return "Spaydata";
     }
+    @RequestMapping("sxztz")
+    public String Sxztz(){
+        return "Sxztz";
+    }
+
 }

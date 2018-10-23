@@ -65,6 +65,7 @@ public class YapplyServiceImpl implements YapplyService {
         return info;
     }
 
+    //查看单个
     @Override
     public List<Map> queryOneRes(Resume resume) {
         return yapplyMapper.queryAllRes(resume);
@@ -76,5 +77,57 @@ public class YapplyServiceImpl implements YapplyService {
         yapplyMapper.updateResOne(resstate, s);
     }
 
+    //添加第一次面试
+    @Override
+    public void addIntone(Interviewone interviewone) {
+        yapplyMapper.addIntone(interviewone);
+    }
+
+    //分页查看第一次面试表
+    @Override
+    public  PageInfo<Map> queryAllInte(Interviewone interviewone, Integer pageNum) {
+        PageHelper.startPage(pageNum,10);
+        List<Map> list=yapplyMapper.queryAllInte(interviewone);
+        PageInfo<Map> info = new PageInfo<Map>(list);
+        return info;
+    }
+    //查看单个第一次面试表
+    @Override
+    public List<Map> queryOneInte(Interviewone interviewone) {
+        return yapplyMapper.queryAllInte(interviewone);
+    }
+
+
+    //清除过期和不过的面试,修改简历成状态3（回收站）
+    @Override
+    public void updateInte(Interviewone interviewone,Integer resstate, String s) {
+        yapplyMapper.updateInte(interviewone);
+        yapplyMapper.updateResOne(resstate,s);
+    }
+
+    //通过后添加第二次面试和删除第一次面试状态4（第一次面试回收站）
+    @Override
+    public void addIntTwo(Interviewtwo Interviewtwo, Interviewone interviewone) {
+        yapplyMapper.addIntTwo(Interviewtwo);
+        yapplyMapper.updateInte(interviewone);
+    }
+    //分页查看第二次面试表
+    @Override
+    public PageInfo<Map> queryAllInteTwo(Interviewtwo interviewtwo, Integer pageNum) {
+        PageHelper.startPage(pageNum,10);
+        List<Map> list = yapplyMapper.queryAllInteTwo(interviewtwo);
+        PageInfo<Map> info = new PageInfo<Map>(list);
+        return info;
+    }
+    //查看单个第二次面试表
+    @Override
+    public List<Map> queryOneInteTwo(Interviewtwo interviewtwo) {
+        return yapplyMapper.queryAllInteTwo(interviewtwo);
+    }
+
+    @Override
+    public void updateInteTwo(Interviewtwo interviewtwo) {
+        yapplyMapper.updateInteTwo(interviewtwo);
+    }
 
 }

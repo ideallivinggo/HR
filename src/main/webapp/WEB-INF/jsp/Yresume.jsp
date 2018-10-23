@@ -232,8 +232,7 @@
                     if(+data.list[i].resstate==0){data.list[i].resstate="未筛选"}
                     if(+data.list[i].resstate==1){data.list[i].resstate="已入库"}
                     if(+data.list[i].resstate==2){data.list[i].resstate="待面试"}
-                    if(+data.list[i].resstate==3){data.list[i].resstate="已面试"}
-                    if(+data.list[i].resstate==4){data.list[i].resstate="回收站"}
+                    if(+data.list[i].resstate==3){data.list[i].resstate="回收站"}
                     tr+="<td>"+data.list[i].resstate+"</td>";
                     tr+="<td><input class='resid' type='checkbox' value='"+data.list[i].resid+"' /></td>";
                     tr+="</tr>";
@@ -296,7 +295,7 @@
         $.ajax({
             url:"updateResOneYLP",
             type:"post",
-            data:{resstate:4,s:str},
+            data:{resstate:3,s:str},
             dataType:"text",
             success:function(data){
                 if(data=="true"){alert("加入回收站成功");}
@@ -308,7 +307,7 @@
     //录入简历
     function addRes() {
         $.ajax({
-            url:"addResEnteringYlp",
+            url:"addResEnteringYlP",
             type:"post",
             data:$("#updateResForm").serialize(),
             dataType: "text",

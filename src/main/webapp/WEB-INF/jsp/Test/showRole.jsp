@@ -48,7 +48,7 @@
             <button type="button" class="btn btn-theme">角色管理</button>
         </div>
         <div class="btn-group">
-            <button type="button" class="btn btn-theme">菜单管理</button>
+            <a href="/config/queryMenuX"><button type="button" class="btn btn-theme">菜单管理</button></a>
         </div>
     </div>
 </div><!--/showback -->
@@ -174,7 +174,7 @@
 
                                 <div class="layui-input-block">
                                     <c:forEach items="${rm[role]}" var="rm" varStatus="status" >
-<i  class="layui-icon layui-icon-auz" style="font-size:15px; color:#406762;">&nbsp;&nbsp; ${rm.name}&nbsp;&nbsp;</i>
+<i  class="layui-icon layui-icon-auz" style="font-size:16px; color:#406762;">&nbsp;&nbsp; ${rm.name}&nbsp;&nbsp;</i>
                                         <c:if test="${status.count%8==0}">
                                        <br>
                                    </c:if>
@@ -285,7 +285,6 @@
            success:function (data) {
                if(data=="ok"){
                   window.location.href="/config/showRole";
-
                }
            }})
    }

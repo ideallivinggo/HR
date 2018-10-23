@@ -28,7 +28,6 @@ public class MailServiceImpl implements MailService {
         message.setTo(to);
         message.setSubject(subject);
         message.setText(content);
-        System.out.println("**************************++++++++++++++++++++++++++------------------");
         try {
             mailSender.send(message);
         } catch (MailException e) {

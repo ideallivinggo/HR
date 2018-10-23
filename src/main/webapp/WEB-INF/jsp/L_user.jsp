@@ -78,7 +78,9 @@
         #form2 input{
             height: 42px;
         }
-
+        a{
+            text-decoration:none
+        }
     </style>
 </head>
 
@@ -120,7 +122,7 @@
              </div>
 
              <div class="bottom">
-                 <div><a href="logout">退出登录</a></div>
+                 <div onclick="xin()">我的薪资</div>
              </div>
 
          </div>
@@ -142,15 +144,14 @@
                 </div>
                 <div class="modal-body">
                     <form id="form1">
-                        <tr><td><img src="assets/img/aaa.PNG"><input class="required" id="name"  type="text" placeholder="公司名称"></td><br><br>
-                        <tr><td><img src="assets/img/bbb.PNG"><input class="required" id="phone" type="text" placeholder="登录手机号"></td></tr><br><br>
-                        <tr><td><img src="assets/img/ccc.PNG"><input class="required" id="password"type="password" placeholder="原密码"></td><br><br>
-                        <tr><td><img src="assets/img/password.PNG"><input class="required" id="repassword" type="password" placeholder="新密码"> </td></tr>
+                        <tr><td><img src="assets/img/bbb.PNG"><input class="required" name="empnumber" id="empnumber" type="text" placeholder="员工号"></td></tr><br><br>
+                        <tr><td><img src="assets/img/ccc.PNG"><input class="required" name="password" id="password"type="password" placeholder="原密码"></td><br><br>
+                        <tr><td><img src="assets/img/password.PNG"><input class="required" name="repassword" id="repassword" type="password" placeholder="新密码"> </td></tr>
                     </form>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭
+                    <button type="button"  class="btn btn-default" data-dismiss="modal">关闭
                     </button>
-                    <button type="button" id="tijiao" class="btn btn-primary">
+                    <button type="button" onclick="tijiao()" class="btn btn-primary">
                         提交更改
                     </button>
                 </div>
@@ -191,30 +192,12 @@
 </body>
 </html>
 <script>
-
     $("form :input").blur(function(){
-
-        //验证姓名
-        if($(this).is("#name")){
-            var nameVal = $.trim(this.value); //原生js去空格方式：this.replace(/(^\s*)|(\s*$)/g, "")
-            var regName = /[~#^$@%&!*()<>:;'"{}【】]/;
-            if(nameVal == "" || nameVal.length <6 || regName.test(nameVal)){
-                alert( " 姓名非空，长度6位以上，不包含特殊字符！");
-
-
-            }
-            else{
-
-
-            }
-        }
         //验证手机号
-        if($(this).is("#phone")){
+        if($(this).is("#empnumber")){
             var phoneVal = $.trim(this.value);
-          var regPhone = /^0?1[3|4|5|7|8][0-9]\d{8}$/;
-            if(phoneVal== "" || (phoneVal != "" && !regPhone.test(phoneVal))){
-               alert("请输入正确的手机号！") ;
-
+            if(phoneVal== ""){
+                alert("请输入员工号") ;
             }
             else{
 
@@ -225,29 +208,42 @@
         //验证密码
         if($(this).is("#password")){
             var pwdVal = $.trim(this.value); //原生js去空格方式：this.replace(/(^\s*)|(\s*$)/g, "")
-            var pwdName = /^[0-9a-zA-Z]+$/;
-            if(pwdVal == "" || pwdVal.length <6 || pwdName.test(pwdVal)){
-               alert(" 密码非空，长度6位以上，不包含特殊字符！");
-
+            if(pwdVal == "" || pwdVal.length <4){
+                alert(" 密码非空，长度5位以上");
             }
-            else{
 
-
-            }
         }
         //验证新密码
         if($(this).is("#repassword")){
-            var repwdVal = $.trim(this.value); //原生js去空格方式：this.replace(/(^\s*)|(\s*$)/g, "")
-            var repwdName = /^[0-9a-zA-Z]+$/;
-            if(repwdVal == "" || repwdVal.length <6 || repwdName.test(repwdVal)){
-                alert( "密码非空，长度6位以上，不包含特殊字符！");
-
-            }
-            else{
-
-
+            var repwdVal = $.trim(this.value);
+            if(repwdVal == "" || repwdVal.length <4 ){
+                alert( "密码非空，长度5位以上");
             }
         }
     });
 
+
+
+
+    function  xin() {
+        window.location.href="L_salary";
+    }
+   function tijiao() {
+       $.ajax({
+               url:"L_update_pwd",
+               type:"post",
+               data:$("#form1").serialize(),
+               dataType:"text",
+               success:function (data) {
+                  alert(data);
+                  if(data=="1"){
+                      window.location.href="login";
+                  }else{
+                      alert("失败");
+                  }
+
+               }
+           }
+       )
+   }
 </script>
