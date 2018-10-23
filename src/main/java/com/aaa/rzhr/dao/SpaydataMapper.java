@@ -1,6 +1,7 @@
 package com.aaa.rzhr.dao;
 
 
+import com.aaa.rzhr.pojo.Att_Statistics;
 import com.aaa.rzhr.pojo.Latedata;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -26,4 +27,13 @@ public interface SpaydataMapper {
     public boolean Supdpdata3(Map m);
     public boolean Supdpdata4(Map m);
     public boolean Supdpdata5(Map m);
+    //获取台账表数据
+    public List<Att_Statistics> Sgetatt();
+    //删除台账表数据
+    public int SdelattById(int id);
+    //获取月考勤记录，员工薪资，员工信息，银行卡信息
+ public List<Map> SgetAll(Integer id);
+ //添加薪资表实发薪资
+ public int Saddpayroll(Map m);
+
 }
