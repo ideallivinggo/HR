@@ -59,6 +59,7 @@
                     var data = obj.data //获得当前行数据
                         ,layEvent = obj.event; //获得 lay-event 对应的值
                     if(layEvent === 'sedit'){
+                        alert(data.staid);
                      var url ="sexportExcelsjp?id="+data.staid;
                         // 这里一定不能使用Ajax请求
                         window.open(url);

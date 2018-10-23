@@ -120,6 +120,7 @@ int ss=service.SdelattById(sid);
 
     @RequestMapping("sexportExcelsjp")
     public void exportExcel(String id, HttpServletRequest request, HttpServletResponse response){
+
                   Integer is=Integer.valueOf(id);
           List<Map> list=service.SgetAll(is);
 // 创建HSSFWorkbook 对象，用于将excel输出到输出流
