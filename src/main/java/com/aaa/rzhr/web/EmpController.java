@@ -41,7 +41,7 @@ public class EmpController {
          System.out.println(encodedPassword);
          System.out.println(salt);
          Emp emp=new Emp();
-         emp.setEmpnumber("admin");
+         emp.setEmpnumber("rz003");
          emp.setPassword(encodedPassword);
          emp.setSalt(salt);
 

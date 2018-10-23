@@ -14,8 +14,28 @@ left join position p on p.posid=e.poid WHERE e.empid=#{empid}
     </select>
 <!--请假的添加-->
     <insert id="L_add_leave"  parameterType="java.util.Map">
-        insert into apply_leave(empid,leaoverdate,leaday,leatype,leareason,leaenterdate) values(#{0},#{1},#{2},#{3},#{4},#{5})
+        insert into apply_leave(empid,leaoverdate,leaday,leatype,leareason,leaenterdate,shendate,leasate) values(#{0},#{1},#{2},#{3},#{4},#{5},#{6},#{7})
     </insert>
 
+<!--修改登录密码-->
+    <update id="L_update_pwd"  parameterType="Emp">
+        update emp set empname='13' WHERE empnumber='12'
+    </update>
+    <!--查询每个审核状态-->
+    <select id="L_query_leave" resultType="java.util.Map" parameterType="Map">
+        select * from apply_leave al
+left join emp e on e.empid = al.empid where e.empid=#{empid}
+        <if test="leasate !=null ">
+        and al.leasate=#{leasate}
+        </if>
 
-</mapper>
+    </select>
+    <!--历史工资单查询-->
+    <select  id="L_query_pay" resultType="java.util.Map" parameterType="Int">
+        SELECT * from emp e
+left join payroll p on e.empid = p.empid
+left join att_statisticsxq ast on e.empid = ast.empid
+left join att_statistics asts on asts.staid= ast.staid
+WHERE  e.empid=#{empid}
+    </select>
+    </mapper>

@@ -12,6 +12,8 @@ public class Apply_Leave {
   private String leareason;
   private Integer leaapproveid;
   private Integer leasate;
+  private String shendate;
+  private String pidate;
 
 
   public Integer getLeaid() {
@@ -92,6 +94,24 @@ public class Apply_Leave {
 
   public void setLeasate(Integer leasate) {
     this.leasate = leasate;
+  }
+
+
+  public String getShendate() {
+    return shendate;
+  }
+
+  public void setShendate(String shendate) {
+    this.shendate = shendate;
+  }
+
+
+  public String getPidate() {
+    return pidate;
+  }
+
+  public void setPidate(String pidate) {
+    this.pidate = pidate;
   }
 
 }
