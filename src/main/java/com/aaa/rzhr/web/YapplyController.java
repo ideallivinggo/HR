@@ -98,6 +98,7 @@ public class YapplyController {
         service.updateResOne(resstate,ss);
         return "true";
     }
+
     @RequestMapping("updateResOne")
     public String updateResOne(Integer resstate, String s,String emali, String notice) {
         //单个筛选
@@ -133,12 +134,48 @@ public class YapplyController {
      * */
     @RequestMapping("updateInteYLP")
     public String updateInte(Interviewone interviewone,Integer resstate, String s){
-        System.out.println(s+"------s--------");
-        System.out.println(resstate+"-----resstate---------");
         service.updateInte(interviewone, resstate, s);
         return "true";
     }
 
+
+    /**
+     * 通过后添加第二次面试
+     * 修改第一次面试状态2（放入第一次面试回收站）
+     * 发送邮件
+     */
+    @RequestMapping("addIntTwoYLP")
+    public String addIntTwo(Interviewtwo interviewtwo, Interviewone interviewone, String emali, String notice) {
+        service.addIntTwo(interviewtwo, interviewone);
+        //mailService.sendSimpleMail(emali,"面试通知",notice);
+        return "true";
+    }
+
+    /**
+     * 分页查询第二次面试
+     * */
+    @RequestMapping("queryAllInteTwoYLP")
+    public  PageInfo<Map> queryAllInteTwo(Interviewtwo interviewtwo, Integer pageNum) {
+        return service.queryAllInteTwo(interviewtwo, pageNum);
+    }
+    /**
+     * 查看单个第二次面试
+     */
+    @RequestMapping("queryOneInteTwoYLP")
+    public List<Map> queryOneInteTwo(Interviewtwo interviewtwo) {
+        return service.queryOneInteTwo(interviewtwo);
+    }
+    /**
+     * 修改第二次面试
+     * */
+    @RequestMapping("updateInteTwoYLP")
+    public String updateInteTwo(Interviewtwo interviewtwo){
+        System.out.println(interviewtwo.getIntid());
+        System.out.println(interviewtwo.getIntstate());
+        System.out.println(interviewtwo.getIntnotes());
+        service.updateInteTwo(interviewtwo);
+        return "true";
+    }
 
 
 }
