@@ -1,24 +1,15 @@
 package com.aaa.rzhr.pojo;
 
-/**
- * @author YLP
- * @date 2018-10-14 16:46
- * 第二轮面试
- */
+
 public class Interviewtwo {
 
   private Integer intid;
   private Integer resid;
-  private String intposition;
+  private Integer intgrade;
   private String intdate;
-  private Integer intnumber;
   private String intnotes;
-  private double inttpaytry;
-  private double intpayjust;
-  private Integer intstate;
-  private String inthiredate;
-  private String intentrydate;
   private String intname;
+  private Integer intstate;
 
 
   public Integer getIntid() {
@@ -39,12 +30,12 @@ public class Interviewtwo {
   }
 
 
-  public String getIntposition() {
-    return intposition;
+  public Integer getIntgrade() {
+    return intgrade;
   }
 
-  public void setIntposition(String intposition) {
-    this.intposition = intposition;
+  public void setIntgrade(Integer intgrade) {
+    this.intgrade = intgrade;
   }
 
 
@@ -57,15 +48,6 @@ public class Interviewtwo {
   }
 
 
-  public Integer getIntnumber() {
-    return intnumber;
-  }
-
-  public void setIntnumber(Integer intnumber) {
-    this.intnumber = intnumber;
-  }
-
-
   public String getIntnotes() {
     return intnotes;
   }
@@ -75,21 +57,12 @@ public class Interviewtwo {
   }
 
 
-  public double getInttpaytry() {
-    return inttpaytry;
+  public String getIntname() {
+    return intname;
   }
 
-  public void setInttpaytry(double inttpaytry) {
-    this.inttpaytry = inttpaytry;
-  }
-
-
-  public double getIntpayjust() {
-    return intpayjust;
-  }
-
-  public void setIntpayjust(double intpayjust) {
-    this.intpayjust = intpayjust;
+  public void setIntname(String intname) {
+    this.intname = intname;
   }
 
 
@@ -99,33 +72,6 @@ public class Interviewtwo {
 
   public void setIntstate(Integer intstate) {
     this.intstate = intstate;
-  }
-
-
-  public String getInthiredate() {
-    return inthiredate;
-  }
-
-  public void setInthiredate(String inthiredate) {
-    this.inthiredate = inthiredate;
-  }
-
-
-  public String getIntentrydate() {
-    return intentrydate;
-  }
-
-  public void setIntentrydate(String intentrydate) {
-    this.intentrydate = intentrydate;
-  }
-
-
-  public String getIntname() {
-    return intname;
-  }
-
-  public void setIntname(String intname) {
-    this.intname = intname;
   }
 
 }

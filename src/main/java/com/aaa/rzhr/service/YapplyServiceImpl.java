@@ -79,8 +79,9 @@ public class YapplyServiceImpl implements YapplyService {
 
     //添加第一次面试
     @Override
-    public void addIntone(Interviewone interviewone) {
+    public void addIntone(Interviewone interviewone, Integer resstate, String s) {
         yapplyMapper.addIntone(interviewone);
+        yapplyMapper.updateResOne(resstate, s);
     }
 
     //分页查看第一次面试表
@@ -128,6 +129,22 @@ public class YapplyServiceImpl implements YapplyService {
     @Override
     public void updateInteTwo(Interviewtwo interviewtwo) {
         yapplyMapper.updateInteTwo(interviewtwo);
+    }
+
+    @Override
+    public void inteTwoPash(Integer intstate, String s) {
+        yapplyMapper.inteTwoPash(intstate, s);
+    }
+
+    @Override
+    public void addEmp(Emp emp,Interviewtwo interviewtwo) {
+        yapplyMapper.addEmp(emp);
+        yapplyMapper.updateInteTwo(interviewtwo);
+    }
+
+    @Override
+    public Map queryEmpID(Integer empid) {
+        return yapplyMapper.queryEmpID(empid);
     }
 
 }
