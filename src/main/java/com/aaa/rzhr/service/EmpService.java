@@ -17,8 +17,8 @@ public interface EmpService {
      List<Emp> queryallempX();
 
      //-----------------------------------------------///
-     /** 查询员工 */
-     public PageInfo<Map> QqueryEmp(Integer pageNum, @Param("deptid")Integer deptid, @Param("empname")String empname);
+     /** 查询员工 1*/
+     public PageInfo<Map> QqueryEmp(Integer pageNum,Integer deptid,String empname,Integer poid,Integer emptypeid);
      /**
       * 条件查询
       * */
@@ -27,5 +27,9 @@ public interface EmpService {
       * 批量删除
       * */
      public void DelEmpYqx(String  str);
+     /**
+      * 更新
+      * */
+     public void UpdateEmpYqx(Emp emp);
 
 }
