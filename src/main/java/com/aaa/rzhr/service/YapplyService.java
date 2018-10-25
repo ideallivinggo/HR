@@ -70,7 +70,7 @@ public interface YapplyService {
      * */
     void addIntTwo(Interviewtwo Interviewtwo, Interviewone interviewone);
     /**
-     * 查看第二次面试
+     * 查看第二次 面试
      * */
     PageInfo<Map> queryAllInteTwo(Interviewtwo interviewtwo, Integer pageNum);
     List<Map> queryOneInteTwo(Interviewtwo interviewtwo);

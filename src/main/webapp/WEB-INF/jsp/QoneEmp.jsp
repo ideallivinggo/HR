@@ -65,6 +65,9 @@
             margin:0 auto;
             margin-top:30px;
         }
+        .div-span input{
+            height: 30px;
+        }
     </style>
 </head>
 <body style="background-color: #f3f3f3">
@@ -189,34 +192,7 @@
                     <div class="layui-tab-item">内容2</div>
                     <div class="layui-tab-item">内容3</div>
                     <div class="layui-tab-item">内容4</div>
-                    <div class="layui-tab-item">
-                        <h1>${list.empid}</h1>
-                        <h1>${list.empnumber}</h1>
-                        <h1>${list.empname}</h1>
-                        <h1>${list.mppicture}</h1>
-
-                        <h1>${list.typeid}${list.typename}</h1>
-                        <h1>${list.idnumber}</h1>
-                        <h1>${list.sex}</h1>
-                        <h1>${list.birthdate}</h1>
-                        <h1>${list.nation}</h1>
-                        <h1>${list.accounttype}</h1>
-                        <h1>${list.eduid}${list.eduname}</h1>
-                        <h1>${list.address}</h1>
-                        <h1>${list.politics}</h1>
-                        <h1>${list.qqnumber}</h1>
-                        <h1>${list.phone}</h1>
-                        <h1>${list.password}</h1>
-                        <h1>${list.salt}</h1>
-                        <h1>${list.email}</h1>
-                        <h1>${list.urgencyphone}</h1>
-                        <h1>${list.urgencyname}</h1>
-                        <h1>${list.empnotes}</h1>
-                        <h1>${list.deptid}${list.deptname}</h1>
-                        <h1>${list.poid}${list.posname}${list.poscontext}</h1>
-                        <h1>${list.emptypeid}${list.emptype}</h1>
-                        <h1>${list.empstateid}${list.statename}${list.empstatedate}</h1>
-                    </div>
+                    <div class="layui-tab-item">内容5</div>
                     </div>
                 </div>
             </div>

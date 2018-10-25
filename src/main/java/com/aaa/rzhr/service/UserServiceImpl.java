@@ -1,11 +1,8 @@
 package com.aaa.rzhr.service;
 
 import com.aaa.rzhr.dao.UserDao;
-import com.aaa.rzhr.pojo.Apply_Leave;
 import com.aaa.rzhr.pojo.Emp;
 import com.aaa.rzhr.util.LayuiFy;
-import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

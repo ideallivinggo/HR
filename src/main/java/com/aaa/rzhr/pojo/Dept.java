@@ -9,7 +9,9 @@ public class Dept {
 
   private Integer deptid;
   private String deptname;
-  private String pdeptid;
+  private Integer deptnum;
+  private Integer empid;
+  private Integer roid;
 
 
   public Integer getDeptid() {
@@ -20,6 +22,29 @@ public class Dept {
     this.deptid = deptid;
   }
 
+  public Integer getDeptnum() {
+    return deptnum;
+  }
+
+  public void setDeptnum(Integer deptnum) {
+    this.deptnum = deptnum;
+  }
+
+  public Integer getEmpid() {
+    return empid;
+  }
+
+  public void setEmpid(Integer empid) {
+    this.empid = empid;
+  }
+
+  public Integer getRoid() {
+    return roid;
+  }
+
+  public void setRoid(Integer roid) {
+    this.roid = roid;
+  }
 
   public String getDeptname() {
     return deptname;
@@ -30,12 +55,5 @@ public class Dept {
   }
 
 
-  public String getPdeptid() {
-    return pdeptid;
-  }
-
-  public void setPdeptid(String pdeptid) {
-    this.pdeptid = pdeptid;
-  }
 
 }

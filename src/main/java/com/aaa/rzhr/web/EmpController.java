@@ -1,6 +1,7 @@
 package com.aaa.rzhr.web;
 
 import com.aaa.rzhr.pojo.Emp;
+import com.aaa.rzhr.service.ContractService;
 import com.aaa.rzhr.service.EmpService;
 import com.aaa.rzhr.service.TreeService;
 import com.github.pagehelper.PageInfo;
@@ -48,7 +49,9 @@ public class EmpController {
          empService.addEmp(emp);
          return "index";
      }
-
+/**
+ * 查询员工
+ * */
     @RequestMapping("QqueryEmp")
     public @ResponseBody
     PageInfo<Map> QqueryEmp(Integer pageNum, Integer deptid, String empname,Integer poid,Integer emptypeid){
@@ -62,6 +65,8 @@ public class EmpController {
     List<Map> QqueryEmpIf(Integer empid, HttpServletRequest request){
         System.out.println(empid+"sqqqqqqqqqqqqqqqqqs");
         List<Map> list = empService.QqueryEmpIf(empid);
+
+        System.out.println(list);
         HttpSession session = request.getSession();
         session.setAttribute("list",list.get(0));
         return list;
@@ -72,6 +77,18 @@ public class EmpController {
         String ss = s.substring(0,s.length()-1);
         System.out.println(ss+"ssssssssssssssssssssssssssssssss");
         empService.DelEmpYqx(ss);
+        return "true";
+    }
+
+    /**
+     * 更新
+     * */
+    @RequestMapping("UpdateEmpYqx")
+    @ResponseBody
+    public String UpdateEmpYqx(Emp emp){
+        System.out.println(emp.getEmpid()+"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
+        empService.UpdateEmpYqx(emp);
+        System.out.println("99999999999999999999999999");
         return "true";
     }
 }
