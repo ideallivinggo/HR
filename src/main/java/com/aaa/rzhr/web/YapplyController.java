@@ -24,7 +24,7 @@ public class YapplyController {
     @Autowired
     MailService mailService;
 
-
+////////////////////////////////////招聘申请///////////////////////////////////////////////////
     /**
      * 查看招聘申请的外键链接表
      */
@@ -63,6 +63,7 @@ public class YapplyController {
         service.updateRec(recruitment);
         return "true";
     }
+    ////////////////////////////////////简历///////////////////////////////////////////////////
     /**
      * 添加简历
      */
@@ -98,20 +99,15 @@ public class YapplyController {
         service.updateResOne(resstate,ss);
         return "true";
     }
-
-    @RequestMapping("updateResOne")
-    public String updateResOne(Integer resstate, String s,String emali, String notice) {
-        //单个筛选
-        service.updateResOne(resstate,s);
-        //mailService.sendSimpleMail(emali,"面试通知",notice);
-        return "true";
-    }
+////////////////////////////////////第一次面试///////////////////////////////////////////////////
     /**
      * 添加面试
      */
     @RequestMapping("addIntoneYLP")
-    public String addIntone(Interviewone interviewone) {
-        service.addIntone(interviewone);
+    public String addIntone(Interviewone interviewone, Integer resstate, String s,String emali, String notice) {
+        service.addIntone(interviewone, resstate, s);
+        String shijian = interviewone.getInodate();
+        //mailService.sendSimpleMail(emali,"面试通知",notice+"面试时间"+shijian);
         return "true";
     }
     /**
@@ -130,7 +126,8 @@ public class YapplyController {
     }
 
     /**
-     * 清除过期和不过面试,或添加通过面试
+     * 清除过期和不过面试
+     * 添加通过面试
      * */
     @RequestMapping("updateInteYLP")
     public String updateInte(Interviewone interviewone,Integer resstate, String s){
@@ -138,7 +135,7 @@ public class YapplyController {
         return "true";
     }
 
-
+////////////////////////////////////第二次面试///////////////////////////////////////////////////
     /**
      * 通过后添加第二次面试
      * 修改第一次面试状态2（放入第一次面试回收站）
@@ -147,10 +144,10 @@ public class YapplyController {
     @RequestMapping("addIntTwoYLP")
     public String addIntTwo(Interviewtwo interviewtwo, Interviewone interviewone, String emali, String notice) {
         service.addIntTwo(interviewtwo, interviewone);
-        //mailService.sendSimpleMail(emali,"面试通知",notice);
+        String shijian = interviewtwo.getIntdate();
+        //mailService.sendSimpleMail(emali,"面试通知",notice+"面试时间"+shijian);
         return "true";
     }
-
     /**
      * 分页查询第二次面试
      * */
@@ -170,10 +167,38 @@ public class YapplyController {
      * */
     @RequestMapping("updateInteTwoYLP")
     public String updateInteTwo(Interviewtwo interviewtwo){
-        System.out.println(interviewtwo.getIntid());
-        System.out.println(interviewtwo.getIntstate());
-        System.out.println(interviewtwo.getIntnotes());
         service.updateInteTwo(interviewtwo);
+        return "true";
+    }
+
+   ////////////////////////////////////面试完成推送到人事部选择录取///////////////////////////
+    /**
+     * 推送筛选
+     */
+    @RequestMapping("inteTwoPashYLP")
+    public String inteTwoPash(Integer intstate, String s) {
+        //多个筛选
+        String ss = s.substring(0,s.length() - 1);
+        service.inteTwoPash(intstate,ss);
+        return "true";
+    }
+    /**
+     * 查看最大员工id
+     * 生成员工编号
+     */
+    @RequestMapping("queryEmpIDYLP")
+    public Map queryEmpID(Integer empid) {
+        return service.queryEmpID(empid);
+    }
+    /**
+     * 添加到emp表（待入职状态）
+     */
+    @RequestMapping("addEmpYLP")
+    public String addEmp(Emp emp,Interviewtwo interviewtwo, String notice) {
+        service.addEmp(emp, interviewtwo);
+        String shijian = emp.getEmpstatedate();
+        String email=emp.getEmail();
+        //mailService.sendSimpleMail(email,"面试通知",notice+"入职时间"+shijian);
         return "true";
     }
 

@@ -101,20 +101,23 @@ public String Qemp(){
         return "L_leave";
 
     }
-    //----------------------------------月亮鹏-------------------------
+    //----------------------------------岳梁朋-------------------------
+    //申请表
     @RequestMapping("Yapply")
     public String Yapply(){
         return "Yapply";
     }
-
+    //简历筛选
     @RequestMapping("Yresume")
-    public String Yresume(){
+   public String Yresume(){
         return "Yresume";
     }
+    //简历人才资源库
     @RequestMapping("Ytalents")
     public String Ytalents(){
         return "Ytalents";
     }
+    //面试表
     @RequestMapping("Yinterview")
     public String Yinterview(){
         return "Yinterview";
@@ -123,6 +126,19 @@ public String Qemp(){
     public String Yinterviewtwo(){
         return "Yinterviewtwo";
     }
+    //员工录用推送
+    @RequestMapping("Yhire")
+    public String Yhire(){
+        return "Yhire";
+    }
+    //员工录用回复
+    @RequestMapping("Yreply")
+    public String Yreply(){
+        return "Yreply";
+    }
+
+
+
    //----------------------------------宋金鹏-------------------------
     @RequestMapping("spaydata")
     public String Spaydata(){

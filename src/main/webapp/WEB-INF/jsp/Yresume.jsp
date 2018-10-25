@@ -9,7 +9,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>简历库</title>
+    <title>简历筛选</title>
     <script type="text/javascript" src="../../assets/js/jquery.js"></script>
     <script type="text/javascript" src="../../assets/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="../../assets/css/bootstrap.css" type="text/css">
@@ -62,9 +62,9 @@
     <div style="float: right">
         <button class="layui-btn" data-toggle="modal" data-target="#myModal">
             <i class="layui-icon">&#xe642;</i> 录入简历</button>
-        <button class="layui-btn" onclick="updareOne()">
+        <button class="layui-btn" onclick="updareRes(1)">
             <i class="layui-icon">&#xe608;</i> 加入简历库</button>
-        <button class="layui-btn" onclick="updareTwo()">
+        <button class="layui-btn" onclick="updareRes(3)">
             <i class="layui-icon">&#xe640;</i>加入回收站</button>
     </div>
 <!--table表格-->
@@ -262,7 +262,7 @@
 
 
     //筛选加入简历库
-    function updareOne() {
+    function updareRes(obj) {
         var str="";
         //获取到所有的被选中的复选框
         $(".resid").each(function(){
@@ -274,31 +274,10 @@
         $.ajax({
             url:"updateResOneYLP",
             type:"post",
-            data:{resstate:1,s:str},
+            data:{resstate:obj, s:str},
             dataType:"text",
             success:function(data){
-                if(data=="true"){alert("加入简历库成功");}
-                queryAllRes(1);
-            }
-        });
-    }
-    //筛选加入回收站 aa
-    function updareTwo() {
-        var str="";
-        //获取到所有的被选中的复选框
-        $(".resid").each(function(){
-            if($(this).prop("checked")==true){
-                var jsonStr=$(this).val();
-                str+=jsonStr+",";
-            }
-        });
-        $.ajax({
-            url:"updateResOneYLP",
-            type:"post",
-            data:{resstate:3,s:str},
-            dataType:"text",
-            success:function(data){
-                if(data=="true"){alert("加入回收站成功");}
+                if(data=="true"){alert("执行成功");}
                 queryAllRes(1);
             }
         });

@@ -29,6 +29,7 @@ public class Emp {
   private Integer emptypeid;
   private String emppay;
   private Integer empstateid;
+  private String empstatedate;
 
 
   public Integer getEmpid() {
@@ -262,6 +263,15 @@ public class Emp {
 
   public void setEmpstateid(Integer empstateid) {
     this.empstateid = empstateid;
+  }
+
+
+  public String getEmpstatedate() {
+    return empstatedate;
+  }
+
+  public void setEmpstatedate(String empstatedate) {
+    this.empstatedate = empstatedate;
   }
 
 }

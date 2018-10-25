@@ -4,12 +4,12 @@
   Date: 2018-10-19
   Time: 20:08
   To change this template use File | Settings | File Templates.
-  人才资源库
+  简历库
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>人才资源库</title>
+    <title>简历库</title>
     <script type="text/javascript" src="../../assets/js/jquery.js"></script>
     <script type="text/javascript" src="../../assets/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="../../assets/css/bootstrap.css" type="text/css">
@@ -58,6 +58,7 @@
                 <input type="button" class="layui-btn" onclick="queryAllRes(1)" value="查询" style="width: 100px">
             </div>
 
+
         </div>
     </div>
 </div>
@@ -77,14 +78,14 @@
         <th>QQ邮箱</th>
         <th>学历</th>
         <th>专业</th>
-        <th>应聘职位</th>
+        <th>心仪职位</th>
         <th>录入时间</th>
         <th>简历状态</th>
         <th>操作</th>
     </tr>
     </thead>
     <tbody id="mytab">
-       <!--数据-->
+    <!--数据-->
     </tbody>
 </table>
 
@@ -142,21 +143,22 @@
                         <div class="layui-form-item layui-form-text">
                             <label class="layui-form-label">通知信息</label>
                             <div class="layui-input-block" style="width: 520px">
-                                    <textarea id="notice" placeholder="请输入通知信息" class="layui-textarea" >
-你好，我这边是郑州睿智科技有限公司，在网上收到你投递的简历，如需要安排面试，请回复邮件，谢谢！
-                                                                            面试通知单
-你好，经过初步面试筛选，你应聘本公司___软件开发____岗位，基本符合要求。如果对于岗位有兴趣，可以回复邮件，可以在__月__号前预约时间，前往公司参加面试和笔试。携带个人简历一份。可以提前预约时间面试。
-公司地址：郑州金水区北三环大学生创业园区
-电话：8888888 岳三金 15837389710
+                                    <textarea id="notice" placeholder="请输入通知信息" class="layui-textarea" rows="8">
+你好，我这边是新乡睿智科技有限公司，在网上收到你投递的简历，现给你安排面试，请回复邮件，谢谢！
+面试通知单
+你好，经过初步简历筛选，你符合应聘的基本符合要求。如果对于岗位有兴趣，可以回复邮件，可以在规定时间内前报道，前往公司参加面试和笔试。携带个人简历一份。
+公司地址：新乡红旗区北三环大学生创业园区
+电话：8888888 徐酱酱 15837389710
                                     </textarea>
                             </div>
                         </div>
 
                         <div class="layui-form-item">
                             <div class="layui-inline">
-                                <label class="layui-form-label">一面时间&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-                                <input class="layui-input" id="test1">
+                                <label class="layui-form-label">面试时间&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                                <input class="layui-input" id="test1" placeholder="yyyy-MM-dd HH:mm:ss">
                             </div>
+
                         </div>
                         <div style="display: none">
                             简历id<input name="resid" id="resid">
@@ -177,8 +179,10 @@
     layui.use(['form', 'layedit', 'laydate'], function(){
         var laydate = layui.laydate;
         //执行一个laydate实例
+        //日期时间选择器
         laydate.render({
-            elem: '#test1' //指定元素
+            elem: '#test1'
+            ,type: 'datetime'
         });
     });
     //自动查询
@@ -187,7 +191,7 @@
         //$("#myModal").modal("show");//模态框开启
     });
 
-    //查看简历
+    //查看所有简历
     function queryAllRes(pageNum) {
         var xueli=$("#education").val();
         var xingbie=$("#sex").val();
@@ -214,11 +218,17 @@
                     tr+="<td>"+data.list[i].resdate+"</td>";
                     if(+data.list[i].resstate==0){data.list[i].resstate="未筛选"}
                     if(+data.list[i].resstate==1){data.list[i].resstate="已入库"}
-                    if(+data.list[i].resstate==2){data.list[i].resstate="待面试"}
+
                     if(+data.list[i].resstate==3){data.list[i].resstate="回收站"}
-                    tr+="<td>"+data.list[i].resstate+"</td>";
-                    tr+="<td><button data-toggle='modal' data-target='#myModal' onclick='queryOneRes("+data.list[i].resid+")'>发送邮件</button></td>";
-                    tr+="</tr>";
+                    if(+data.list[i].resstate==2){
+                        tr+="<td>待面试</td>";
+                        tr+="<td></td>";
+                    }else {
+                        tr+="<td>"+data.list[i].resstate+"</td>";
+                        tr+="<td><button data-toggle='modal' data-target='#myModal' onclick='queryOneRes("+data.list[i].resid+")'>发送邮件</button></td>";
+                        tr+="</tr>";
+                    }
+
                     $("#mytab").append(tr);
                 }
                 $("#nowPage").html(data.pageNum);
@@ -227,7 +237,7 @@
             }
         })
     }
-    //单个信息
+    //查看单个简历
     function queryOneRes(obj) {
         $.ajax({
             url: "queryOneRes",
@@ -250,20 +260,12 @@
         var senddate=$("#senddate").val();//发送时间
         var inodate=$("#test1").val();//面试时间
         if(inodate != "" & inodate >= senddate){
-            //发送邮件面试信息
-            $.ajax({
-                url:"updateResOne",
-                type:"post",
-                data:{resstate:2, s:resid, emali:emali, notice:notice},
-                dataType: "text",
-                success:function(data) {
-                }
-            })
-            //把简历添加到第一次面试
             $.ajax({
                 url:"addIntoneYLP",
                 type:"post",
-                data:{resid:resid, inodate:inodate, inonumber:1, inostate:0},
+                data:{resid:resid, inodate:inodate, inostate:0,//添加面试
+                    resstate:2, s:resid,//修改简历状态
+                    emali:emali, notice:notice},//发送邮件
                 dataType: "text",
                 success:function(data) {
                     if(data=="true"){alert("已发送邮件");}
@@ -272,7 +274,7 @@
                 }
             })
         }else {
-            alert("请输入面试时间！")
+            alert("请输入面试时间或面试时间不正确！")
         }
     }
 
@@ -300,7 +302,8 @@
     var second=date.getSeconds();//秒
     if(min<10){ min="0"+min;}
     if(second<10){second="0"+second; }
-    var shijian=year+"-"+month+"-"+day;
+    //var shijian=year+"-"+month+"-"+day;
+    var shijian=year+"-"+month+"-"+day+" "+hour+":"+min+":"+second;//当前时间
     $("#senddate").val(shijian);//通知时间
 
 
