@@ -66,6 +66,16 @@ public String Qemp(){
     public String Qdept(){
         return "Qdept";
     }
+
+    @RequestMapping("QqueryContract")
+    public String QqueryContract(){
+        return "QqueryContract";
+    }
+    @RequestMapping("Qmanage")
+    public String Qmanage(){
+        return "Qmanage";
+    }
+
     ///----------------------------------李佳鹏区--------------------------------//
 
     /**

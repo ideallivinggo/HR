@@ -78,6 +78,7 @@
                     <th>职务类型id</th>
                     <th>员工类型id</th>
                     <th>当前薪资</th>
+                    <th>入职状态</th>
                     <th>入职日期</th>
                     <th>操作</th>
                 </tr>
@@ -171,6 +172,7 @@ function QQueryEmp(pageNum,typeVale,name,poid,emptypeid){
                 tr+="<th>"+datalist[i].roname+"</th>";
                 tr+="<th>"+datalist[i].emptype+"</th>";
                 tr+="<th>"+datalist[i].emppay+"</th>";
+                tr+="<th>"+datalist[i].empstateid+"</th>";
                 tr+="<th>"+datalist[i].empstatedate+"</th>";
                 tr+="<th><a onclick='QupdateEmp("+datalist[i].empid+")' >修改</a></th>";
                 tr+="</tr>";

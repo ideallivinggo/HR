@@ -4,12 +4,21 @@ import com.aaa.rzhr.pojo.Contract;
 import com.aaa.rzhr.pojo.Education_Experience;
 import com.aaa.rzhr.pojo.Social_Benefits;
 import com.aaa.rzhr.pojo.Work_Experience;
+import com.aaa.rzhr.util.LayuiFy;
+import com.aaa.rzhr.util.layuiPage;
+
+import java.util.List;
+import java.util.Map;
 
 /**
  * @author YQL
  * @date 2018/10/24 23:02
  */
 public interface ContractService {
+    /**
+     * 查询合同
+     * */
+    public LayuiFy QueryContractYqx(Integer limit,Integer page);
     /**
      * 添加合同
      */
@@ -42,4 +51,9 @@ public interface ContractService {
      * 修改社保福利
      * */
     public void UpdateSociaYqx(Social_Benefits social);
+    /**
+     *入职，转正，离职
+     * */
+    public LayuiFy QueryEmpState(Integer empstateid,Integer limit,Integer page);
+    public List<Map> QueryEmpStateName();
 }

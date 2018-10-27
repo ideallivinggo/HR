@@ -5,6 +5,10 @@ import com.aaa.rzhr.pojo.Education_Experience;
 import com.aaa.rzhr.pojo.Social_Benefits;
 import com.aaa.rzhr.pojo.Work_Experience;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
+import java.util.Map;
 
 /**
  * @author YQL
@@ -13,6 +17,10 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface ContractMapperYqx {
 
+    /**
+     * 查询合同
+     * */
+    public List<Map> QueryContractYqx();
     /**
      * 添加合同
      */
@@ -45,5 +53,10 @@ public interface ContractMapperYqx {
      * 修改社保福利
      * */
     public void UpdateSociaYqx(Social_Benefits social);
+    /**
+     * 入职，转正，离职
+     * */
+    public List<Map> QueryEmpState(@Param("empstateid") Integer empstateid);
+    public List<Map> QueryStateName();
 
 }
