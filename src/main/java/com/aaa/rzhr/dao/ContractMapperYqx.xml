@@ -3,6 +3,12 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.aaa.rzhr.dao.ContractMapperYqx">
+    <!--查询合同-->
+    <select id="QueryContractYqx" resultType="java.util.Map" parameterType="Map">
+        SELECT * FROM contract c
+        LEFT JOIN contract_type ct on c.contypeid = ct.contypeid
+        LEFT JOIN emp e on c.empid = e.empid
+    </select>
     <!--添加合同-->
         <insert id="AddContractYqx" parameterType="Contract">
             insert into contract(empid,contypeid,concontent,constart,conover,conexpire)
@@ -47,4 +53,21 @@
         ,fundaccount=#{fundaccount},payto=#{payto},securityaccount=#{securityaccount},place_payment=#{place_payment}
         where socid=#{socid}
     </update>
+    <!--入职，转正，离职管理-->
+    <select id="QueryEmpState" resultType="java.util.Map" parameterType="Map">
+        select * from emp e left join id_type idtype on e.typeid = idtype.typeid
+        left join education edu on e.eduid = edu.eduid
+        left join dept d on e.deptid = d.deptid
+        left join emp_type et on e.emptypeid = et.emptypeid
+        left join position p on e.poid = p.poid
+        left join role r on e.poid = r.roid
+        LEFT JOIN empstate state on e.empstateid=state.empstateid
+        <if test="empstateid!=null and empstateid!=''">
+             WHERE e.empstateid = #{empstateid}
+        </if>
+    </select>
+    <select id="QueryStateName" resultType="java.util.Map" parameterType="Map">
+        SELECT * FROM empstate
+    </select>
+
 </mapper>
