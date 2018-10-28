@@ -45,7 +45,7 @@
         left join position p on e.poid = p.poid
 
         <if test="empid!=null">
-            where empid=#{empid}
+            where empid = #{empid}
         </if>
     </select>
     <delete id="DelEmpYqx" parameterType="String">

@@ -91,7 +91,7 @@
 
     layui.use('layer', function(){ //独立版的layer无需执行这一句
         var $ = layui.jquery, layer = layui.layer; //独立版的layer无需执行这一句
-        //触发事件
+        //触发事件1
         var active = {
           offset: function(othis){
                 var type = othis.data('type');

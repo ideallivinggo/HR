@@ -48,7 +48,9 @@ public class EmpController {
          empService.addEmp(emp);
          return "index";
      }
-
+/**
+ * 查询员工
+ * */
     @RequestMapping("QqueryEmp")
     public @ResponseBody
     PageInfo<Map> QqueryEmp(Integer pageNum, Integer deptid, String empname,Integer poid,Integer emptypeid){

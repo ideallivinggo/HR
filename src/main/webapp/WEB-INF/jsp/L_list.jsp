@@ -78,7 +78,7 @@
         <input type="text" placeholder="请输入关键字"/>
     </div>
       <div id="center">
-       <div id="center_left">公司结构</div>
+       <div id="center_left"></div>
        <div id="center_right">员工信息</div>
     </div>
       <div id="gangwei">
@@ -113,7 +113,6 @@
         b1.style.background='#19AA8D';
         gg.style.display='none';
         ct.style.display='block';
-        alert("hello 你好");
     }
     function t2(){
         b1.style.background='#fff';
@@ -122,4 +121,19 @@
         gg.style.display='block';
         alert("hello xianshi");
     }
+    $(function () {
+        $.ajax({
+            url: "QueryDeptYqx",
+            type: "post",
+            data: {},
+            dataType: "json",
+            success: function (data) {
+                alert(data);
+                for (var i = 0; i < data.length; i++) {
+                            var ul="<ul>";
+                    ul+="<li>"+data[i].deptname+'('+data[i].deptnum+')'+"</li>";
+                    ul+="</ul>"
+                $("#center_left").append(ul);
+            }}
+    })})
 </script>

@@ -11,7 +11,7 @@ import java.util.Map;
  */
 public interface DeptService {
     /**
-    * 查询部门
+    * 查询部门1
     * */
     public List<Map> QueryDeptYqx();
     /**

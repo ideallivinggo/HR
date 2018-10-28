@@ -28,7 +28,7 @@ public interface EmpMapper {
      * */
     public List<Map> QqueryEmpIf(@Param("empid")Integer empid);
     /**
-     * 批量删除
+     * 批量删除1
      * */
     public void DelEmpYqx(@Param("str") String  str);
 

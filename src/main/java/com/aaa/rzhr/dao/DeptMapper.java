@@ -17,7 +17,7 @@ public interface DeptMapper {
      * */
     public List<Map> QueryDeptYqx();
     /**
-     * 添加部门
+     * 添加部门1
      * */
     public void addDept(@Param("deptName") String deptName);
     /**

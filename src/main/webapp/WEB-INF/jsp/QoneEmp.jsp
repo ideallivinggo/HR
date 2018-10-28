@@ -186,37 +186,103 @@
                             </div>
                         </div>
                     </div>
-                    <div class="layui-tab-item">内容2</div>
+                    <div class="layui-tab-item">
+                        <div class="body-tab-item-div-left">
+                            <div style="width: 300px;">
+                                <label class="div-lablel">姓名:</label>&nbsp;&nbsp;&nbsp;
+                                <span class="div-span">${list.empname}</span>
+                            </div>
+                            <div style="width: 300px;">
+                                <label  class="div-lablel">工号:</label>&nbsp;&nbsp;&nbsp;
+                                <span  class="div-span">${list.empnumber}</span>
+                            </div>
+                            <div style="width: 300px;">
+                                <label class="div-lablel">薪资:</label>&nbsp;&nbsp;&nbsp;
+                                <span class="div-span">${list.emppay}</span>
+                            </div>
+                            <div style="width: 300px;">
+                                <label  class="div-lablel">证件类型:</label>&nbsp;&nbsp;&nbsp;
+                                <span class="div-span">${list.typename}</span>
+                            </div>
+                            <div style="width: 300px;">
+                                <label  class="div-lablel">证件号:</label>&nbsp;&nbsp;&nbsp;
+                                <span class="div-span">${list.idnumber}</span>
+                            </div>
+                            <div style="width: 300px;">
+                                <label class="div-lablel">性别:</label>&nbsp;&nbsp;&nbsp;
+                                <span class="div-span">${list.sex}</span>
+                            </div>
+                            <div style="width: 300px;">
+                                <label  class="div-lablel">出生日期:</label>&nbsp;&nbsp;&nbsp;
+                                <span  class="div-span">${list.birthdate}</span>
+                            </div>
+                            <div style="width: 300px;">
+                                <label  class="div-lablel">民族:</label>&nbsp;&nbsp;&nbsp;
+                                <span class="div-span">${list.nation}</span>
+                            </div>
+                            <div style="width: 300px;">
+                                <label  class="div-lablel">户口类型:</label>&nbsp;&nbsp;&nbsp;
+                                <span class="div-span">${list.accounttype}</span>
+                            </div>
+                            <div style="width: 300px;">
+                                <label class="div-lablel">学历:</label>&nbsp;&nbsp;&nbsp;
+                                <span class="div-span">${list.eduname}</span>
+                            </div>
+                            <div style="width: 300px;">
+                                <label  class="div-lablel">住址:</label>&nbsp;&nbsp;&nbsp;
+                                <span  class="div-span">${list.address}</span>
+                            </div>
+                            <div style="width: 300px;">
+                                <label class="div-lablel">备注:</label>&nbsp;&nbsp;&nbsp;
+                                <span class="div-span">${list.empnotes}</span>
+                            </div>
+
+                        </div>
+                        <div class="body-tab-item-div-right">
+                            <div style="width: 300px;">
+                                <label  class="div-lablel">政治面貌:</label>&nbsp;&nbsp;&nbsp;
+                                <span class="div-span">${list.politics}</span>
+                            </div>
+                            <div style="width: 300px;">
+                                <label  class="div-lablel">QQ:</label>&nbsp;&nbsp;&nbsp;
+                                <span class="div-span">${list.qqnumber}</span>
+                            </div>
+                            <div style="width: 300px;">
+                                <label class="div-lablel">电话:</label>&nbsp;&nbsp;&nbsp;
+                                <span class="div-span">${list.phone}</span>
+                            </div>
+                            <div style="width: 300px;">
+                                <label  class="div-lablel">邮箱:</label>&nbsp;&nbsp;&nbsp;
+                                <span  class="div-span">${list.email}</span>
+                            </div>
+                            <div style="width: 300px;">
+                                <label  class="div-lablel">紧急联系人:</label>&nbsp;&nbsp;&nbsp;
+                                <span class="div-span">${list.urgencyname}</span>
+                            </div>
+                            <div style="width: 300px;">
+                                <label  class="div-lablel">紧急联系人电话:</label>&nbsp;&nbsp;&nbsp;
+                                <span class="div-span">${list.urgencyphone}</span>
+                            </div>
+                            <div style="width: 300px;">
+                                <label  class="div-lablel">部门:</label>&nbsp;&nbsp;&nbsp;
+                                <span  class="div-span">${list.deptname}</span>
+                            </div>
+                            <div style="width: 300px;">
+                                <label  class="div-lablel">职务:</label>&nbsp;&nbsp;&nbsp;
+                                <span class="div-span">${list.posname}</span>
+                            </div>
+                            <div style="width: 300px;">
+                                <label  class="div-lablel">员工类型:</label>&nbsp;&nbsp;&nbsp;
+                                <span class="div-span">${list.emptype}</span>
+                            </div>
+                            <div style="width: 300px;">
+                                <label  class="div-lablel">入职日期:</label>&nbsp;&nbsp;&nbsp;
+                                <span class="div-span">${list.empstatedate}</span>
+                            </div>
+                        </div>
                     <div class="layui-tab-item">内容3</div>
                     <div class="layui-tab-item">内容4</div>
-                    <div class="layui-tab-item">
-                        <h1>${list.empid}</h1>
-                        <h1>${list.empnumber}</h1>
-                        <h1>${list.empname}</h1>
-                        <h1>${list.mppicture}</h1>
-
-                        <h1>${list.typeid}${list.typename}</h1>
-                        <h1>${list.idnumber}</h1>
-                        <h1>${list.sex}</h1>
-                        <h1>${list.birthdate}</h1>
-                        <h1>${list.nation}</h1>
-                        <h1>${list.accounttype}</h1>
-                        <h1>${list.eduid}${list.eduname}</h1>
-                        <h1>${list.address}</h1>
-                        <h1>${list.politics}</h1>
-                        <h1>${list.qqnumber}</h1>
-                        <h1>${list.phone}</h1>
-                        <h1>${list.password}</h1>
-                        <h1>${list.salt}</h1>
-                        <h1>${list.email}</h1>
-                        <h1>${list.urgencyphone}</h1>
-                        <h1>${list.urgencyname}</h1>
-                        <h1>${list.empnotes}</h1>
-                        <h1>${list.deptid}${list.deptname}</h1>
-                        <h1>${list.poid}${list.posname}${list.poscontext}</h1>
-                        <h1>${list.emptypeid}${list.emptype}</h1>
-                        <h1>${list.empstateid}${list.statename}${list.empstatedate}</h1>
-                    </div>
+                    <div class="layui-tab-item">内容5</div>
                     </div>
                 </div>
             </div>

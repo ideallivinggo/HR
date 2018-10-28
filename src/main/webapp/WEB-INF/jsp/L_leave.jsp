@@ -38,17 +38,8 @@
             margin-top: 20px;
             margin-left: 100px;
         }
-        #sel{
-            width: 350px;
-            height: 20px;
-        }
-     /*   textarea:after{
-            content:'*';
-            position:absolute;
-            right:-10px;
-            top:0;
-            color:red;
-        }*/
+
+
         .layui-form div{
             margin-top: 18px;
             margin-left: 20px;
@@ -56,6 +47,10 @@
         .layui-form{
             font-weight: 700;
             font-size: 12px;
+        }
+        #sel{
+            width: 350px;
+            height: 20px;
         }
     </style>
 </head>
@@ -74,7 +69,7 @@
             </div>
                 <%--请假日期--%>
             <div>
-              休假时间:<input name="leaenterdate" required lay-verify="required" type="text" class="demo-input" placeholder="请选择日期" id="test16">
+              休假时间:<input name="leaenterdate" readonly="readonly" required lay-verify="required" type="text" class="demo-input" placeholder="请选择日期" id="test16">
             </div>
                 <div>
                     请假时长:<input type="text" name="leaday"  required lay-verify="required" style="width: 30px;height: 25px"  maxlength="3" oninput="value=value.replace(/[^\d]/g,'')">
@@ -107,8 +102,7 @@
 </html>
 <script>
     lay('#version').html('-v'+ laydate.v);
-
-    //执行一个laydate实例
+      //执行一个laydate实例
     laydate.render({
         elem: '#test16'
         ,type: 'datetime'

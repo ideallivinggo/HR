@@ -14,6 +14,9 @@ import java.util.Map;
 @SuppressWarnings("ALL")
 @Service
 public class DeptServiceImpl implements DeptService {
+    /**
+    *
+    * */
     @Autowired
     private DeptMapper mapper;
     @Override

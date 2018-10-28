@@ -109,6 +109,30 @@ public String Qemp(){
         return "L_leave";
 
     }
+    /**
+     * 员工考勤
+     */
+    @RequestMapping("L_kaoqin")
+    public  String L_kaoqin(){
+        return "L_kaoqin";
+
+    }
+
+    /**
+     * 员工加班
+     */
+    @RequestMapping("L_jiaban")
+    public  String L_jiaban(){
+        return "L_jiaban";
+    }
+
+    /**
+     * 员工离职申请
+     */
+    @RequestMapping("L_lizhi")
+    public  String L_lizhi(){
+        return "L_lizhi";
+    }
     //----------------------------------月亮鹏-------------------------
     @RequestMapping("Yapply")
     public String Yapply(){

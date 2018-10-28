@@ -44,7 +44,7 @@ public class EmpServiceImpl implements EmpService {
         return info;
     }
     /**
-     * 条件查询
+     * 条件查询1
      * */
     @Override
     public List<Map> QqueryEmpIf(Integer empid) {

@@ -17,7 +17,7 @@ public interface EmpService {
      List<Emp> queryallempX();
 
      //-----------------------------------------------///
-     /** 查询员工 */
+     /** 查询员工 1*/
      public PageInfo<Map> QqueryEmp(Integer pageNum,Integer deptid,String empname,Integer poid,Integer emptypeid);
      /**
       * 条件查询

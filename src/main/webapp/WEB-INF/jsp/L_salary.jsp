@@ -20,31 +20,39 @@
 
 <body>
 
-<table class="layui-hide" id="test"></table>
+<table class="layui-hide" id="test">
+
+
+</table>
+<input value="${emp.empid}" hidden id="empid">
+</body>
+</html>
 <script>
     layui.use('table', function(){
         var table = layui.table;
-
         table.render({
             elem: '#test'
             ,url:'L_query_pay'
+            ,limit:1
+            ,limits:[1,2,3]
+            ,where:{empid:$("#empid").val()}
             ,cols: [[
-                {field:'empid', width:80, title: 'ID', sort: true}
-                ,{field:'empname', width:80, title: '用户名'}
-                ,{field:'sex', width:80, title: '性别', sort: true}
-                ,{field:'city', width:80, title: '城市'}
-                ,{field:'sign', title: '签名', minWidth: 150}
-                ,{field:'experience', width:80, title: '积分', sort: true}
-                ,{field:'score', width:80, title: '评分', sort: true}
-                ,{field:'classify', width:80, title: '职业'}
-                ,{field:'wealth', width:135, title: '财富', sort: true}
+                {field:'statjmonth ', width:110, title: '统计时间', sort: true}
+                ,{field:'empname', width:85, title: '姓名'}
+                ,{field:'worday', width:90, title: '本月缺勤'}
+                ,{field:'worbelate ', width:90, title: '本月病假'}
+                ,{field:'worpaffairs', title: '本月事假',width:90}
+                ,{field:'worweekwork', width:125, title: '本月周末加班'}
+                ,{field:'worpswork ', width:125, title: '本月平时加班'}
+                ,{field:'worhdaywork', width:125, title: '本月假日加班'}
+                ,{field:'worklatesum', width:125, title: '本月迟到次数'}
+                ,{field:'paynumber', width:110, title: '当前薪资', sort: true}
+                ,{field:'paytakehome', width:110, title: '实发薪资', sort: true}
+                ,{field:'paydate', width:120, title: '发薪资时间', sort: true}
             ]]
             ,page: true
         });
     });
 </script>
-
-</body>
-</html>
 
 

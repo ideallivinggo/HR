@@ -106,7 +106,7 @@
 
 $(function(){
     QQueryEmp(1);
-    //添加表单属性
+    //添加表单属性1
     layui.use(['form', 'layedit', 'laydate'], function(){ });
 //自动查询
     $(function(){

@@ -19,7 +19,9 @@ public class DeptController {
     @Autowired
     private DeptService service;
 
-
+/**
+ * 查询部门
+ * */
     @RequestMapping("QueryDeptYqx")
     @ResponseBody
     public List<Map> QueryDeptYqx(){
