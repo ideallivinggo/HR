@@ -167,7 +167,7 @@ public  String    L_add_j(Apply_Overtime app,double apovhour_1,double apovhour_2
 
 /*------------------------------撤回休假*/
     @RequestMapping("L_update_xiujia")
-    public @ResponseBody  String L_update_xiujia(Integer  leaid){
+    public @ResponseBody   String L_update_xiujia(Integer  leaid){
         System.out.println(leaid);
         userService.L_update_xiujia(leaid);
 

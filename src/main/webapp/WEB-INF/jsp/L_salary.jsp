@@ -23,7 +23,7 @@
 <table class="layui-hide" id="test">
 
 
-</table>
+</table >
 <input value="${emp.empid}" hidden id="empid">
 </body>
 </html>

@@ -110,7 +110,7 @@ WHERE  e.empid=#{empid}
        UPDATE  apply_leave  SET leasate=3
        where leaid=#{leaid}
     </update>
-    <!--修改加班状态-->
+    <!--修改加班  状态-->
     <update id="L_update_jiaban"  parameterType="Integer">
         UPDATE  apply_overtime  SET apovstate=3
         where apovid=#{apovid}

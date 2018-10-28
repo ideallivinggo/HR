@@ -46,7 +46,7 @@
 <body style="background-color:#EFEFEF">
     <div style="background-color: #FFFFFF;width: 1090px;height: 500px;margin-left:100px;margin-top: 10px">
 
-            <div id="top">申请加班</div>
+            <div  id="top">申请加班</div>
             <div id="center">
                 <form  action="L_add_jiaban" class="layui-form">
                     <input value="${emp.empid}" hidden name="empid">

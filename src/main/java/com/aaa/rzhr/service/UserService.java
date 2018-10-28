@@ -33,7 +33,7 @@ public interface UserService {
     List<Map> L_query_xiujia( Integer empid,  String fristdate,String overdate, Integer leasate);
     /**查询加班*/
     List<Map> L_query_jiaban( Integer empid,String fristdate,String overdate,Integer apovstate);
-    /**查询辞职*/
+    /**查询  辞职*/
     List<Map> L_query_cizhi( Integer empid,String fristdate,String overdate,Integer dimstate);
     /**修改休假的状态  为3*/
     void L_update_xiujia(Integer leaid);

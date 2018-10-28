@@ -104,7 +104,7 @@
             background-color: #F3F3F3;
             display: none;
         }
-        #yin_3{
+        #yin_3 {
             width: 990px;
             display:block;
         }

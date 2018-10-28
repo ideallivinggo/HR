@@ -76,7 +76,7 @@ userDao.L_add_lizhi(empid, dimtype, dimdetails, dimsuggest, dimturn, dimapplydat
         return userDao.L_query_cizhi(empid,fristdate,overdate,dimstate);
     }
     @Override
-    public void L_update_xiujia(Integer leaid) {
+    public void  L_update_xiujia(Integer leaid) {
        userDao.L_update_xiujia(leaid);
     }
 

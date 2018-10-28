@@ -317,7 +317,7 @@
                                 if (data[i].dimstate == '') {
 
                                 }
-                                if (data[i].dimstate == 0) {
+                                if (data[i].dimstate == 0 ) {
                                     var div = "<div style='background-color: #FFFFFF;margin-top: 20px;padding-left: 20px'>";
                                     div += "<input id='dimid' hidden value='data[i].dimid' />";
                                     div += "<span  style='font-size:20px;color:#ac2925'> 离职申请</span>";

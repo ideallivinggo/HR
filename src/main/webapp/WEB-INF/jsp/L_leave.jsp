@@ -71,7 +71,7 @@
             <div>
               休假时间:<input name="leaenterdate" readonly="readonly" required lay-verify="required" type="text" class="demo-input" placeholder="请选择日期" id="test16">
             </div>
-                <div>
+                <div >
                     请假时长:<input type="text" name="leaday"  required lay-verify="required" style="width: 30px;height: 25px"  maxlength="3" oninput="value=value.replace(/[^\d]/g,'')">
                     <input type="button" value="天"/>
                     <span style="font-size: 14px;color:#E1E2E6;margin-left: 100px">请假时长为1的整数倍</span>
