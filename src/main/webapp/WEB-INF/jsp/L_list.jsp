@@ -128,7 +128,7 @@
             data: {},
             dataType: "json",
             success: function (data) {
-                alert(data);
+                alert(data+"aaa");
                 for (var i = 0; i < data.length; i++) {
                             var ul="<ul>";
                     ul+="<li>"+data[i].deptname+'('+data[i].deptnum+')'+"</li>";
