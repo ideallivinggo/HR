@@ -4,6 +4,8 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!--mapper路径-->
 <mapper namespace="com.aaa.rzhr.dao.YapplyMapper">
+
+
     <!--查看职业-->
     <select id="queryAllPos" resultType="Position">
        select * from position
@@ -41,6 +43,8 @@
          WHERE recid=#{recid}
     </update>
 
+
+
     <!--添加简历-->
     <insert id="addResEntering" parameterType="Resume">
         INSERT INTO resume(resumename, sex, education, age, phone, resmajor, resposition, emali, resdate, resstate)
@@ -65,21 +69,24 @@
                 </if>
             </otherwise>
         </choose>
-
-
     </select>
     <!--简历筛选选中-->
     <update id="updateResOne" parameterType="Map">
         UPDATE resume set resstate = ${resstate}  WHERE resid in (${s})
-   </update>
+    </update>
+
+
+
+
+
     <!--添加第一次面试-->
     <insert id="addIntone" parameterType="Interviewone">
-        INSERT  INTO interviewone(resid, inoposition, inodate, inonumber, inostate, inonotes, inname)
-        VALUES (#{resid}, #{inoposition}, #{inodate}, #{inonumber}, #{inostate}, #{inonotes}, #{inname})
+        INSERT  INTO interviewone(resid, inograde, inodate, inonotes, inname, inostate)
+        VALUES (#{resid}, #{inograde}, #{inodate}, #{inonotes}, #{inname}, #{inostate})
     </insert>
     <!--查看第一次面试-->
     <select id="queryAllInte" resultType="java.util.Map" parameterType="Map">
-        SELECT r.*, i.inoid, i.inonumber, i.inostate, i.inonotes, i.inname,
+        SELECT r.*, i.inoid,i.inograde, i.inonotes, i.inname, i.inostate,
         str_to_date(inodate,'%Y-%m-%d') inodate FROM interviewone i
         INNER JOIN resume r ON i.resid = r.resid WHERE 1=1
         <choose>
@@ -97,6 +104,9 @@
     <!--修改第一次面试-->
     <update id="updateInte" parameterType="Interviewone">
          UPDATE interviewone SET
+        <if test="inograde != null">
+            inograde=#{inograde},
+        </if>
         <if test="inname != null">
             inname=#{inname},
         </if>
@@ -109,14 +119,17 @@
          WHERE inoid=#{inoid}
     </update>
 
+
+
+
     <!--添加第二次面试-->
     <insert id="addIntTwo" parameterType="Interviewtwo">
-        INSERT INTO interviewtwo(resid, intposition, intdate, intnumber, intnotes, inttpaytry, intpayjust, intstate, inthiredate, intentrydate, intname)
-        VALUES (#{resid}, #{intposition}, #{intdate}, #{intnumber}, #{intnotes}, #{inttpaytry}, #{intpayjust}, #{intstate}, #{inthiredate}, #{intentrydate}, #{intname})
+        INSERT INTO interviewtwo(resid, intgrade, intdate, intnotes, intname, intstate)
+        VALUES (#{resid}, #{intgrade}, #{intdate}, #{intnotes}, #{intname}, #{intstate})
     </insert>
     <!--查看第二次面试-->
     <select id="queryAllInteTwo" resultType="java.util.Map" parameterType="Map">
-        SELECT r.*, i.intid, i.intnumber, i.intstate, i.intnotes, i.intname,
+        SELECT r.*, i.intid, i.intgrade, i.intnotes, i.intname, i.intstate,
         str_to_date(intdate,'%Y-%m-%d') intdate FROM interviewtwo i
         INNER JOIN resume r ON i.resid = r.resid WHERE 1=1
         <choose>
@@ -134,6 +147,9 @@
     <!--修改第二次面试-->
     <update id="updateInteTwo" parameterType="Interviewtwo">
         UPDATE interviewtwo SET
+        <if test="intgrade != null">
+            intgrade=#{intgrade},
+        </if>
         <if test="intname != null">
             intname=#{intname},
         </if>
@@ -145,6 +161,27 @@
         </if>
         WHERE intid=#{intid}
     </update>
+
+
+
+    <!--面试完成推送-->
+    <update id="inteTwoPash" parameterType="Map">
+        UPDATE interviewtwo set intstate = ${intstate}  WHERE intid in (${s})
+    </update>
+    <!--添加员工到待入职状态-->
+    <select id="addEmp" parameterType="Emp">
+        INSERT INTO emp (empnumber, empname, mppicture, typeid, idnumber, sex, birthdate, nation,
+        accounttype, eduid, address, politics, qqnumber, phone, password, salt, email, urgencyphone,
+        urgencyname, empnotes, deptid, poid, emptypeid, emppay, empstateid, empstatedate)
+        VALUES (#{empnumber}, #{empname}, #{mppicture}, #{typeid}, #{idnumber}, #{sex}, #{birthdate},
+        #{nation}, #{accounttype}, #{eduid}, #{address}, #{politics}, #{qqnumber}, #{phone},
+        #{password}, #{salt}, #{email}, #{urgencyphone}, #{urgencyname}, #{empnotes}, #{deptid}, #{poid},
+        #{emptypeid}, #{emppay}, #{empstateid}, #{empstatedate})
+    </select>
+    <!--获取最大的员工编号-->
+    <select id="queryEmpID" parameterType="int" resultType="java.util.Map">
+        SELECT empid FROM emp WHERE empid=(SELECT MAX(empid) FROM emp)
+    </select>
 
 
 </mapper>

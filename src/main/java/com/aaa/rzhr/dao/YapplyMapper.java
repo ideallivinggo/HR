@@ -13,6 +13,8 @@ import java.util.Map;
  */
 @Mapper
 public interface YapplyMapper {
+
+    /////////////////////////招聘申请//////////////////////////
     /**
      * 查看要招聘的职位
      */
@@ -38,6 +40,7 @@ public interface YapplyMapper {
      * */
     void updateRec(Recruitment recruitment);
 
+    ///////////////////////////简历///////////////////////////////////
     /**
      * 简历录入entering
      * */
@@ -51,6 +54,7 @@ public interface YapplyMapper {
      */
     void  updateResOne(@Param("resstate") Integer resstate, @Param("s") String s);
 
+    /////////////////////////////第一次面试操作////////////////////////////////
     /**
      * 添加第一次面试
      * */
@@ -64,6 +68,7 @@ public interface YapplyMapper {
      * */
     void updateInte(Interviewone interviewone);
 
+    /////////////////////////////第二次面试操作////////////////////////////////
     /**
      * 通过后添加第二次面试
      * */
@@ -76,6 +81,21 @@ public interface YapplyMapper {
      * 修改第二次面试
      * */
     void updateInteTwo(Interviewtwo interviewtwo);
+
+    //////////////////////////////面试完成推送到人事部选择录取///////////////////////////////
+    /**
+     * 面试完成推送
+     * 接收回复发送邮件录取
+     * */
+    void inteTwoPash(@Param("intstate") Integer intstate, @Param("s") String s);
+    /**
+     *添加员工到待入职状态
+     * */
+    void addEmp (Emp emp);
+    /**
+     * 获取最大的员工编号
+     * */
+    Map queryEmpID (Integer empid);
 
 
 

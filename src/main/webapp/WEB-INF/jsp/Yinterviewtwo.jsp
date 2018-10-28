@@ -22,6 +22,15 @@
     .layui-input{
         width: 200px;
     }
+    #miantab td{
+        width: 130px;
+    }
+    .inputss{
+        width: 90%;
+        height: 99%;
+        border: 0px solid ;
+        padding-left: 10px;
+    }
 </style>
 <body>
 <!-- 多条件查询  -->
@@ -41,6 +50,7 @@
             <div class="layui-inline" style="margin-left: 850px" >
                 <a href="Yinterview"><button class="layui-btn">查看第一次面试</button></a>
             </div>
+            <p style="text-align: center;font-size: 28px;color: #000;margin-top: -45px;">第二轮面试人员 </p>
         </div>
     </div>
 </div>
@@ -58,8 +68,8 @@
         <th>学历</th>
         <th>专业</th>
         <th>心仪职位</th>
-        <th>面试轮次</th>
         <th>面试时间</th>
+        <th>分数</th>
         <th>面试官</th>
         <th>面试备注</th>
         <th>面试状态</th>
@@ -83,7 +93,7 @@
 
 <!-- 模态框查询面试信息填写（Modal） -->
 <div class="modal fade" id="myModal" >
-    <div class="modal-dialog" style="width: 700px;" >
+    <div class="modal-dialog"  style="width: 900px;margin-bottom: 80px" >
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -93,138 +103,175 @@
             </div>
             <div class="modal-body">
                 <form class="layui-form" id="TwoForm" >
-                    <div class="layui-form-item">
-                        <div class="layui-inline">
-                            <label class="layui-form-label">姓名</label>
-                            <div class="layui-input-block">
-                                <input id="resumename" class="layui-input" disabled>
-                            </div>
-                        </div>
-                        <div class="layui-inline">
-                            <label class="layui-form-label">学历</label>
-                            <div class="layui-input-block">
-                                <input id="education" class="layui-input" disabled>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="layui-form-item">
-                        <div class="layui-inline">
-                            <label class="layui-form-label">专业</label>
-                            <div class="layui-input-block">
-                                <input id="resmajor" class="layui-input" disabled>
-                            </div>
-                        </div>
-                        <div class="layui-inline">
-                            <label class="layui-form-label">面试轮次</label>
-                            <div class="layui-input-block">
-                                <input id="intnumber" class="layui-input" disabled>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="layui-form-item">
-                        <div class="layui-inline">
-                            <label class="layui-form-label">面试时间</label>
-                            <div class="layui-input-block">
-                                <input id="intdate" class="layui-input" disabled>
-                            </div>
-                        </div>
-                        <div class="layui-inline">
-                            <label class="layui-form-label">面试状态</label>
-                            <div class="layui-input-block">
-                                <input  name="intstate" value="1"  title="通过" type="radio" checked>
-                                <input  name="intstate" value="2"  title="未通过" type="radio">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="layui-form-item">
-                        <div class="layui-inline" >
-                            <label class="layui-form-label">面试官</label>
-                            <div class="layui-input-block">
-                                <input name="intname" class="layui-input" style="width: 520px;">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="layui-form-item layui-form-text">
-                        <label class="layui-form-label">面试备注</label>
-                        <div class="layui-input-block" style="width: 520px">
-                            <textarea name="intnotes"  placeholder="请输入面试信息" class="layui-textarea" ></textarea>
-                        </div>
-                    </div>
-                    <div<%-- style="display: none"--%>>
-                        面试id<input name="intid" id="intid">
-                        简历id<input id="resid">
-                    </div>
-                    <input type="button" class="layui-btn layui-btn-fluid" onclick="mianshi2()" value="保存" style="letter-spacing:15px;"/>
-                </form>
-            </div>
-        </div><!-- /.modal-content -->
-    </div><!-- /.modal -->
-</div>
-<!-- 模态框邀请入职信息填写（Modal） -->
-<div class="modal fade" id="myModal2" >
-    <div class="modal-dialog" style="width: 700px;" >
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title"  style="font-size:28px;font-weight:bold;font-family:'楷体';margin-left: 50px">
-                    发送第二次面试邀请
-                </h4>
-            </div>
-            <div class="modal-body">
-                <form class="layui-form" id="sendForm" >
-                    <div class="layui-form-item">
-                        <div class="layui-inline">
-                            <label class="layui-form-label">姓名</label>
-                            <div class="layui-input-block">
-                                <input id="resumename2" class="layui-input" disabled>
-                            </div>
-                        </div>
-                        <div class="layui-inline">
-                            <label class="layui-form-label">QQ邮箱</label>
-                            <div class="layui-input-block">
-                                <input id="emali" class="layui-input" disabled>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="layui-form-item">
-                        <div class="layui-inline">
-                            <label class="layui-form-label">手机号</label>
-                            <div class="layui-input-block">
-                                <input id="phone" class="layui-input" disabled>
-                            </div>
-                        </div>
-                        <div class="layui-inline">
-                            <label class="layui-form-label">发送时间</label>
-                            <div class="layui-input-block">
-                                <input id="senddate" class="layui-input" disabled>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="layui-form-item layui-form-text">
-                        <label class="layui-form-label">通知信息</label>
-                        <div class="layui-input-block" style="width: 520px">
-                                    <textarea id="notice" placeholder="请输入通知信息" class="layui-textarea" >
-                                        面试通知单
-                                    </textarea>
-                        </div>
-                    </div>
+                    <p style="text-align: center;font-size: 28px;color: #000;margin-top: 20px;">第二次面试表 </p>
 
-                    <div class="layui-form-item">
-                        <div class="layui-inline">
-                            <label class="layui-form-label">二面时间&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-                            <input class="layui-input" id="test1">
-                        </div>
-                    </div>
+                    <table border="1" style="margin: 10px auto;text-align: center; border-collapse:collapse;"  id="miantab">
+                        <tr style="height: 45px;">
+                            <td>姓名：</td>
+                            <td><input class="inputss" id="resumename" readOnly></td>
+                            <td>性别：</td>
+                            <td><input class="inputss" id="sex" readOnly></td>
+                            <td>年龄：</td>
+                            <td><input class="inputss" id="age" readOnly></td>
+                        </tr>
+                        <tr style="height: 45px;">
+                            <td>心仪职位：</td>
+                            <td><input class="inputss" id="resposition" readOnly></td>
+                            <td>学历：</td>
+                            <td><input class="inputss" id="education" readOnly></td>
+                            <td>所学专业：</td>
+                            <td><input class="inputss" id="resmajor" readOnly></td>
+                        </tr>
+                        <tr style="height: 40px;">
+
+                            <td colspan="3">评分标准（35分以上考虑）</td>
+                            <td colspan="3">
+                                5优秀&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                4很好&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                3较好&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                2一般&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                1较差
+                            </td>
+                        </tr>
+                        <tr style="height: 40px;">
+                            <td rowspan="10">相关的工作经验及专业知识</td>
+                            <td colspan="2">1：工作经验</td>
+                            <td colspan="3">
+                                <input type="checkbox" class="one" value="5" title="5">
+                                <input type="checkbox" class="one" value="4" title="4">
+                                <input type="checkbox" class="one" value="3" title="3">
+                                <input type="checkbox" class="one" value="2" title="2">
+                                <input type="checkbox" class="one" value="1" title="1">
+                            </td>
+                        </tr>
+                        <tr style="height: 40px;">
+                            <td colspan="2">掌握的专业知识</td>
+                            <td colspan="3">
+                                <input type="checkbox" class="two" value="5" title="5">
+                                <input type="checkbox" class="two" value="4" title="4">
+                                <input type="checkbox" class="two" value="3" title="3">
+                                <input type="checkbox" class="two" value="2" title="2">
+                                <input type="checkbox" class="two" value="1" title="1">
+                            </td>
+                        </tr>
+                        <tr style="height: 40px;">
+                            <td colspan="2">3：对企业的价值</td>
+                            <td colspan="3">
+                                <input type="checkbox" class="three" value="5" title="5">
+                                <input type="checkbox" class="three" value="4" title="4">
+                                <input type="checkbox" class="three" value="3" title="3">
+                                <input type="checkbox" class="three" value="2" title="2">
+                                <input type="checkbox" class="three" value="1" title="1">
+                            </td>
+                        </tr>
+                        <tr style="height: 40px;">
+                            <td colspan="2">4：个人工作观念</td>
+                            <td colspan="3">
+                                <input type="checkbox" class="four" value="5" title="5">
+                                <input type="checkbox" class="four" value="4" title="4">
+                                <input type="checkbox" class="four" value="3" title="3">
+                                <input type="checkbox" class="four" value="2" title="2">
+                                <input type="checkbox" class="four" value="1" title="1">
+                            </td>
+                        </tr>
+                        <tr style="height: 40px;">
+                            <td colspan="2">5：学习能力</td>
+                            <td colspan="3">
+                                <input type="checkbox" class="five" value="5" title="5">
+                                <input type="checkbox" class="five" value="4" title="4">
+                                <input type="checkbox" class="five" value="3" title="3">
+                                <input type="checkbox" class="five" value="2" title="2">
+                                <input type="checkbox" class="five" value="1" title="1">
+                            </td>
+                        </tr>
+                        <tr style="height: 40px;">
+                            <td colspan="2">6：工作创造能力</td>
+                            <td colspan="3">
+                                <input type="checkbox" class="six" value="5" title="5">
+                                <input type="checkbox" class="six" value="4" title="4">
+                                <input type="checkbox" class="six" value="3" title="3">
+                                <input type="checkbox" class="six" value="2" title="2">
+                                <input type="checkbox" class="six" value="1" title="1">
+                            </td>
+                        </tr>
+                        <tr style="height: 40px;">
+                            <td colspan="2">7：对企业的忠诚度</td>
+                            <td colspan="3">
+                                <input type="checkbox" class="seven" value="5" title="5">
+                                <input type="checkbox" class="seven" value="4" title="4">
+                                <input type="checkbox" class="seven" value="3" title="3">
+                                <input type="checkbox" class="seven" value="2" title="2">
+                                <input type="checkbox" class="seven" value="1" title="1">
+                            </td>
+                        </tr>
+                        <tr style="height: 40px;">
+                            <td colspan="2">8：职位胜任能力</td>
+                            <td colspan="3">
+                                <input type="checkbox" class="eight" value="5" title="5">
+                                <input type="checkbox" class="eight" value="4" title="4">
+                                <input type="checkbox" class="eight" value="3" title="3">
+                                <input type="checkbox" class="eight" value="2" title="2">
+                                <input type="checkbox" class="eight" value="1" title="1">
+                            </td>
+                        </tr>
+                        <tr style="height: 40px;">
+                            <td colspan="2">9：个性特征与企业文化的相融性</td>
+                            <td colspan="3">
+                                <input type="checkbox" class="nine" value="5" title="5">
+                                <input type="checkbox" class="nine" value="4" title="4">
+                                <input type="checkbox" class="nine" value="3" title="3">
+                                <input type="checkbox" class="nine" value="2" title="2">
+                                <input type="checkbox" class="nine" value="1" title="1">
+                            </td>
+                        </tr>
+                        <tr style="height: 40px;">
+                            <td colspan="2">10：稳定性、发展潜力</td>
+                            <td colspan="3">
+                                <input type="checkbox" class="ten" value="5" title="5">
+                                <input type="checkbox" class="ten" value="4" title="4">
+                                <input type="checkbox" class="ten" value="3" title="3">
+                                <input type="checkbox" class="ten" value="2" title="2">
+                                <input type="checkbox" class="ten" value="1" title="1">
+                            </td>
+                        </tr>
+                        <tr style="height: 45px;">
+                            <td>点击计分：</td>
+                            <td colspan="2">
+                                <input name="intgrade" onfocus="dian()" class="inputss" id="intgrade" readonly >
+                            </td>
+                            <td>是否录取：</td>
+                            <td colspan="2">
+                                <input name="intstate" value="1" title="通过" type="radio">
+                                <input name="intstate" value="2" title="不通过" type="radio">
+                            </td>
+                        </tr>
+
+                        <tr style="height: 100px;">
+                            <td colspan="2">面试批语</td>
+                            <td colspan="4">
+                                <textarea name="intnotes" id="intnotes" class="layui-textarea">
+                                </textarea>
+                            </td>
+                        </tr>
+                        <tr style="height: 45px;">
+                            <td>面试时间</td>
+                            <td colspan="2"><input name="intdate" class="inputss" id="intdate"></td>
+                            <td>面试官</td>
+                            <td colspan="2"><input name="intname" class="inputss" id="intname" style="border-bottom: 1px solid #000000"></td>
+                        </tr>
+                    </table>
                     <div style="display: none">
-                        简历id<input name="resid" id="resid2">
-                        面试id<input name="inoid" id="inoid2">
+                        面试id<input name="intid" id="intid">
+                        简历id<input name="resid" id="resid">
                     </div>
-                    <input type="button" class="layui-btn layui-btn-fluid" onclick="sendmail()" value="发送邮件" style="letter-spacing:15px;"/>
+                    <input type="reset" class="layui-btn layui-btn-fluid" onclick="mianshi()" value="保存" style="letter-spacing:15px;"/>
                 </form>
             </div>
         </div><!-- /.modal-content -->
     </div><!-- /.modal -->
 </div>
+
+
 </body>
 <script>
 
@@ -262,8 +309,9 @@
                     tr+="<td>"+data.list[i].education+"</td>";
                     tr+="<td>"+data.list[i].resmajor+"</td>";
                     tr+="<td>"+data.list[i].resposition+"</td>";
-                    tr+="<td>"+data.list[i].intnumber+"</td>";
                     tr+="<td>"+data.list[i].intdate+"</td>";
+                    if(data.list[i].intgrade==undefined){data.list[i].intgrade=" ";}
+                    tr+="<td>"+data.list[i].intgrade+"</td>";
                     if(data.list[i].intname==undefined){data.list[i].intname=" ";}
                     tr+="<td>"+data.list[i].intname+"</td>";
                     if(data.list[i].intnotes==undefined){data.list[i].intnotes=" ";}
@@ -290,7 +338,7 @@
                     }
                     if(data.list[i].intstate==1){
                         tr+="<td>已通过</td>";
-                        tr+="<td>等待审批</td>";
+                        tr+="<td>等待推送</td>";
                         tr+="</tr>";
                     }
 
@@ -304,7 +352,6 @@
     }
     //过期清除
     function qingchu(obj) {
-        alert(obj);
         var intstate=2;//已过期
         $.ajax({
             url: "updateInteTwoYLP",
@@ -324,25 +371,57 @@
             data:{intid:obj},
             dataType: "json",
             success: function (data) {
-
-                $("#intid").val(data[0].intid);
-                $("#resid").val(data[0].resid);
-                $("#resid2").val(data[0].resid);
-                $("#intnumber").val(data[0].intnumber);
                 $("#resumename").val(data[0].resumename);
-                $("#resumename2").val(data[0].resumename);
-                $("#phone").val(data[0].phone);
-                $("#emali").val(data[0].emali);
-                $("#intdate").val(data[0].intdate);
+                $("#sex").val(data[0].sex);
+                $("#age").val(data[0].age);
+                $("#resposition").val(data[0].resposition);
                 $("#education").val(data[0].education);
                 $("#resmajor").val(data[0].resmajor);
-                $("#inname").val(data[0].inname);
-                $("#inonotes").val(data[0].inonotes);
+                $("#intid").val(data[0].intid);
+                $("#resid").val(data[0].resid);
+                $("#intdate").val(data[0].intdate);
             }
         })
     }
+
+    //获取到所有的被选中的复选框计算分数
+    function dian() {
+        $(".one").each(function(){
+            if($(this).prop("checked")==true){   one = $(this).val();  }
+        });
+        $(".two").each(function(){
+            if($(this).prop("checked")==true){   two = $(this).val();  }
+        });
+        $(".three").each(function(){
+            if($(this).prop("checked")==true){   three = $(this).val();  }
+        });
+        $(".four").each(function(){
+            if($(this).prop("checked")==true){   four = $(this).val();  }
+        });
+        $(".five").each(function(){
+            if($(this).prop("checked")==true){   five = $(this).val();  }
+        });
+        $(".six").each(function(){
+            if($(this).prop("checked")==true){   six = $(this).val();  }
+        });
+        $(".seven").each(function(){
+            if($(this).prop("checked")==true){   seven = $(this).val();  }
+        });
+        $(".eight").each(function(){
+            if($(this).prop("checked")==true){   eight = $(this).val();  }
+        });
+        $(".nine").each(function(){
+            if($(this).prop("checked")==true){   nine = $(this).val();  }
+        });
+        $(".ten").each(function(){
+            if($(this).prop("checked")==true){   ten = $(this).val();  }
+        });
+        var fen = Number(one) + Number(two)+Number(three)+Number(four)+Number(five)+Number(six)+Number(seven)+Number(eight)+Number(nine)+Number(ten);
+        $("#intgrade").val(fen);
+    }
+
     //第二次面试记录
-    function mianshi2() {
+    function mianshi() {
         $.ajax({
             url:"updateInteTwoYLP",
             type:"post",
@@ -352,13 +431,12 @@
                 if(data=="true"){alert("面试完成");}
                 queryAllInteTwo(1);
                 $("#myModal").modal("hide");
-               // $("#TwoForm").reset();
             }
         })
     }
 
 
-    //发邮件等待第二次面试
+    //发邮件等待录取
     function sendmail() {
         var inoid=$("#inoid2").val();//面试1id
         var resid=$("#resid2").val();//简历id
@@ -370,7 +448,7 @@
             $.ajax({
                 url:"addIntTwoYLP",
                 type:"post",
-                data:{resid:resid,intdate:intdate,intnumber:2,intstate:0,
+                data:{resid:resid,intdate:intdate,intstate:0,
                     inoid:inoid,inostate:2,
                     emali:emali, notice:notice},
                 dataType: "text",

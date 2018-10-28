@@ -39,8 +39,6 @@
             <div class="layui-inline" style="padding-left: 50px;">
                 <select id="ByType"  class="select">
                     <option value="">--部门--</option>
-                    <%--<option value="4"><span id="aaa"></span></option>
-                    <option value="2"><span id="bbb"></span></option>--%>
                 </select>
             </div>
             <div class="layui-inline">
@@ -80,6 +78,7 @@
                     <th>职务类型id</th>
                     <th>员工类型id</th>
                     <th>当前薪资</th>
+                    <th>入职状态</th>
                     <th>入职日期</th>
                     <th>操作</th>
                 </tr>
@@ -108,15 +107,32 @@ $(function(){
     QQueryEmp(1);
     //添加表单属性1
     layui.use(['form', 'layedit', 'laydate'], function(){ });
-//自动查询
+    //自动查询
     $(function(){
         queryAllRes(1);
-        //$("#myModal").modal("show");//模态框开启
     });
-
+    QuerySelect();
 })
+/**
+ * 下拉
+ * */
+function QuerySelect(){
+    $.ajax({
+        url:'QueryDeptSelectYqx',
+        type:'post',
+        data:{},
+        dataType:'json',
+        success:function (data) {
+            for (var i=0;i<data.length;i++){
+                var o="<option value='"+data[i].deptid+"'>"+data[i].deptname+"</option>";
+                $("#ByType").append(o);
+            }
+        }
+    })
+}
 function shuaxin() {
    window.location.reload();
+  /*  window.history.back();*/
 }
 function clickDype(){
     var typeVale = $("#ByType").val();
@@ -136,7 +152,6 @@ function QueryEmptTypeid() {
 }
 
 function QQueryEmp(pageNum,typeVale,name,poid,emptypeid){
-
     $.ajax({
         url:'QqueryEmp',
         type:'post',
@@ -154,9 +169,10 @@ function QQueryEmp(pageNum,typeVale,name,poid,emptypeid){
                 tr+="<th>"+datalist[i].sex+"</th>";
                 tr+="<th>"+datalist[i].phone+"</th>";
                 tr+="<th>"+datalist[i].deptname+"</th>";
-                tr+="<th>"+datalist[i].posname+"</th>";
+                tr+="<th>"+datalist[i].roname+"</th>";
                 tr+="<th>"+datalist[i].emptype+"</th>";
                 tr+="<th>"+datalist[i].emppay+"</th>";
+                tr+="<th>"+datalist[i].empstateid+"</th>";
                 tr+="<th>"+datalist[i].empstatedate+"</th>";
                 tr+="<th><a onclick='QupdateEmp("+datalist[i].empid+")' >修改</a></th>";
                 tr+="</tr>";
@@ -167,12 +183,9 @@ function QQueryEmp(pageNum,typeVale,name,poid,emptypeid){
             var pageCount = data.pageSize; //总页数
             $("#total").html(currentPage);
             $("#pageSize").html(pageCount);
+
             for (var i=0;i<datalist.length;i++){
-                var o="<option value='"+datalist[i].deptid+"'>"+datalist[i].deptname+"</option>";
-                $("#ByType").append(o);
-            }
-            for (var i=0;i<datalist.length;i++){
-                var o="<option value='"+datalist[i].poid+"'>"+datalist[i].posname+"</option>";
+                var o="<option value='"+datalist[i].poid+"'>"+datalist[i].roname+"</option>";
                 $("#ByPoid").append(o);
             }
             for (var i=0;i<datalist.length;i++){
@@ -228,6 +241,8 @@ function QqueryOneEmp(obj) {
             }
         })
 }
+
+
 function QupdateEmp(obj) {
     alert(obj)
     $.ajax({

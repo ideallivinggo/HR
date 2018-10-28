@@ -1,6 +1,5 @@
 package com.aaa.rzhr.dao;
 
-import com.aaa.rzhr.pojo.Apply_Leave;
 import com.aaa.rzhr.pojo.Emp;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;

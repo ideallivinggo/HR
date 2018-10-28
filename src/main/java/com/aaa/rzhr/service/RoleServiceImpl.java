@@ -1,11 +1,9 @@
 package com.aaa.rzhr.service;
 
-import com.aaa.rzhr.dao.EmpMapper;
 import com.aaa.rzhr.dao.EmpRoleMapper;
 import com.aaa.rzhr.dao.RoleMapper;
-import com.aaa.rzhr.dao.EmpRoleMapper;
-import com.aaa.rzhr.pojo.Role;
 import com.aaa.rzhr.pojo.Emp;
+import com.aaa.rzhr.pojo.Role;
 import com.aaa.rzhr.pojo.Emp_Role;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

@@ -19,10 +19,14 @@ public interface DeptMapper {
     /**
      * 添加部门1
      * */
-    public void addDept(@Param("deptName") String deptName);
+    public void addDept(@Param("deptName") String deptName,@Param("deptnum") Integer deptnum);
     /**
      * 删除部门
      * */
     public void delDept(@Param("deptId") Integer deptId);
+    /**
+     * 分组查询emp中的deptid
+     * */
+    public List<Map> QueryByEmpDeptid();
 
 }

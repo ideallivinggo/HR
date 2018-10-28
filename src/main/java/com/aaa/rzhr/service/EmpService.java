@@ -27,5 +27,9 @@ public interface EmpService {
       * 批量删除
       * */
      public void DelEmpYqx(String  str);
+     /**
+      * 更新
+      * */
+     public void UpdateEmpYqx(Emp emp);
 
 }

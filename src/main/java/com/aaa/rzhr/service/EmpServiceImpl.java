@@ -4,7 +4,6 @@ import com.aaa.rzhr.dao.EmpMapper;
 import com.aaa.rzhr.pojo.Emp;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -55,5 +54,11 @@ public class EmpServiceImpl implements EmpService {
     public void DelEmpYqx(String  str) {
         empMapper.DelEmpYqx(str);
 
+    }
+
+    @Override
+    public void UpdateEmpYqx(Emp emp) {
+        System.out.println(emp.getEmpname()+"ddddddddddddddddddddddddddddddddddd");
+        empMapper.UpdateEmpYqx(emp);
     }
 }
