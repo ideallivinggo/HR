@@ -59,9 +59,6 @@ public class LogingControllerx {
             s.setAttribute("listemp",map);
            // System.out.println(map.toString());
 
-             
-            Emp emp=empService.getByName(subject.getPrincipal().toString());
-            s.setAttribute("emp",emp);
             return "okok";
 
         } catch (AuthenticationException e) {
