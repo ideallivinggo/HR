@@ -197,10 +197,10 @@
                  endroidstr+=$(this).val()+",";
              }
          })
-          alert(endroidstr)
 
-         /*$.ajax({
-             url:'/config/SaveEmpRoleX',
+
+         $.ajax({
+             url:'/config/savePermissionMenuX',
              type:'post',
              data:{
                  'endroidstr':endroidstr,
@@ -211,11 +211,11 @@
 
                  if(data=="ok"){
 
-                     window.location.href="/config/permissionconfig";
+                     window.location.href="/config/queryMenuX";
 
                  }
 
-             }})*/
+             }})
      }
 
 

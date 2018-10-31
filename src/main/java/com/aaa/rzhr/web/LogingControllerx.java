@@ -19,7 +19,9 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author XBJ
@@ -41,7 +43,19 @@ public class LogingControllerx {
             subject.login(token);
               Session s=  subject.getSession();
                  Emp emp=empService.getByName(subject.getPrincipal().toString());
-            s.setAttribute("emp",emp);
+                 s.setAttribute("emp",emp);
+
+
+            List<Emp> listb=empService.queryallempX();
+            Map<String,Emp> map=new HashMap<>();
+            for (Emp e:listb
+                    ) {
+                System.out.println();
+                map.put("a"+e.getEmpid().toString(),e);
+            }
+            s.setAttribute("listemp",map);
+           // System.out.println(map.toString());
+
              return "okok";
         } catch (AuthenticationException e) {
            // e.printStackTrace();

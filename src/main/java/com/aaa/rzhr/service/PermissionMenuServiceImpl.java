@@ -5,6 +5,7 @@ import com.aaa.rzhr.dao.PermissionMenuMapper;
 import com.aaa.rzhr.pojo.Menu;
 import com.aaa.rzhr.pojo.Permission;
 import com.aaa.rzhr.pojo.Permission_Menu;
+import com.alibaba.fastjson.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -33,5 +34,27 @@ public class PermissionMenuServiceImpl implements  PermissionMenuService {
         permissions.add(permissionByid);
     }
         return permissions;
+    }
+
+    @Override
+    public int savePermissionMenuX(List<String> list, Integer mid) {
+        delPermissionMenuX(mid);
+        if (!list.get(0).equals("")){
+            List<Permission_Menu> listpm=new ArrayList<>();
+            for (String str:list){
+                Permission_Menu p=new Permission_Menu();
+                p.setMid(mid);
+                p.setPid(Integer.parseInt(str));
+                listpm.add(p);
+            }
+            permissionMenuMapper.savePermissionMenuX(listpm);
+        }
+
+        return 0;
+    }
+
+    @Override
+    public int delPermissionMenuX(Integer mid) {
+        return permissionMenuMapper.delPermissionMenuX(mid);
     }
 }

@@ -225,7 +225,7 @@
 
                  if(data=="ok"){
 
-                     window.location.href="/config/permissionconfig";
+                     window.location.href="/config/";
 
             }
 

@@ -54,6 +54,7 @@ public class ShiroConfiguration {
         Map<String, Filter> customisedFilter = new HashMap<>();
         customisedFilter.put("url", getURLPathMatchingFilter());
 
+
         //配置映射关系
         //跳转登陆页面
         filterChainDefinitionMap.put("/login", "anon");
@@ -63,7 +64,9 @@ public class ShiroConfiguration {
         filterChainDefinitionMap.put("/checkuser", "anon");
         filterChainDefinitionMap.put("/static/**", "anon");
         filterChainDefinitionMap.put("/assets/**", "anon");
-        filterChainDefinitionMap.put("/doLogout", "logout");;
+        //配置登录拦截器
+      ///  filterChainDefinitionMap.put("/doLogout", "logout");
+      //  filterChainDefinitionMap.put("/config/**","unauthorized");
         filterChainDefinitionMap.put("/**", "url");
         shiroFilterFactoryBean.setFilters(customisedFilter);
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
@@ -73,6 +76,7 @@ public class ShiroConfiguration {
     public URLPathMatchingFilter getURLPathMatchingFilter() {
         return new URLPathMatchingFilter();
     }
+
 
     @Bean
     public SecurityManager securityManager(){

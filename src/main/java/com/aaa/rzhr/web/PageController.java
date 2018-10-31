@@ -47,6 +47,11 @@ public class PageController {
 
         return "unauthorized";
     }
+    @RequestMapping("testmessage")
+    public String testmessage(){
+
+        return "testmssage";
+    }
 ///----------------------------------于青县区--------------------------------//
 @RequestMapping("Qemp")
 public String Qemp(){
