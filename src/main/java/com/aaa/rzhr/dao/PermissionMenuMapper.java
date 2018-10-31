@@ -19,4 +19,5 @@ public interface PermissionMenuMapper {
     List<Permission_Menu> getAllPermission();
     List<Permission_Menu> getAllMenuByMenu(Menu menu);
     int  savePermissionMenuX(List<Permission_Menu> list);
+     int delPermissionMenuX(Integer mid);
 }

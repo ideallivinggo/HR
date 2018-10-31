@@ -18,7 +18,7 @@
         DELETE FROM role_permission where roid=#{roid}
     </delete>
 
-    <insert id="addRolePermisssionX">
+    <insert id="addRolePermisssionX" parameterType="list">
 
         INSERT into role_permission (roid,pid) VALUES
         <foreach collection="list" item="role_permission" separator=",">

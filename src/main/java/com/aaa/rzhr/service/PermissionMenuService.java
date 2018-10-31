@@ -10,5 +10,7 @@ import java.util.List;
  */
 public interface PermissionMenuService {
     List<Permission> getAllMenuByMenu(Menu menu);
+    int savePermissionMenuX(List<String> list,Integer mid);
+    int delPermissionMenuX(Integer mid);
 
 }

@@ -36,7 +36,7 @@ public class ConfigPermissionController {
 
 
 
-    @RequestMapping("/permissionconfig")
+    @RequestMapping("")
     public String aaa(Model m){
         //查询所有用户
         List<Emp> emps = empService.queryallempX();
@@ -171,7 +171,14 @@ public  @ResponseBody String addRoleX(String pidstr,String roname){
           m.setMid(midmid);
         List<Permission> list = permissionMenuService.getAllMenuByMenu(m);
         return list;
+    }
 
+    @RequestMapping("savePermissionMenuX")
+    public @ResponseBody String savePermissionMenuX(String endroidstr,Integer mid){
+         String[] aa=endroidstr.split(",");
+         List<String> list=Arrays.asList(aa);
+      permissionMenuService.savePermissionMenuX(list,mid);
+        return "ok";
     }
 
 
