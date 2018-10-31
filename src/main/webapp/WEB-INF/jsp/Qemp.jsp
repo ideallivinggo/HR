@@ -14,37 +14,56 @@
     <script type="text/javascript" src="../../assets/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../../assets/js/layer.js"></script>
     <script type="text/javascript" src="../../assets/layui/layui.js"></script>
-    <link href="../../assets/layui/css/layui.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../assets/layui/css/layui.css">
     <script type="text/javascript" src="../../assets/js/bootstrap-paginator.js"></script>
     <style>
         table tr th{
             text-align: center;
         }
+       .panel-heading div input{
+            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        }
     </style>
 </head>
 <body>
+
 <div class="panel panel-default" style="margin:1%">
-    <div class="panel-heading">
-        <h3 class="panel-title">
-            <button onclick="delemp()">批量删除</button>
-            <button >添加</button>
-                <select id="ByType">
-                    <option value="">--请选择--</option>
-                    <option value="4">招聘部</option>
-                    <option value="2">销售部</option>
-                </select><button onclick="clickDype()">部门</button>
-                <input id="name"><button onclick="ClickByName()">姓名</button>
-            <select>
-                <option>总经理</option>
-                <option>部门主管</option>
-                <option>技术员</option>
-            </select><button >公司职务</button>
-            <select>
-                <option>全职</option>
-                <option>兼职</option>
-                <option>实习生</option>
-            </select>员工类型
-        </h3>
+    <div class="panel-heading" style="height:50px;">
+        <div class="layui-form">
+            <div  class="layui-inline">
+                <input id="name" style="width: 200px;height: 37px;border: 1px solid #e6e6e6;font-size: 16px;">
+            </div>
+            <div class="layui-inline">
+                <button  style="border: 1px solid #e6e6e6;width: 30px;height: 37px;margin-left:-6px;" onclick="ClickByName()"><i class="layui-icon">&#xe615;</i></button>
+            </div>
+            <div class="layui-inline" style="padding-left: 50px;">
+                <select id="ByType"  class="select">
+                    <option value="">--部门--</option>
+                </select>
+            </div>
+            <div class="layui-inline">
+                <button style="border: 1px solid #e6e6e6;width: 30px;height: 37px;margin-left:-6px;" onclick="clickDype()"><i class="layui-icon">&#xe615;</i></button>
+            </div>
+            <div class="layui-inline" style="padding-left: 50px;">
+                <select id="ByPoid"  class="select" >
+                    <option value="">--公司职务--</option>
+                </select>
+            </div>
+            <div class="layui-inline">
+                <button  style="border: 1px solid #e6e6e6;width: 30px;height: 37px;margin-left:-6px;" onclick="QueryEmpPoid()"><i class="layui-icon">&#xe615;</i></button>
+            </div>
+            <div class="layui-inline" style="padding-left: 50px;">
+                <select id="ByEmpTypeid"  class="select">
+                    <option value="">--员工类型--</option>
+                </select>
+            </div>
+            <div class="layui-inline">
+                <button  style="border: 1px solid #e6e6e6;width: 30px;height: 37px;margin-left:-6px;" onclick="QueryEmptTypeid()"><i class="layui-icon">&#xe615;</i></button>
+            </div>
+            <div style="float:right;">
+                <button onclick="shuaxin()">刷新</button>
+            </div>
+        </div>
     </div>
     <div class="panel-body " style="height: 80%">
         <div class="table-responsive">
@@ -59,6 +78,7 @@
                     <th>职务类型id</th>
                     <th>员工类型id</th>
                     <th>当前薪资</th>
+                    <th>入职状态</th>
                     <th>入职日期</th>
                     <th>操作</th>
                 </tr>
@@ -68,6 +88,7 @@
     </div>
 
     <div class="panel-footer">
+        <button class="layui-btn layui-btn-sm" onclick="delemp()"><i class="layui-icon"></i></button>
         <ul class="pagination">
             <li><a id="prepage">上一页</a></li>
             <li class="active"><span id="nowPage"></span></li>
@@ -81,24 +102,60 @@
 </body>
 </html>
 <script !src="text/javascript">
+
 $(function(){
     QQueryEmp(1);
+    //添加表单属性1
+    layui.use(['form', 'layedit', 'laydate'], function(){ });
+    //自动查询
+    $(function(){
+        queryAllRes(1);
+    });
+    QuerySelect();
 })
+/**
+ * 下拉
+ * */
+function QuerySelect(){
+    $.ajax({
+        url:'QueryDeptSelectYqx',
+        type:'post',
+        data:{},
+        dataType:'json',
+        success:function (data) {
+            for (var i=0;i<data.length;i++){
+                var o="<option value='"+data[i].deptid+"'>"+data[i].deptname+"</option>";
+                $("#ByType").append(o);
+            }
+        }
+    })
+}
+function shuaxin() {
+   window.location.reload();
+  /*  window.history.back();*/
+}
 function clickDype(){
     var typeVale = $("#ByType").val();
-    QQueryEmp(1,typeVale,'');
+    QQueryEmp(1,typeVale,'','','');
 }
 function ClickByName() {
     var name = $("#name").val();
-    QQueryEmp(1,'',name);
+    QQueryEmp(1,'',name,'','');
+}
+function  QueryEmpPoid() {
+    var poid = $("#ByPoid").val();
+    QQueryEmp(1,'','',poid,'');
+}
+function QueryEmptTypeid() {
+    var emptypeid = $("#ByEmpTypeid").val();
+    QQueryEmp(1,'','','',emptypeid);
 }
 
-function QQueryEmp(pageNum,typeVale,name){
-
+function QQueryEmp(pageNum,typeVale,name,poid,emptypeid){
     $.ajax({
         url:'QqueryEmp',
         type:'post',
-        data:{"pageNum":pageNum,"deptid":typeVale,"empname":name},
+        data:{"pageNum":pageNum,"deptid":typeVale,"empname":name,"poid":poid,"emptypeid":emptypeid},
         dataType:"json",
         success:function(data){
             $("#MyBody").html("");
@@ -107,15 +164,17 @@ function QQueryEmp(pageNum,typeVale,name){
             {
                 var tr="<tr>";
                 tr+="<th><input type='checkbox' name='check' value='"+datalist[i].empid+"'></th>";
-                tr+="<th><a onclick='QqueryOneEmp("+datalist[i].empid+")' >"+datalist[i].empname+"</a></th>";
+                tr+="<th><a style='color: #19aa8d' onclick='QqueryOneEmp("+datalist[i].empid+")' >"+datalist[i].empname+"</a></th>";
                 tr+="<th>"+datalist[i].empnumber+"</th>";
                 tr+="<th>"+datalist[i].sex+"</th>";
                 tr+="<th>"+datalist[i].phone+"</th>";
                 tr+="<th>"+datalist[i].deptname+"</th>";
-                tr+="<th>"+datalist[i].posname+"</th>";
+                tr+="<th>"+datalist[i].roname+"</th>";
                 tr+="<th>"+datalist[i].emptype+"</th>";
                 tr+="<th>"+datalist[i].emppay+"</th>";
+                tr+="<th>"+datalist[i].empstateid+"</th>";
                 tr+="<th>"+datalist[i].empstatedate+"</th>";
+                tr+="<th><a onclick='QupdateEmp("+datalist[i].empid+")' >修改</a></th>";
                 tr+="</tr>";
                     $("#MyBody").append(tr);
             }
@@ -124,6 +183,15 @@ function QQueryEmp(pageNum,typeVale,name){
             var pageCount = data.pageSize; //总页数
             $("#total").html(currentPage);
             $("#pageSize").html(pageCount);
+
+            for (var i=0;i<datalist.length;i++){
+                var o="<option value='"+datalist[i].poid+"'>"+datalist[i].roname+"</option>";
+                $("#ByPoid").append(o);
+            }
+            for (var i=0;i<datalist.length;i++){
+                var o="<option value='"+datalist[i].emptypeid+"'>"+datalist[i].emptype+"</option>";
+                $("#ByEmpTypeid").append(o);
+            }
         }
 })
 }
@@ -161,7 +229,7 @@ $("#nextpage").click(function(){
     var nowPage=parseInt($("#nowPage").html());
     QQueryEmp(nowPage+1);
 })
-    function QqueryOneEmp(obj) {
+function QqueryOneEmp(obj) {
         alert(obj)
         $.ajax({
             url:'QqueryEmpIf',
@@ -172,7 +240,22 @@ $("#nextpage").click(function(){
                 window.location.href="QoneEmp"
             }
         })
-    }
+}
+
+
+function QupdateEmp(obj) {
+    alert(obj)
+    $.ajax({
+        url:'QqueryEmpIf',
+        type:'post',
+        data:{"empid":obj},
+        dataType:'json',
+        success:function (data) {
+            window.location.href="QupdateEmp"
+        }
+    })
+}
+
 
 </script>
 

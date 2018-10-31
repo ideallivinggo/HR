@@ -1,13 +1,10 @@
 package com.aaa.rzhr.dao;
 
-import com.aaa.rzhr.pojo.Emp_Role;
 import com.aaa.rzhr.pojo.Emp;
 import com.aaa.rzhr.pojo.Emp_Role;
 import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
 @SuppressWarnings("ALL")

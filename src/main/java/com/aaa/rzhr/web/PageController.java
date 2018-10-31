@@ -63,6 +63,24 @@ public String Qemp(){
 
         return "QoneEmp";
     }
+    @RequestMapping("QupdateEmp")
+    public String QupdateEmp(){
+        return "QupdateEmp";
+    }
+    @RequestMapping("Qdept")
+    public String Qdept(){
+        return "Qdept";
+    }
+
+    @RequestMapping("QqueryContract")
+    public String QqueryContract(){
+        return "QqueryContract";
+    }
+    @RequestMapping("Qmanage")
+    public String Qmanage(){
+        return "Qmanage";
+    }
+
     ///----------------------------------李佳鹏区--------------------------------//
 
     /**
@@ -106,23 +124,57 @@ public String Qemp(){
         return "L_leave";
 
     }
-    //----------------------------------月亮鹏-------------------------
+    //----------------------------------岳梁朋-------------------------
+    //招聘申请表
     @RequestMapping("Yapply")
     public String Yapply(){
         return "Yapply";
     }
-
+    //招聘发布表
+    @RequestMapping("Yissue")
+    public String Yissue(){
+        return "Yissue";
+    }
+    //简历筛选
     @RequestMapping("Yresume")
-    public String Yresume(){
+   public String Yresume(){
         return "Yresume";
     }
+    //简历人才资源库
     @RequestMapping("Ytalents")
     public String Ytalents(){
         return "Ytalents";
     }
-    //----------------------------------宋金鹏-------------------------
+    //面试表
+    @RequestMapping("Yinterview")
+    public String Yinterview(){
+        return "Yinterview";
+    }
+    @RequestMapping("Yinterviewtwo")
+    public String Yinterviewtwo(){
+        return "Yinterviewtwo";
+    }
+    //员工录用推送
+    @RequestMapping("Yhire")
+    public String Yhire(){
+        return "Yhire";
+    }
+    //员工录用回复
+    @RequestMapping("Yreply")
+    public String Yreply(){
+        return "Yreply";
+    }
+
+
+
+   //----------------------------------宋金鹏-------------------------
     @RequestMapping("spaydata")
     public String Spaydata(){
         return "Spaydata";
     }
+    @RequestMapping("sxztz")
+    public String Sxztz(){
+        return "Sxztz";
+    }
+
 }

@@ -1,21 +1,15 @@
 package com.aaa.rzhr.pojo;
 
-/**
- * @author YLP
- * @date 2018-10-14 16:46
- * 第一轮面试
- */
 
 public class Interviewone {
 
   private Integer inoid;
   private Integer resid;
-  private String inoposition;
+  private Integer inograde;
   private String inodate;
-  private Integer inonumber;
-  private Integer inostate;
   private String inonotes;
   private String inname;
+  private Integer inostate;
 
 
   public Integer getInoid() {
@@ -36,12 +30,12 @@ public class Interviewone {
   }
 
 
-  public String getInoposition() {
-    return inoposition;
+  public Integer getInograde() {
+    return inograde;
   }
 
-  public void setInoposition(String inoposition) {
-    this.inoposition = inoposition;
+  public void setInograde(Integer inograde) {
+    this.inograde = inograde;
   }
 
 
@@ -51,24 +45,6 @@ public class Interviewone {
 
   public void setInodate(String inodate) {
     this.inodate = inodate;
-  }
-
-
-  public Integer getInonumber() {
-    return inonumber;
-  }
-
-  public void setInonumber(Integer inonumber) {
-    this.inonumber = inonumber;
-  }
-
-
-  public Integer getInostate() {
-    return inostate;
-  }
-
-  public void setInostate(Integer inostate) {
-    this.inostate = inostate;
   }
 
 
@@ -87,6 +63,15 @@ public class Interviewone {
 
   public void setInname(String inname) {
     this.inname = inname;
+  }
+
+
+  public Integer getInostate() {
+    return inostate;
+  }
+
+  public void setInostate(Integer inostate) {
+    this.inostate = inostate;
   }
 
 }

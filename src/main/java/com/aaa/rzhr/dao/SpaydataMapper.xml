@@ -31,5 +31,19 @@
     <update id="Supdpdata5" parameterType="java.util.Map">
         UPDATE payrolldata SET payrbase=#{payrbase},payjixiao=#{payjixiao} WHERE payrid=5
     </update>
+    <select id="Sgetatt" resultType="Att_Statistics">
+        SELECT * FROM att_statistics
+    </select>
+    <delete id="SdelattById" parameterType="Int">
+        DELETE from att_statistics WHERE staid=#{id}
+    </delete>
+    <select id="SgetAll" parameterType="Int" resultType="java.util.Map">
+         select att.stagsname,att.statjmonth,e.empname,e.idnumber,sb.socbank,sb.soccardno,axq.worday,axq.worbelate,axq.worpaffairs,axq.worklatesum,
+axq.worweekwork,axq.worpswork,axq.empid,axq.worhdaywork,p.paynumber,p.paytakehome from att_statisticsxq axq JOIN emp e ON axq.empid=e.empid JOIN payroll p ON
+  axq.empid=p.empid JOIN social_benefits sb ON axq.empid=sb.empid JOIN att_statistics att on axq.staid=att.staid WHERE axq.staid=#{id}
+     </select>
+<update id="Saddpayroll" parameterType="java.util.Map">
+UPDATE payroll set paytakehome=#{shifaa} WHERE empid=#{empidd}
+</update>
 
 </mapper>

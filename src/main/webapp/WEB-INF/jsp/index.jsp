@@ -41,7 +41,8 @@
 
     <![endif]-->
 </head>
-
+<style>
+</style>
 <body>
 
 <section id="container" >
@@ -49,7 +50,7 @@
     TOP BAR CONTENT & NOTIFICATIONS
     *********************************************************************************************************************************************************** -->
     <!--header start-->
-    <header class="header black-bg">
+    <header class="header black-bg" style="background-color: #424A5D ">
         <div class="sidebar-toggle-box">
             <div class="fa fa-bars tooltips" data-placement="right" data-original-title="Toggle Navigation"></div>
         </div>
@@ -146,9 +147,28 @@
                 <c:forEach items="${treevo}" var="list">
        <li class="sub-menu">
   <a href="javascript:;" >  <i class="fa fa-desktop"></i>  <span>${list.name}</span> </a>
+
+           <style>
+               .dian{
+                   width: 190px;
+                   height: 40px;
+                   margin-left: -32px;
+                   text-align: left;
+                   padding-left: 40px;
+                   line-height: 40px;
+                   color: #FFFFFF;
+                   border: 0px solid #000000;
+                   background-color: #424A5D;
+               }
+               .dian:focus{
+                   /*background:#293F45;*/
+                   color: #68DFF0;
+               }
+           </style>
+
      <ul class="sub">
          <c:forEach items="${list.permissionList}" var="plist">
-             <li><a href="javascript:;" onclick="skipjsp('${plist.url}')">${plist.name}</a></li>
+             <li><button class="dian" onclick="skipjsp('${plist.url}')">${plist.name}</button></li>
          </c:forEach>
      </ul>
   </li>

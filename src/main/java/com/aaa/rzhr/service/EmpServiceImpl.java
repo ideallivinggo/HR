@@ -4,10 +4,12 @@ import com.aaa.rzhr.dao.EmpMapper;
 import com.aaa.rzhr.pojo.Emp;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+
 import org.apache.ibatis.annotations.Param;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -43,14 +45,14 @@ public class EmpServiceImpl implements EmpService {
         return empMapper.queryallempX();
     }
     @Override
-    public PageInfo<Map> QqueryEmp(Integer pageNum, @Param("deptid")Integer deptid, @Param("empname")String empname) {
+    public PageInfo<Map> QqueryEmp(Integer pageNum,Integer deptid,String empname,Integer poid,Integer emptypeid) {
         PageHelper.startPage(pageNum,10);
-        List<Map> list = empMapper.QqueryEmp(deptid,empname);
+        List<Map> list = empMapper.QqueryEmp(deptid,empname,poid,emptypeid);
         PageInfo<Map> info = new PageInfo<Map>(list);
         return info;
     }
     /**
-     * 条件查询
+     * 条件查询1
      * */
     @Override
     public List<Map> QqueryEmpIf(Integer empid) {
@@ -61,5 +63,11 @@ public class EmpServiceImpl implements EmpService {
     public void DelEmpYqx(String  str) {
         empMapper.DelEmpYqx(str);
 
+    }
+
+    @Override
+    public void UpdateEmpYqx(Emp emp) {
+        System.out.println(emp.getEmpname()+"ddddddddddddddddddddddddddddddddddd");
+        empMapper.UpdateEmpYqx(emp);
     }
 }

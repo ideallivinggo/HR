@@ -9,7 +9,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>简历库</title>
+    <title>简历筛选</title>
     <script type="text/javascript" src="../../assets/js/jquery.js"></script>
     <script type="text/javascript" src="../../assets/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="../../assets/css/bootstrap.css" type="text/css">
@@ -28,13 +28,44 @@
         width: 1000px;
         margin: 0px auto;
     }
+    #batchUpload {
+        margin-left: 500px;
+        margin-top: -57px;
+    }
+    #fy {
+        height: 40px;
+        margin-left: 20px;
+        margin-top: -10px
+
+    }
+    .fy1 {
+        width: 35px;
+        height: 30px;
+        text-align: center;
+        cursor: pointer;
+        float: left;
+        line-height: 30px;
+        border-radius:5px;
+        margin-left: 10px;
+
+    }
+    .fy2 {
+        width: 100px;
+        height: 30px;
+        text-align: center;
+        float: left;
+        line-height: 30px;
+        border-radius:5px;
+        letter-spacing: 5px;
+    }
 </style>
 <body>
+<div class="panel panel-default" style="margin:1%">
     <!-- 多条件查询  -->
-    <div class="layui-form"  style=" height: 40px; float: left; ">
+    <div class="panel-heading" style="height: 60px">
         <div class="layui-form">
             <div class="layui-form-item">
-                <div class="layui-inline" style="margin: 0px">
+                <div class="layui-inline" style="margin: 0px;width: 200px">
                     <select id="education" >
                         <option value="">学历不限</option>
                         <option value="小学">小学</option>
@@ -45,7 +76,7 @@
                         <option value="博士">博士</option>
                     </select>
                 </div>
-                <div class="layui-inline" style="margin: 0px">
+                <div class="layui-inline" style="margin: 0px;width: 200px">
                     <select id="sex" >
                         <option value="">性别不限</option>
                         <option value="男">男</option>
@@ -53,147 +84,157 @@
                     </select>
                 </div>
                 <div class="layui-inline" style="margin: 0px" >
-                    <input type="button" class="layui-btn" onclick="queryAllRes(1)" value="查询" style="width: 100px">
+                    <button style="border: 1px solid #e6e6e6;width: 30px;height: 37px;margin-left:-6px;" onclick="queryAllRes(1)"><i class="layui-icon">&#xe615;</i></button>
+                </div>
+
+                <div class="layui-inline" style="float: right" >
+                    <button class="layui-btn" data-toggle="modal" data-target="#myModal">
+                        <i class="layui-icon">&#xe642;</i>录入简历</button>
+                    <button class="layui-btn" onclick="updareRes(1)">
+                        <i class="layui-icon">&#xe608;</i> 加入简历库</button>
+                    <button class="layui-btn" onclick="updareRes(3)">
+                        <i class="layui-icon">&#xe640;</i>加入回收站</button>
                 </div>
             </div>
         </div>
-    </div>
-
-    <div style="float: right">
-        <button class="layui-btn" data-toggle="modal" data-target="#myModal">
-            <i class="layui-icon">&#xe642;</i> 录入简历</button>
-        <button class="layui-btn" onclick="updareOne()">
-            <i class="layui-icon">&#xe608;</i> 加入简历库</button>
-        <button class="layui-btn" onclick="updareTwo()">
-            <i class="layui-icon">&#xe640;</i>加入回收站</button>
+        <form enctype="multipart/form-data" id="batchUpload">
+             <div class="layui-inline" style="margin-left: 50px" >
+                 <input type="file" name="file" style="width: 170px;height: 38px;border: 1px solid #969696" id="file">
+             </div>
+             <div class="layui-inline" style="margin-left: -15px" >
+                 <input type="button" class="layui-btn" onclick="uploadBtn()" value="上传简历">
+             </div>
+        </form>
     </div>
 <!--table表格-->
-<table class="layui-table">
-    <colgroup>
-        <col width="100">
-    </colgroup>
-    <thead>
-    <tr>
-        <th>编号</th>
-        <th>姓名</th>
-        <th>性别</th>
-        <th>年龄</th>
-        <th>手机号</th>
-        <th>QQ邮箱</th>
-        <th>学历</th>
-        <th>专业</th>
-        <th>应聘职位</th>
-        <th>录入时间</th>
-        <th>筛选状态</th>
-        <th>操作</th>
-    </tr>
-    </thead>
-    <tbody id="mytab">
-    <!--数据-->
-    </tbody>
-</table>
+    <div class="panel-body ">
+        <div class="table-responsive">
+            <table class="layui-table">
+                <thead>
+                <tr>
+                    <th>编号</th>
+                    <th>姓名</th>
+                    <th>性别</th>
+                    <th>年龄</th>
+                    <th>手机号</th>
+                    <th>QQ邮箱</th>
+                    <th>学历</th>
+                    <th>专业</th>
+                    <th>应聘职位</th>
+                    <th>录入时间</th>
+                    <th>筛选状态</th>
+                    <th>操作</th>
+                </tr>
+                </thead>
+                <tbody id="mytab">
+                <!--数据-->
+                </tbody>
+            </table>
+        </div>
+    </div>
 <!--分页-->
-    <div>
-        <a id="prepage">上一页</a>
-        <a id="nextpage">下一页
-        </a>当前第<span id="nowPage"></span>页
-        </a>共<span id="pages"></span>页
-        </a>共<span id="total"></span>条
+    <div id="fy">
+        <div id="prepage" class="fy1"><i class="layui-icon">&#xe603;</i></div><!--上一页-->
+        <div class="fy1" style="background-color: #009688; color: #FFFFFF"><span id="nowPage"></span></div><!--第几页-->
+        <div id="nextpage" class="fy1"><i class="layui-icon">&#xe602;</i></div><!--下一页-->
+        <div class="fy2">共<span id="total"></span>条</div><!--条数-->
+        <div class="fy2">共<span id="pages"></span>页</div><!--页数-->
     </div>
 
 
   <!-- 模态框添加（Modal） -->
-<div class="modal fade" id="myModal" >
-    <div class="modal-dialog" style="width: 700px;" >
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title"  style="font-size:28px;font-weight:bold;font-family:'楷体';margin-left: 50px">
-                   添加简历
-                </h4>
-            </div>
-            <div class="modal-body">
-            <div class="content">
-                <form class="layui-form" id="updateResForm" >
-                <div class="layui-form-item">
-                    <div class="layui-inline">
-                        <label class="layui-form-label">姓名</label>
-                        <div class="layui-input-block">
-                            <input name="resumename" class="layui-input">
-                        </div>
-                    </div>
-                    <div class="layui-inline">
-                        <label class="layui-form-label">性别</label>
-                        <div class="layui-input-block">
-                            <input name="sex" value="男"  title="男" type="radio" checked>
-                            <input name="sex" value="女"  title="女" type="radio">
-                        </div>
-                    </div>
+    <div class="modal fade" id="myModal" >
+        <div class="modal-dialog" style="width: 700px;" >
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title"  style="font-size:28px;font-weight:bold;font-family:'楷体';margin-left: 50px">
+                       添加简历
+                    </h4>
                 </div>
-                <div class="layui-form-item">
-                    <div class="layui-inline">
-                        <label class="layui-form-label">年龄</label>
-                        <div class="layui-input-block">
-                            <input name="age" class="layui-input" >
+                <div class="modal-body">
+                <div class="content">
+                    <form class="layui-form" id="updateResForm" >
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label">姓名</label>
+                            <div class="layui-input-block">
+                                <input name="resumename" class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">性别</label>
+                            <div class="layui-input-block">
+                                <input name="sex" value="男"  title="男" type="radio" checked>
+                                <input name="sex" value="女"  title="女" type="radio">
+                            </div>
                         </div>
                     </div>
-                    <div class="layui-inline">
-                        <label class="layui-form-label">手机号</label>
-                        <div class="layui-input-block">
-                            <input name="phone" class="layui-input" >
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label">年龄</label>
+                            <div class="layui-input-block">
+                                <input name="age" class="layui-input" >
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">手机号</label>
+                            <div class="layui-input-block">
+                                <input name="phone" class="layui-input" >
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="layui-form-item">
-                    <div class="layui-inline">
-                        <label class="layui-form-label">QQ邮箱</label>
-                        <div class="layui-input-block">
-                            <input name="emali" class="layui-input" >
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label">QQ邮箱</label>
+                            <div class="layui-input-block">
+                                <input name="emali" class="layui-input" >
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">应聘职位</label>
+                            <div class="layui-input-block">
+                                <input name="resposition" class="layui-input" >
+                            </div>
                         </div>
                     </div>
-                    <div class="layui-inline">
-                        <label class="layui-form-label">应聘职位</label>
-                        <div class="layui-input-block">
-                            <input name="resposition" class="layui-input" >
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label">学历</label>
+                            <div class="layui-input-block">
+                                <input name="education" class="layui-input" placeholder="最高学历">
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">专业</label>
+                            <div class="layui-input-block">
+                                <input name="resmajor" class="layui-input" >
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="layui-form-item">
-                    <div class="layui-inline">
-                        <label class="layui-form-label">学历</label>
-                        <div class="layui-input-block">
-                            <input name="education" class="layui-input" placeholder="最高学历">
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label">录入时间</label>
+                            <div class="layui-input-block">
+                                <input name="resdate" id="resdate" class="layui-input" >
+                            </div>
                         </div>
                     </div>
-                    <div class="layui-inline">
-                        <label class="layui-form-label">专业</label>
-                        <div class="layui-input-block">
-                            <input name="resmajor" class="layui-input" >
+                        <div  style="display: none">
+                            <label class="layui-form-label">简历状态</label>
+                            <div class="layui-input-inline">
+                                <input name="resstate" value="0" class="layui-input" >
+                            </div>
                         </div>
-                    </div>
-                </div>
-                <div class="layui-form-item">
-                    <div class="layui-inline">
-                        <label class="layui-form-label">录入时间</label>
-                        <div class="layui-input-block">
-                            <input name="resdate" id="resdate" class="layui-input" >
-                        </div>
-                    </div>
-                </div>
-                    <div  style="display: none">
-                        <label class="layui-form-label">简历状态</label>
-                        <div class="layui-input-inline">
-                            <input name="resstate" value="0" class="layui-input" >
-                        </div>
-                    </div>
-                    <input type="button" class="layui-btn layui-btn-fluid" onclick="addRes()" value="录入"
-                           style="width: 300px;margin-left: 200px;letter-spacing:15px;"/>
+                        <input type="button" class="layui-btn layui-btn-fluid" onclick="addRes()" value="录入"
+                               style="width: 300px;margin-left: 200px;letter-spacing:15px;"/>
 
-                </form>
-            </div>
-            </div>
-        </div><!-- /.modal-content -->
-    </div><!-- /.modal -->
+                    </form>
+                </div>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal -->
+    </div>
 </div>
 </body>
 <script>
@@ -232,8 +273,7 @@
                     if(+data.list[i].resstate==0){data.list[i].resstate="未筛选"}
                     if(+data.list[i].resstate==1){data.list[i].resstate="已入库"}
                     if(+data.list[i].resstate==2){data.list[i].resstate="待面试"}
-                    if(+data.list[i].resstate==3){data.list[i].resstate="已面试"}
-                    if(+data.list[i].resstate==4){data.list[i].resstate="回收站"}
+                    if(+data.list[i].resstate==3){data.list[i].resstate="回收站"}
                     tr+="<td>"+data.list[i].resstate+"</td>";
                     tr+="<td><input class='resid' type='checkbox' value='"+data.list[i].resid+"' /></td>";
                     tr+="</tr>";
@@ -263,7 +303,7 @@
 
 
     //筛选加入简历库
-    function updareOne() {
+    function updareRes(obj) {
         var str="";
         //获取到所有的被选中的复选框
         $(".resid").each(function(){
@@ -275,40 +315,52 @@
         $.ajax({
             url:"updateResOneYLP",
             type:"post",
-            data:{resstate:1,s:str},
+            data:{resstate:obj, s:str},
             dataType:"text",
             success:function(data){
-                if(data=="true"){alert("加入简历库成功");}
-                queryAllRes(1);
-            }
-        });
-    }
-    //筛选加入回收站
-    function updareTwo() {
-        var str="";
-        //获取到所有的被选中的复选框
-        $(".resid").each(function(){
-            if($(this).prop("checked")==true){
-                var jsonStr=$(this).val();
-                str+=jsonStr+",";
-            }
-        });
-        $.ajax({
-            url:"updateResOneYLP",
-            type:"post",
-            data:{resstate:4,s:str},
-            dataType:"text",
-            success:function(data){
-                if(data=="true"){alert("加入回收站成功");}
+                if(data=="true"){alert("执行成功");}
                 queryAllRes(1);
             }
         });
     }
 
+    //上传简历
+    function uploadBtn() {
+        var file = $("#file").val();
+        if(file == ''){
+            alert("请选择excel,再上传");
+        }else if(file.lastIndexOf(".xls")<0){
+            alert("只能上传Excel文件");
+        }else {
+            //获取form 表单内容
+            var form = document.getElementById("batchUpload");
+            //获取form表单中第一个 input type是file的的对象
+            var file=$('input[type=file]')[0].files[0];
+            var fm = new FormData(form);
+            fm.append('file', file);
+            $.ajax({
+                url: "uploadYlp",
+                type: "post",
+                data: fm,
+                contentType: false, //禁止设置请求类型
+                processData: false, //禁止jquery对DAta数据的处理,默认会处理
+                //禁止的原因是,FormData已经帮我们做了处理
+                success: function (result) {
+                    if (result=="true"){
+                        $("#file").val("")
+                        queryAllRes(1);
+                    }else {
+                        alert("导入简历错误，请检查Excel文件是否正确");
+                    }
+                }
+            });
+        }
+    }
+
     //录入简历
     function addRes() {
         $.ajax({
-            url:"addResEnteringYlp",
+            url:"addResEnteringYlP",
             type:"post",
             data:$("#updateResForm").serialize(),
             dataType: "text",

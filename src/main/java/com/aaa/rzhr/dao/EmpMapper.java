@@ -22,14 +22,18 @@ public interface EmpMapper {
 
     //------------------------------------------------------------------////
     /** 查询员工 */
-    public List<Map> QqueryEmp(@Param("deptid")Integer deptid, @Param("empname")String empname);
+    public List<Map> QqueryEmp(@Param("deptid")Integer deptid, @Param("empname")String empname,@Param("poid") Integer poid,@Param("emptypeid") Integer emptypeid);
     /**
      * 条件查询
      * */
     public List<Map> QqueryEmpIf(@Param("empid")Integer empid);
     /**
-     * 批量删除
+     * 批量删除1
      * */
     public void DelEmpYqx(@Param("str") String  str);
+    /**
+     * 更新
+     * */
+    public void UpdateEmpYqx(Emp emp);
 
 }

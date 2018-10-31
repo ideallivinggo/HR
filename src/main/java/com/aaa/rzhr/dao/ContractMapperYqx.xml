@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.aaa.rzhr.dao.ContractMapperYqx">
+    <!--查询合同-->
+    <select id="QueryContractYqx" resultType="java.util.Map" parameterType="Map">
+        SELECT * FROM contract c
+        LEFT JOIN contract_type ct on c.contypeid = ct.contypeid
+        LEFT JOIN emp e on c.empid = e.empid
+    </select>
+    <!--添加合同-->
+        <insert id="AddContractYqx" parameterType="Contract">
+            insert into contract(empid,contypeid,concontent,constart,conover,conexpire)
+            values (#{empid},#{contypeid},#{concontent},#{constart},#{conover},#{conexpire})
+        </insert>
+    <!--修改合同-->
+    <update id="UpdateContractYqx" parameterType="Contract">
+        update contract set contypeid=#{contypeid},concontent=#{concontent},constart=#{constart}
+        ,conover=#{conover},conexpire=#{conexpire}
+        where conid=#{conid}
+    </update>
+    <!--添加教育经历-->
+    <insert id="AddEducationYqx" parameterType="Education_Experience">
+         insert into education_experience(empid,expshool,expmajon,enterdate,graduatedate,expeducation,degree,certificate)
+         values(#{empid},#{expshool},#{expmajon},#{enterdate},#{graduatedate},#{expeducation},#{degree},#{certificate})
+    </insert>
+    <!--修改教育经历-->
+    <update id="UpdateEducationYqx" parameterType="Education_Experience">
+        update education_experience set expshool=#{expshool},expmajon=#{expmajon},enterdate=#{enterdate}
+        ,graduatedate=#{graduatedate},expeducation=#{expeducation},degree=#{degree},certificate=#{certificate}
+        where expid =#{expid}
+    </update>
+    <!--添加工作经历-->
+    <insert id="AddWorkYqx" parameterType="Work_Experience">
+      insert into work_experience(empid,worcompany, worposition, worentrydate, woroverdate, wordescribe)
+        values(#{empid},#{worcompany},#{worposition},#{worentrydate},#{woroverdate},#{wordescribe})
+    </insert>
+    <!--修改工作经历-->
+    <update id="UpdateWorkYqx" parameterType="Work_Experience">
+        update work_experience set worcompany=#{worcompany},worposition=#{worposition},worentrydate=#{worentrydate}
+        ,woroverdate=#{woroverdate},wordescribe=#{wordescribe}
+        where workid =#{workid}
+    </update>
+    <!--添加社保福利-->
+    <insert id="AddSocialYqx" parameterType="Social_Benefits">
+        insert into social_benefits(empid, socbank, soccardno, soccardname, fundaccount, payto, securityaccount, place_payment)
+        values(#{empid},#{socbank},#{soccardno},#{soccardname},#{fundaccount},#{payto},#{securityaccount},#{place_payment})
+    </insert>
+    <!--修改社保福利-->
+    <update id="UpdateSociaYqx" parameterType="Social_Benefits">
+        update social_benefits set socbank=#{socbank},soccardno=#{soccardno},soccardname=#{soccardname}
+        ,fundaccount=#{fundaccount},payto=#{payto},securityaccount=#{securityaccount},place_payment=#{place_payment}
+        where socid=#{socid}
+    </update>
+    <!--入职，转正，离职管理-->
+    <select id="QueryEmpState" resultType="java.util.Map" parameterType="Map">
+        select * from emp e left join id_type idtype on e.typeid = idtype.typeid
+        left join education edu on e.eduid = edu.eduid
+        left join dept d on e.deptid = d.deptid
+        left join emp_type et on e.emptypeid = et.emptypeid
+        left join position p on e.poid = p.poid
+        left join role r on e.poid = r.roid
+        LEFT JOIN empstate state on e.empstateid=state.empstateid
+        <if test="empstateid!=null and empstateid!=''">
+             WHERE e.empstateid = #{empstateid}
+        </if>
+    </select>
+    <select id="QueryStateName" resultType="java.util.Map" parameterType="Map">
+        SELECT * FROM empstate
+    </select>
+
+</mapper>
