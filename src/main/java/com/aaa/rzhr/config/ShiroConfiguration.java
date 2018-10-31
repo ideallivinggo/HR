@@ -61,6 +61,7 @@ public class ShiroConfiguration {
         filterChainDefinitionMap.put("/testadduser", "anon");
         //登陆验证请求
         filterChainDefinitionMap.put("/checkuser", "anon");
+        filterChainDefinitionMap.put("/jihuo.jsp", "anon");
         filterChainDefinitionMap.put("/static/**", "anon");
         filterChainDefinitionMap.put("/assets/**", "anon");
         filterChainDefinitionMap.put("/doLogout", "logout");;

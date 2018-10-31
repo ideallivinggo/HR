@@ -1,5 +1,7 @@
 package com.aaa.rzhr.pojo;
 
+import java.math.BigInteger;
+
 /**
  * @author YLP
  * @date 2018-10-14 16:46
@@ -92,14 +94,13 @@ public class Resume {
   }
 
 
-  public String getemali() {
+  public String getEmali() {
     return emali;
   }
 
-  public void setemali(String emali) {
+  public void setEmali(String emali) {
     this.emali = emali;
   }
-
 
   public String getResdate() {
     return resdate;

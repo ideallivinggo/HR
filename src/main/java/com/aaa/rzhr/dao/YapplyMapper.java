@@ -34,11 +34,14 @@ public interface YapplyMapper {
     /**
      * 查看招聘申请信息
      */
-    List<Map> queryAllRec(Integer recid);
+    List<Map> queryAllRec(Recruitment recruitment);
     /**
      * 修改招聘申请信息
      * */
     void updateRec(Recruitment recruitment);
+    /**
+     * 修改招聘申请信息
+     * */
 
     ///////////////////////////简历///////////////////////////////////
     /**
@@ -95,7 +98,36 @@ public interface YapplyMapper {
     /**
      * 获取最大的员工编号
      * */
-    Map queryEmpID (Integer empid);
+    Map queryActID (Integer actid);
+    /**
+     * 录取后添加到员工激活表
+     * */
+    void addAct (Activation activation);
+
+    //////////////////////////////////////////首页////////////////////////////////////////////////////////
+
+    /**
+     * 员工类型统计
+     * */
+    List<Map> countEmpState();
+    /**
+     * 合同到期提醒
+     * */
+    Map countContract();
+    /**
+     * 加班审批
+     * */
+    Map countOvertime();
+    /**
+     * 离职审批
+     * */
+    Map countDimission();
+    /**
+     * 休假审批
+     * */
+    Map countLeave();
+
+
 
 
 

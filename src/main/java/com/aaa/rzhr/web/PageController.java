@@ -120,10 +120,15 @@ public String Qemp(){
 
     }
     //----------------------------------岳梁朋-------------------------
-    //申请表
+    //招聘申请表
     @RequestMapping("Yapply")
     public String Yapply(){
         return "Yapply";
+    }
+    //招聘发布表
+    @RequestMapping("Yissue")
+    public String Yissue(){
+        return "Yissue";
     }
     //简历筛选
     @RequestMapping("Yresume")

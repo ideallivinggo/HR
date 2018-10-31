@@ -28,6 +28,9 @@
                     <div class="site-demo-button" id="layerDemo" style="margin-bottom: 0;float: right;padding-right: 60px;">
                         <button data-method="offset" data-type="auto" class="layui-btn layui-btn-normal">添加部门</button>
                     </div>
+                    <div class="layui-inline" style="margin-left: 350px;" >
+                        <a href="Yapply"><button class="layui-btn">发布招聘</button></a>
+                    </div>
                 </div>
                 <div class="layui-card-body">
                     <table class="layui-table">

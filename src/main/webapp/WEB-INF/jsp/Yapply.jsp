@@ -38,38 +38,95 @@
         background-color: #F4F4F4;
         margin: 5px;
     }
+    #fy {
+        height: 40px;
+        margin-left: 20px;
+        margin-top: -10px
+
+    }
+    .fy1 {
+        width: 35px;
+        height: 30px;
+        text-align: center;
+        cursor: pointer;
+        float: left;
+        line-height: 30px;
+        border-radius:5px;
+        margin-left: 10px;
+
+    }
+    .fy2 {
+        width: 100px;
+        height: 30px;
+        text-align: center;
+        float: left;
+        line-height: 30px;
+        border-radius:5px;
+        letter-spacing: 5px;
+    }
 </style>
 <body>
-    <button class="layui-btn" data-toggle="modal" data-target="#myModal">
-        <i class="layui-icon">&#xe608;</i> 添加
-    </button>
-  <table class="layui-table">
-     <colgroup>
-         <col width="70">
-    </colgroup>
-    <thead>
-    <tr>
-        <th>编号</th>
-        <th>招聘部门</th>
-        <th>招聘职务</th>
-        <th>招聘人数</th>
-        <th>工作地址</th>
-        <th>发布时间</th>
-        <th>性别要求</th>
-        <th>学历要求</th>
-        <th>年龄要求</th>
-        <th>工作经验</th>
-        <th>专业要求</th>
-        <th>其他要求</th>
-        <th>审批状态</th>
-        <th>操作</th>
-    </tr>
-    </thead>
-    <tbody id="mytab">
-      <!--数据-->
-    </tbody>
-  </table>
+<div class="panel panel-default" style="margin:1%">
+    <!-- 多条件查询  -->
+    <div class="panel-heading" style="height: 60px">
+        <div class="layui-form" >
+            <div class="layui-form-item">
+                <div class="layui-inline" style="margin: 0px">
+                    <select id="recstate">
+                        <option value="">所有申请</option>
+                        <option value="0">已申请</option>
+                        <option value="1">已发布</option>
+                        <option value="2">已撤除</option>
+                    </select>
+                </div>
+                <div class="layui-inline" style="margin: 0px" >
+                    <button style="border: 1px solid #e6e6e6;width: 30px;height: 37px;margin-left:-6px;" onclick="queryAllRec(1)"><i class="layui-icon">&#xe615;</i></button>
+                </div>
+                <div class="layui-inline" style="margin-left: 800px;" >
+                    <button class="layui-btn" data-toggle="modal" data-target="#myModal">
+                        <i class="layui-icon">&#xe608;</i> 添加招聘信息
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
 
+    <!--table表格-->
+    <div class="panel-body">
+        <div class="table-responsive">
+        <table class="layui-table">
+            <thead>
+            <tr>
+                <th>编号</th>
+                <th>招聘部门</th>
+                <th>招聘职务</th>
+                <th>招聘人数</th>
+                <th>工作地址</th>
+                <th>发布时间</th>
+                <th>性别要求</th>
+                <th>学历要求</th>
+                <th>年龄要求</th>
+                <th>工作经验</th>
+                <th>专业要求</th>
+                <th>其他要求</th>
+                <th>审批状态</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+            <tbody id="mytab">
+              <!--数据-->
+            </tbody>
+        </table>
+        </div>
+    </div>
+    <!--分页-->
+    <div id="fy">
+        <div id="prepage" class="fy1"><i class="layui-icon">&#xe603;</i></div><!--上一页-->
+        <div class="fy1" style="background-color: #009688; color: #FFFFFF"><span id="nowPage"></span></div><!--第几页-->
+        <div id="nextpage" class="fy1"><i class="layui-icon">&#xe602;</i></div><!--下一页-->
+        <div class="fy2">共<span id="total"></span>条</div><!--条数-->
+        <div class="fy2">共<span id="pages"></span>页</div><!--页数-->
+    </div>
 
 
 <!-- 模态框添加（Modal） -->
@@ -184,7 +241,7 @@
                         </div>
                     </div>
                 </div>
-                <input type="button" class="layui-btn layui-btn-fluid" onclick="addRec()" value="添加"/>
+                <input  class="layui-btn layui-btn-fluid" onclick="addRec()" value="添加"/>
             </form>
             </div>
             </div>
@@ -230,7 +287,7 @@
                             <div class="layui-inline">
                                 <label class="layui-form-label">招聘人数</label>
                                 <div class="layui-input-block" style="width: 300px">
-                                    <input class="layui-input" id="recnumber" disabled="disabled" >
+                                    <input class="layui-input" name="recnumber" id="recnumber">
                                 </div>
                             </div>
                         </div>
@@ -244,7 +301,7 @@
                             <div class="layui-inline">
                                 <label class="layui-form-label">发布时间</label>
                                 <div class="layui-input-block" style="width: 300px">
-                                    <input name="recreachdate" class="layui-input" id="recreachdate2" disabled="disabled">
+                                    <input class="layui-input" id="recreachdate2" disabled="disabled">
                                 </div>
                             </div>
                         </div>
@@ -306,6 +363,7 @@
         </div><!-- /.modal-content -->
     </div><!-- /.modal -->
 </div>
+</div>
 </body>
 <script>
     //添加表单属性
@@ -314,7 +372,7 @@
     //自动查询
     $(function(){
         AllForeignKey();
-        queryAllRec();
+        queryAllRec(1);
        //$("#myModal").modal("show");//模态框开启
     });
     //申请招聘的所有外键
@@ -362,49 +420,74 @@
     }
 
     //查看招聘申请
-    function queryAllRec() {
+    function queryAllRec(pageNum) {
+        var recstate =  $("#recstate").val();
         $.ajax({
             url: "queryAllRecYLP",
             type: "post",
+            data:{recstate:recstate, pageNum:pageNum},
             dataType: "json",
             success: function (data) {
-               // alert(data);
+               //alert(data);
                 $("#mytab").html("");
-                for ( var i = 0; i < data.length; i++) {
+                for ( var i = 0; i < data.list.length; i++) {
                     var tr="<tr>";
-                    tr+="<td>"+data[i].recid+"</td>";
-                    tr+="<td>"+data[i].deptname+"</td>";
-                    tr+="<td>"+data[i].posname+"</td>";
-                    if(data[i].recnumber==undefined){   data[i].recnumber=" ";   }
-                    tr+="<td>"+data[i].recnumber+"</td>";
-                    tr+="<td>"+data[i].recaddress+"</td>";
-                    tr+="<td>"+data[i].recreachdate+"</td>";
-                    tr+="<td>"+data[i].recsex+"</td>";
-                    tr+="<td>"+data[i].receducation+"</td>";
-                    tr+="<td>"+data[i].recage+"</td>";
-                    tr+="<td>"+data[i].recsuffer+"</td>";
-                    tr+="<td>"+data[i].recmajor +"</td>";
-                    tr+="<td>"+data[i].recrequire+"</td>";
-                    if(+data[i].recstate==0){data[i].recstate="未审核"}
-                    if(+data[i].recstate==1){data[i].recstate="已审核"}
-                    if(+data[i].recstate==2){ data[i].recstate="撤除"}
-                    tr+="<td>"+data[i].recstate+"</td>";
-                    tr+="<td>";
-                    tr+="<button onclick='delRec("+data[i].recid+")'>删除</button>&nbsp;&nbsp;";
-                    tr+="<button data-toggle='modal' data-target='#myModal2' onclick='queryOneRec("+data[i].recid+")'>修改</button>";
-                    tr+="</td>";
+                    tr+="<td>"+data.list[i].recid+"</td>";
+                    tr+="<td>"+data.list[i].deptname+"</td>";
+                   tr+="<td>"+data.list[i].posname+"</td>";
+                    if(data.list[i].recnumber==undefined){   data.list[i].recnumber=" ";   }
+                    tr+="<td>"+data.list[i].recnumber+"</td>";
+                    tr+="<td>"+data.list[i].recaddress+"</td>";
+                    tr+="<td>"+data.list[i].recreachdate+"</td>";
+                    tr+="<td>"+data.list[i].recsex+"</td>";
+                    tr+="<td>"+data.list[i].receducation+"</td>";
+                    tr+="<td>"+data.list[i].recage+"</td>";
+                    tr+="<td>"+data.list[i].recsuffer+"</td>";
+                    tr+="<td>"+data.list[i].recmajor +"</td>";
+                    tr+="<td>"+data.list[i].recrequire+"</td>";
+                    if(+data.list[i].recstate==0){
+                        tr+="<td>已申请</td>";
+                        tr+="<td>";
+                        tr+="<button onclick='chechu("+data.list[i].recid+")'>撤除</button>&nbsp;&nbsp;";
+                        tr+="<button data-toggle='modal' data-target='#myModal2' onclick='queryOneRec("+data.list[i].recid+")'>修改</button>";
+                        tr+="</td>";
+                    }
+                    if(+data.list[i].recstate==1){
+                        tr+="<td>已发布</td>";
+                        tr+="<td>";
+                        tr+="<button onclick='chechu("+data.list[i].recid+")'>撤除</button>&nbsp;&nbsp;";
+                        tr+="<button data-toggle='modal' data-target='#myModal2' onclick='queryOneRec("+data.list[i].recid+")'>修改</button>";
+                        tr+="</td>";
+                    }
+                    if(+data.list[i].recstate==2){
+                        tr+="<td>已撤除</td>";
+                        tr+="<td></td>";
+                    }
                     tr+="</tr>";
                     $("#mytab").append(tr);
                 }
+                $("#nowPage").html(data.pageNum);
+                $("#total").html(data.total);//总条数
+                $("#pages").html(data.pages);//总页数
 
             }
         })
     }
+    $("#prepage").click(function(){
+        //得到下一页的页码
+        var nowPage=parseInt($("#nowPage").html());
+        queryAllRec(nowPage-1);
+    });
+    $("#nextpage").click(function(){
+        //得到下一页的页码
+        var nowPage=parseInt($("#nowPage").html());
+        queryAllRec(nowPage+1);
+    });
 
     //查看单个详情
     function queryOneRec(obj) {
         $.ajax({
-            url: "queryAllRecYLP",
+            url: "queryOneRecYLP",
             data:{recid:obj},
             type: "post",
             dataType: "json",
@@ -424,10 +507,6 @@
                 $("#recrequire").val(data[0].recrequire)
                 $("#recstate").val(data[0].recstate)
 
-                //$("input[value=sexylp]").attr('checked','true');
-               // $("input[value='女']").attr('checked','true');
-                //var xb=data[0].recsex;
-                //$("input:radio[value='"+xb+"']").attr('checked','true');
             }
         })
     }
@@ -443,7 +522,8 @@
             dataType: "text",
             success:function(data) {
                 if(data=="true"){alert("修改成功");}
-                queryAllRec();
+                $("#recstate").val("");
+                queryAllRec(1);
                 $("#myModal2").modal("hide");
             }
         })
@@ -457,13 +537,24 @@
             dataType: "text",
             success:function(data) {
                 if(data=="true"){alert("申请成功");}
-                queryAllRec();
+                queryAllRec(1);
                 $("#myModal").modal("hide");
             }
         })
     }
 
-
+    //撤除
+    function chechu(obj) {
+        $.ajax({
+            url:"updateRecYLP",
+            type:"post",
+            data:{recid:obj, recstate:2},
+            dataType: "text",
+            success:function(data) {
+                queryAllRec(1);
+            }
+        })
+    }
 
 
 
