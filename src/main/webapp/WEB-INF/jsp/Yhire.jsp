@@ -22,21 +22,49 @@
     .layui-input{
         width: 200px;
     }
+    #fy {
+        height: 40px;
+        margin-left: 20px;
+        margin-top: -10px
+
+    }
+    .fy1 {
+        width: 35px;
+        height: 30px;
+        text-align: center;
+        cursor: pointer;
+        float: left;
+        line-height: 30px;
+        border-radius:5px;
+        margin-left: 10px;
+
+    }
+    .fy2 {
+        width: 100px;
+        height: 30px;
+        text-align: center;
+        float: left;
+        line-height: 30px;
+        border-radius:5px;
+        letter-spacing: 5px;
+    }
 </style>
 <body>
+<div class="panel panel-default" style="margin:1%">
 <!-- 多条件查询  -->
-<div class="layui-form" style=" height: 40px; float: left; margin-top: 10px; margin-bottom: 10px;  ">
+<div class="panel-heading" style="height: 60px">
     <div class="layui-form">
         <div class="layui-form-item">
             <div class="layui-inline" style="margin: 0px">
                 <select id="intstate">
+                    <option value="4">待录取</option>
                     <option value="1">待推送</option>
                     <option value="3">已推送</option>
-                    <option value="4">待录取</option>
+
                 </select>
             </div>
             <div class="layui-inline" style="margin: 0px" >
-                <input type="button" class="layui-btn" onclick="queryAllInteTwo(1)" value="查询" style="width: 100px">
+                <button style="border: 1px solid #e6e6e6;width: 30px;height: 37px;margin-left:-6px;" onclick="queryAllInteTwo(1)"><i class="layui-icon">&#xe615;</i></button>
             </div>
             <div class="layui-inline" style="margin-left: 850px" >
                 <button class="layui-btn" onclick="inteTwoPash()">推送给人事部</button>
@@ -45,42 +73,42 @@
     </div>
 </div>
 <!--table表格-->
-<table class="layui-table">
-    <colgroup>
-        <col width="100">
-    </colgroup>
-    <thead>
-    <tr>
-        <th>编号</th>
-        <th>姓名</th>
-        <th>性别</th>
-        <th>年龄</th>
-        <th>学历</th>
-        <th>专业</th>
-        <th>心仪职位</th>
-        <th>面试时间</th>
-        <th>分数</th>
-        <th>面试官</th>
-        <th>面试备注</th>
-        <th>人员状态</th>
-        <th>
-            <input type="checkbox" onclick="selectAll(this);" />操作
-        </th>
-    </tr>
-    </thead>
-    <tbody id="mytab">
-    <!--数据-->
-    </tbody>
-</table>
-
-<!--分页按钮-->
-<div>
-    <a id="prepage">上一页</a>
-    <a id="nextpage">下一页
-    </a>当前第<span id="nowPage"></span>页
-    </a>共<span id="pages"></span>页
-    </a>共<span id="total"></span>条
+<div class="panel-body ">
+    <div class="table-responsive">
+        <table class="layui-table">
+            <tr>
+                <th>编号</th>
+                <th>姓名</th>
+                <th>性别</th>
+                <th>年龄</th>
+                <th>学历</th>
+                <th>专业</th>
+                <th>心仪职位</th>
+                <th>面试时间</th>
+                <th>分数</th>
+                <th>面试官</th>
+                <th>面试备注</th>
+                <th>人员状态</th>
+                <th>
+                    <input type="checkbox" onclick="selectAll(this);" />操作
+                </th>
+            </tr>
+            </thead>
+            <tbody id="mytab">
+            <!--数据-->
+            </tbody>
+        </table>
+    </div>
 </div>
+
+    <!--分页-->
+    <div id="fy">
+        <div id="prepage" class="fy1"><i class="layui-icon">&#xe603;</i></div><!--上一页-->
+        <div class="fy1" style="background-color: #009688; color: #FFFFFF"><span id="nowPage"></span></div><!--第几页-->
+        <div id="nextpage" class="fy1"><i class="layui-icon">&#xe602;</i></div><!--下一页-->
+        <div class="fy2">共<span id="total"></span>条</div><!--条数-->
+        <div class="fy2">共<span id="pages"></span>页</div><!--页数-->
+    </div>
 
 <!-- 模态框邀请入职信息填写（Modal） -->
 <div class="modal fade" id="myModal" >
@@ -112,7 +140,7 @@
                         <div class="layui-inline">
                             <label class="layui-form-label">手机号</label>
                             <div class="layui-input-block">
-                                <input id="phone2" class="layui-input" disabled>
+                                <input id="phone" class="layui-input" disabled>
                             </div>
                         </div>
                         <div class="layui-inline">
@@ -125,12 +153,12 @@
                     <div class="layui-form-item layui-form-text">
                         <label class="layui-form-label">通知信息</label>
                         <div class="layui-input-block" style="width: 520px">
-                                    <textarea  id="notice" placeholder="请输入通知信息" class="layui-textarea" rows="6">
-                                        入职通知单
-你好，我这边是新乡睿智科技有限公司，经过多次面试，你符合本公司的基本符合要求。现给你安排入职，请回复邮件，谢谢！
-可以在规定时间内前报道，前往公司参加工作。
-公司地址：新乡红旗区北三环大学生创业园区
+                                    <textarea name="notice" id="notice" placeholder="请输入通知信息" class="layui-textarea" rows="6">
+                                 入职通知单：
+你好，我这边是新乡睿智科技有限公司，经过多次面试，你符合本公司的基本符合要求。现给你安排入职，请在规定时间内前报道并且激活工号。
+公司地址：新乡红旗区北三环大学生创业园区。
 电话：8888888 徐酱酱 15837389710
+激活地址：http://localhost:8080/jihuo.jsp
                                     </textarea>
                         </div>
                     </div>
@@ -138,23 +166,23 @@
                     <div class="layui-form-item">
                         <div class="layui-inline">
                             <label class="layui-form-label">报道时间&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-                            <input name="empstatedate" class="layui-input" id="empstatedate">
+                            <input name="actdate" class="layui-input" id="actdate"  placeholder="yyyy-MM-dd HH:mm:ss">
                         </div>
                     </div>
-                    <div <%--style="display: none"--%>>
-                        面试id<input id="intid">
-                        姓名<input name="empname" id="empname"><br>
-                        性别<input name="sex" id="sex">
-                        手机号<input name="phone" id="phone"><br>
-                        邮箱<input name="email" id="email">
-                        入职状态<input name="empstateid" value="0"><br>
-                        员工编号<input name="empnumber" id="empnumber">
+                    <div style="display: none">
+                        面试id<input name="intid" id="intid">
+                        面试状态<input name="intstate" value="2"><br>
+                        发送邮箱<input name="emali" id="emali2">
+                        简历id<input name="resid" id="resid"><br>
+                        员工激活编号<input name="actnumber" id="actnumber">
+                        员工激活状态<input name="actstate" value="0">
                     </div>
-                    <input type="button" class="layui-btn layui-btn-fluid" onclick="sendEntry()" value="发送邮件" style="letter-spacing:15px;"/>
+                    <input type="button" class="layui-btn layui-btn-fluid" onclick="sendAct()" value="发送邮件" style="letter-spacing:15px;"/>
                 </form>
             </div>
         </div><!-- /.modal-content -->
     </div><!-- /.modal -->
+</div>
 </div>
 </body>
 <script>
@@ -162,7 +190,8 @@
     layui.use(['form', 'layedit', 'laydate'], function(){
         var laydate = layui.laydate;
         laydate.render({
-            elem: '#empstatedate' //指定元素
+            elem: '#actdate'
+            ,type: 'datetime'
         });
     });
     //自动查询
@@ -219,6 +248,7 @@
             }
         })
     }
+
     //全选
     function selectAll(checkbox) {
         $('input[type=checkbox]').prop('checked', $(checkbox).prop('checked'));
@@ -254,58 +284,40 @@
             dataType: "json",
             success: function (data) {
                 $("#resumename").val(data[0].resumename);
-                $("#emali").val(data[0].emali);//发送的邮件
-                $("#phone2").val(data[0].phone);
-                $("#intid").val(data[0].intid);
-
-                $("#empname").val(data[0].resumename);
-                $("#sex").val(data[0].sex);
+                $("#emali").val(data[0].emali);
                 $("#phone").val(data[0].phone);
-                $("#email").val(data[0].emali);//添加的邮箱
-
-
-
+                $("#intid").val(data[0].intid);
+                $("#intstate").val(data[0].intstate);
+                $("#resid").val(data[0].resid);
+                $("#emali2").val(data[0].emali);//发送的邮件
             }
         })
         //生成员工编号
         $.ajax({
-            url: "queryEmpIDYLP",
+            url: "queryActIDYLP",
             type: "post",
             dataType: "json",
             success: function(data) {
-                var empnumber = data.empid + 1;//员工编号
-                if(empnumber < 10){
-                    var qzid = 1000;//编号前缀
-                    $("#empnumber").val("RZ"+qzid+empnumber);
-                }
-                if(empnumber >= 10){
-                    var qzid = 100;//编号前缀
-                    $("#empnumber").val("RZ"+qzid+empnumber);
-                }
-                if(empnumber >= 100){
-                    var qzid = 10;//编号前缀
-                    $("#empnumber").val("RZ"+qzid+empnumber);
-                }
-                if(empnumber >= 1000){
-                    var qzid = 1;//编号前缀
-                    $("#empnumber").val("RZ"+qzid+empnumber);
-                }
+                    var actnumber = data.actid ;//员工编号
+                    var qz =101;//开始号
+                    var newbh = qz + data.actid
+                    $("#actnumber").val("RZ"+newbh);
             }
         });
     }
-    //添加待入职员工
-    function sendEntry() {
-        var intid=$("#intid").val();//面试id
-        var intstate = 2;//回收站
-        var emali = $("#emali").val();//发送邮箱
-        var notice=$("#notice").val();//信息
+    //添加员工激活
+    function sendAct() {
         var senddate=$("#senddate").val();//发送时间
-        var empstatedate=$("#empstatedate").val();//面试时间
-        if(empstatedate != "" & empstatedate >= senddate){
+        var actdate=$("#actdate").val();//报道时间
+        if(actdate == "") {
+            alert("请输入报道时间！")
+        }else if(actdate <= senddate){
+            alert("报道不能小于当前时间！")
+        }else {
             $.ajax({
-                url:"addEmpYLP?intid="+intid+"&intstate="+intstate+"&notice="+notice,
+                url:"addActYLP",
                 type:"post",
-                data:$("#sendForm").serialize(),//添加员工
+                data:$("#sendForm").serialize(),//添加员工激活
                 dataType: "text",
                 success:function(data) {
                     if(data=="true"){alert("已发送邀请入职邮件");}
@@ -313,20 +325,8 @@
                     $("#myModal").modal("hide");
                 }
             })
-        }else {
-            alert("请输入面试时间或面试时间不正确！")
         }
     }
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -350,6 +350,7 @@
     var month=date.getMonth()+1;//月
     var day=date.getDate();//日
     var hour=date.getHours();//时
+    if(hour<=9){ hour = "0"+hour; }
     var min=date.getMinutes();//分
     var second=date.getSeconds();//秒
     if(min<10){ min="0"+min;}

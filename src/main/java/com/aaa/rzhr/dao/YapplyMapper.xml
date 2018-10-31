@@ -16,7 +16,7 @@
     </select>
     <!--查看员工申请人-->
     <select id="queryAllEmp" resultType="Emp">
-        select * from emp e inner join dept d on e.deptid=d.deptid where e.deptid=4
+        select * from emp e inner join dept d on e.deptid=d.deptid where e.deptid=1
     </select>
     <!--添加招聘申请-->
     <insert id="addRec" parameterType="Recruitment">
@@ -26,20 +26,31 @@
                   #{receducation}, #{recage}, #{recsuffer}, #{recmajor}, #{recrequire}, #{recstate} )
     </insert>
     <!--查看招聘信息-->
-    <select id="queryAllRec" resultType="java.util.Map" parameterType="int">
+    <select id="queryAllRec" resultType="java.util.Map" parameterType="Map">
         SELECT * FROM  recruitment r
         LEFT JOIN emp e ON r.empid = e.empid
         LEFT JOIN dept d ON r.deptid = d.deptid
         LEFT JOIN position p ON r.poid = p.poid
         WHERE 1 = 1
-        <if test="_parameter != null">
-           AND recid = #{_parameter}
-        </if>
+            <if test="recid != null">
+                AND recid = #{recid}
+            </if>
+            <if test="recstate != null">
+                AND recstate = #{recstate}
+            </if>
+
     </select>
     <!--修改招聘需求-->
     <update id="updateRec" parameterType="Recruitment">
-        UPDATE recruitment SET  recreachdate=#{recreachdate}, recsex=#{recsex},receducation= #{receducation}, recage=#{recage},
-         recsuffer=#{recsuffer}, recmajor=#{recmajor}, recrequire=#{recrequire}
+        UPDATE recruitment SET
+        <if test="recnumber != null"> recnumber=#{recnumber}, </if>
+        <if test="recsex != null"> recsex=#{recsex}, </if>
+        <if test="receducation != null"> receducation= #{receducation}, </if>
+        <if test="recage != null"> recage=#{recage}, </if>
+        <if test="recsuffer != null"> recsuffer=#{recsuffer}, </if>
+        <if test="recmajor != null"> recmajor=#{recmajor},</if>
+        <if test="recrequire != null">  recrequire=#{recrequire}, </if>
+        <if test="recstate != null">  recstate=#{recstate} </if>
          WHERE recid=#{recid}
     </update>
 
@@ -178,9 +189,50 @@
         #{password}, #{salt}, #{email}, #{urgencyphone}, #{urgencyname}, #{empnotes}, #{deptid}, #{poid},
         #{emptypeid}, #{emppay}, #{empstateid}, #{empstatedate})
     </select>
-    <!--获取最大的员工编号-->
-    <select id="queryEmpID" parameterType="int" resultType="java.util.Map">
-        SELECT empid FROM emp WHERE empid=(SELECT MAX(empid) FROM emp)
+
+    <!--获取最大的员工激活编号-->
+    <select id="queryActID" parameterType="int" resultType="java.util.Map">
+        SELECT actid FROM activation WHERE actid=(SELECT MAX(actid) FROM activation)
+    </select>
+
+    <!--录取后添加到员工激活表-->
+    <insert id="addAct" parameterType="Activation">
+        INSERT  INTO activation(resid, actnumber, actpwd, actdate, actstate)
+        VALUES (#{resid}, #{actnumber}, #{actpwd}, #{actdate}, #{actstate})
+    </insert>
+
+
+
+
+
+
+
+
+
+    <!--统计员工类型-->
+    <select id="countEmpState" resultType="java.util.Map">
+        SELECT COUNT(empstateid) AS countstate FROM emp GROUP BY empstateid
+    </select>
+
+    <!--合同到期提醒小于或者等于当前日期-->
+    <select id="countContract" resultType="java.util.Map">
+        SELECT COUNT(conid) AS countnum FROM contract
+        where conover &lt;= (select current_date as Systemtime)
+    </select>
+
+    <!--加班审批-->
+    <select id="countOvertime" resultType="java.util.Map">
+        SELECT COUNT(apovstate) AS countnum FROM apply_overtime where apovstate = 0
+    </select>
+
+    <!--离职审批-->
+    <select id="countDimission" resultType="java.util.Map">
+        SELECT COUNT(dimstate) AS countnum FROM apply_dimission where dimstate = 0
+    </select>
+
+    <!--休假审批-->
+    <select id="countLeave" resultType="java.util.Map">
+        SELECT COUNT(leasate) AS countnum FROM apply_leave where leasate = 0
     </select>
 
 

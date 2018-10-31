@@ -15,10 +15,39 @@
     <script type="text/javascript" src="../../assets/layui/layui.js"></script>
     <link rel="stylesheet" href="../../assets/layui/css/layui.css">
 </head>
+<style>
+    #fy {
+        height: 40px;
+        margin-left: 20px;
+        margin-top: -10px
+
+    }
+    .fy1 {
+        width: 35px;
+        height: 30px;
+        text-align: center;
+        cursor: pointer;
+        float: left;
+        line-height: 30px;
+        border-radius:5px;
+        margin-left: 10px;
+
+    }
+    .fy2 {
+        width: 100px;
+        height: 30px;
+        text-align: center;
+        float: left;
+        line-height: 30px;
+        border-radius:5px;
+        letter-spacing: 5px;
+    }
+</style>
 <body>
+<div class="panel panel-default" style="margin:1%">
 <!-- 多条件查询  -->
-<div class="layui-form" 6 style=" height: 40px; float: left; margin-top: 10px; margin-bottom: 10px;  ">
-    <div class="layui-form">
+    <div class="panel-heading" style="height: 60px">
+        <div class="layui-form" >
         <div class="layui-form-item">
             <div class="layui-inline" style="margin: 0px">
                 <select id="intstate">
@@ -30,7 +59,7 @@
             <div class="layui-inline" style="margin: 0px" >
                 <input type="button" class="layui-btn" onclick="queryAllInteTwo(1)" value="查询" style="width: 100px">
             </div>
-            <div class="layui-inline" style="margin-left: 800px" >
+            <div class="layui-inline" style="margin-left: 750px" >
                 <button class="layui-btn" onclick="inteTwoPash(4)">录取</button>
                 <button class="layui-btn" onclick="inteTwoPash(0)">弃用</button>
             </div>
@@ -38,41 +67,42 @@
     </div>
 </div>
 <!--table表格-->
-<table class="layui-table">
-    <colgroup>
-        <col width="100">
-    </colgroup>
-    <thead>
-    <tr>
-        <th>编号</th>
-        <th>姓名</th>
-        <th>性别</th>
-        <th>年龄</th>
-        <th>学历</th>
-        <th>专业</th>
-        <th>心仪职位</th>
-        <th>面试时间</th>
-        <th>分数</th>
-        <th>面试官</th>
-        <th>面试备注</th>
-        <th>人员状态</th>
-        <th>
-            <input type="checkbox" onclick="selectAll(this);" title="全选" />
-        </th>
-    </tr>
-    </thead>
-    <tbody id="mytab">
-    <!--数据-->
-    </tbody>
-</table>
-
-<!--分页按钮-->
-<div>
-    <a id="prepage">上一页</a>
-    <a id="nextpage">下一页
-    </a>当前第<span id="nowPage"></span>页
-    </a>共<span id="pages"></span>页
-    </a>共<span id="total"></span>条
+<div class="panel-body">
+    <div class="table-responsive">
+        <table class="layui-table">
+            <thead>
+            <tr>
+                <th>编号</th>
+                <th>姓名</th>
+                <th>性别</th>
+                <th>年龄</th>
+                <th>学历</th>
+                <th>专业</th>
+                <th>心仪职位</th>
+                <th>面试时间</th>
+                <th>分数</th>
+                <th>面试官</th>
+                <th>面试备注</th>
+                <th>人员状态</th>
+                <th>
+                    <input type="checkbox" onclick="selectAll(this);" title="全选" />
+                </th>
+            </tr>
+            </thead>
+            <tbody id="mytab">
+            <!--数据-->
+            </tbody>
+        </table>
+    </div>
+</div>
+<!--分页-->
+<div id="fy">
+    <div id="prepage" class="fy1"><i class="layui-icon">&#xe603;</i></div><!--上一页-->
+    <div class="fy1" style="background-color: #009688; color: #FFFFFF"><span id="nowPage"></span></div><!--第几页-->
+    <div id="nextpage" class="fy1"><i class="layui-icon">&#xe602;</i></div><!--下一页-->
+    <div class="fy2">共<span id="total"></span>条</div><!--条数-->
+    <div class="fy2">共<span id="pages"></span>页</div><!--页数-->
+</div>
 </div>
 </body>
 <script>
