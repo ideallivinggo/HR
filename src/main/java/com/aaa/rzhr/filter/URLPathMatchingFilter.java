@@ -25,6 +25,7 @@ public class  URLPathMatchingFilter extends PathMatchingFilter {
             permissionService = SpringContextUtils.getContext().getBean(PermissionService.class);
         }
         String requestURI = getPathWithinApplication(request);
+
         System.out.println("requestURI:" + requestURI);
 
         Subject subject = SecurityUtils.getSubject();

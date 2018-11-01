@@ -43,8 +43,16 @@ public class YapplyServiceImpl implements YapplyService {
     }
 
     @Override
-    public List<Map> queryAllRec(Integer recid) {
-        return yapplyMapper.queryAllRec(recid);
+    public PageInfo<Map> queryAllRec(Recruitment recruitment,Integer pageNum) {
+        PageHelper.startPage(pageNum,10);
+        List<Map> list=yapplyMapper.queryAllRec(recruitment);
+        PageInfo<Map> info = new PageInfo<Map>(list);
+        return info;
+    }
+
+    @Override
+    public List<Map> queryOneRec(Recruitment recruitment) {
+        return yapplyMapper.queryAllRec(recruitment);
     }
 
     @Override
@@ -143,8 +151,40 @@ public class YapplyServiceImpl implements YapplyService {
     }
 
     @Override
-    public Map queryEmpID(Integer empid) {
-        return yapplyMapper.queryEmpID(empid);
+    public Map queryActID (Integer actid) {
+        return yapplyMapper.queryActID(actid);
     }
+
+    @Override
+    public void addAct(Activation activation,Interviewtwo interviewtwo) {
+        yapplyMapper.addAct(activation);
+        yapplyMapper.updateInteTwo(interviewtwo);
+    }
+
+    @Override
+    public List<Map> countEmpState() {
+        return yapplyMapper.countEmpState();
+    }
+
+    @Override
+    public Map countContract() {
+        return yapplyMapper.countContract();
+    }
+
+    @Override
+    public Map countOvertime() {
+        return yapplyMapper.countOvertime();
+    }
+
+    @Override
+    public Map countDimission() {
+        return yapplyMapper.countDimission();
+    }
+
+    @Override
+    public Map countLeave() {
+        return yapplyMapper.countLeave();
+    }
+
 
 }

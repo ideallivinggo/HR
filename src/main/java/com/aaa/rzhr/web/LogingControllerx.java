@@ -17,6 +17,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.ServletRequest;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+
 /**
  * @author XBJ
  * @date 2018-10-16 15:25
@@ -37,9 +44,23 @@ public class LogingControllerx {
         try {
             subject.login(token);
               Session s=  subject.getSession();
-            Emp emp=empService.getByName(subject.getPrincipal().toString());
-            s.setAttribute("emp",emp);
+
+                 Emp emp=empService.getByName(subject.getPrincipal().toString());
+                 s.setAttribute("emp",emp);
+
+
+            List<Emp> listb=empService.queryallempX();
+            Map<String,Emp> map=new HashMap<>();
+            for (Emp e:listb
+                    ) {
+                System.out.println();
+                map.put("a"+e.getEmpid().toString(),e);
+            }
+            s.setAttribute("listemp",map);
+           // System.out.println(map.toString());
+
             return "okok";
+
         } catch (AuthenticationException e) {
             return "nono";
         }

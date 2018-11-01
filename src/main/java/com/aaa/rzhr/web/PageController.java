@@ -47,6 +47,11 @@ public class PageController {
 
         return "unauthorized";
     }
+    @RequestMapping("testmessage")
+    public String testmessage(){
+
+        return "testmssage";
+    }
 ///----------------------------------于青县区--------------------------------//
 @RequestMapping("Qemp")
 public String Qemp(){
@@ -109,6 +114,7 @@ public String Qemp(){
         return "L_leave";
 
     }
+
     /**
      * 员工考勤
      */
@@ -142,10 +148,23 @@ public String Qemp(){
         return "L_1111";
     }
     //----------------------------------月亮鹏-------------------------
+
+    //----------------------------------岳梁朋-------------------------
+    //招聘申请表
+
     @RequestMapping("Yapply")
     public String Yapply(){
         return "Yapply";
     }
+
+
+
+    //招聘发布表
+    @RequestMapping("Yissue")
+    public String Yissue(){
+        return "Yissue";
+    }
+    //简历筛选
 
     @RequestMapping("Yresume")
     public String Yresume(){

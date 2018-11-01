@@ -32,7 +32,8 @@ public interface YapplyService {
     /**
      * 查看招聘申请信息
      */
-    List<Map> queryAllRec(Integer recid);
+    PageInfo<Map> queryAllRec(Recruitment recruitment, Integer pageNum);
+    List<Map> queryOneRec(Recruitment recruitment);
     /**
      * 修改申请信息
      * */
@@ -95,7 +96,42 @@ public interface YapplyService {
     /**
      * 获取最大的员工编号
      * */
-    Map queryEmpID (Integer empid);
+    Map queryActID (Integer actid);
+    /**
+     * 录取后添加到员工激活表
+     * */
+    void addAct (Activation activation,Interviewtwo interviewtwo);
+
+
+
+
+
+
+
+
+
+    //////////////////////////////////////////////////////////////////////////////////////////////////
+
+    /**
+     * 员工类型统计
+     * */
+    List<Map> countEmpState();
+    /**
+     * 合同到期提醒
+     * */
+    Map countContract();
+    /**
+     * 加班审批
+     * */
+    Map countOvertime();
+    /**
+     * 离职审批
+     * */
+    Map countDimission();
+    /**
+     * 休假审批
+     * */
+    Map countLeave();
 
 
 }

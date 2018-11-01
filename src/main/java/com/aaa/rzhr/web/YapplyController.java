@@ -1,16 +1,25 @@
 package com.aaa.rzhr.web;
-import java.util.ArrayList;
+import java.io.File;
+import java.io.IOException;
 
 import com.aaa.rzhr.pojo.*;
 import com.aaa.rzhr.service.MailService;
 import com.aaa.rzhr.service.YapplyService;
 import com.github.pagehelper.PageInfo;
+import jxl.Cell;
+import jxl.Sheet;
+import jxl.Workbook;
+import jxl.read.biff.BiffException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 /**
  * @author YLP
@@ -49,11 +58,19 @@ public class YapplyController {
         return "true";
     }
     /**
-     * 查看招聘申请
+     * 分页查看招聘申请
      */
     @RequestMapping("queryAllRecYLP")
-    public List<Map> queryAllRec(Integer recid) {
-        return service.queryAllRec(recid);
+    public PageInfo<Map> queryAllRec(Recruitment recruitment,Integer pageNum) {
+        PageInfo<Map> info = service.queryAllRec(recruitment, pageNum);
+        return info;
+    }
+    /**
+     * 查看招聘申请
+     */
+    @RequestMapping("queryOneRecYLP")
+    public List<Map> queryOneRec(Recruitment recruitment) {
+        return service.queryOneRec(recruitment);
     }
     /**
      * 修改招聘申请
@@ -72,6 +89,55 @@ public class YapplyController {
         service.addResEntering(resume);
         return "true";
     }
+    /**
+     * 添加简历
+     */
+    //批量添加
+    @RequestMapping("uploadYlp")
+    public String addAll(Resume resume, @RequestParam("file") MultipartFile file, HttpServletRequest req) throws IOException {
+        String oldname=file.getOriginalFilename();
+        String newName= UUID.randomUUID()+oldname.substring(oldname.lastIndexOf("."));
+        //upload文件路径,获取upload文件夹的路径
+        String realPath=req.getSession().getServletContext().getRealPath("/upload");
+        //上传
+        File files=new File(realPath+"/"+newName);
+        file.transferTo(files);
+        System.out.println(files);
+
+        Workbook bWorkbook=null;
+        try {
+            //获取文件.xls文件
+            bWorkbook=Workbook.getWorkbook(new File(String.valueOf(files)));
+            //获得第一个工作表对象
+            Sheet sheet=bWorkbook.getSheet(0);
+            //把值遍历取出，sheet.getRows()获取行，sheet.getColumns();获取列数
+            for (int i = 1; i < sheet.getRows(); i++) {
+                resume.setResumename(sheet.getCell(0,i).getContents());
+                resume.setSex(sheet.getCell(1,i).getContents());
+                resume.setEducation(sheet.getCell(2,i).getContents());
+                resume.setAge(Integer.parseInt(sheet.getCell(3,i).getContents()));
+                resume.setPhone(sheet.getCell(4,i).getContents());
+                resume.setResmajor(sheet.getCell(5,i).getContents());
+                resume.setResposition(sheet.getCell(6,i).getContents());
+                resume.setEmali(sheet.getCell(7,i).getContents());
+                resume.setResdate(sheet.getCell(8,i).getContents());
+                resume.setResstate(0);
+                service.addResEntering(resume);
+            }
+        } catch (BiffException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }finally {
+            bWorkbook.close();
+        }
+        return "true";
+
+
+    }
+
     /**
      * 分页查看简历
      */
@@ -145,7 +211,7 @@ public class YapplyController {
     public String addIntTwo(Interviewtwo interviewtwo, Interviewone interviewone, String emali, String notice) {
         service.addIntTwo(interviewtwo, interviewone);
         String shijian = interviewtwo.getIntdate();
-        //mailService.sendSimpleMail(emali,"面试通知",notice+"面试时间"+shijian);
+        //没成功//mailService.sendSimpleMail(emali,"面试通知",notice+"面试时间"+shijian);
         return "true";
     }
     /**
@@ -186,10 +252,32 @@ public class YapplyController {
      * 查看最大员工id
      * 生成员工编号
      */
-    @RequestMapping("queryEmpIDYLP")
-    public Map queryEmpID(Integer empid) {
-        return service.queryEmpID(empid);
+    @RequestMapping("queryActIDYLP")
+    public Map queryActID (Integer actid) {
+        return service.queryActID(actid);
     }
+    /**
+     * 添加面试
+     */
+    @RequestMapping("addActYLP")
+    public String addAct(Activation activation, Interviewtwo interviewtwo,String emali, String notice) {
+        service.addAct(activation, interviewtwo);
+        String shijian = activation.getActdate();
+        String bianhao = activation.getActnumber();
+        //mailService.sendSimpleMail(emali,"面试通知",notice+"员工编号"+bianhao+" ，报道时间"+shijian);
+        return "true";
+    }
+
+
+
+
+
+
+
+
+
+
+
     /**
      * 添加到emp表（待入职状态）
      */
@@ -198,9 +286,50 @@ public class YapplyController {
         service.addEmp(emp, interviewtwo);
         String shijian = emp.getEmpstatedate();
         String email=emp.getEmail();
-        //mailService.sendSimpleMail(email,"面试通知",notice+"入职时间"+shijian);
+        //mailService.sendSimpleMail(email,"面试通知",notice+"报道时间"+shijian);
         return "true";
     }
+
+
+////////////////////////////////////////////首页////////////////////////////////////////////////
+
+
+    /**
+     * 统计不同状态员工
+     */
+    @RequestMapping("countEmpStateYLP")
+    public List<Map> countEmpState() {
+        return service.countEmpState();
+    }
+    /**
+     * 合同到期提醒
+     */
+    @RequestMapping("countContractYLP")
+    public Map countContract() {
+        return service.countContract();
+    }
+    /**
+     * 加班审批
+     */
+    @RequestMapping("countOvertimeYLP")
+    public Map countOvertime() {
+        return service.countOvertime();
+    }
+    /**
+     * 离职审批
+     */
+    @RequestMapping("countDimissionYLP")
+    public Map countDimission() {
+        return service.countDimission();
+    }
+    /**
+     * 休假审批
+     */
+    @RequestMapping("countLeaveYLP")
+    public Map countLeave() {
+        return service.countLeave();
+    }
+
 
 
 }
