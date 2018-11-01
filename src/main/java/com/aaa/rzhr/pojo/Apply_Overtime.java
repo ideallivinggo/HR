@@ -14,6 +14,7 @@ public class Apply_Overtime {
   private String pipeople;
   private String shentime;
   private String bohui;
+  private Integer deptid;
 
 
   public Integer getApovid() {
@@ -112,6 +113,15 @@ public class Apply_Overtime {
 
   public void setBohui(String bohui) {
     this.bohui = bohui;
+  }
+
+
+  public Integer getDeptid() {
+    return deptid;
+  }
+
+  public void setDeptid(Integer deptid) {
+    this.deptid = deptid;
   }
 
 }

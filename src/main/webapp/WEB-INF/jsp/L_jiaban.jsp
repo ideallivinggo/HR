@@ -50,6 +50,7 @@
             <div id="center">
                 <form  action="L_add_jiaban" class="layui-form">
                     <input value="${emp.empid}" hidden name="empid">
+                    <input style="display: none" name="deptid"value="${emp.deptid}">
                     加班类型：<select name="apovtype" required lay-verify="required">
                                  <option></option>
                                  <option>工作日加班</option>

@@ -14,6 +14,9 @@ public class Apply_Leave {
   private Integer leasate;
   private String shendate;
   private String pidate;
+  private Integer deptid;
+  private String bohui;
+  private String pipeople;
 
 
   public Integer getLeaid() {
@@ -112,6 +115,33 @@ public class Apply_Leave {
 
   public void setPidate(String pidate) {
     this.pidate = pidate;
+  }
+
+
+  public Integer getDeptid() {
+    return deptid;
+  }
+
+  public void setDeptid(Integer deptid) {
+    this.deptid = deptid;
+  }
+
+
+  public String getBohui() {
+    return bohui;
+  }
+
+  public void setBohui(String bohui) {
+    this.bohui = bohui;
+  }
+
+
+  public String getPipeople() {
+    return pipeople;
+  }
+
+  public void setPipeople(String pipeople) {
+    this.pipeople = pipeople;
   }
 
 }

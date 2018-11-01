@@ -85,6 +85,7 @@
             </div>
                 <%--员工id--%>
                 <input style="display: none" name="empid"value="${emp.empid}">
+                <input style="display: none" name="deptid"value="${emp.deptid}">
              <%--w文件上传--%>
                 <div>
                     附件上传:<input name="file" accept="image/*" style="width:600px" type="file" >

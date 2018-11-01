@@ -133,6 +133,14 @@ public String Qemp(){
     public  String L_lizhi(){
         return "L_lizhi";
     }
+
+    /**
+     * 员工请假休假离职审批
+     */
+    @RequestMapping("L_1111")
+    public  String L_1111(){
+        return "L_1111";
+    }
     //----------------------------------月亮鹏-------------------------
     @RequestMapping("Yapply")
     public String Yapply(){

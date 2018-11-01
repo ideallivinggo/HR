@@ -46,18 +46,7 @@
             opacity: 0.3;
             cursor:pointer
         }
-        #bottom{
-            margin-left: 140px;
-            widtd:1000px;
-            height: 300px;
 
-        }
-        #bottom_1{
-            width: 990px;
-            height: 25px;
-            border-bottom:1px solid #19AA8D;
-            widtd: auto;
-        }
 
         #bottom_1 button{
             widtd: 120px;
@@ -67,47 +56,9 @@
             color: #babcbf;
         }
 
-        #yin_3 img{
-            widtd: 150px;
-            height: 150px;
-        }
-        #yin_3 div{
-            widtd: 150px;
-            height: 150px;
-            float: left;
-            border: 1px solid #19AA8D;
-            border-right:0px;
 
-        }
-        #yin_3 div:hover{
-            filter:alpha(Opacity=100);
-            -moz-opacity:0.3;
-            opacity: 0.3;
-            width: 180px;
-            height: 180px;
-            background-color: #19AA8D;
-            cursor:pointer
-        }
-        #yin_3 img:hover{
-            width: 180px;
-            height: 180px;
-        }
-        #yin_1{
-            width: 990px;
-            height:500px;
-            background-color:  #F3F3F3;
-            display: none;
-        }
-        #yin_2{
-            width: 990px;
-            height:500px;
-            background-color: #F3F3F3;
-            display: none;
-        }
-        #yin_3 {
-            width: 990px;
-            display:block;
-        }
+
+
 
 
 
@@ -131,28 +82,7 @@
         <div onclick="d5()"><img src="assets/img/shouye5.PNG"/></div>
         <div onclick="d6()"><img  src="assets/img/shoye6.PNG"/></div>
     </div>
-    <div id="bottom">
-        <div id="bottom_1">
-            <button id="bottom_1_1" onclick="o1()" >待审批事项</button>
-            <button id="bottom_1_2" onclick="o2()">我的申请</button>
-            <button id="bottom_1_3" style="background-color:#19AA8D" onclick="o3()">发起申请</button>
-        </div>
-        <div id="bottom_2">
-            <div id="yin_1">
-                <div id="mybody1"></div>
-                <div id="myjiaban1"></div>
-                <div id="lizhi1"></div>
-            </div>
-            <div id="yin_2">
-                <div id="mybody"></div>
-                <div id="myjiaban"></div>
-                <div id="lizhi"></div>
-            </div>
-            <div id="yin_3">
-                <div onclick="i1()"><img src="assets/img/s1.PNG"/></div>
-            </div>
-        </div>
-    </div>
+
 
 </div>
 <input value="${emp.empid}" id="empidid" type="hidden">
@@ -177,7 +107,7 @@
             }
         )
     }
-    //三个按钮点击事件
+    /*//三个按钮点击事件
     var b3 = document.getElementById('bottom_1_3');
     var b2 = document.getElementById('bottom_1_2');
     var b1 = document.getElementById('bottom_1_1');
@@ -203,7 +133,7 @@
                     alert(data);
                     $("#mybody").html("");
                     for (var i = 0; i < data.length; i++) {
-                        /*请假所有申请*/
+                        /!*请假所有申请*!/
                         if (data[i].leasate == '') {
 
                         }
@@ -230,9 +160,9 @@
                         }
 
 
-                        /*-------------------------------------------------------------------*/
+                        /!*-------------------------------------------------------------------*!/
 
-                        /*加班所有申请*/
+                        /!*加班所有申请*!/
                         if (data[i].apovstate == '') {
 
                         }
@@ -259,9 +189,9 @@
 
                         }
 
-                        /*-------------------------------------------------------------------*/
+                        /!*-------------------------------------------------------------------*!/
 
-                        /*离职*/
+                        /!*离职*!/
                         if (data[i].dimstate == '') {
 
                         }
@@ -307,7 +237,7 @@
                     alert(data);
                     $("#mybody").html("");
                     for (var i = 0; i < data.length; i++) {
-                        /*请假所有申请*/
+                        /!*请假所有申请*!/
                         if (data[i].leasate == '') {
 
                         }
@@ -359,9 +289,9 @@
                             $("#mybody").append(div);
 
 
-                            /*-------------------------------------------------------------------*/
+                            /!*-------------------------------------------------------------------*!/
 
-                            /*加班所有申请*/
+                            /!*加班所有申请*!/
                             if (data[i].apovstate == '') {
 
                             }
@@ -416,9 +346,9 @@
 
 
 
-                                /*-------------------------------------------------------------------*/
+                                /!*-------------------------------------------------------------------*!/
 
-                                /*离职*/
+                                /!*离职*!/
                                 if (data[i].dimstate == '') {
 
                                 }
@@ -491,7 +421,7 @@
     }
 
 
-
+*/
 function d1() {
     window.location.href="L_jiaban";
 }

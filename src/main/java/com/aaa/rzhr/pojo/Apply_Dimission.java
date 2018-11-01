@@ -15,6 +15,8 @@ public class Apply_Dimission {
   private Integer dimstate;
   private String nodim;
   private String shendimdate;
+  private Integer deptid;
+  private String bohui;
 
 
   public Integer getDimid() {
@@ -122,6 +124,24 @@ public class Apply_Dimission {
 
   public void setShendimdate(String shendimdate) {
     this.shendimdate = shendimdate;
+  }
+
+
+  public Integer getDeptid() {
+    return deptid;
+  }
+
+  public void setDeptid(Integer deptid) {
+    this.deptid = deptid;
+  }
+
+
+  public String getBohui() {
+    return bohui;
+  }
+
+  public void setBohui(String bohui) {
+    this.bohui = bohui;
   }
 
 }

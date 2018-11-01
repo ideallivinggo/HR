@@ -34,7 +34,7 @@
     </div>
       <div id="mybody" style="width:1020px;height:500px;border: 2px solid #ac2925;margin-left:110px">
       </div>
-</div>
+</div >
 </body>
 </html>
 <script>
@@ -42,7 +42,6 @@
         elem: '#test1'
         ,type: 'datetime'
     });
-
     laydate.render({
         elem: '#test2'
         ,type: 'datetime'
