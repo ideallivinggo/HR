@@ -9,26 +9,23 @@
      select * from emp e
 left join id_type idtype on e.typeid = idtype.typeid
 left join dept d on e.deptid = d.deptid
+left join role ro on ro.roid=d.roid
 left join recruitment r on r.empid=e.empid
 left join position p on p.posid=e.poid WHERE e.empid=#{empid}
     </select>
-<!--请假的添加-->
-    <insert id="L_add_leave"  parameterType="java.util.Map">
-        insert into apply_leave(empid,leaoverdate,leaday,leatype,leareason,leaenterdate,shendate,leasate) values(#{0},#{1},#{2},#{3},#{4},#{5},#{6},#{7})
-    </insert>
-
 <!--修改登录密码-->
     <update id="L_update_pwd"  parameterType="Emp">
         update emp set empname='13' WHERE empnumber='12'
     </update>
     <!--查询每个审核状态-->
     <select id="L_query_leave" resultType="java.util.Map" parameterType="Map">
-        select * from apply_leave al
-left join emp e on e.empid = al.empid where e.empid=#{empid}
-        <if test="leasate !=null ">
-        and al.leasate=#{leasate}
-        </if>
-
+        SELECT
+        *
+        FROM
+        apply_leave al
+        LEFT JOIN emp e ON e.empid = al.empid
+        WHERE
+        e.empid = #{empid}
     </select>
     <!--历史工资单查询-->
     <select  id="L_query_pay" resultType="java.util.Map" parameterType="Int">
@@ -37,5 +34,182 @@ left join payroll p on e.empid = p.empid
 left join att_statisticsxq ast on e.empid = ast.empid
 left join att_statistics asts on asts.staid= ast.staid
 WHERE  e.empid=#{empid}
+    </select>
+    <!--请假的添加-->
+    <insert id="L_add_leave"  parameterType="java.util.Map">
+        insert into apply_leave(empid,leaoverdate,leaday,leatype,leareason,leaenterdate,shendate,leasate,deptid) values(#{0},#{1},#{2},#{3},#{4},#{5},#{6},#{7},#{8})
+    </insert>
+    <!--加班的添加-->
+    <insert id="L_add_jiaban"  parameterType="java.util.Map">
+        insert into apply_overtime(empid,apovtype,apovstartdate,apoverdate,apovhour,apovreason,apovstate,deptid) values(#{0},#{1},#{2},#{3},#{4},#{5},#{6},#{7})
+    </insert>
+    <!--离职申请-->
+    <insert id="L_add_lizhi"  parameterType="java.util.Map">
+        insert into apply_dimission(empid,dimtype,dimdetails,dimsuggest,dimturn,dimapplydate,dimstate,deptid) values(#{0},#{1},#{2},#{3},#{4},#{5},#{6},#{7})
+    </insert>
+    <!--休假查询-->
+    <select id="L_query_xiujia" resultType="java.util.Map" parameterType="Map">
+        SELECT
+        *
+        FROM
+        apply_leave al
+        LEFT JOIN emp e ON e.empid = al.empid
+        WHERE
+        e.empid = #{empid}
+        <if test="fristdate!=''">
+         and   al.shendate  &gt;= #{fristdate}
+        </if>
+        <if test="overdate!=''">
+        and  al.shendate &lt;= #{overdate}
+        </if>
+        <if test="leasate!=null">
+            AND  al.leasate=#{leasate}
+        </if>
+    </select>
+    <!--加班查询-->
+    <select id="L_query_jiaban" resultType="java.util.Map" parameterType="Map">
+        SELECT
+        *
+        FROM
+        apply_overtime ao
+        LEFT JOIN emp e ON e.empid = ao.empid
+        WHERE
+        e.empid = #{empid}
+        <if test="fristdate!=''">
+            and   ao.shentime  &gt;= #{fristdate}
+        </if>
+        <if test="overdate!=''">
+            and  ao.shentime &lt;= #{overdate}
+        </if>
+        <if test="apovstate!=null">
+            AND  ao.apovstate=#{apovstate}
+        </if>
+    </select>
+    <!--离职查询-->
+    <select id="L_query_cizhi" resultType="java.util.Map" parameterType="Map">
+        SELECT
+        *
+        FROM
+        apply_dimission ad
+        LEFT JOIN emp e ON e.empid = ad.empid
+        WHERE
+        e.empid = #{empid}
+        <if test="fristdate!=''">
+            and   ad.shendimdate  &gt;= #{fristdate}
+        </if>
+        <if test="overdate!=''">
+            and   ad.shendimdate &lt;= #{overdate}
+        </if>
+        <if test="dimstate!=null">
+            AND  ad.dimstate=#{dimstate}
+        </if>
+    </select>
+    <!--修改休假状态-->
+    <update id="L_update_xiujia"  parameterType="Integer">
+       UPDATE  apply_leave  SET leasate=3
+       where leaid=#{leaid}
+    </update>
+    <!--修改加班  状态-->
+    <update id="L_update_jiaban"  parameterType="Integer">
+        UPDATE  apply_overtime  SET apovstate=3
+        where apovid=#{apovid}
+    </update>
+    <!--修改离职状态-->
+    <update id="L_update_cizhi"  parameterType="Integer">
+        UPDATE  apply_dimission  SET dimstate=3
+        where dimid=#{dimid}
+    </update>
+    <!--通讯录员工查询 -->
+    <select id="L_query_emp"  parameterType="Int" resultType="java.util.Map">
+        select * from emp e
+ LEFT JOIN dept d ON e.deptid = d.deptid
+ LEFT JOIN role r ON r.roid = d.roid
+        <if test="deptid!=null">
+            WHERE e.deptid= #{deptid}
+        </if>
+    </select>
+
+    <!--通讯录员工姓名查询 -->
+    <select id="L_query_emp_name"   resultType="java.util.Map">
+        select * from emp e
+        LEFT JOIN dept d ON e.deptid = d.deptid
+        LEFT JOIN role r ON r.roid = d.roid
+        <if test="empname!=''">
+            WHERE e.empname= #{empname}
+        </if>
+    </select>
+
+    <!--通讯录员工 -->
+    <select id="L_query_emp_empid" parameterType="Int"   resultType="java.util.Map">
+        select * from emp e
+        LEFT JOIN dept d ON e.deptid = d.deptid
+        LEFT JOIN role r ON r.roid = d.roid
+            WHERE e.empid= #{empid}
+    </select>
+    <!--查询未审批的休假-->
+    <select id="L_shen_leave" parameterType="Int"   resultType="java.util.Map">
+        select * from apply_leave al
+        LEFT JOIN emp e ON e.empid = al.empid
+        WHERE al.deptid= #{deptid}
+        <if test="leasate!=null">
+            AND al.leasate= #{leasate}
+        </if>
+    </select>
+    <!--查询未审批的加班-->
+    <select id="L_shen_jiaban" parameterType="Int"   resultType="java.util.Map">
+        select * from apply_overtime ao
+        LEFT JOIN emp e ON e.empid = ao.empid
+        WHERE ao.deptid= #{deptid}
+        <if test="apovstate!=null">
+            AND ao.apovstate= #{apovstate}
+        </if>
+    </select>
+   <!-- 查询未审批的离职-->
+    <select id="L_shen_lizhi" parameterType="Int"   resultType="java.util.Map">
+         select * from apply_dimission ad
+        LEFT JOIN emp e ON e.empid = ad.empid
+        WHERE ad.deptid= #{deptid}
+        <if test="dimstate!=null">
+            AND ad.dimstate= #{dimstate}
+        </if>
+    </select>
+    <!--修改休假状0,1,装态-->
+    <update id="L_upd_xiujia_unpass"  parameterType="Apply_Leave">
+        UPDATE  apply_leave  SET leasate=#{leasate},pipeople=#{pipeople},pidate=#{pidate}
+        <if test="bohui">
+          ,bohui=#{bohui}
+        </if>
+        where leaid=#{leaid}
+    </update>
+    <!--修改加班状态-->
+    <update id="L_upd_jiaban_unpass" parameterType="Apply_Overtime" >
+        UPDATE  apply_overtime  SET apovstate=#{apovstate},pipeople=#{pipeople},shentime=#{shentime}
+        <if test="bohui">
+            ,bohui=#{bohui}
+        </if>
+        where apovid=#{apovid}
+    </update>
+    <!--修改离职状态-->
+    <update id="L_upd_lizhi_unpass" parameterType="Apply_Dimission" >
+        UPDATE  apply_overtime  SET dimstate=#{dimstate},dimsign=#{dimsign},nodim=#{nodim}
+        <if test="bohui">
+            ,bohui=#{bohui}
+        </if>
+        where dimid=#{dimid}
+    </update>
+
+    <!--模糊查询工资单-->
+    <select id="L_query_pay_time" resultType="java.util.Map" parameterType="String">
+        SELECT * from emp e
+        left join payroll p on e.empid = p.empid
+        left join att_statisticsxq ast on e.empid = ast.empid
+        left join att_statistics asts on asts.staid= ast.staid
+        WHERE  e.empid=#{empid}
+        <if test="time1!=null">
+            and   p.paydate  &gt;= #{time1}
+        </if>
+        <if test="time2!=null">
+            and  p.paydate &lt;= #{time2}
+        </if>
     </select>
     </mapper>
