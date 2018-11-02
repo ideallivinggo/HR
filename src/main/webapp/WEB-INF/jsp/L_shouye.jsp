@@ -423,10 +423,10 @@
 
 */
 function d1() {
-    window.location.href="L_jiaban";
+    window.location.href="L_leave";
 }
 function d2() {
-        window.location.href="";
+        window.location.href="L_jiaban";
     }
 function d3() {
         window.location.href="L_lizhi";

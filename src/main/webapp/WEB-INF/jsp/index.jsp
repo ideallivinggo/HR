@@ -334,7 +334,7 @@
     $(document).ready(function () {
          $('<audio id="chatAudio"> <source src="../../assets/map3/iphoneqq.mp3" type="audio/mpeg"></audio>').appendTo('body');
        var ud='a2';
-        var unique_id = $.gritter.add({
+       $.gritter.add({
             // (string | mandatory) the heading of the notification
             title: '欢迎来到',
             // (string | mandatory) the text inside the notification
@@ -376,6 +376,35 @@
             alert("与GoEasy连接失败，错误编码："+error.code+"错误信息："+error.content);
         }
     });
+    goEasy.subscribe({
+        channel: "zhong",
+        onMessage: function (message) {
+            alert("您有新消息：channel：" + message.channel + " 内容：" + message.content);
+            $.gritter.add({
+                // (string | mandatory) the heading of the notification
+                title:'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp&nbsp;&nbsp;&nbsp;&nbsp;&nbsp&nbsp;'+ message.content.split("♈")[0]+'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-----重要通知',
+                // (string | mandatory) the text inside the notification
+                text: message.content.split("♈")[1],
+                // (string | optional) the image to display on the left
+
+                // (bool | optional) if you want it to fade out on its own or just sit there
+                sticky: true,
+                // (int | optional) the time you want it to be alive for before fading out
+                time: '',
+                // (string | optional) the class name you want to apply to that specific message
+                class_name: 'my-sticky-class'
+            });
+
+        },
+        onSuccess: function () {
+            alert("Channel订阅成功。");
+        },
+        onFailed: function (error) {
+            alert("Channel订阅失败, 错误编码：" + error.code + " 错误信息：" + error.content)
+        }
+    });
+
+
     ///接收信息
     goEasy.subscribe({
 
@@ -525,9 +554,6 @@
 
 
               }
-
-
-
              goEasy.publish({
             channel: "channe"+uidd,
             message: ${emp.empid}+"♈"+$("#messagetextt").val(),

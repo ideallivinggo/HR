@@ -52,6 +52,12 @@ public class PageController {
 
         return "testmssage";
     }
+    @RequestMapping("/sendnotice")
+    public String sendnotice(){
+      return "sendmessage";
+    }
+
+
 ///----------------------------------于青县区--------------------------------//
 @RequestMapping("Qemp")
 public String Qemp(){
