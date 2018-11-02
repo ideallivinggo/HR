@@ -38,7 +38,6 @@ public class EmpController {
          int times = 2;
          String algorithmName = "md5";
          String encodedPassword = new SimpleHash(algorithmName, "12345", salt, times).toString();
-
          System.out.println(encodedPassword);
          System.out.println(salt);
          Emp emp=new Emp();
