@@ -5,6 +5,7 @@ public class Activation {
 
   private Integer actid;
   private Integer resid;
+  private String actname;
   private String actnumber;
   private String actpwd;
   private String actdate;
@@ -26,6 +27,15 @@ public class Activation {
 
   public void setResid(Integer resid) {
     this.resid = resid;
+  }
+
+
+  public String getActname() {
+    return actname;
+  }
+
+  public void setActname(String actname) {
+    this.actname = actname;
   }
 
 

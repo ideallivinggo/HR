@@ -88,20 +88,31 @@ public interface YapplyService {
      * 面试完成推送
      * */
     void inteTwoPash(Integer intstate, String s);
-    /**
-     *添加员工到待入职状态
-     * 简历加入回收站
-     * */
-    void addEmp (Emp emp,Interviewtwo interviewtwo);
+
     /**
      * 获取最大的员工编号
      * */
     Map queryActID (Integer actid);
     /**
+     * 判断是否激活
+     * */
+    String judge (Activation activation);
+    /**
      * 录取后添加到员工激活表
      * */
     void addAct (Activation activation,Interviewtwo interviewtwo);
-
+    /**
+     * 员工激活并且添加员工到待入职状态
+     * */
+    void updateAct (Activation activation);
+    /**
+     * 激活详情
+     * */
+    PageInfo<Map> queryAllAct(Activation activation, Integer pageNum);
+    /**
+     * 过期撤出
+     * */
+    void ccAct (Activation activation);
 
 
 
@@ -112,6 +123,10 @@ public interface YapplyService {
 
     //////////////////////////////////////////////////////////////////////////////////////////////////
 
+    /**
+     * 待入职统计
+     * */
+    Map countAct();
     /**
      * 员工类型统计
      * */

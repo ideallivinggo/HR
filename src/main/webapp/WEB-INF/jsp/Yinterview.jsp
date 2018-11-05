@@ -291,7 +291,7 @@
                             <td>面试时间</td>
                             <td colspan="2"><input name="inodate" class="inputss" id="inodate"></td>
                             <td>面试官</td>
-                            <td colspan="2"><input name="inname" class="inputss" id="inname" style="border-bottom: 1px solid #000000"></td>
+                            <td colspan="2"><input name="inname" class="inputss" value="${emp.empname}" id="inname" style="border-bottom: 1px solid #000000"></td>
                         </tr>
                     </table>
                     <div style="display: none">
@@ -495,7 +495,6 @@
         })
     }
 
-
     //获取到所有的被选中的复选框计算分数
     function dian() {
 
@@ -575,9 +574,9 @@
                     emali:emali, notice:notice},
                 dataType: "text",
                 success:function(data) {
-                    if(data=="true"){alert("已发送邮件");}
                     queryAllInte(1);
                     $("#myModal2").modal("hide");
+                    if(data=="true"){alert("已发送邮件");}
                 }
             })
         }
@@ -604,9 +603,11 @@
     var month=date.getMonth()+1;//月
     var day=date.getDate();//日
     var hour=date.getHours();//时
-    if(hour<=9){ hour = "0"+hour; }
     var min=date.getMinutes();//分
     var second=date.getSeconds();//秒
+    if(month<=9){ month = "0"+month; }
+    if(day<=9){ day = "0"+day; }
+    if(hour<=9){ hour = "0"+hour; }
     if(min<10){ min="0"+min;}
     if(second<10){second="0"+second; }
     var shijian=year+"-"+month+"-"+day;//面试对比当前时间

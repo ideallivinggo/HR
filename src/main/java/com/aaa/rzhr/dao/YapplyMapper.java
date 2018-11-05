@@ -91,10 +91,7 @@ public interface YapplyMapper {
      * 接收回复发送邮件录取
      * */
     void inteTwoPash(@Param("intstate") Integer intstate, @Param("s") String s);
-    /**
-     *添加员工到待入职状态
-     * */
-    void addEmp (Emp emp);
+
     /**
      * 获取最大的员工编号
      * */
@@ -104,10 +101,32 @@ public interface YapplyMapper {
      * */
     void addAct (Activation activation);
 
-    //////////////////////////////////////////首页////////////////////////////////////////////////////////
+    /**
+     * 判断是否激活
+     * */
+    Activation judge (Activation activation);
+
 
     /**
-     * 员工类型统计
+     * 员工激活
+     * */
+     void updateAct (Activation activation);
+    /**
+     * 激活详情
+     * */
+    List<Map> queryAllAct(Activation activation);
+    /**
+     * 过期撤出
+     * */
+    void ccAct (Activation activation);
+    //////////////////////////////////////////首页////////////////////////////////////////////////////////
+    /**
+     * 待入职统计
+     * */
+    Map countAct();
+
+    /**
+     * 员工统计（待转正，已转正，待离职）
      * */
     List<Map> countEmpState();
     /**

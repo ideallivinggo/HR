@@ -157,16 +157,24 @@
     })
     //首页显示
     function countEmpstate() {
-        //统计员工
+        //待入职统计
+        $.ajax({
+            url: "countActYLP",
+            type: "post",
+            dataType: "json",
+            success: function (data) {
+                $("#drz").html(data.countnum);
+            }
+        })
+        //统计员工(待转正，已转正，代离职)
         $.ajax({
             url: "countEmpStateYLP",
             type: "post",
             dataType: "json",
             success: function (data) {
-                $("#drz").html(data[0].countstate);
-                $("#dzz").html(data[1].countstate);
-                $("#yzz").html(data[2].countstate);
-                $("#dlz").html(data[3].countstate);
+                $("#dzz").html(data[0].countstate);
+                $("#yzz").html(data[1].countstate);
+                $("#dlz").html(data[2].countstate);
             }
         })
         //合同到期提醒
