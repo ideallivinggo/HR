@@ -76,7 +76,6 @@
                         <option value="0">已申请</option>
                         <option value="1">已发布</option>
                         <option value="2">已撤除</option>
-                        <option value="">所有申请</option>
                     </select>
                 </div>
                 <div class="layui-inline" style="margin: 0px" >
@@ -103,7 +102,6 @@
                     <th>年龄要求</th>
                     <th>工作经验</th>
                     <th>专业要求</th>
-                    <th>其他要求</th>
                     <th>审批状态</th>
                     <th>操作</th>
                 </tr>
@@ -158,7 +156,6 @@
                     tr+="<td>"+data.list[i].recage+"</td>";
                     tr+="<td>"+data.list[i].recsuffer+"</td>";
                     tr+="<td>"+data.list[i].recmajor +"</td>";
-                    tr+="<td>"+data.list[i].recrequire+"</td>";
                     if(+data.list[i].recstate==0){data.list[i].recstate="已申请"}
                     if(+data.list[i].recstate==1){data.list[i].recstate="已发布"}
                     if(+data.list[i].recstate==2){ data.list[i].recstate="已撤除"}
@@ -229,6 +226,9 @@
     var hour=date.getHours();//时
     var min=date.getMinutes();//分
     var second=date.getSeconds();//秒
+    if(month<=9){ month = "0"+month; }
+    if(day<=9){ day = "0"+day; }
+    if(hour<=9){ hour = "0"+hour; }
     if(min<10){ min="0"+min;}
     if(second<10){second="0"+second; }
     var recreachdate=year+"-"+month+"-"+day;

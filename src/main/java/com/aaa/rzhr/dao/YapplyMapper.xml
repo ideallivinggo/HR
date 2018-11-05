@@ -20,9 +20,9 @@
     </select>
     <!--添加招聘申请-->
     <insert id="addRec" parameterType="Recruitment">
-        INSERT  INTO recruitment(empid, deptid, recaddress, poid, recnumber, recreachdate, recsex,
+        INSERT  INTO recruitment(rectitle, empid, deptid, recaddress, poid, recnumber, recreachdate, recsex,
                                   receducation, recage, recsuffer, recmajor, recrequire, recstate)
-           values(#{empid}, #{deptid}, #{recaddress}, #{poid}, #{recnumber}, #{recreachdate}, #{recsex},
+           values(#{rectitle}, #{empid}, #{deptid}, #{recaddress}, #{poid}, #{recnumber}, #{recreachdate}, #{recsex},
                   #{receducation}, #{recage}, #{recsuffer}, #{recmajor}, #{recrequire}, #{recstate} )
     </insert>
     <!--查看招聘信息-->
@@ -172,34 +172,45 @@
         </if>
         WHERE intid=#{intid}
     </update>
-
-
-
     <!--面试完成推送-->
     <update id="inteTwoPash" parameterType="Map">
         UPDATE interviewtwo set intstate = ${intstate}  WHERE intid in (${s})
     </update>
-    <!--添加员工到待入职状态-->
-    <select id="addEmp" parameterType="Emp">
-        INSERT INTO emp (empnumber, empname, mppicture, typeid, idnumber, sex, birthdate, nation,
-        accounttype, eduid, address, politics, qqnumber, phone, password, salt, email, urgencyphone,
-        urgencyname, empnotes, deptid, poid, emptypeid, emppay, empstateid, empstatedate)
-        VALUES (#{empnumber}, #{empname}, #{mppicture}, #{typeid}, #{idnumber}, #{sex}, #{birthdate},
-        #{nation}, #{accounttype}, #{eduid}, #{address}, #{politics}, #{qqnumber}, #{phone},
-        #{password}, #{salt}, #{email}, #{urgencyphone}, #{urgencyname}, #{empnotes}, #{deptid}, #{poid},
-        #{emptypeid}, #{emppay}, #{empstateid}, #{empstatedate})
-    </select>
+
+
+
 
     <!--获取最大的员工激活编号-->
     <select id="queryActID" parameterType="int" resultType="java.util.Map">
         SELECT actid FROM activation WHERE actid=(SELECT MAX(actid) FROM activation)
     </select>
-
     <!--录取后添加到员工激活表-->
     <insert id="addAct" parameterType="Activation">
-        INSERT  INTO activation(resid, actnumber, actpwd, actdate, actstate)
-        VALUES (#{resid}, #{actnumber}, #{actpwd}, #{actdate}, #{actstate})
+        INSERT  INTO activation(resid, actname, actnumber, actpwd, actdate, actstate)
+        VALUES (#{resid}, #{actname}, #{actnumber}, #{actpwd}, #{actdate}, #{actstate})
     </insert>
+    <!--判断-->
+    <select id="judge" parameterType="Activation" resultType="Activation">
+        SELECT actpwd FROM activation WHERE actnumber = #{actnumber}
+    </select>
+
+    <!--员工激活-->
+    <update id="updateAct" parameterType="Activation">
+        UPDATE activation set actpwd = ${actpwd}, actstate = ${actstate} WHERE actnumber = #{actnumber}
+    </update>
+
+    <!--激活详情-->
+    <select id="queryAllAct" parameterType="Activation" resultType="java.util.Map">
+        SELECT * FROM activation a LEFT JOIN resume r ON a.resid = r.resid WHERE 1 = 1
+        <if test="actstate != null">
+            AND actstate = #{actstate}
+        </if>
+    </select>
+
+    <!--撤出-->
+    <update id="ccAct" parameterType="Activation">
+        UPDATE activation set actstate = ${actstate} WHERE actid = #{actid}
+    </update>
 
 
 
@@ -207,7 +218,10 @@
 
 
 
-
+    <!--待入职统计-->
+    <select id="countAct" resultType="java.util.Map">
+        SELECT  COUNT(actstate) AS countnum FROM activation where actstate = 1
+    </select>
 
     <!--统计员工类型-->
     <select id="countEmpState" resultType="java.util.Map">
@@ -216,8 +230,7 @@
 
     <!--合同到期提醒小于或者等于当前日期-->
     <select id="countContract" resultType="java.util.Map">
-        SELECT COUNT(conid) AS countnum FROM contract
-        where conover &lt;= (select current_date as Systemtime)
+        SELECT COUNT(conid) AS countnum FROM contract where conover &lt;= (select current_date as Systemtime);
     </select>
 
     <!--加班审批-->

@@ -99,9 +99,9 @@
         </div>
         <form enctype="multipart/form-data" id="batchUpload">
              <div class="layui-inline" style="margin-left: 50px" >
-                 <input type="file" name="file" style="width: 170px;height: 38px;border: 1px solid #969696" id="file">
+                 <input type="file" name="file" style="width: 170px;height: 100%;border: 1px solid #969696" id="file">
              </div>
-             <div class="layui-inline" style="margin-left: -15px" >
+             <div class="layui-inline" style="margin-left: -5px" >
                  <input type="button" class="layui-btn" onclick="uploadBtn()" value="上传简历">
              </div>
         </form>
@@ -349,6 +349,7 @@
                     if (result=="true"){
                         $("#file").val("")
                         queryAllRes(1);
+                        alert("导入简历成功");
                     }else {
                         alert("导入简历错误，请检查Excel文件是否正确");
                     }
@@ -382,6 +383,9 @@
     var hour=date.getHours();//时
     var min=date.getMinutes();//分
     var second=date.getSeconds();//秒
+    if(month<=9){ month = "0"+month; }
+    if(day<=9){ day = "0"+day; }
+    if(hour<=9){ hour = "0"+hour; }
     if(min<10){ min="0"+min;}
     if(second<10){second="0"+second; }
     var recreachdate=year+"-"+month+"-"+day;

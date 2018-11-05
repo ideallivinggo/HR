@@ -126,7 +126,7 @@
                         <div class="layui-inline">
                             <label class="layui-form-label">姓名</label>
                             <div class="layui-input-block">
-                                <input id="resumename" class="layui-input" disabled>
+                                <input name="actnmae" id="resumename" class="layui-input" disabled>
                             </div>
                         </div>
                         <div class="layui-inline">
@@ -154,11 +154,7 @@
                         <label class="layui-form-label">通知信息</label>
                         <div class="layui-input-block" style="width: 520px">
                                     <textarea name="notice" id="notice" placeholder="请输入通知信息" class="layui-textarea" rows="6">
-                                 入职通知单：
-你好，我这边是新乡睿智科技有限公司，经过多次面试，你符合本公司的基本符合要求。现给你安排入职，请在规定时间内前报道并且激活工号。
-公司地址：新乡红旗区北三环大学生创业园区。
-电话：8888888 徐酱酱 15837389710
-激活地址：http://localhost:8080/jihuo.jsp
+
                                     </textarea>
                         </div>
                     </div>
@@ -176,6 +172,7 @@
                         简历id<input name="resid" id="resid"><br>
                         员工激活编号<input name="actnumber" id="actnumber">
                         员工激活状态<input name="actstate" value="0">
+                        激活姓名<input name="actname" id="actname">
                     </div>
                     <input type="button" class="layui-btn layui-btn-fluid" onclick="sendAct()" value="发送邮件" style="letter-spacing:15px;"/>
                 </form>
@@ -282,12 +279,14 @@
             type: "post",
             data:{intid:obj},
             dataType: "json",
+            async:false,
             success: function (data) {
                 $("#resumename").val(data[0].resumename);
                 $("#emali").val(data[0].emali);
                 $("#phone").val(data[0].phone);
                 $("#intid").val(data[0].intid);
                 $("#intstate").val(data[0].intstate);
+                $("#actname").val(data[0].resumename);
                 $("#resid").val(data[0].resid);
                 $("#emali2").val(data[0].emali);//发送的邮件
             }
@@ -297,6 +296,7 @@
             url: "queryActIDYLP",
             type: "post",
             dataType: "json",
+            async:false,
             success: function(data) {
                     var actnumber = data.actid ;//员工编号
                     var qz =101;//开始号
@@ -304,6 +304,11 @@
                     $("#actnumber").val("RZ"+newbh);
             }
         });
+        $("#notice").html("                                 入职通知单：\n" +
+            "你好，我这边是新乡睿智科技有限公司，经过多次面试，你符合本公司的基本符合要求。现给你安排入职，请在规定时间内前报道并且激活工号。\n" +
+            "公司地址：新乡红旗区北三环大学生创业园区。\n" +
+            "电话：8888888 徐酱酱 15837389710\n" +
+            "激活地址：http://localhost:8080/jihuo?gh="+$("#actnumber").val()+"&name="+$("#actname").val()+"")
     }
     //添加员工激活
     function sendAct() {
@@ -320,9 +325,9 @@
                 data:$("#sendForm").serialize(),//添加员工激活
                 dataType: "text",
                 success:function(data) {
-                    if(data=="true"){alert("已发送邀请入职邮件");}
                     queryAllInteTwo(1);
                     $("#myModal").modal("hide");
+                    if(data=="true"){alert("已发送邀请入职邮件");}
                 }
             })
         }
@@ -350,9 +355,11 @@
     var month=date.getMonth()+1;//月
     var day=date.getDate();//日
     var hour=date.getHours();//时
-    if(hour<=9){ hour = "0"+hour; }
     var min=date.getMinutes();//分
     var second=date.getSeconds();//秒
+    if(month<=9){ month = "0"+month; }
+    if(day<=9){ day = "0"+day; }
+    if(hour<=9){ hour = "0"+hour; }
     if(min<10){ min="0"+min;}
     if(second<10){second="0"+second; }
     var senddate=year+"-"+month+"-"+day+" "+hour+":"+min+":"+second;//发送时间

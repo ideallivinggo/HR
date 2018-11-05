@@ -173,7 +173,7 @@ public class YapplyController {
     public String addIntone(Interviewone interviewone, Integer resstate, String s,String emali, String notice) {
         service.addIntone(interviewone, resstate, s);
         String shijian = interviewone.getInodate();
-        //mailService.sendSimpleMail(emali,"面试通知",notice+"面试时间"+shijian);
+        mailService.sendSimpleMail(emali,"面试通知",notice+"面试时间"+shijian);
         return "true";
     }
     /**
@@ -210,8 +210,9 @@ public class YapplyController {
     @RequestMapping("addIntTwoYLP")
     public String addIntTwo(Interviewtwo interviewtwo, Interviewone interviewone, String emali, String notice) {
         service.addIntTwo(interviewtwo, interviewone);
+        System.out.println(emali);
         String shijian = interviewtwo.getIntdate();
-        //没成功//mailService.sendSimpleMail(emali,"面试通知",notice+"面试时间"+shijian);
+        mailService.sendSimpleMail(emali,"面试通知",notice+"面试时间"+shijian);
         return "true";
     }
     /**
@@ -257,42 +258,60 @@ public class YapplyController {
         return service.queryActID(actid);
     }
     /**
-     * 添加面试
+     * 添加员工激活表
+     * 修改面试到回收
      */
     @RequestMapping("addActYLP")
     public String addAct(Activation activation, Interviewtwo interviewtwo,String emali, String notice) {
         service.addAct(activation, interviewtwo);
         String shijian = activation.getActdate();
-        String bianhao = activation.getActnumber();
-        //mailService.sendSimpleMail(emali,"面试通知",notice+"员工编号"+bianhao+" ，报道时间"+shijian);
+        mailService.sendSimpleMail(emali,"面试通知",notice+"。报道时间"+shijian);
         return "true";
     }
-
-
-
-
-
-
-
-
-
-
 
     /**
-     * 添加到emp表（待入职状态）
+     * 员工激活
      */
-    @RequestMapping("addEmpYLP")
-    public String addEmp(Emp emp,Interviewtwo interviewtwo, String notice) {
-        service.addEmp(emp, interviewtwo);
-        String shijian = emp.getEmpstatedate();
-        String email=emp.getEmail();
-        //mailService.sendSimpleMail(email,"面试通知",notice+"报道时间"+shijian);
+    @RequestMapping("updateActYLP")
+    public  String updateAct (Activation activation) {
+        service.updateAct(activation);
         return "true";
     }
+    /**
+     * 激活详情
+     */
+    @RequestMapping("queryAllActYLP")
+    public  PageInfo<Map> queryAllAct(Activation activation, Integer pageNum) {
+        return service.queryAllAct(activation, pageNum);
+    }
+    /**
+     * 撤除
+     */
+    @RequestMapping("ccActYLP")
+    public  String ccAct (Activation activation) {
+        service.ccAct(activation);
+        return "true";
+    }
+
+
+
+
+
+
+
+
+
+
 
 
 ////////////////////////////////////////////首页////////////////////////////////////////////////
-
+    /**
+     * 待入职统计
+     */
+    @RequestMapping("countActYLP")
+    public Map countAct() {
+        return service.countAct();
+    }
 
     /**
      * 统计不同状态员工

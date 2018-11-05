@@ -73,7 +73,6 @@
             <div class="layui-form-item">
                 <div class="layui-inline" style="margin: 0px">
                     <select id="recstate">
-                        <option value="">所有申请</option>
                         <option value="0">已申请</option>
                         <option value="1">已发布</option>
                         <option value="2">已撤除</option>
@@ -108,7 +107,6 @@
                 <th>年龄要求</th>
                 <th>工作经验</th>
                 <th>专业要求</th>
-                <th>其他要求</th>
                 <th>审批状态</th>
                 <th>操作</th>
             </tr>
@@ -131,7 +129,7 @@
 
 <!-- 模态框添加（Modal） -->
 <div class="modal fade" id="myModal" >
-    <div class="modal-dialog" style="width: 80%;">
+    <div class="modal-dialog" style="width: 80%; margin-bottom: 50px">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -143,6 +141,14 @@
             <div class="content">
             <form class="layui-form" id="addRecForm" >
                 <p class="biaoti">招聘申请</p>
+                <div class="layui-form-item">
+                    <div class="layui-inline">
+                        <label class="layui-form-label"> 添加标题</label>
+                        <div class="layui-input-block" style="width: 300px">
+                            <input name="rectitle"  class="layui-input" style="width: 770px">
+                        </div>
+                    </div>
+                </div>
                 <div class="layui-form-item">
                     <div class="layui-inline">
                         <label class="layui-form-label"> 招聘部门</label>
@@ -251,7 +257,7 @@
 
 <!-- 模态框修改（Modal） -->
 <div class="modal fade" id="myModal2" >
-    <div class="modal-dialog" style="width: 80%;">
+    <div class="modal-dialog" style="width: 80%; margin-bottom: 50px;">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -263,6 +269,14 @@
                 <div class="content">
                     <form class="layui-form" id="updateRecForm" >
                         <p class="biaoti">招聘申请</p>
+                        <div class="layui-form-item">
+                            <div class="layui-inline">
+                                <label class="layui-form-label"> 添加标题</label>
+                                <div class="layui-input-block" style="width: 300px">
+                                    <input id="rectitle"  class="layui-input" style="width: 770px">
+                                </div>
+                            </div>
+                        </div>
                         <div class="layui-form-item">
                             <div class="layui-inline">
                                 <label class="layui-form-label"> 招聘部门</label>
@@ -330,7 +344,7 @@
                             <div class="layui-inline">
                                 <label class="layui-form-label">性别要求</label>
                                 <div class="layui-input-block" style="width: 300px">
-                                    <input name="recsex" class="aa" value="不限" id="buxian" title="不限"  type="radio" >
+                                    <input name="recsex" class="aa" value="不限" id="buxian" title="不限"  type="radio" checked >
                                     <input name="recsex" class="aa"  value="男" id="nan" title="男" type="radio">
                                     <input name="recsex" class="aa" value="女" id="nv" title="女"   type="radio">
                                 </div>
@@ -367,7 +381,9 @@
 </body>
 <script>
     //添加表单属性
-    layui.use(['form', 'layedit', 'laydate'], function(){ });
+    layui.use(['form', 'layedit', 'laydate'], function(){
+
+    });
 
     //自动查询
     $(function(){
@@ -444,19 +460,18 @@
                     tr+="<td>"+data.list[i].recage+"</td>";
                     tr+="<td>"+data.list[i].recsuffer+"</td>";
                     tr+="<td>"+data.list[i].recmajor +"</td>";
-                    tr+="<td>"+data.list[i].recrequire+"</td>";
                     if(+data.list[i].recstate==0){
                         tr+="<td>已申请</td>";
                         tr+="<td>";
                         tr+="<button onclick='chechu("+data.list[i].recid+")'>撤除</button>&nbsp;&nbsp;";
-                        tr+="<button data-toggle='modal' data-target='#myModal2' onclick='queryOneRec("+data.list[i].recid+")'>修改</button>";
+                        tr+="<button data-toggle='modal' data-target='#myModal2' onclick='queryOneRec("+data.list[i].recid+")'>详情</button>";
                         tr+="</td>";
                     }
                     if(+data.list[i].recstate==1){
                         tr+="<td>已发布</td>";
                         tr+="<td>";
                         tr+="<button onclick='chechu("+data.list[i].recid+")'>撤除</button>&nbsp;&nbsp;";
-                        tr+="<button data-toggle='modal' data-target='#myModal2' onclick='queryOneRec("+data.list[i].recid+")'>修改</button>";
+                        tr+="<button data-toggle='modal' data-target='#myModal2' onclick='queryOneRec("+data.list[i].recid+")'>详情</button>";
                         tr+="</td>";
                     }
                     if(+data.list[i].recstate==2){
@@ -492,6 +507,7 @@
             type: "post",
             dataType: "json",
             success: function (data) {
+                $("#rectitle").val(data[0].rectitle)
                 $("#recid").val(data[0].recid)
                 $("#deptname").val(data[0].deptname)
                 $("#empname").val(data[0].empname)
@@ -564,6 +580,7 @@
     var year=date.getFullYear();//年
     var month=date.getMonth()+1;//月
     var day=date.getDate();//日
+    if(day<=9){ day = "0"+day; }
     var hour=date.getHours();//时
     var min=date.getMinutes();//分
     var second=date.getSeconds();//秒

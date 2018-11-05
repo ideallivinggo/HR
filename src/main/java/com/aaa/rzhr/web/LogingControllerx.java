@@ -57,7 +57,6 @@ public class LogingControllerx {
                 map.put("a"+e.getEmpid().toString(),e);
             }
             s.setAttribute("listemp",map);
-           // System.out.println(map.toString());
 
             return "okok";
 

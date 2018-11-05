@@ -294,7 +294,7 @@
         }else if(inodate <= senddate){
             alert("面试时间不能小于当前时间！")
         }else {
-            $.ajax({
+           $.ajax({
                 url:"addIntoneYLP",
                 type:"post",
                 data:{resid:resid, inodate:inodate, inostate:0,//添加面试
@@ -330,9 +330,11 @@
     var month=date.getMonth()+1;//月
     var day=date.getDate();//日
     var hour=date.getHours();//时
-    if(hour<=9){ hour = "0"+hour; }
     var min=date.getMinutes();//分
     var second=date.getSeconds();//秒
+    if(month<=9){ month = "0"+month; }
+    if(day<=9){ day = "0"+day; }
+    if(hour<=9){ hour = "0"+hour; }
     if(min<10){ min="0"+min;}
     if(second<10){second="0"+second; }
     var shijian=year+"-"+month+"-"+day+" "+hour+":"+min+":"+second;//当前时间

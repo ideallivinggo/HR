@@ -1,18 +1,24 @@
 package com.aaa.rzhr.web;
 
+import com.aaa.rzhr.pojo.Activation;
 import com.aaa.rzhr.pojo.TreeVO;
 import com.aaa.rzhr.service.TreeService;
+import com.aaa.rzhr.service.YapplyService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.servlet.ServletRequest;
 import java.util.List;
 
 @Controller
 public class PageController {
     @Autowired
     TreeService treeService;
+    @Autowired
+    YapplyService yapplyService;
 
      @RequestMapping("login")
      public  String aa(){
@@ -188,6 +194,40 @@ public String Qemp(){
     public String Yinterviewtwo(){
         return "Yinterviewtwo";
     }
+
+    //员工录用推送
+    @RequestMapping("Yhire")
+    public String Yhire(){
+        return "Yhire";
+    }
+    //员工录用回复details
+    @RequestMapping("Yreply")
+    public String Yreply(){
+        return "Yreply";
+    }
+
+    @RequestMapping("jihuo")
+    public String jihuo(String gh, String name, ServletRequest req){
+        req.setAttribute("name",name);
+        req.setAttribute("gh",gh);
+        Activation a=new Activation();
+        a.setActnumber(gh);
+        String p=yapplyService.judge(a);
+      if (p.equals("")){
+          return "jihuo";
+      }else {
+          return "jihuoOK";
+      }
+    }
+    //激活详情
+    @RequestMapping("Ydetails")
+    public String Ydetails(){
+        return "Ydetails";
+    }
+
+
+
+
    //----------------------------------宋金鹏-------------------------
     @RequestMapping("spaydata")
     public String Spaydata(){
