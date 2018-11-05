@@ -285,7 +285,7 @@
                             <td>面试时间</td>
                             <td colspan="2"><input name="intdate" class="inputss" id="intdate"></td>
                             <td>面试官</td>
-                            <td colspan="2"><input name="intname" class="inputss" id="intname" style="border-bottom: 1px solid #000000"></td>
+                            <td colspan="2"><input name="intname" class="inputss"  value="${emp.empname}"  id="intname" style="border-bottom: 1px solid #000000"></td>
                         </tr>
                     </table>
                     <div style="display: none">
@@ -482,9 +482,11 @@
     var month=date.getMonth()+1;//月
     var day=date.getDate();//日
     var hour=date.getHours();//时
-    if(hour<=9){ hour = "0"+hour; }
     var min=date.getMinutes();//分
     var second=date.getSeconds();//秒
+    if(month<=9){ month = "0"+month; }
+    if(day<=9){ day = "0"+day; }
+    if(hour<=9){ hour = "0"+hour; }
     if(min<10){ min="0"+min;}
     if(second<10){second="0"+second; }
     var shijian=year+"-"+month+"-"+day;

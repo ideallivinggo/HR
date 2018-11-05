@@ -144,11 +144,6 @@ public class YapplyServiceImpl implements YapplyService {
         yapplyMapper.inteTwoPash(intstate, s);
     }
 
-    @Override
-    public void addEmp(Emp emp,Interviewtwo interviewtwo) {
-        yapplyMapper.addEmp(emp);
-        yapplyMapper.updateInteTwo(interviewtwo);
-    }
 
     @Override
     public Map queryActID (Integer actid) {
@@ -156,9 +151,50 @@ public class YapplyServiceImpl implements YapplyService {
     }
 
     @Override
+    public String judge(Activation activation) {
+        Activation aa=yapplyMapper.judge(activation);
+        String pwd="";
+        try {
+             pwd=aa.getActpwd();
+        }catch (java.lang.NullPointerException e){
+             pwd ="";
+
+        }
+
+
+        return pwd;
+    }
+
+
+    @Override
     public void addAct(Activation activation,Interviewtwo interviewtwo) {
         yapplyMapper.addAct(activation);
         yapplyMapper.updateInteTwo(interviewtwo);
+    }
+
+    @Override
+    public void updateAct(Activation activation) {
+        yapplyMapper.updateAct(activation);
+
+    }
+
+    @Override
+    public PageInfo<Map> queryAllAct(Activation activation, Integer pageNum) {
+        PageHelper.startPage(pageNum,10);
+        List<Map> list = yapplyMapper.queryAllAct(activation);
+        PageInfo<Map> info = new PageInfo<Map>(list);
+        return info;
+    }
+
+    @Override
+    public void ccAct(Activation activation) {
+        yapplyMapper.ccAct(activation);
+    }
+
+
+    @Override
+    public Map countAct() {
+        return yapplyMapper.countAct();
     }
 
     @Override
