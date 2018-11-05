@@ -90,4 +90,13 @@ public class EmpController {
         System.out.println("99999999999999999999999999");
         return "true";
     }
+    @RequestMapping("queryEmpById")
+    @ResponseBody
+    public Emp  queryEmpById(Integer empid){
+        Emp emp = empService.queryEmpById(empid);
+
+        return emp;
+    }
+
+
 }

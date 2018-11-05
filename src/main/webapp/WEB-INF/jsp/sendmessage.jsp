@@ -18,7 +18,7 @@
     <!-- FONTAWESOME STYLES-->
     <link href="../../assets/css/font-awesome.css" rel="stylesheet" />
     <!--PAGE LEVEL STYLES-->
-    <link href="../../assets/css/pricing.css" rel="stylesheet" />
+
     <!--CUSTOM BASIC STYLES-->
     <link href="../../assets/css/basic.css" rel="stylesheet" />
     <!--CUSTOM MAIN STYLES-->
@@ -38,7 +38,7 @@
         <div class="col-md-3">
             <div class="panel normal-table panel-danger adjust-border-radius">
                 <div class="panel-heading adjust-border">
-                    <h4>重要通知</h4>
+                    <h4>公司通知</h4>
                 </div>
                 <div class="panel-body">
 
@@ -47,8 +47,8 @@
                     正文<br/>
                          <textarea rows="10" cols="25" name="metext">
 						 </textarea><br/>
-                    开始时间 <input type="date" name="begintime"><br/>
-                    结束时间 <input type="date" name="endtime">
+                    开始时间 <input type="date" name="begintime" id="begintime1"><br/>
+                    结束时间 <input type="date" name="endtime" id="endtime1">
                       </form>
                 </div>
                 <div class="panel-footer">
@@ -63,7 +63,7 @@
         <div class="col-md-3">
             <div class="panel normal-table panel-primary adjust-border-radius">
                 <div class="panel-heading adjust-border">
-                    <h4>一般通知</h4>
+                    <h4>部门通知</h4>
                 </div>
                 <div class="panel-body">
                     <form id="yiban">
@@ -71,8 +71,8 @@
                         正文<br/>
                         <textarea rows="10" cols="25" name="metext">
 						 </textarea><br/>
-                        开始时间 <input type="date" name="begintime"><br/>
-                        结束时间 <input type="date" name="endtime">
+                        开始时间 <input type="date" name="begintime" id="begintime2"><br/>
+                        结束时间 <input type="date" name="endtime" id="endtime2">
                     </form>
 
                 </div>
@@ -83,48 +83,80 @@
         </div>
         <script>
             function send(obj){
-                alert(obj)
-                var ssa;
-                if(obj==1){
-                    ssa=$("#zhong").serialize();
-                }else if(obj==2){
-                    ssa=$("#yiban").serialize();
+
+                function toDate(str){
+                    var sd=str.split("-");
+                    return new Date(sd[0],sd[1],sd[2]);
+                }
+                var d1=toDate($("#begintime"+obj).val());
+                var d2=toDate($("#endtime"+obj).val());
+
+                if($("#begintime"+obj).val()==""){
+                    alert("开始时间不能为空");
+                    return false;
+                }
+                if($("#endtime"+obj).val()==""){
+                    alert("结束时间不能为空");
+                    return false;
                 }
 
-                $.ajax({
-                    url:'sendmessage/zhong',
-                    type:'post',
-                    data:ssa,
-                    dataType:'text',
-                    success:function (data) {
-                        alert(data)
+                var d3 =toDate(getNowFormatDate());
+                function getNowFormatDate() {
+                    var date = new Date();
+                    var seperator1 = "-";
+                    var year = date.getFullYear();
+                    var month = date.getMonth() + 1;
+                    var strDate = date.getDate();
+                    if (month >= 1 && month <= 9) {
+                        month = "0" + month;
                     }
-                })
+                    if (strDate >= 0 && strDate <= 9) {
+                        strDate = "0" + strDate;
+                    }
+                    var currentdate = year + seperator1 + month + seperator1 + strDate;
+                    return currentdate;
+                }
+
+
+                if (d1<d3){
+                    alert("开始日期不可以小于当前日期");
+                }else{
+
+                    if(d2<d1){
+
+                        alert("输入有误开始日期不可以大于或者等于结束日期")
+                    }else{
+
+                        var ssa;
+                        if(obj==1){
+                            ssa=$("#zhong").serialize();
+                        }else if(obj==2){
+                            ssa=$("#yiban").serialize();
+                        }
+
+                        $.ajax({
+                            url:'sendmessage/zhong',
+                            type:'post',
+                            data:ssa,
+                            dataType:'text',
+                            success:function (data) {
+                                alert(data)
+                            }
+                        })
+                    }
+                }
+
+
+
+
+
+
+
 
             }
         </script>
 
-        <div class="col-md-3">
-            <div class="panel normal-table panel-success adjust-border-radius">
-                <div class="panel-heading adjust-border">
-                    <h4>部门通知</h4>
-                </div>
-                <div class="panel-body">
 
-                    标题<br/><input><br/>
-                    正文<br/>
-                    <textarea rows="10" cols="25">
-						 </textarea><br/>
-                    开始时间 <input type="date"><br/>
-                    结束时间 <input type="date">
-
-
-                </div>
-                <div class="panel-footer">
-                    <a href="#" class="btn btn-success btn-block btn-lg adjust-border-radius">发送</a>
-                </div>
-            </div>
-        </div>
 
     </div>
 </div>

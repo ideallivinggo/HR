@@ -9,6 +9,15 @@ public class Rzmessage {
   private String endtime;
   private String mestate;
   private String metitle;
+  private Integer deptid;
+
+  public Integer getDeptid() {
+    return deptid;
+  }
+
+  public void setDeptid(Integer deptid) {
+    this.deptid = deptid;
+  }
 
   public String getMetitle() {
     return metitle;

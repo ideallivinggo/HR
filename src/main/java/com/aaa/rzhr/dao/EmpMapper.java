@@ -16,6 +16,7 @@ public interface EmpMapper {
    Emp getByName(@Param("name") String name);
     int addEmp (Emp emp);
     List<Emp> queryallempX();
+    Emp queryEmpById(Integer empid);
 
 
 

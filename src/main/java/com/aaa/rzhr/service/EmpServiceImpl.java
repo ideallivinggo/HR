@@ -44,6 +44,12 @@ public class EmpServiceImpl implements EmpService {
         System.out.println("进入到了++++666666666666666666666666666666666666666666");
         return empMapper.queryallempX();
     }
+
+    @Override
+    public Emp queryEmpById(Integer empid) {
+        return empMapper.queryEmpById(empid);
+    }
+
     @Override
     public PageInfo<Map> QqueryEmp(Integer pageNum,Integer deptid,String empname,Integer poid,Integer emptypeid) {
         PageHelper.startPage(pageNum,10);

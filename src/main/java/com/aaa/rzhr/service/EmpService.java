@@ -15,6 +15,7 @@ public interface EmpService {
      Emp getByName(String name);
      int addEmp(Emp emp);
      List<Emp> queryallempX();
+     Emp queryEmpById(Integer empid);
 
      //-----------------------------------------------///
      /** 查询员工 1*/
