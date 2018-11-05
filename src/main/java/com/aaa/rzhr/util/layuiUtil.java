@@ -9,7 +9,7 @@ import java.util.Map;
 /**
  * @ClassName layuiUtil
  * @Description //TODO
- * @Auther YanAn
+ * @Auther aa
  * @Date 2018/10/26 10:53
  * @Version 1.0
  **/
@@ -28,6 +28,7 @@ public class layuiUtil {
                 list2.add(list.get((page-1)*limit+i));
             }
         }
+
 
         layuiFy.setData(list2);
         layuiFy.setCount(list.size());

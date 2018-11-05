@@ -23,7 +23,6 @@
         left join dept d on e.deptid = d.deptid
         left join emp_type et on e.emptypeid = et.emptypeid
         left join position p on e.poid = p.poid
-        left join role r on e.poid = r.roid
         <if test="deptid!=null">
             WHERE e.deptid=#{deptid}
         </if>
@@ -38,47 +37,19 @@
         </if>
     </select>
     <select id="QqueryEmpIf" resultType="java.util.Map">
-        SELECT * from emp e
+        select * from emp e
         left join id_type idtype on e.typeid = idtype.typeid
         left join education edu on e.eduid = edu.eduid
         left join dept d on e.deptid = d.deptid
         left join emp_type et on e.emptypeid = et.emptypeid
         left join position p on e.poid = p.poid
-        left join empstate state on e.empstateid = state.empstateid
-        left join contract c on c.empid = e.empid
-        left join education_experience eduex on eduex.empid = e.empid
-        left join work_experience workex on workex.empid = e.empid
-        left join social_benefits sb on sb.empid = e.empid
+
         <if test="empid!=null">
-            where e.empid = #{empid}
+            where empid = #{empid}
         </if>
     </select>
     <delete id="DelEmpYqx" parameterType="String">
         delete from emp where empid in (${str})
     </delete>
-    <update id="UpdateEmpYqx" parameterType="Emp">
-        UPDATE emp
-SET empnumber = #{empnumber},
-empname = #{empname},
-mppicture = #{mppicture},
-typeid = #{typeid},
-idnumber = #{idnumber},
-sex = #{sex},
-birthdate = #{birthdate},
-nation = #{nation},
-accounttype = #{accounttype},
-eduid = #{eduid},
-address = #{address},
-politics = #{politics},
-qqnumber = #{qqnumber},
-phone = #{phone},
-email = #{email}
-,
- urgencyphone = #{urgencyphone},urgencyname=#{urgencyname},empnotes=#{empnotes},deptid=#{deptid}
-,
- poid = #{poid},emptypeid=#{emptypeid},emppay=#{emppay},empstateid=#{empstateid},empstatedate=#{empstatedate}
-WHERE
-	empid = #{empid}
-    </update>
 
 </mapper>

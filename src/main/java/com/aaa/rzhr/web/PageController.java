@@ -58,6 +58,12 @@ public class PageController {
 
         return "testmssage";
     }
+    @RequestMapping("/sendnotice")
+    public String sendnotice(){
+      return "sendmessage";
+    }
+
+
 ///----------------------------------于青县区--------------------------------//
 @RequestMapping("Qemp")
 public String Qemp(){
@@ -77,16 +83,6 @@ public String Qemp(){
     public String Qdept(){
         return "Qdept";
     }
-
-    @RequestMapping("QqueryContract")
-    public String QqueryContract(){
-        return "QqueryContract";
-    }
-    @RequestMapping("Qmanage")
-    public String Qmanage(){
-        return "Qmanage";
-    }
-
     ///----------------------------------李佳鹏区--------------------------------//
 
     /**
@@ -130,28 +126,66 @@ public String Qemp(){
         return "L_leave";
 
     }
+
+    /**
+     * 员工考勤
+     */
+    @RequestMapping("L_kaoqin")
+    public  String L_kaoqin(){
+        return "L_kaoqin";
+
+    }
+
+    /**
+     * 员工加班
+     */
+    @RequestMapping("L_jiaban")
+    public  String L_jiaban(){
+        return "L_jiaban";
+    }
+
+    /**
+     * 员工离职申请
+     */
+    @RequestMapping("L_lizhi")
+    public  String L_lizhi(){
+        return "L_lizhi";
+    }
+
+    /**
+     * 员工请假休假离职审批
+     */
+    @RequestMapping("L_1111")
+    public  String L_1111(){
+        return "L_1111";
+    }
+    //----------------------------------月亮鹏-------------------------
+
     //----------------------------------岳梁朋-------------------------
     //招聘申请表
+
     @RequestMapping("Yapply")
     public String Yapply(){
         return "Yapply";
     }
+
+
+
     //招聘发布表
     @RequestMapping("Yissue")
     public String Yissue(){
         return "Yissue";
     }
     //简历筛选
+
     @RequestMapping("Yresume")
-   public String Yresume(){
+    public String Yresume(){
         return "Yresume";
     }
-    //简历人才资源库
     @RequestMapping("Ytalents")
     public String Ytalents(){
         return "Ytalents";
     }
-    //面试表
     @RequestMapping("Yinterview")
     public String Yinterview(){
         return "Yinterview";
@@ -160,6 +194,7 @@ public String Qemp(){
     public String Yinterviewtwo(){
         return "Yinterviewtwo";
     }
+
     //员工录用推送
     @RequestMapping("Yhire")
     public String Yhire(){
@@ -189,6 +224,7 @@ public String Qemp(){
     public String Ydetails(){
         return "Ydetails";
     }
+
 
 
 
