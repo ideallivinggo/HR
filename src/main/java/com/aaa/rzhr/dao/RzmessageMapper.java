@@ -2,6 +2,9 @@ package com.aaa.rzhr.dao;
 
 import com.aaa.rzhr.pojo.Rzmessage;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 /**
  * @author XBJ
@@ -10,5 +13,6 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface RzmessageMapper {
      int addRzmessageX(Rzmessage rzmessage);
+     List<Rzmessage> queryRzmessageX(@Param("nowate") String nowate,@Param("mestate") String mestate);
 
 }

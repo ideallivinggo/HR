@@ -71,34 +71,10 @@
                     </a>
                     <ul class="dropdown-menu extended inbox" id="showfriend">
                         <div class="notify-arrow notify-arrow-green"></div>
-                        <li>
-                            <p class="green">你有5条信息</p>
-                        </li>
-                        <li>
-                            <a href="javascript:;">
-                                <span class="photo"><img alt="avatar" src="../../assets/img/ui-zac.jpg"></span>
-                                <span class="subject">
-                                    <span class="from">部门通告</span>
-                                    <span class="time">21：53</span>
-                                    </span>
-                                <span class="message">
-                                        人事部门资源提醒
-                                    </span>
-                            </a>
-                        </li>
 
-                        <li>
-                            <a href="javascript:;">
-                                <span class="photo"><img alt="avatar" src="../../assets/img/ui-divya.jpg"></span>
-                                <span class="subject">
-                                    <span class="from">公司通告</span>
-                                    <span class="time">22：66</span>
-                                    </span>
-                                <span class="message">
-                                    我是公司发的信息。。。。。
-                                    </span>
-                            </a>
-                        </li>
+
+
+
 
                         <li>
 
@@ -208,7 +184,7 @@
                                         <div class="panel panel-success" style="height:600px; ">
                                             <div class="panel-heading">
                                                 <span id="toemp"></span>
-                                                <span id="uuid"></span>
+                                                <span id="uuid" style="display: none"></span>
                                                 <button type="button"  class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                                             </div>
                                             <div class="panel-body" style="padding:0px;">
@@ -238,41 +214,53 @@
 <%--------------------------------------------------显示所有好友模态------------------------------------------%>
                 <div class="modal fade" id="showemp" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                     <div class="modal-dialog">
-                        <div class="modal-content" style="width: 350px;border-radius:25px;">
-                            <div class="modal-header" style="width: 350px;border-radius:25px;">
+                        <div class="modal-content" style="width: 300px;border-radius:25px;">
+                            <div class="modal-header" style="width: 300px;border-radius:25px;">
                                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                                 <h4 class="modal-title" id="myModalLabel"style="text-align:center">选择在线员工聊天</h4>
                             </div>
+                             <div class="modal-header" style="width: 300px;height:55px;border-radius:25px;
+                            position:absolute;left:300px;top:0px;   ">
+                                <h4 class="modal-title" style="text-align:center"><input style="color:#0C0C0C" id="empnamei">&nbsp;&nbsp;
+                                    <span onclick="b_query()">查找</span></h4>
+                            </div>
+
+                            <div class="col-lg-3 ds" id="yuangong" style="height:500px;width:400px;overflow-y:auto;border:1px solid ;border-radius:25px;
+                            position: absolute;left:300px;top:55px; ">
+                                <%--<div class="desc" style="background:#FFD777;height:70px;border-radius:25px;" onclick="openmessage(2)">
+                                    <div class="thumb">
+                                        <img class="img-circle" src="assets/img/ui-sherman.jpg" width="35px" height="35px" align="">
+                                    </div>
+                                    <div class="details" >
+                                        <p > <span style="color:#B26A8F;font-size:15px;margin-left:10px; ">张三一</span><br/>
+                                            <muted>在线</muted>
+                                        </p>
+                                    </div>
+                                </div>--%>
 
 
-                                <div class="col-lg-3 ds" style="height:500px;width:350px;overflow-y:auto;border:1px solid ;border-radius:25px;">
+                            </div>
+
+
+                            <div class="col-lg-3 ds" id="bumen" style="height:500px;width:300px;overflow-y:auto;border:1px solid ;border-radius:25px;">
                                     <!-- USERS ONLINE SECTION -->
-
-                                    <!-- First Member -->
-                                    <div class="desc" style="background:#FFD777;height:70px;border-radius:25px;" onclick="openmessage(2)">
-                                        <div class="thumb">
-                                            <img class="img-circle" src="assets/img/ui-sherman.jpg" width="35px" height="35px" align="">
-                                        </div>
-                                        <div class="details" >
-                                            <p > <span style="color:#B26A8F;font-size:15px;margin-left:10px; ">张三一</span><br/>
-                                                <muted>在线</muted>
-                                            </p>
-                                        </div>
+                               <%-- <div class="desc" style="background:#FFD777;height:70px;border-radius:25px;" onclick="openmessage(2)">
+                                    <div class="thumb">
+                                        <img class="img-circle" src="assets/img/ui-sherman.jpg" width="35px" height="35px" align="">
                                     </div>
-                                    <!-- First Member -->
-                                    <div class="desc" style="background:#FFD777;height:70px;border-radius:25px;" onclick="openmessage(3)">
-                                        <div class="thumb">
-                                            <img class="img-circle" src="assets/img/ui-sherman.jpg" width="35px" height="35px" align="">
-                                        </div>
-                                        <div class="details" >
-                                            <p > <span style="color:#B26A8F;font-size:15px;margin-left:10px; ">李四二</span><br/>
-                                                <muted>在线</muted>
-                                            </p>
-                                        </div>
+                                    <div class="details" >
+                                        <p > <span style="color:#B26A8F;font-size:15px;margin-left:10px; ">财务部门</span><br/>
+                                            <muted>5人</muted>
+                                        </p>
                                     </div>
-
+                                </div>--%>
 
                                 </div><!-- /col-lg-3 -->
+                            <script>
+
+
+
+                            </script>
 
 
                         </div><!-- /.modal-content -->
@@ -288,18 +276,7 @@
         </section><! --/wrapper -->
     </section><!-- /MAIN CONTENT -->
 
-    <!--main content end-->
-    <!--footer start-->
-   <%-- <footer class="site-footer">
 
-        <div class="text-center">
-            2014 - Alvarez.is - More Templates <a href="#" target="_blank" title="睿智HR">睿智HR</a> - Collect from <a href="http://www.cssmoban.com/" title="睿智HR" target="_blank">睿智HR</a>
-            <a href="blank.html#" class="go-top">
-                <i class="fa fa-angle-up"></i>
-            </a>
-        </div>
-    </footer>--%>
-    <!--footer end-->
 </section>
 
 <!-- js placed at the end of the document so the pages load faster -->
@@ -320,6 +297,7 @@
 <!--script for this page-->
 
 <script>
+     var emp;
 
 
 
@@ -333,36 +311,164 @@
 
     $(document).ready(function () {
          $('<audio id="chatAudio"> <source src="../../assets/map3/iphoneqq.mp3" type="audio/mpeg"></audio>').appendTo('body');
-       var ud='a2';
-       $.gritter.add({
-            // (string | mandatory) the heading of the notification
-            title: '欢迎来到',
-            // (string | mandatory) the text inside the notification
-            text: '谢谢您使用睿智hr在线真的很牛的一个系统时间',
-            // (string | optional) the image to display on the left
-            image: 'assets/img/ui-sam.jpg',
-            // (bool | optional) if you want it to fade out on its own or just sit there
-            sticky: true,
-            // (int | optional) the time you want it to be alive for before fading out
-            time: '',
-            // (string | optional) the class name you want to apply to that specific message
-            class_name: 'my-sticky-class'
-        });
-        $.gritter.add({
-            // (string | mandatory) the heading of the notification
-            title: '常规的自带!',
-            // (string | mandatory) the text inside the notification
-            text: 'This will fade out after a certain amount of time. This note also contains a link example. Thank you so much to try Dashgum. Developed by <a href="#" style="color:#FFD777">Alvarez.is</a>.',
-            // (string | optional) the image to display on the left
-            image: 'assets/img/ui-sam.jpg',
-            // (bool | optional) if you want it to fade out on its own or just sit there
-            sticky: false,
-            // (int | optional) the time you want it to be alive for before fading out
-            time: ''
+
+         $.ajax({
+              url:'sendmessage/betweendatezhong',
+              type:'post',
+              dataType:'json',
+              success:function (data) {
+                     for(var  i=0;i<data.length;i++){
+                         $.gritter.add({
+                             title: data[i].metitle+"&nbsp;&nbsp;--来自公司通告",
+                             text:data[i].metext ,
+                             sticky: true,
+                             time: '',
+                             class_name: 'my-sticky-class'
+                         });
+                     }
+              }
+         });
+        $.ajax({
+            url:'sendmessage/betweendateyiban',
+            type:'post',
+            dataType:'json',
+            success:function (data) {
+                for(var  i=0;i<data.length;i++){
+                    $.gritter.add({
+                        title: data[i].metitle+"&nbsp;&nbsp;--来自部门通告",
+                        text:data[i].metext ,
+                        sticky: true,
+                        time: '',
+                        class_name: 'my-sticky-class'
+                    });
+                }
+            }
         });
 
-        return false;
-    });
+//加载部门信息
+        $.ajax({
+            url: "QueryDeptYqx",
+            type: "post",
+            data: {},
+            dataType: "json",
+            success: function (data) {
+                var div="";
+                for (var i = 0; i < data.length; i++) {
+                    var deptid=data[i].deptid;
+                    var num=data[i].num;
+                    if(deptid==null){
+                        num=0;
+                    }else {
+                        num=data[i].num;
+                    }
+                    div+=" <div class='desc' style='background:#FFD777;height:70px;border-radius:25px;' onclick='showall("+deptid+")'   >" +
+                        "                                    <div class='thumb'>\n" +
+                        "                                        <img class='img-circle' src='assets/img/ui-sherman.jpg' width='35px' height='35px' align=''>\n" +
+                        "                                    </div>\n" +
+                        "                                    <div class='details' >\n" +
+                        "                                        <p > <span style='color:#B26A8F;font-size:15px;margin-left:10px; '>"+data[i].deptname+"</span><br/>\n" +
+                        "                                            <muted>"+num+"人</muted>\n" +
+                        "                                        </p>\n" +
+                        "                                    </div>\n" +
+                        "                                </div>";
+
+                }
+                $("#bumen").html(div)
+                //endsuccess
+            }
+        })
+        //点击部门显示部门员工
+
+
+
+
+        //加载全部
+        $.ajax({
+            url: "L_query_emp",
+            type: "post",
+            data: {},
+            dataType: "json",
+            success: function (data) {
+                  var div="";
+                for (var i = 0; i < data.length; i++) {
+                  div+="<div class='desc' style='background:#FFD777;height:70px;border-radius:25px;' onclick='openmessage("+data[i].empid+")'  >\n" +
+                      "                                    <div class='thumb'>\n" +
+                      "                                        <img class='img-circle' src='assets/img/ui-sherman.jpg' width='35px' height='35px' align=''>\n" +
+                      "                                    </div>\n" +
+                      "                                    <div class='details' >\n" +
+                      "                                        <p > <span style='color:#B26A8F;font-size:15px;margin-left:10px; '>"+data[i].empname+"</span><br/>\n" +
+                      "                                            <muted>在线</muted>\n" +
+                      "                                        </p>\n" +
+                      "                                    </div>\n" +
+                      "                                </div>";
+
+                }
+              $("#yuangong").html(div);
+            }
+        })
+
+
+
+
+       });
+    function showall(b) {
+        $.ajax({
+            url: "L_query_emp",
+            type: "post",
+            data: {deptid:b},
+            dataType: "json",
+            success: function (data) {
+                var div="";
+                for (var i = 0; i < data.length; i++) {
+                    div+="<div class='desc' style='background:#FFD777;height:70px;border-radius:25px;' onclick='openmessage("+data[i].empid+")'  >\n" +
+                        "                                    <div class='thumb'>\n" +
+                        "                                        <img class='img-circle' src='assets/img/ui-sherman.jpg' width='35px' height='35px' align=''>\n" +
+                        "                                    </div>\n" +
+                        "                                    <div class='details' >\n" +
+                        "                                        <p > <span style='color:#B26A8F;font-size:15px;margin-left:10px; '>"+data[i].empname+"</span><br/>\n" +
+                        "                                            <muted>在线</muted>\n" +
+                        "                                        </p>\n" +
+                        "                                    </div>\n" +
+                        "                                </div>";
+
+                }
+                $("#yuangong").html(div);
+            }
+        })
+
+    };
+    function b_query() {
+            alert("ooo");
+
+            alert( $("#empnamei").val());
+        $.ajax({
+            url: "L_query_emp_name",
+            type: "post",
+            data: {empname:$("#empnamei").val()},
+            dataType: "json",
+            success: function (data) {
+                var div="";
+                for (var i = 0; i < data.length; i++) {
+                    div+="<div class='desc' style='background:#FFD777;height:70px;border-radius:25px;' onclick='openmessage("+data[i].empid+")'  >\n" +
+                        "                                    <div class='thumb'>\n" +
+                        "                                        <img class='img-circle' src='assets/img/ui-sherman.jpg' width='35px' height='35px' align=''>\n" +
+                        "                                    </div>\n" +
+                        "                                    <div class='details' >\n" +
+                        "                                        <p > <span style='color:#B26A8F;font-size:15px;margin-left:10px; '>"+data[i].empname+"</span><br/>\n" +
+                        "                                            <muted>在线</muted>\n" +
+                        "                                        </p>\n" +
+                        "                                    </div>\n" +
+                        "                                </div>";
+
+                }
+                $("#yuangong").html(div);
+
+            }
+        })
+
+
+    }
+
 
     var goEasy = new GoEasy({
         appkey: "BC-ce1dd32a157e46f892f1dc98a07ebaad",
@@ -397,7 +503,33 @@
 
         },
         onSuccess: function () {
-            alert("Channel订阅成功。");
+         //   alert("Channel订阅成功。");
+        },
+        onFailed: function (error) {
+            alert("Channel订阅失败, 错误编码：" + error.code + " 错误信息：" + error.content)
+        }
+    });
+    goEasy.subscribe({
+        channel: "yiban"+${emp.deptid},
+        onMessage: function (message) {
+            $.gritter.add({
+                // (string | mandatory) the heading of the notification
+                title:'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp&nbsp;&nbsp;&nbsp;&nbsp;&nbsp&nbsp;'+ message.content.split("♈")[0]+'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-----部门通知',
+                // (string | mandatory) the text inside the notification
+                text: message.content.split("♈")[1],
+                // (string | optional) the image to display on the left
+
+                // (bool | optional) if you want it to fade out on its own or just sit there
+                sticky: true,
+                // (int | optional) the time you want it to be alive for before fading out
+                time: '',
+                // (string | optional) the class name you want to apply to that specific message
+                class_name: 'my-sticky-class'
+            });
+
+        },
+        onSuccess: function () {
+           // alert("Channel订阅成功。");
         },
         onFailed: function (error) {
             alert("Channel订阅失败, 错误编码：" + error.code + " 错误信息：" + error.content)
@@ -412,6 +544,18 @@
         onMessage: function (message) {
             $('#chatAudio')[0].play();
          var uid= message.content.split("♈")[0].toString();
+         $.ajax({
+                url:'queryEmpById',
+                type:'post',
+                data:{"empid":uid},
+                dataType:'json',
+             async: false,
+                success:function (data) {
+                    emp=data;
+                }
+            })
+
+
             function getNow(s) {
                 return s < 10 ? '0' + s: s;
             }
@@ -420,7 +564,7 @@
             var m=myDate.getMinutes();    //获取当前分钟数(0-59)
   var messagehistory= "<div class='chat-widget-left' style='word-wrap:break-word'>"+ message.content.split("♈")[1]+"</div>" +
                 "<div class='chat-widget-name-left' style='margin-left:0px '>" +
-                "<h4>"+uid+"&nbsp;&nbsp;&nbsp;&nbsp;"+getNow(h)+"时"+getNow(m)+"分</h4> </div>" ;
+                "<h4>"+emp.empname+"&nbsp;&nbsp;&nbsp;&nbsp;"+getNow(h)+"时"+getNow(m)+"分</h4> </div>" ;
 
             var inputa="<input id='a"+uid+"' >";
             var messagespan5t=message.content.split("♈")[1];
@@ -433,8 +577,8 @@
             var showfriendstr= "<li>"+
                 "<a href='javascript:;' onclick='showmessage("+uid+")'> "+
             "  <span class='photo'><img alt='avatar' src='../../assets/img/ui-zac.jpg'></span>"+
-            " <span class='subject'>"+
-            "  <span class='from' id='"+uid+"'>"+uid+"</span>"+
+            " <span class='subject'><span>"+emp.empname+"</span>"+
+            "  <span class='from' style='display: none' id='"+uid+"'>"+uid+"</span>"+
             "  <span class='time' id='totime"+uid+"'>"+getNow(h)+"时"+getNow(m)+"分</span>"+
             "  </span> "+
             "  <span class='message' id='messagespan"+uid+"'>"+str5t+
@@ -443,7 +587,7 @@
             "   </li>";
             $.gritter.add({
                 // (string | mandatory) the heading of the notification
-                title: uid+'   发来的消息!',
+                title: emp.empname+'   发来的消息!',
                 // (string | mandatory) the text inside the notification
     text:message.content.split("♈")[1]+ "<br/>&nbsp;<a href='javascript:;' onclick='showmessage("+uid+")' style='color:#FFD777'>立即查看</a>.",
                 // (string | optional) the image to display on the left
@@ -495,8 +639,18 @@
 
 
     function showmessage(obj) {
+        $.ajax({
+            url:'queryEmpById',
+            type:'post',
+            data:{"empid":obj},
+            dataType:'json',
+            async: false,
+            success:function (data) {
+                emp=data;
+            }
+        })
        /// alert("showmessage");
-          $("#toemp").html(obj);//设置与谁谁聊天
+          $("#toemp").html(emp.empname);//设置与谁谁聊天
           $("#uuid").html(obj);//设置uid
          ///alert(obj+"实时")
        var messagetexta= $("#a"+obj).val();
@@ -528,6 +682,16 @@
               alert("必须输入消息");
          }else{
           var uidd=$("#uuid").html();
+             $.ajax({
+                 url:'queryEmpById',
+                 type:'post',
+                 data:{"empid":uidd},
+                 dataType:'json',
+                 async: false,
+                 success:function (data) {
+                     emp=data;
+                 }
+             })
 
              var messagetextcc= $("#a"+uidd).val();
               if(messagetextcc==undefined){
@@ -540,8 +704,8 @@
                   var showfriendstr= "<li>"+
                       "<a href='javascript:;' onclick='showmessage("+uidd+")'> "+
                       "  <span class='photo'><img alt='avatar' src='../../assets/img/ui-zac.jpg'></span>"+
-                      " <span class='subject'>"+
-                      "  <span class='from' id='"+uidd+"'>"+uidd+"</span>"+
+                      " <span class='subject'><span>"+emp.empname+"</span>"+
+                      "  <span class='from' style='display: none' id='"+uidd+"'>"+uidd+"</span>"+
                       "  <span class='time' id='totime"+uidd+"'>"+getNow(h)+"时"+getNow(m)+"分</span>"+
                       "  </span> "+
                       "  <span class='message' id='messagespan"+uidd+"'>"+$("#messagetextt").val()+
@@ -564,6 +728,7 @@
                 var myDate = new Date();
                 var h=myDate.getHours();       //获取当前小时数(0-23)
                 var m=myDate.getMinutes();
+                $("#totime"+uidd).html(getNow(h)+"时"+getNow(m)+"分");
                 // alert("消息发布成功。");
                 var shangmessagestr= $("#a"+uidd).val();
                 var newsendmessagetext=  "<div class='chat-widget-right' style='word-wrap:break-word'>  "+$("#messagetextt").val()+"</div>"+

@@ -5,8 +5,14 @@
 
 <mapper namespace="com.aaa.rzhr.dao.RzmessageMapper">
     <insert id="addRzmessageX" parameterType="Rzmessage">
-                  INSERT INTO rzmessage(metext,begintime,endtime,mestate,metitle) VALUE(#{metext},#{begintime},#{endtime},#{mestate},#{metitle})
+                  INSERT INTO rzmessage(metext,begintime,endtime,mestate,metitle,deptid) VALUE(#{metext},#{begintime},#{endtime},#{mestate},#{metitle},#{deptid})
     </insert>
+    <select id="queryRzmessageX" parameterType="String" resultType="Rzmessage">
+       SELECT * FROM rzmessage WHERE STR_TO_DATE(#{nowate},'%Y-%m-%d')
+           BETWEEN STR_TO_DATE(begintime,'%Y-%m-%d')
+           AND STR_TO_DATE(endtime,'%Y-%m-%d')     AND mestate=#{mestate}
+    </select>
+
 
 
 </mapper>
