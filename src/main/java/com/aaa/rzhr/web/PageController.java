@@ -36,6 +36,11 @@ public class PageController {
 
          return "test";
       }
+      @RequestMapping("/Xding")
+     public String Xding(){
+
+          return "showdingding";
+     }
 
 
      @RequestMapping("me")
@@ -67,13 +72,44 @@ public class PageController {
 ///----------------------------------于青县区--------------------------------//
 @RequestMapping("Qemp")
 public String Qemp(){
-
     return "Qemp";
 }
+    @RequestMapping("QqueryEmp")
+    public String QqueryEmp(){
+        return "QqueryEmp";
+    }
     @RequestMapping("QoneEmp")
     public String QoneEmp(){
 
         return "QoneEmp";
+    }
+    @RequestMapping("Qupdatemp")
+    public String Qupdatemp(){
+
+        return "Qupdatemp";
+    }
+    /**转正*/
+    @RequestMapping("QmanageTurn")
+    public String QmanageTurn(){
+
+        return "QmanageTurn";
+    }
+    /**
+     * 添加员工
+     * */
+    @RequestMapping("QaddEmp")
+    public String QaddEmp(){
+        return "QaddEmp";
+    }
+    /**入职*/
+    @RequestMapping("QmanageEntry")
+    public String QmanageEntry(){
+        return "QmanageEntry";
+    }
+    /**离职查询*/
+    @RequestMapping("QmanageDimission")
+    public String QmanageDimission(){
+        return "QmanageDimission";
     }
     @RequestMapping("QupdateEmp")
     public String QupdateEmp(){
@@ -82,6 +118,15 @@ public String Qemp(){
     @RequestMapping("Qdept")
     public String Qdept(){
         return "Qdept";
+    }
+
+    @RequestMapping("QqueryContract")
+    public String QqueryContract(){
+        return "QqueryContract";
+    }
+    @RequestMapping("Qmanage")
+    public String Qmanage(){
+        return "Qmanage";
     }
     ///----------------------------------李佳鹏区--------------------------------//
 

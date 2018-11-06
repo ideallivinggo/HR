@@ -1,9 +1,6 @@
 package com.aaa.rzhr.service;
 
-import com.aaa.rzhr.pojo.Contract;
-import com.aaa.rzhr.pojo.Education_Experience;
-import com.aaa.rzhr.pojo.Social_Benefits;
-import com.aaa.rzhr.pojo.Work_Experience;
+import com.aaa.rzhr.pojo.*;
 import com.aaa.rzhr.util.LayuiFy;
 import com.aaa.rzhr.util.layuiPage;
 
@@ -18,7 +15,7 @@ public interface ContractService {
     /**
      * 查询合同
      * */
-    public LayuiFy QueryContractYqx(Integer limit,Integer page);
+    public LayuiFy QueryContractYqx(String contypeid, Integer limit, Integer page);
     /**
      * 添加合同
      */
@@ -54,6 +51,43 @@ public interface ContractService {
     /**
      *入职，转正，离职
      * */
-    public LayuiFy QueryEmpState(Integer empstateid,Integer limit,Integer page);
+    public LayuiFy QueryEmpState(String empname, Integer limit, Integer page);
+    /**
+     * 转正查询
+     * */
+    public LayuiFy QueryEmpStateTurn(String empname, Integer limit, Integer page);
+    /**
+     * 离职查询
+     * */
+/*    public LayuiFy QueryEmpStateDimission(String empname,Integer limit,Integer page);*/
+
     public List<Map> QueryEmpStateName();
+    /**
+     * 员工驳回，离职
+     * */
+    public void UpdateEmpState(Emp emp);
+    /**
+     * 员工转正
+     * */
+    public void UpdateEmpStateTurn(Emp emp);
+    /**
+     * 查询面试成功(简历)
+     * */
+    public LayuiFy QueryResumeYqx(Integer limit, Integer page);
+    /**
+     * 修改员工（入职添加）
+     * */
+    public void UpdateEmpYu(Emp emp);
+    /**
+     * 职位查询
+     * */
+    public List<Map> QueryPosition();
+    /**
+     * 添加员工
+     * */
+    public void AddEmpYqx(Emp emp);
+    /**
+     * 修改面试状态（默认2为已入职）
+     * */
+    public void UpdateActivationYqx(String actnumber);
 }

@@ -1,6 +1,7 @@
 package com.aaa.rzhr.service;
 
 import com.aaa.rzhr.pojo.Emp;
+import com.aaa.rzhr.util.LayuiFy;
 import com.github.pagehelper.PageInfo;
 import org.apache.ibatis.annotations.Param;
 
@@ -19,15 +20,16 @@ public interface EmpService {
 
      //-----------------------------------------------///
      /** 查询员工 1*/
-     public PageInfo<Map> QqueryEmp(Integer pageNum,Integer deptid,String empname,Integer poid,Integer emptypeid);
+     public PageInfo<Map> QqueryEmp(Integer pageNum, Integer deptid, String empname, Integer poid, Integer emptypeid);
+     public LayuiFy QueryEmpYqx(Emp emp, Integer limit, Integer page);
      /**
       * 条件查询
       * */
-     public List<Map> QqueryEmpIf(@Param("empid")Integer empid);
+     public List<Map> QqueryEmpIf(@Param("empid") Integer empid);
      /**
       * 批量删除
       * */
-     public void DelEmpYqx(String  str);
+     public void DelEmpYqx(String str);
      /**
       * 更新
       * */

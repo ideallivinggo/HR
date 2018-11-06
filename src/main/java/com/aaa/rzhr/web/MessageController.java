@@ -50,8 +50,6 @@ public class MessageController {
                System.out.println("发送通知");
              }
            }
-
-
             return "ok";
         }else {
             return "no";

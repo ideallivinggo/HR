@@ -13,9 +13,9 @@ left join role ro on ro.roid=d.roid
 left join recruitment r on r.empid=e.empid
 left join position p on p.posid=e.poid WHERE e.empid=#{empid}
     </select>
-<!--修改登录密码-->
+    <!--修改登录密码-->
     <update id="L_update_pwd"  parameterType="Emp">
-        update emp set empname='13' WHERE empnumber='12'
+        update emp set `password`=#{password} WHERE empnumber=#{empnumber}
     </update>
     <!--查询每个审核状态-->
     <select id="L_query_leave" resultType="java.util.Map" parameterType="Map">
@@ -54,8 +54,10 @@ WHERE  e.empid=#{empid}
         FROM
         apply_leave al
         LEFT JOIN emp e ON e.empid = al.empid
-        WHERE
-        e.empid = #{empid}
+        <where>
+        <if test="empid!=null">
+            and    e.empid = #{empid}
+        </if>
         <if test="fristdate!=''">
          and   al.shendate  &gt;= #{fristdate}
         </if>
@@ -65,6 +67,7 @@ WHERE  e.empid=#{empid}
         <if test="leasate!=null">
             AND  al.leasate=#{leasate}
         </if>
+        </where>
     </select>
     <!--加班查询-->
     <select id="L_query_jiaban" resultType="java.util.Map" parameterType="Map">
@@ -73,8 +76,11 @@ WHERE  e.empid=#{empid}
         FROM
         apply_overtime ao
         LEFT JOIN emp e ON e.empid = ao.empid
-        WHERE
-        e.empid = #{empid}
+        <where>
+        <if test="empid!=null">
+            and    e.empid = #{empid}
+        </if>
+
         <if test="fristdate!=''">
             and   ao.shentime  &gt;= #{fristdate}
         </if>
@@ -84,6 +90,7 @@ WHERE  e.empid=#{empid}
         <if test="apovstate!=null">
             AND  ao.apovstate=#{apovstate}
         </if>
+        </where>
     </select>
     <!--离职查询-->
     <select id="L_query_cizhi" resultType="java.util.Map" parameterType="Map">
@@ -92,8 +99,10 @@ WHERE  e.empid=#{empid}
         FROM
         apply_dimission ad
         LEFT JOIN emp e ON e.empid = ad.empid
-        WHERE
-        e.empid = #{empid}
+        <where>
+            <if test="empid!=null">
+                and    e.empid = #{empid}
+            </if>
         <if test="fristdate!=''">
             and   ad.shendimdate  &gt;= #{fristdate}
         </if>
@@ -103,6 +112,7 @@ WHERE  e.empid=#{empid}
         <if test="dimstate!=null">
             AND  ad.dimstate=#{dimstate}
         </if>
+        </where>
     </select>
     <!--修改休假状态-->
     <update id="L_update_xiujia"  parameterType="Integer">
@@ -128,7 +138,6 @@ WHERE  e.empid=#{empid}
             WHERE e.deptid= #{deptid}
         </if>
     </select>
-
     <!--通讯录员工姓名查询 -->
     <select id="L_query_emp_name"   resultType="java.util.Map">
         select * from emp e
@@ -138,7 +147,6 @@ WHERE  e.empid=#{empid}
             WHERE e.empname= #{empname}
         </if>
     </select>
-
     <!--通讯录员工 -->
     <select id="L_query_emp_empid" parameterType="Int"   resultType="java.util.Map">
         select * from emp e
@@ -191,13 +199,12 @@ WHERE  e.empid=#{empid}
     </update>
     <!--修改离职状态-->
     <update id="L_upd_lizhi_unpass" parameterType="Apply_Dimission" >
-        UPDATE  apply_overtime  SET dimstate=#{dimstate},dimsign=#{dimsign},nodim=#{nodim}
+        UPDATE  apply_dimission SET dimstate=#{dimstate},dimsign=#{dimsign},nodim=#{nodim}
         <if test="bohui">
             ,bohui=#{bohui}
         </if>
         where dimid=#{dimid}
     </update>
-
     <!--模糊查询工资单-->
     <select id="L_query_pay_time" resultType="java.util.Map" parameterType="String">
         SELECT * from emp e
@@ -212,4 +219,18 @@ WHERE  e.empid=#{empid}
             and  p.paydate &lt;= #{time2}
         </if>
     </select>
+    <!--个人信息的查询根据姓名 -->
+    <select id="L_query_user_name" parameterType="String" resultType="java.util.Map">
+        select * from emp
+      WHERE empnumber=#{empnumber}
+    </select>
+    <!--修改离职状态为3-->
+    <update id="L_update_emp_empstateid"  parameterType="Emp">
+        update emp set empstateid=#{empstateid} WHERE empid=#{empid}
+    </update>
+
+
+
+
+
     </mapper>

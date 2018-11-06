@@ -8,6 +8,9 @@
         SELECT * FROM contract c
         LEFT JOIN contract_type ct on c.contypeid = ct.contypeid
         LEFT JOIN emp e on c.empid = e.empid
+        <if test="contypeid!=null and contypeid!=''">
+            WHERE c.contypeid = #{contypeid}
+        </if>
     </select>
     <!--添加合同-->
         <insert id="AddContractYqx" parameterType="Contract">
@@ -53,7 +56,7 @@
         ,fundaccount=#{fundaccount},payto=#{payto},securityaccount=#{securityaccount},place_payment=#{place_payment}
         where socid=#{socid}
     </update>
-    <!--入职，转正，离职管理-->
+    <!--入职，转正，离职查询-->
     <select id="QueryEmpState" resultType="java.util.Map" parameterType="Map">
         select * from emp e left join id_type idtype on e.typeid = idtype.typeid
         left join education edu on e.eduid = edu.eduid
@@ -62,12 +65,58 @@
         left join position p on e.poid = p.poid
         left join role r on e.poid = r.roid
         LEFT JOIN empstate state on e.empstateid=state.empstateid
-        <if test="empstateid!=null and empstateid!=''">
-             WHERE e.empstateid = #{empstateid}
+        WHERE e.empstateid =#{empstateid}
+        <if test="empname!=null and empname!=''">
+            AND e.empname LIKE CONCAT(CONCAT('%',#{empname},'%'))
         </if>
     </select>
     <select id="QueryStateName" resultType="java.util.Map" parameterType="Map">
         SELECT * FROM empstate
     </select>
-
+    <!--员工驳回，离职-->
+    <update id="UpdateEmpState" parameterType="Emp">
+         UPDATE emp SET
+        <if test="empstateid==3">
+            empstateid =4 WHERE empid=#{empid}
+        </if>
+        <if test="empstateid==1">
+            empstateid =4 WHERE empid=#{empid}
+        </if>
+    </update>
+    <!--员工转正-->
+    <update id="UpdateEmpStateTurn" parameterType="Emp">
+        UPDATE emp SET
+        <if test="empstateid==1">
+            empstateid =2 WHERE empid=#{empid}
+        </if>
+    </update>
+    <!--查询面试成功(简历)-->
+    <select id="QueryResumeYqx" resultType="java.util.Map" parameterType="Map">
+        SELECT * from resume r
+        inner join activation a on r.resid=a.resid
+        WHERE a.actstate=1
+    </select>
+    <!--修改员工（入职添加员工）-->
+    <update id="UpdateEmpYu" parameterType="Emp">
+        update emp set empnumber=#{empnumber},empname=#{empname},typeid=#{typeid},
+        idnumber=#{idnumber},sex=#{sex},birthdate=#{birthdate},nation=#{nation},
+        accounttype=#{accounttype},eduid=#{eduid},address=#{address},politics=#{politics},
+        qqnumber=#{qqnumber},phone=#{phone},email=#{email},urgencyphone=#{urgencyphone},
+        urgencyname=#{urgencyname},empnotes=#{empnotes},deptid=#{deptid},poid=#{poid},
+        emptypeid=#{emptypeid},emppay=#{emppay},empstateid=#{empstateid},empstatedate=#{empstatedate}
+        where empid=#{empid}
+    </update>
+    <!--职位查询-->
+    <select id="QueryPosition" resultType="java.util.Map" parameterType="Map">
+        SELECT * FROM position
+    </select>
+    <!--添加员工-->
+    <insert id="AddEmpYqx" parameterType="Emp">
+        INSERT INTO emp(empnumber,empname,typeid,idnumber,sex,birthdate,nation,accounttype,eduid,address,politics,qqnumber,phone,password,salt,email,urgencyphone,urgencyname,empnotes,deptid,poid,emptypeid,emppay,empstateid,empstatedate)
+        VALUE (#{empnumber},#{empname},#{typeid},#{idnumber},#{sex},#{birthdate},#{nation},#{accounttype},#{eduid},#{address},#{politics},#{qqnumber},#{phone},#{password},#{salt},#{email},#{urgencyphone},#{urgencyname},#{empnotes},#{deptid},#{poid},#{emptypeid},#{emppay},#{empstateid},#{empstatedate});
+    </insert>
+    <!--修改面试状态（默认1为已入职）-->
+    <update id="UpdateActivationYqx" parameterType="String">
+        UPDATE activation SET actstate=2 WHERE actnumber=#{actnumber}
+    </update>
 </mapper>

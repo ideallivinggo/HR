@@ -28,14 +28,12 @@
                     <div class="site-demo-button" id="layerDemo" style="margin-bottom: 0;float: right;padding-right: 60px;">
                         <button data-method="offset" data-type="auto" class="layui-btn layui-btn-normal">添加部门</button>
                     </div>
-                    <div class="layui-inline" style="margin-left: 350px;" >
-                        <a href="Yapply"><button class="layui-btn">发布招聘</button></a>
-                    </div>
                 </div>
                 <div class="layui-card-body">
                     <table class="layui-table">
                         <tr style="background-color: #f2f2f2;color: #009688">
                             <th>序号</th>
+                            <th>ID</th>
                             <th>部门名称</th>
                             <th>部门经理</th>
                             <th>部门人数</th>
@@ -50,8 +48,6 @@
     </div>
 </div>
 <div id="addDept" style="display: none;">
-       <%-- 部门名称:<input id="deptname" style="margin-left:70px;margin-top:35px;width: 150px;height: 40px;border: 1px solid #cdcdcd"><br>
-        部门人数:<input id="deptnamenum" style="margin-left:70px;margin-top:35px;width: 150px;height: 40px;border: 1px solid #cdcdcd">--%>
            <div style="padding-top: 40px;padding-left: 50px;">
                部门名称:<input id="deptname" style="width: 200px;height: 40px;border: 1px solid #cdcdcd"><br>
            </div>
@@ -91,18 +87,31 @@
                     }
                     var tr="<tr>";
                     tr+="<th>"+(i+1)+"</th>";
+                    tr+="<th>"+data[i].deptid+"</th>";
                     tr+="<th>"+data[i].deptname+"</th>";
                     tr+="<th>"+name+"</th>";
                     tr+="<th>"+data[i].deptnum+"</th>";
                     tr+="<th>"+num+"</th>";
-                    tr+="<th><button class='layui-btn layui-btn-sm' onclick='delDept("+data[i].deptid+")'><i class='layui-icon'></i></button></th>";
+                    tr+="<th><button class='layui-btn layui-btn-sm' onclick='delDept("+data[i].deptid+")'><i class='layui-icon'>&#xe640;</i></button>" +
+                        "<button class='layui-btn layui-btn-sm layui-btn-normal' onclick='UpdateDept("+data[i].deptid+")'><i class='layui-icon'>&#xe642;</i></th>";
                     tr+="</tr>";
                     $("#MyBody").append(tr);
                 }
             }
         })
     }
+    /**
+     * 修改部门人数
+     * */
+    function UpdateDept(id) {
+            alert(id)
+    }
+    /**
+     * 删除
+     * */
     function delDept(obj) {
+        alert(obj)
+        alert(111)
         $.ajax({
             url:'delDept',
             type:'post',

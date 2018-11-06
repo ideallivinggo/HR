@@ -1,9 +1,6 @@
 package com.aaa.rzhr.dao;
 
-import com.aaa.rzhr.pojo.Contract;
-import com.aaa.rzhr.pojo.Education_Experience;
-import com.aaa.rzhr.pojo.Social_Benefits;
-import com.aaa.rzhr.pojo.Work_Experience;
+import com.aaa.rzhr.pojo.*;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -18,9 +15,13 @@ import java.util.Map;
 public interface ContractMapperYqx {
 
     /**
+     * 修改员工（入职添加）
+     * */
+    public void UpdateEmpYu(Emp emp);
+    /**
      * 查询合同
      * */
-    public List<Map> QueryContractYqx();
+    public List<Map> QueryContractYqx(@Param("contypeid") String contypeid);
     /**
      * 添加合同
      */
@@ -54,9 +55,34 @@ public interface ContractMapperYqx {
      * */
     public void UpdateSociaYqx(Social_Benefits social);
     /**
-     * 入职，转正，离职
+     * 入职，转正，离职查询
      * */
-    public List<Map> QueryEmpState(@Param("empstateid") Integer empstateid);
+    public List<Map> QueryEmpState(@Param("empname") String empname, @Param("empstateid") String empstateid);
     public List<Map> QueryStateName();
-
+     /**
+     * 员工入职
+     * */
+    public void UpdateEmpState(Emp emp);
+    /**
+     * 员工转正
+     * */
+    public void UpdateEmpStateTurn(Emp emp);
+    /**
+     * 查询面试成功(简历)
+     *
+     *
+     * */
+    public List<Map> QueryResumeYqx();
+    /**
+     * 职位查询
+     * */
+    public List<Map> QueryPosition();
+    /**
+     * 添加员工
+     * */
+    public void AddEmpYqx(Emp emp);
+    /**
+     * 修改面试状态（默认1为已入职）
+     * */
+    public void UpdateActivationYqx(@Param("actnumber") String actnumber);
 }

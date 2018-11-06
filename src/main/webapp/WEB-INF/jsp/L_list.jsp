@@ -160,7 +160,9 @@ function sub_menu() {
             data: {},
             dataType: "json",
             success: function (data) {
+                var zai=0;
                 for (var i = 0; i < data.length; i++) {
+                    zai+=data[i].num;
                     var deptid=data[i].deptid;
                     var num=data[i].num;
                     if(deptid==null){
@@ -172,6 +174,7 @@ function sub_menu() {
                         li+="<li onclick='li(this,"+data[i].deptid+")'>"+data[i].deptname+'('+num+'/'+data[i].deptnum+')'+"</li>";
                          $("#sub_menu_1").append(li);
             }
+                document.getElementById("zhi").innerHTML=zai
             }
     })
 

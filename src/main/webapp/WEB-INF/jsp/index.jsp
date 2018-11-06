@@ -438,9 +438,6 @@
 
     };
     function b_query() {
-            alert("ooo");
-
-            alert( $("#empnamei").val());
         $.ajax({
             url: "L_query_emp_name",
             type: "post",
@@ -485,7 +482,6 @@
     goEasy.subscribe({
         channel: "zhong",
         onMessage: function (message) {
-            alert("您有新消息：channel：" + message.channel + " 内容：" + message.content);
             $.gritter.add({
                 // (string | mandatory) the heading of the notification
                 title:'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp&nbsp;&nbsp;&nbsp;&nbsp;&nbsp&nbsp;'+ message.content.split("♈")[0]+'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-----重要通知',

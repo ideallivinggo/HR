@@ -326,7 +326,7 @@
                                     div += "<span>" + '姓名:' + data[i].empname + "<span>";
                                     div += "<span style='margin-left: 250px'>" + '类型:' + data[i].dimtype + "</span><br/><br/>";
                                     div += "<span>" + '离职原因:' + data[i].dimdetails + "</span><br/><br/>";
-                                    div += "<span>" + '对公司的建议:' + data[i].dimsuggest + "</span><br/><br/>";
+                                    div += "<span>" + '对公司的建议:' + data[i].dimsuggest + "</span>";
                                     div+="<button  onclick='query3()' style='margin-left:80px'>撤回</button>";
                                     div += "</div>"
                                     $("#mybody").append(div);
@@ -342,7 +342,7 @@
                                     div += "<span style='margin-left: 250px'>" + '类型:' + data[i].dimtype + "</span><br/><br/>";
                                     div += "<span>" + '离职原因:' + data[i].dimdetails + "</span><br/><br/>";
                                     div += "<span>" + '对公司的建议:' + data[i].dimsuggest + "</span><br/><br/>";
-                                    div += "<span>" + '审批时间:' + data[i].shendimdate + "</span>";
+                                    div += "<span>" + '审批时间:' + data[i].nodim + "</span>";
                                     div += "<span style='margin-left: 50px'>请尽快到人事部办理相关手续</span><br/><br/>";
                                     div += "</div>"
                                     $("#mybody").append(div);
@@ -358,8 +358,8 @@
                                     div += "<span style='margin-left: 250px'>" + '类型:' + data[i].dimtype + "</span><br/><br/>";
                                     div += "<span>" + '离职原因:' + data[i].dimdetails + "</span><br/><br/>";
                                     div += "<span>" + '对公司的建议:' + data[i].dimsuggest + "</span><br/><br/>";
-                                    div += "<span>" + '驳回理由:' + data[i].nodim + "</span><br/><br/>";
-                                    div += "<span>" + '审批时间:' + data[i].shendimdate + "</span><br/><br/>";
+                                    div += "<span>" + '驳回理由:' + data[i].bohui + "</span><br/><br/>";
+                                    div += "<span>" + '审批时间:' +  data[i].nodim + "</span><br/><br/>";
                                     div += "</div>"
                                     $("#mybody").append(div);
 
@@ -368,7 +368,7 @@
                                     var div = "<div style='background-color: #FFFFFF;margin-top: 20px;padding-left: 20px'>";
                                     div += "<span  style='font-size:20px;color:#ac2925'> 离职申请</span>";
                                     div += "<span style='font-size: 12px;font-weight:500;color:#999999 '>" + data[i].dimapplydate + "</span>";
-                                    div += "<span style='margin-left:650px; '>审核中 </span><br/>";
+                                    div += "<span style='margin-left:650px; '>撤销 </span><br/>";
                                     div += "<div style='border-top:1px solid #2a6496;width: auto'></div><br/>"
                                     div += "<span>" + '姓名:' + data[i].empname + "<span>";
                                     div += "<span style='margin-left: 250px'>" + '类型:' + data[i].dimtype + "</span><br/><br/>";
@@ -384,9 +384,7 @@
 
 
         }
-
     function query1() {
-        alert("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa傻逼")
         alert($("#leaid").val())
         $.ajax({
             url: "L_update_xiujia",
@@ -401,7 +399,6 @@
         })}
 
     function query4() {
-        alert("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa傻逼")
         alert($("#leaid").val())
         $.ajax({
             url: "L_update_xiujia",
@@ -418,7 +415,6 @@
 
 
     function query2() {
-        alert("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa傻逼")
         alert($("#apovid").val())
         $.ajax({
             url: "L_update_jiaban",
@@ -436,7 +432,6 @@
 
 
     function query3() {
-        alert("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa傻逼")
         alert($("#dimid").val())
         $.ajax({
             url: "L_update_cizhi",

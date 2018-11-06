@@ -7,8 +7,7 @@ import com.aaa.rzhr.pojo.Apply_Overtime;
 import com.aaa.rzhr.pojo.Emp;
 import com.aaa.rzhr.service.UserService;
 import com.aaa.rzhr.util.LayuiFy;
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
+import org.apache.shiro.crypto.hash.SimpleHash;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -24,11 +24,8 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import org.springframework.web.multipart.MultipartFile;
 
 @Controller
 public class UserController {
@@ -84,7 +81,8 @@ public  @ResponseBody  List<Map> L_query_leave(Integer empid){
 * 薪资
 * */
 @RequestMapping("L_query_pay")
-public  @ResponseBody LayuiFy L_query_pay(Integer empid,Integer limit,Integer page){
+public  @ResponseBody
+LayuiFy L_query_pay(Integer empid, Integer limit, Integer page){
 
     System.out.println(empid+"========================-------------");
     return  userService.L_query_pay(empid,limit,page);
@@ -93,7 +91,7 @@ public  @ResponseBody LayuiFy L_query_pay(Integer empid,Integer limit,Integer pa
 *加班申请
  */
 @RequestMapping("L_add_jiaban")
-public  String    L_add_j(Apply_Overtime app,double apovhour_1,double apovhour_2){
+public  String    L_add_j(Apply_Overtime app, double apovhour_1, double apovhour_2){
     System.out.println(apovhour_1+".....................");
     System.out.println(apovhour_2+"++++++++++++++++++");
     double aa=apovhour_1*8+apovhour_2;
@@ -115,14 +113,17 @@ public  String    L_add_j(Apply_Overtime app,double apovhour_1,double apovhour_2
      */
     @RequestMapping("L_add_lizhi")
     public  String    L_add_lizhi(Apply_Dimission ad){
-
-
+        System.out.println(ad.getDeptid());
+        System.out.println(ad.getDeptid());
+        System.out.println(ad.getDimdetails());
+        System.out.println(ad.getDimsuggest());
+        System.out.println(ad.getDimtype());
         Date date = new Date();
         //设置要获取到什么样的时间
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         //获取String类型的时间
         String createdate = sdf.format(date);
-        userService.L_add_lizhi(empid,ad.getDimtype(),ad.getDimdetails(),ad.getDimsuggest(),"未移交",createdate,0,ad.getDeptid());
+        userService.L_add_lizhi(ad.getEmpid(),ad.getDimtype(),ad.getDimdetails(),ad.getDimsuggest(),"未移交",createdate,0,ad.getDeptid());
         return "L_shouye";
     }
 
@@ -245,37 +246,75 @@ public  String    L_add_j(Apply_Overtime app,double apovhour_1,double apovhour_2
         userService.L_upd_jiaban_unpass(apovstate,pipeople,createdate,bohui,apovid);
         return  "chenggong";
     }
+    /**离职审批*/
     @RequestMapping("L_upd_lizhi_unpass")
-    public @ResponseBody String L_upd_lizhi_unpass(Integer dimstate,String dimsign, String nodim, String bohui, Integer dimid){
+    public @ResponseBody String L_upd_lizhi_unpass(Integer dimstate,String dimsign, String nodim, String bohui, Integer dimid,Integer empid){
+        System.out.println("zhici进来了");
         Date date = new Date();
         //设置要获取到什么样的时间
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         //获取String类型的时间
         String createdate = sdf.format(date);
+        System.out.println(dimsign+"--------------");
+
+        System.out.println(createdate+"33333333333333333333");
+        System.out.println(dimstate+"4444444444444444444");
+        System.out.println(bohui+"55555555555555");
+        System.out.println(dimid+"2222222222222222222");
+        System.out.println(empid+"66666666666666666666666");
         userService.L_upd_lizhi_unpass(dimstate,dimsign,createdate,bohui,dimid);
+        if(empid!=null){
+            Emp emp=new Emp();
+            emp.setEmpid(empid);
+            emp.setEmpstateid(3);
+            userService.L_update_emp_empstateid(emp);
+        }
+
         return  "chenggong";
     }
     /*--------查询已审批过的-----*/
     @RequestMapping("L_queryAll_leave")
     public @ResponseBody List<Map> L_queryAll_leave(Integer deptid,Integer leasate){
-        System.out.println( userService.L_shen_leave(deptid,null));
         return  userService.L_shen_leave(deptid,null);
     }
     @RequestMapping("L_queryAll_jiaban")
     public @ResponseBody List<Map> L_queryAll_jiaban(Integer deptid,Integer apovstate){
-        System.out.println( userService.L_shen_jiaban(deptid,null));
         return  userService.L_shen_jiaban(deptid,null);
     }
     @RequestMapping("L_queryAll_lizhi")
     public @ResponseBody List<Map> L_queryAll_lizhi(Integer deptid,Integer dimstate){
-        System.out.println( userService.L_shen_lizhi(deptid,null));
+        System.out.println( userService.L_shen_lizhi(deptid,null)+"aaaaaaaaaaaaaaaa");
         return  userService.L_shen_lizhi(deptid,null);
     }
     /*----------模糊查询工资单-------*/
     @RequestMapping("L_query_pay_time")
-    public @ResponseBody LayuiFy L_query_pay_time(String empid, String time1, String time2,Integer limit,Integer page){
-        System.out.println(empid+"aaaa"+time1+"bbbb"+time2+"ccccc");
+    public @ResponseBody
+    LayuiFy L_query_pay_time(String empid, String time1, String time2, Integer limit, Integer page){
         return  userService.L_query_pay_time(empid,time1,time2,limit,page);
+    }
+    /*----修改密码----*/
+    @RequestMapping("L_update_pwd")
+    public @ResponseBody String L_update_pwd(String empnumber,String pwd,String repwd){
+        List<Map> list1=userService.L_query_user_name(empnumber);
+        String salt = (String) list1.get(0).get("salt");
+        String yuanmima= (String) list1.get(0).get("password");
+        System.out.println(yuanmima+"--------------------++++++++++++++++++");
+        System.out.println(list1);
+        int times = 2;
+        String algorithmName = "md5";
+      String yanzhneg=new SimpleHash(algorithmName, pwd, salt, times).toString();
+         if (yanzhneg.equals(yuanmima)){
+           String encodedPassword = new SimpleHash(algorithmName, repwd, salt, times).toString();
+             System.out.println("***************************"+encodedPassword+"!!!!!");
+             Emp emp=new Emp();
+             emp.setEmpnumber(empnumber);
+             emp.setPassword(encodedPassword);
+             emp.setSalt(salt);
+             userService.L_update_pwd(emp);
+             return "ok";
+         }else {
+             return "no";
+         }
     }
 
 
