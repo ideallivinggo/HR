@@ -69,6 +69,8 @@ public interface ContractMapperYqx {
     public void UpdateEmpStateTurn(Emp emp);
     /**
      * 查询面试成功(简历)
+     *
+     *
      * */
     public List<Map> QueryResumeYqx();
     /**
