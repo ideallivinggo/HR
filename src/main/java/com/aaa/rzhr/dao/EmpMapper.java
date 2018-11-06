@@ -14,24 +14,24 @@ import java.util.Map;
 @Mapper
 public interface EmpMapper {
    Emp getByName(@Param("name") String name);
-    int addEmp (Emp emp);
+    int addEmp(Emp emp);
     List<Emp> queryallempX();
-    Emp queryEmpById(Integer empid);
-
+ Emp queryEmpById(Integer empid);
 
 
 
     //------------------------------------------------------------------////
     /** 查询员工 */
-    public List<Map> QqueryEmp(@Param("deptid")Integer deptid, @Param("empname")String empname,@Param("poid") Integer poid,@Param("emptypeid") Integer emptypeid);
+    public List<Map> QqueryEmp(@Param("deptid") Integer deptid, @Param("empname") String empname, @Param("poid") Integer poid, @Param("emptypeid") Integer emptypeid);
+    public List<Map> QueryEmpYqx(Emp emp);
     /**
      * 条件查询
      * */
-    public List<Map> QqueryEmpIf(@Param("empid")Integer empid);
+    public List<Map> QqueryEmpIf(@Param("empid") Integer empid);
     /**
      * 批量删除1
      * */
-    public void DelEmpYqx(@Param("str") String  str);
+    public void DelEmpYqx(@Param("str") String str);
     /**
      * 更新
      * */

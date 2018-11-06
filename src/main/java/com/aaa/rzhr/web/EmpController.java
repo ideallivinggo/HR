@@ -4,6 +4,7 @@ import com.aaa.rzhr.pojo.Emp;
 import com.aaa.rzhr.service.ContractService;
 import com.aaa.rzhr.service.EmpService;
 import com.aaa.rzhr.service.TreeService;
+import com.aaa.rzhr.util.LayuiFy;
 import com.github.pagehelper.PageInfo;
 import org.apache.shiro.crypto.SecureRandomNumberGenerator;
 import org.apache.shiro.crypto.hash.SimpleHash;
@@ -28,7 +29,9 @@ public class EmpController {
 
       @Autowired
     TreeService treeService;
-
+/**
+ * 添加员工
+ * */
      @RequestMapping("testadduser")
      public String testadEmp(){
          System.out.println("进入主页面testadduser");
@@ -38,6 +41,7 @@ public class EmpController {
          int times = 2;
          String algorithmName = "md5";
          String encodedPassword = new SimpleHash(algorithmName, "12345", salt, times).toString();
+
          System.out.println(encodedPassword);
          System.out.println(salt);
          Emp emp=new Emp();
@@ -48,16 +52,28 @@ public class EmpController {
          empService.addEmp(emp);
          return "index";
      }
+
 /**
  * 查询员工
  * */
-    @RequestMapping("QqueryEmp")
+    @RequestMapping("QqueryEmpTest")
     public @ResponseBody
-    PageInfo<Map> QqueryEmp(Integer pageNum, Integer deptid, String empname,Integer poid,Integer emptypeid){
+    PageInfo<Map> QqueryEmpTest(Integer pageNum, Integer deptid, String empname,Integer poid,Integer emptypeid){
         System.out.println("查询"+"部门"+deptid+"姓名"+empname);
         PageInfo<Map> info = empService.QqueryEmp(pageNum,deptid,empname,poid,emptypeid);
         System.out.println(info);
         return info;
+    }
+    /**
+     * 查询员工
+     * */
+    @RequestMapping("QueryEmpYqx")
+    @ResponseBody
+    public LayuiFy QueryEmpYqx(Emp emp, Integer limit, Integer page){
+        System.out.println(limit+"dddddddddddddddddddddd"+emp.getDeptid()+"ccccccc"+emp.getEmpstateid());
+        /*Emp emp = new Emp();
+        emp.setDeptid(deptid);*/
+        return empService.QueryEmpYqx(emp,limit,page);
     }
     @RequestMapping("QqueryEmpIf")
     public @ResponseBody
@@ -97,6 +113,4 @@ public class EmpController {
 
         return emp;
     }
-
-
 }

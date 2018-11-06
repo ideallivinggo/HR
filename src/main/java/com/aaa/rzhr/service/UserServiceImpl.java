@@ -1,12 +1,9 @@
 package com.aaa.rzhr.service;
 
 import com.aaa.rzhr.dao.UserDao;
-import com.aaa.rzhr.pojo.Apply_Leave;
 import com.aaa.rzhr.pojo.Emp;
 import com.aaa.rzhr.util.LayuiFy;
 import com.aaa.rzhr.util.layuiUtil;
-import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,7 +15,7 @@ import java.util.Map;
  */
 @Service
 
-public class UserServiceImpl implements  UserService {
+public class UserServiceImpl implements UserService {
     @Autowired
     private UserDao userDao;
     @Override
@@ -48,7 +45,7 @@ public class UserServiceImpl implements  UserService {
     }
 
     @Override
-    public LayuiFy L_query_pay(Integer empid,Integer limit,Integer page) {
+    public LayuiFy L_query_pay(Integer empid, Integer limit, Integer page) {
         LayuiFy aa= layuiUtil.getData(userDao.L_query_pay(empid),limit,page);
         return aa;
     }
@@ -144,9 +141,21 @@ userDao.L_add_lizhi(empid, dimtype, dimdetails, dimsuggest, dimturn, dimapplydat
     }
 
     @Override
-    public LayuiFy L_query_pay_time(String empid, String time1, String time2,Integer limit,Integer page) {
+    public LayuiFy L_query_pay_time(String empid, String time1, String time2, Integer limit, Integer page) {
         LayuiFy aa= layuiUtil.getData(userDao.L_query_pay_time(empid,time1,time2),limit,page);
         return aa;
+    }
+
+    /**genju empnumber   chaxun  emp */
+    @Override
+    public List<Map> L_query_user_name(String empnumber) {
+        System.out.println(empnumber+"11111111111111111");
+        return userDao.L_query_user_name(empnumber);
+    }
+
+    @Override
+    public void L_update_emp_empstateid(Emp emp) {
+        userDao.L_update_emp_empstateid(emp);
     }
 }
 

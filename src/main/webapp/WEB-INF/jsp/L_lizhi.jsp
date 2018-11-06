@@ -82,7 +82,7 @@
                     </div>
                 </div>
             <%--员工id--%>
-            <input style="display: none" name="empid"value="${emp.empid}">
+                <input style="display: none" name="empid"value="${emp.empid}">
                 <input style="display: none" name="deptid"value="${emp.deptid}">
             <div class="layui-form-item">
                 <div class="layui-input-block">

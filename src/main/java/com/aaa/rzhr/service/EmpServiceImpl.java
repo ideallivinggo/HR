@@ -2,19 +2,13 @@ package com.aaa.rzhr.service;
 
 import com.aaa.rzhr.dao.EmpMapper;
 import com.aaa.rzhr.pojo.Emp;
+import com.aaa.rzhr.util.LayuiFy;
+import com.aaa.rzhr.util.layuiUtil;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-
-import org.apache.ibatis.annotations.Param;
-import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.session.Session;
-import org.apache.shiro.subject.Subject;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -41,7 +35,6 @@ public class EmpServiceImpl implements EmpService {
 
     @Override
     public List<Emp> queryallempX() {
-        System.out.println("进入到了++++666666666666666666666666666666666666666666");
         return empMapper.queryallempX();
     }
 
@@ -49,7 +42,9 @@ public class EmpServiceImpl implements EmpService {
     public Emp queryEmpById(Integer empid) {
         return empMapper.queryEmpById(empid);
     }
-
+    /**
+     * 查询员工
+     * */
     @Override
     public PageInfo<Map> QqueryEmp(Integer pageNum,Integer deptid,String empname,Integer poid,Integer emptypeid) {
         PageHelper.startPage(pageNum,10);
@@ -57,6 +52,15 @@ public class EmpServiceImpl implements EmpService {
         PageInfo<Map> info = new PageInfo<Map>(list);
         return info;
     }
+/**
+ * 查询员工
+ * */
+    @Override
+    public LayuiFy QueryEmpYqx(Emp emp,Integer limit,Integer page) {
+        LayuiFy layui = layuiUtil.getData(empMapper.QueryEmpYqx(emp),limit, page);
+        return layui;
+    }
+
     /**
      * 条件查询1
      * */

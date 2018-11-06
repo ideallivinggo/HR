@@ -13,6 +13,6 @@ import java.util.List;
 @Mapper
 public interface RzmessageMapper {
      int addRzmessageX(Rzmessage rzmessage);
-     List<Rzmessage> queryRzmessageX(@Param("nowate") String nowate,@Param("mestate") String mestate);
+     List<Rzmessage> queryRzmessageX(@Param("nowate") String nowate,@Param("mestate") String mestate,@Param("deptid") String deptid);
 
 }

@@ -65,24 +65,7 @@ public class LogingControllerx {
         }
     }
 
-      @RequestMapping("L_update_pwd")
-      public @ResponseBody String updatePassword(String empnumber,String password,String repassword){
 
-
-          System.out.println(empnumber+"empnumber");
-          String salt = new SecureRandomNumberGenerator().nextBytes().toString();
-          int times = 2;
-          String algorithmName = "md5";
-          System.out.println(salt);
-         String encodedPassword = new SimpleHash(algorithmName, repassword, salt, times).toString();
-          System.out.println("***************************"+encodedPassword+"!!!!!");
-          Emp emp=new Emp();
-           emp.setEmpnumber(empnumber);
-           emp.setPassword(encodedPassword);
-           emp.setSalt(salt);
-         // userService.L_update_pwd(emp);
-        return "1";
-      }
 
      @RequestMapping("logout")
     public String  logout(){

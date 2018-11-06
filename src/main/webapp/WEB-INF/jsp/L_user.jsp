@@ -150,9 +150,9 @@
                 </div>
                 <div class="modal-body">
                     <form id="form1">
-                        <tr><td><img src="assets/img/bbb.PNG"><input class="required" name="empnumber" id="empnumber" type="text" placeholder="员工号"></td></tr><br><br>
-                        <tr><td><img src="assets/img/ccc.PNG"><input class="required" name="password" id="password"type="password" placeholder="原密码"></td><br><br>
-                        <tr><td><img src="assets/img/password.PNG"><input class="required" name="repassword" id="repassword" type="password" placeholder="新密码"> </td></tr>
+                        <tr><td><img src="assets/img/bbb.PNG"><input class="required" name="empnumber" id="empnumber" value="${emp.empnumber}"   readonly="readonly"type="text" placeholder="员工号"></td></tr><br><br>
+                        <tr><td><img src="assets/img/ccc.PNG"><input class="required" name="pwd" id="password"type="password" placeholder="原密码"></td><br><br>
+                        <tr><td><img src="assets/img/password.PNG"><input class="required" name="repwd" id="repassword" type="password" placeholder="新密码"> </td></tr>
                     </form>
                 <div class="modal-footer">
                     <button type="button"  class="btn btn-default" data-dismiss="modal">关闭
@@ -166,7 +166,7 @@
     </div>
     </div>
 <%--修改查询密码--%>
-<div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<%--<div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -194,10 +194,11 @@
             </div><!-- /.modal-content -->
         </div><!-- /.modal -->
     </div>
-</div>
+</div>--%>
 </body>
 </html>
 <script>
+
     $("form :input").blur(function(){
         //验证手机号
         if($(this).is("#empnumber")){
@@ -242,12 +243,11 @@
                dataType:"text",
                success:function (data) {
                   alert(data);
-                  if(data=="1"){
-                      window.location.href="login";
+                  if(data=="ok"){
+                      window.open('logout','_top');
                   }else{
-                      alert("失败");
+                      alert("原始密码失败");
                   }
-
                }
            }
        )
