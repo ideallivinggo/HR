@@ -283,4 +283,11 @@ public String Qemp(){
         return "Sxztz";
     }
 
+    //--------------------------------靳风儒
+  @RequestMapping("/J200")
+    public String  J200(){
+
+        return "kecheng";
+    }
+
 }

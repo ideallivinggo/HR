@@ -125,9 +125,10 @@ public class DingRecordSyncController {
 
     public static List<AttendanceQvo> getAttendances(List<AttendanceQvo> users, String workDateFrom, String workDateTo,String access_Token) {
 
-       // List list = Arrays.asList("113168612523661213");
-         List list=new ArrayList();
+        List list = Arrays.asList("113168612523661213","142301623523718761");
+ /*        List list=new ArrayList();
          list.add("113168612523661213");
+         list.add("142301623523718761");*/
         
 
         int listSize=list.size();
@@ -202,7 +203,7 @@ public class DingRecordSyncController {
         Date date = new Date();
         String currentDate = new SimpleDateFormat("yyyy-MM-dd").format(date);
         System.out.println("当前时间"+currentDate);
-        String yesterday = getPreDayOrAfterDay(currentDate, -5);
+        String yesterday = getPreDayOrAfterDay(currentDate, -1);
         String workDateFrom = yesterday + " " + "06:00:00";
         String workDateTo = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(date);//当前时间
         String access_token_str = getAccessToken();//获取access_token
@@ -216,13 +217,13 @@ public class DingRecordSyncController {
         //获取第一个userid的对象
        // AttendanceQvo attendanceQvo = Arrays.asList(users).get(0).get(5);
         String dates =  new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
-             .format(new Date(Arrays.asList(users).get(0).get(4).getUserCheckTime()));
-  //    System.out.println("用户id "+Arrays.asList(users).get(0).get(0).getUserId());
+             .format(new Date(Arrays.asList(users).get(0).get(0).getUserCheckTime()));
+     System.out.println("用户id "+Arrays.asList(users).get(0).get(2).getUserId());
        System.out.println("员工打卡时间"+dates);
 
-        System.out.println("打卡类型"+Arrays.asList(users).get(0).get(4).getCheckType());
+        System.out.println("打卡类型"+Arrays.asList(users).get(0).get(0).getCheckType());
      //   System.out.println(Arrays.asList(users).get(0).size());
-       System.out.println("打卡结果"+Arrays.asList(users).get(0).get(4).getTimeResult());
+       System.out.println("打卡结果"+Arrays.asList(users).get(0).get(0).getTimeResult());
 
     }
 }

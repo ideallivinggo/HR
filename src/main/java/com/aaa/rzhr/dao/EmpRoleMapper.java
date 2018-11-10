@@ -13,7 +13,6 @@ public interface EmpRoleMapper {
 
      //根据用户 查询用户-角色中间表
     List<Emp_Role>  SelectByEmp(Emp emp);
-
     //根据用户id查询用户 角色
     Set<Integer> selectByEmprid(Emp emp);
  //根据用户信息删除中间表
