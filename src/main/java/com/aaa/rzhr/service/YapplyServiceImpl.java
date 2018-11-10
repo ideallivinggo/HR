@@ -223,4 +223,41 @@ public class YapplyServiceImpl implements YapplyService {
     }
 
 
+
+
+
+    @Override
+    public PageInfo<Map> queryAllkec(Kecheng kecheng, Integer pageNum) {
+        PageHelper.startPage(pageNum,10);
+        List<Map> list = yapplyMapper.queryAllkec(kecheng);
+        PageInfo<Map> pageInfo = new PageInfo<Map>(list);
+        return pageInfo;
+    }
+
+    @Override
+    public List<Map> queryOnekec(Kecheng kecheng) {
+        return yapplyMapper.queryAllkec(kecheng);
+    }
+
+    @Override
+    public void updatekec(Kecheng kecheng) {
+        yapplyMapper.updatekec(kecheng);
+    }
+
+    @Override
+    public PageInfo<Map> queryAllkee(Keemp keemp, Integer pageNum) {
+        PageHelper.startPage(pageNum,10);
+        List<Map> list = yapplyMapper.queryAllkee(keemp);
+        PageInfo<Map> pageInfo = new PageInfo<Map>(list);
+        return pageInfo;
+    }
+
+    @Override
+    public List<Map> queryOnekee(Keemp keemp) {
+        return yapplyMapper.queryAllkee(keemp);
+    }
+
+
+
+
 }

@@ -149,4 +149,22 @@ public interface YapplyService {
     Map countLeave();
 
 
+
+
+    ////////////////////////////////////////////////////////////////
+    /**
+     * 查看培训课程
+     * */
+    PageInfo<Map> queryAllkec(Kecheng kecheng, Integer pageNum);
+    List<Map> queryOnekec(Kecheng kecheng);
+    /**
+     * 课程审批
+     * */
+    void updatekec(Kecheng kecheng);
+    /**
+     * 员工培训记录
+     * */
+    PageInfo<Map> queryAllkee(Keemp keemp, Integer pageNum);
+    List<Map> queryOnekee(Keemp keemp);
+
 }

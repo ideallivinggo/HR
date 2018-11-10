@@ -146,7 +146,26 @@ public interface YapplyMapper {
      * */
     Map countLeave();
 
+    /**
+     * wx公告栏
+     * */
+    List<Map> queryAllMes(Rzmessage rzmessage);
 
+
+    //////////////////////////////////////////培训////////////////////////////////////////////////////////
+    /**
+     * 查看培训课程
+     * */
+    List<Map> queryAllkec(Kecheng kecheng);
+    /**
+     * 课程审批
+     * */
+    void updatekec(Kecheng kecheng);
+
+    /**
+     * 员工培训记录
+     * */
+    List<Map> queryAllkee(Keemp keemp);
 
 
 

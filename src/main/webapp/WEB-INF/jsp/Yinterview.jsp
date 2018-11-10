@@ -103,7 +103,7 @@
                 <th>年龄</th>
                 <th>学历</th>
                 <th>专业</th>
-                <th>心仪职位</th>
+                <th>面试职位</th>
                 <th>面试时间</th>
                 <th>分数</th>
                 <th>面试官</th>
@@ -153,7 +153,7 @@
                             <td><input class="inputss" id="age" readOnly></td>
                         </tr>
                         <tr>
-                            <td>心仪职位：</td>
+                            <td>面试职位：</td>
                             <td><input class="inputss" id="resposition" readOnly></td>
                             <td>学历：</td>
                             <td><input class="inputss" id="education" readOnly></td>
@@ -171,101 +171,101 @@
                             <td rowspan="10">个人基本素质评价</td>
                             <td colspan="2">1：仪容外貌</td>
                             <td colspan="3" onclick="dian()">
-                                <input type="radio" class="one" value="5" title="优秀" name="one">
-                                <input type="radio" class="one" value="4" title="很好" name="one">
-                                <input type="radio" class="one" value="3" title="较好" name="one">
-                                <input type="radio" class="one" value="2" title="一般" name="one">
-                                <input type="radio" class="one" value="1" title="较差" name="one">
+                                <input type="radio" class="one" value="5" title="优秀" name="inoone">
+                                <input type="radio" class="one" value="4" title="很好" name="inoone">
+                                <input type="radio" class="one" value="3" title="较好" name="inoone">
+                                <input type="radio" class="one" value="2" title="一般" name="inoone">
+                                <input type="radio" class="one" value="1" title="较差" name="inoone">
                             </td>
                         </tr>
                         <tr>
                             <td colspan="2">2：语言表达能力</td>
                             <td colspan="3" onclick="dian()">
-                                <input type="radio" class="two" value="5" title="优秀" name="two">
-                                <input type="radio" class="two" value="4" title="很好" name="two">
-                                <input type="radio" class="two" value="3" title="较好" name="two">
-                                <input type="radio" class="two" value="2" title="一般" name="two">
-                                <input type="radio" class="two" value="1" title="较差" name="two">
+                                <input type="radio" class="two" value="5" title="优秀" name="inotwo">
+                                <input type="radio" class="two" value="4" title="很好" name="inotwo">
+                                <input type="radio" class="two" value="3" title="较好" name="inotwo">
+                                <input type="radio" class="two" value="2" title="一般" name="inotwo">
+                                <input type="radio" class="two" value="1" title="较差" name="inotwo">
                             </td>
                         </tr>
                         <tr>
                             <td colspan="2">3：亲和力</td>
                             <td colspan="3" onclick="dian()">
-                                <input type="radio" class="three" value="5" title="优秀" name="three">
-                                <input type="radio" class="three" value="4" title="很好" name="three">
-                                <input type="radio" class="three" value="3" title="较好" name="three">
-                                <input type="radio" class="three" value="2" title="一般" name="three">
-                                <input type="radio" class="three" value="1" title="较差" name="three">
+                                <input type="radio" class="three" value="5" title="优秀" name="inothree">
+                                <input type="radio" class="three" value="4" title="很好" name="inothree">
+                                <input type="radio" class="three" value="3" title="较好" name="inothree">
+                                <input type="radio" class="three" value="2" title="一般" name="inothree">
+                                <input type="radio" class="three" value="1" title="较差" name="inothree">
                             </td>
                         </tr>
                         <tr>
                             <td colspan="2">4：诚实度</td>
                             <td colspan="3" onclick="dian()">
-                                <input type="radio" class="four" value="5" title="优秀" name="four">
-                                <input type="radio" class="four" value="4" title="很好" name="four">
-                                <input type="radio" class="four" value="3" title="较好" name="four">
-                                <input type="radio" class="four" value="2" title="一般" name="four">
-                                <input type="radio" class="four" value="1" title="较差" name="four">
+                                <input type="radio" class="four" value="5" title="优秀" name="inofour">
+                                <input type="radio" class="four" value="4" title="很好" name="inofour">
+                                <input type="radio" class="four" value="3" title="较好" name="inofour">
+                                <input type="radio" class="four" value="2" title="一般" name="inofour">
+                                <input type="radio" class="four" value="1" title="较差" name="inofour">
                             </td>
                         </tr>
                         <tr>
                             <td colspan="2">5：时间观念</td>
                             <td colspan="3" onclick="dian()">
-                                <input type="radio" class="five" value="5" title="优秀" name="five">
-                                <input type="radio" class="five" value="4" title="很好" name="five">
-                                <input type="radio" class="five" value="3" title="较好" name="five">
-                                <input type="radio" class="five" value="2" title="一般" name="five">
-                                <input type="radio" class="five" value="1" title="较差" name="five">
+                                <input type="radio" class="five" value="5" title="优秀" name="inofive">
+                                <input type="radio" class="five" value="4" title="很好" name="inofive">
+                                <input type="radio" class="five" value="3" title="较好" name="inofive">
+                                <input type="radio" class="five" value="2" title="一般" name="inofive">
+                                <input type="radio" class="five" value="1" title="较差" name="inofive">
                             </td>
                         </tr>
                         <tr>
                             <td colspan="2">6：逻辑思维</td>
                             <td colspan="3" onclick="dian()">
-                                <input type="radio" class="six" value="5" title="优秀" name="six">
-                                <input type="radio" class="six" value="4" title="很好" name="six">
-                                <input type="radio" class="six" value="3" title="较好" name="six">
-                                <input type="radio" class="six" value="2" title="一般" name="six">
-                                <input type="radio" class="six" value="1" title="较差" name="six">
+                                <input type="radio" class="six" value="5" title="优秀" name="inosix">
+                                <input type="radio" class="six" value="4" title="很好" name="inosix">
+                                <input type="radio" class="six" value="3" title="较好" name="inosix">
+                                <input type="radio" class="six" value="2" title="一般" name="inosix">
+                                <input type="radio" class="six" value="1" title="较差" name="inosix">
                             </td>
                         </tr>
                         <tr>
                             <td colspan="2">7：应变能力</td>
                             <td colspan="3" onclick="dian()">
-                                <input type="radio" class="seven" value="5" title="优秀" name="seven">
-                                <input type="radio" class="seven" value="4" title="很好" name="seven">
-                                <input type="radio" class="seven" value="3" title="较好" name="seven">
-                                <input type="radio" class="seven" value="2" title="一般" name="seven">
-                                <input type="radio" class="seven" value="1" title="较差" name="seven">
+                                <input type="radio" class="seven" value="5" title="优秀" name="inoseven">
+                                <input type="radio" class="seven" value="4" title="很好" name="inoseven">
+                                <input type="radio" class="seven" value="3" title="较好" name="inoseven">
+                                <input type="radio" class="seven" value="2" title="一般" name="inoseven">
+                                <input type="radio" class="seven" value="1" title="较差" name="inoseven">
                             </td>
                         </tr>
                         <tr>
                             <td colspan="2">8：人格成熟程度</td>
                             <td colspan="3" onclick="dian()">
-                                <input type="radio" class="eight" value="5" title="优秀" name="eight">
-                                <input type="radio" class="eight" value="4" title="很好" name="eight">
-                                <input type="radio" class="eight" value="3" title="较好" name="eight">
-                                <input type="radio" class="eight" value="2" title="一般" name="eight">
-                                <input type="radio" class="eight" value="1" title="较差" name="eight">
+                                <input type="radio" class="eight" value="5" title="优秀" name="inoeight">
+                                <input type="radio" class="eight" value="4" title="很好" name="inoeight">
+                                <input type="radio" class="eight" value="3" title="较好" name="inoeight">
+                                <input type="radio" class="eight" value="2" title="一般" name="inoeight">
+                                <input type="radio" class="eight" value="1" title="较差" name="inoeight">
                             </td>
                         </tr>
                         <tr>
                             <td colspan="2">9：判断分析能力</td>
                             <td colspan="3" onclick="dian()">
-                                <input type="radio" class="nine" value="5" title="优秀" name="nine">
-                                <input type="radio" class="nine" value="4" title="很好" name="nine">
-                                <input type="radio" class="nine" value="3" title="较好" name="nine">
-                                <input type="radio" class="nine" value="2" title="一般" name="nine">
-                                <input type="radio" class="nine" value="1" title="较差" name="nine">
+                                <input type="radio" class="nine" value="5" title="优秀" name="inonine">
+                                <input type="radio" class="nine" value="4" title="很好" name="inonine">
+                                <input type="radio" class="nine" value="3" title="较好" name="inonine">
+                                <input type="radio" class="nine" value="2" title="一般" name="inonine">
+                                <input type="radio" class="nine" value="1" title="较差" name="inonine">
                             </td>
                         </tr>
                         <tr>
                             <td colspan="2">10：自我认识能力</td>
                             <td colspan="3" onclick="dian()">
-                                <input type="radio" class="ten" value="5" title="优秀" name="ten">
-                                <input type="radio" class="ten" value="4" title="很好" name="ten">
-                                <input type="radio" class="ten" value="3" title="较好" name="ten">
-                                <input type="radio" class="ten" value="2" title="一般" name="ten">
-                                <input type="radio" class="ten" value="1" title="较差" name="ten">
+                                <input type="radio" class="ten" value="5" title="优秀" name="inoten">
+                                <input type="radio" class="ten" value="4" title="很好" name="inoten">
+                                <input type="radio" class="ten" value="3" title="较好" name="inoten">
+                                <input type="radio" class="ten" value="2" title="一般" name="inoten">
+                                <input type="radio" class="ten" value="1" title="较差" name="inoten">
                             </td>
                         </tr>
                         <tr>
@@ -296,7 +296,8 @@
                     </table>
                     <div style="display: none">
                         面试id<input name="inoid" id="inoid">
-                        简历id<input id="resid">
+                        简历状态<input name="resstate" value="3">
+                        简历id<input id="resid" name="s">
                     </div>
 
                     <input type="reset" class="layui-btn layui-btn-fluid" onclick="mianshi()" value="保存" style="letter-spacing:15px;"/>
@@ -460,7 +461,7 @@
        $.ajax({
             url: "updateInteYLP",
             type: "post",
-            data: {inoid:obj1,inostate:inostate, resstate:resstate, s:obj2},
+            data: {inoid:obj1,inostate:inostate, s:obj2, resstate:resstate},
             dataType: "text",
             success: function (data) {
                 queryAllInte(1);
@@ -535,16 +536,12 @@
 
     //面试记录
     function mianshi() {
-        var resid=$("#resid").val();//id
-        var resstate=3;//简历回收站
         $.ajax({
-            url:"updateInteYLP?s="+resid+"&resstate="+resstate,
+            url:"updateInteYLP",
             type:"post",
             data:$("#inteForm").serialize(),
             dataType: "text",
             success:function(data) {
-
-
                 queryAllInte(1);
                 $("#myModal").modal("hide");
                 if(data=="true"){alert("面试完成");}

@@ -22,6 +22,16 @@
     .layui-input{
         width: 200px;
     }
+    .miantab td{
+        width: 150px;
+        height: 45px;
+    }
+    .inputss{
+        width: 90%;
+        height: 99%;
+        border: 0px solid ;
+        padding-left: 10px;
+    }
     #fy {
         height: 40px;
         margin-left: 20px;
@@ -110,76 +120,315 @@
         <div class="fy2">共<span id="pages"></span>页</div><!--页数-->
     </div>
 
-<!-- 模态框邀请入职信息填写（Modal） -->
-<div class="modal fade" id="myModal" >
-    <div class="modal-dialog" style="width: 700px;" >
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title"  style="font-size:28px;font-weight:bold;font-family:'楷体';margin-left: 50px">
-                    发送入职邀请
-                </h4>
-            </div>
-            <div class="modal-body">
-                <form class="layui-form" id="sendForm" >
-                    <div class="layui-form-item">
-                        <div class="layui-inline">
-                            <label class="layui-form-label">姓名</label>
-                            <div class="layui-input-block">
-                                <input name="actnmae" id="resumename" class="layui-input" disabled>
+    <!-- 模态框邀请入职信息填写（Modal） -->
+    <div class="modal fade" id="myModal" >
+        <div class="modal-dialog" style="width: 700px;" >
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title"  style="font-size:28px;font-weight:bold;font-family:'楷体';margin-left: 50px">
+                        发送入职邀请
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    <form class="layui-form" id="sendForm" >
+                        <div class="layui-form-item">
+                            <div class="layui-inline">
+                                <label class="layui-form-label">姓名</label>
+                                <div class="layui-input-block">
+                                    <input name="actnmae" id="resumename" class="layui-input" disabled>
+                                </div>
+                            </div>
+                            <div class="layui-inline">
+                                <label class="layui-form-label">QQ邮箱</label>
+                                <div class="layui-input-block">
+                                    <input id="emali" class="layui-input" disabled>
+                                </div>
                             </div>
                         </div>
-                        <div class="layui-inline">
-                            <label class="layui-form-label">QQ邮箱</label>
-                            <div class="layui-input-block">
-                                <input id="emali" class="layui-input" disabled>
+                        <div class="layui-form-item">
+                            <div class="layui-inline">
+                                <label class="layui-form-label">手机号</label>
+                                <div class="layui-input-block">
+                                    <input id="phone" class="layui-input" disabled>
+                                </div>
+                            </div>
+                            <div class="layui-inline">
+                                <label class="layui-form-label">发送时间</label>
+                                <div class="layui-input-block">
+                                    <input id="senddate" class="layui-input" disabled>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="layui-form-item">
-                        <div class="layui-inline">
-                            <label class="layui-form-label">手机号</label>
-                            <div class="layui-input-block">
-                                <input id="phone" class="layui-input" disabled>
-                            </div>
-                        </div>
-                        <div class="layui-inline">
-                            <label class="layui-form-label">发送时间</label>
-                            <div class="layui-input-block">
-                                <input id="senddate" class="layui-input" disabled>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="layui-form-item layui-form-text">
-                        <label class="layui-form-label">通知信息</label>
-                        <div class="layui-input-block" style="width: 520px">
-                                    <textarea name="notice" id="notice" placeholder="请输入通知信息" class="layui-textarea" rows="6">
+                        <div class="layui-form-item layui-form-text">
+                            <label class="layui-form-label">通知信息</label>
+                            <div class="layui-input-block" style="width: 520px">
+                                        <textarea name="notice" id="notice" placeholder="请输入通知信息" class="layui-textarea" rows="6">
 
-                                    </textarea>
+                                        </textarea>
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="layui-form-item">
-                        <div class="layui-inline">
-                            <label class="layui-form-label">报道时间&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-                            <input name="actdate" class="layui-input" id="actdate"  placeholder="yyyy-MM-dd HH:mm:ss">
+                        <div class="layui-form-item">
+                            <div class="layui-inline">
+                                <label class="layui-form-label">报道时间&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                                <input name="actdate" class="layui-input" id="actdate"  placeholder="yyyy-MM-dd HH:mm:ss">
+                            </div>
                         </div>
-                    </div>
-                    <div style="display: none">
-                        面试id<input name="intid" id="intid">
-                        面试状态<input name="intstate" value="2"><br>
-                        发送邮箱<input name="emali" id="emali2">
-                        简历id<input name="resid" id="resid"><br>
-                        员工激活编号<input name="actnumber" id="actnumber">
-                        员工激活状态<input name="actstate" value="0">
-                        激活姓名<input name="actname" id="actname">
-                    </div>
-                    <input type="button" class="layui-btn layui-btn-fluid" onclick="sendAct()" value="发送邮件" style="letter-spacing:15px;"/>
-                </form>
-            </div>
-        </div><!-- /.modal-content -->
-    </div><!-- /.modal -->
-</div>
+                        <div style="display: none">
+                            面试id<input name="intid" id="intid">
+                            面试状态<input name="intstate" value="2"><br>
+                            发送邮箱<input name="emali" id="emali2">
+                            简历id<input name="resid" id="resid"><br>
+                            员工激活编号<input name="actnumber" id="actnumber">
+                            员工激活状态<input name="actstate" value="0">
+                            激活姓名<input name="actname" id="actname">
+                        </div>
+                        <input type="button" class="layui-btn layui-btn-fluid" onclick="sendAct()" value="发送邮件" style="letter-spacing:15px;"/>
+                    </form>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal -->
+    </div>
+
+    <!-- 模态详情（Modal） -->
+    <div class="modal fade" id="myModal2" >
+        <div class="modal-dialog"  style="width: 1000px;margin-bottom: 80px" >
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title"  style="font-size:28px;font-weight:bold;font-family:'楷体';margin-left: 50px">
+                        员工面试记录
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    <%--<form class="layui-form" id="OneForm" >
+                    <table border="1" style="margin: 10px auto;text-align: center; border-collapse:collapse;"  class="miantab">
+                        <tr>
+                            <td>姓名：</td>
+                            <td><input class="inputss" id="resumename" readOnly></td>
+                            <td>性别：</td>
+                            <td><input class="inputss" id="sex" readOnly></td>
+                            <td>年龄：</td>
+                            <td><input class="inputss" id="age" readOnly></td>
+                        </tr>
+                        <tr>
+                            <td>面试职位：</td>
+                            <td><input class="inputss" id="resposition" readOnly></td>
+                            <td>学历：</td>
+                            <td><input class="inputss" id="education" readOnly></td>
+                            <td>所学专业：</td>
+                            <td><input class="inputss" id="resmajor" readOnly></td>
+                        </tr>
+                        <tr>
+
+                            <td colspan="3">评分项目</td>
+                            <td colspan="3">
+                                评分标准（35分以上考虑）
+                            </td>
+                        </tr>
+                        <tr>
+                            <td rowspan="10">个人基本素质评价</td>
+                            <td colspan="2">1：仪容外貌</td>
+                            <td colspan="3">
+                                <input class="inputss" id="inoone" readOnly>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">2：语言表达能力</td>
+                            <td colspan="3">
+                                <input class="inputss" id="inotwo" readOnly>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">3：亲和力</td>
+                            <td colspan="3">
+                                <input class="inputss" id="inothree" readOnly>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">4：诚实度</td>
+                            <td colspan="3">
+                                <input class="inputss" id="inofour" readOnly>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">5：时间观念</td>
+                            <td colspan="3">
+                                <input class="inputss" id="inofive" readOnly>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">6：逻辑思维</td>
+                            <td colspan="3">
+                                <input class="inputss" id="inosix" readOnly>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">7：应变能力</td>
+                            <td colspan="3">
+                                <input class="inputss" id="inoseven" readOnly>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">8：人格成熟程度</td>
+                            <td colspan="3">
+                                <input class="inputss" id="inoeight" readOnly>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">9：判断分析能力</td>
+                            <td colspan="3">
+                                <input class="inputss" id="inonine" readOnly>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">10：自我认识能力</td>
+                            <td colspan="3">
+                                <input class="inputss" id="inoten" readOnly>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>是否通过：</td>
+                            <td colspan="2">
+                                <input class="inputss" id="inostate" readOnly>
+                            </td>
+                            <td>点击计分：</td>
+                            <td colspan="2">
+                                <input name="inograde" class="inputss" id="inograde" readonly >
+                            </td>
+                        </tr>
+
+                        <tr style="height: 100px;">
+                            <td colspan="1">面试批语</td>
+                            <td colspan="5">
+                    <textarea  name="inonotes" id="inonotes" class="layui-textarea">
+                    </textarea>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>面试时间</td>
+                            <td colspan="2"><input name="inodate" class="inputss" id="inodate"></td>
+                            <td>面试官</td>
+                            <td colspan="2"><input name="inname" class="inputss" value="${emp.empname}" id="inname" style="border-bottom: 1px solid #000000"></td>
+                        </tr>
+                    </table>
+                    </form>--%>
+                    <form class="layui-form" id="TwoForm" >
+                        <table border="1" style="margin: 10px auto;text-align: center; border-collapse:collapse;"  class="miantab">
+                            <tr style="height: 45px;">
+                                <td>姓名：</td>
+                                <td><input class="inputss" id="resumename2" readOnly></td>
+                                <td>性别：</td>
+                                <td><input class="inputss" id="sex" readOnly></td>
+                                <td>年龄：</td>
+                                <td><input class="inputss" id="age" readOnly></td>
+                            </tr>
+                            <tr style="height: 45px;">
+                                <td>面试职位：</td>
+                                <td><input class="inputss" id="resposition" readOnly></td>
+                                <td>学历：</td>
+                                <td><input class="inputss" id="education" readOnly></td>
+                                <td>所学专业：</td>
+                                <td><input class="inputss" id="resmajor" readOnly></td>
+                            </tr>
+                            <tr style="height: 40px;">
+
+                                <td colspan="3">评分项目</td>
+                                <td colspan="3">
+                                    评分标准（35分以上考虑）
+                                </td>
+                            </tr>
+                            <tr style="height: 40px;">
+                                <td rowspan="10">相关的工作经验及专业知识</td>
+                                <td colspan="2">1：工作经验</td>
+                                <td colspan="3">
+                                    <input class="inputss" id="intone" readOnly style="width: 80px">分
+                                </td>
+                            </tr>
+                            <tr style="height: 40px;">
+                                <td colspan="2">掌握的专业知识</td>
+                                <td colspan="3">
+                                    <input class="inputss" id="inttwo" readOnly style="width: 80px">分
+                                </td>
+                            </tr>
+                            <tr style="height: 40px;">
+                                <td colspan="2">3：对企业的价值</td>
+                                <td colspan="3">
+                                    <input class="inputss" id="intthree" readOnly style="width: 80px">分
+                                </td>
+                            </tr>
+                            <tr style="height: 40px;">
+                                <td colspan="2">4：个人工作观念</td>
+                                <td colspan="3">
+                                    <input class="inputss" id="intfour" readOnly style="width: 80px">分
+                                </td>
+                            </tr>
+                            <tr style="height: 40px;">
+                                <td colspan="2">5：学习能力</td>
+                                <td colspan="3">
+                                    <input class="inputss" id="intfive" readOnly style="width: 80px">分
+                                </td>
+                            </tr>
+                            <tr style="height: 40px;">
+                                <td colspan="2">6：工作创造能力</td>
+                                <td colspan="3">
+                                    <input class="inputss" id="intsix" readOnly style="width: 80px">分
+                                </td>
+                            </tr>
+                            <tr style="height: 40px;">
+                                <td colspan="2">7：对企业的忠诚度</td>
+                                <td colspan="3">
+                                    <input class="inputss" id="intseven" readOnly style="width: 80px">分
+                                </td>
+                            </tr>
+                            <tr style="height: 40px;">
+                                <td colspan="2">8：职位胜任能力</td>
+                                <td colspan="3">
+                                    <input class="inputss" id="inteight" readOnly style="width: 80px">分
+                                </td>
+                            </tr>
+                            <tr style="height: 40px;">
+                                <td colspan="2">9：个性特征与企业文化的相融性</td>
+                                <td colspan="3">
+                                    <input class="inputss" id="intnine" readOnly style="width: 80px">分
+                                </td>
+                            </tr>
+                            <tr style="height: 40px;">
+                                <td colspan="2">10：稳定性、发展潜力</td>
+                                <td colspan="3">
+                                    <input class="inputss" id="intten" readOnly style="width: 80px">分
+                                </td>
+                            </tr>
+                            <tr style="height: 45px;">
+                                <td>是否通过：</td>
+                                <td colspan="2">
+                                    <input class="inputss" id="tgintstate" value="已通过" readOnly>
+                                </td>
+                                <td>点击计分：</td>
+                                <td colspan="2">
+                                    <input class="inputss" id="intgrade" readonly >
+                                </td>
+                            </tr>
+                            <tr style="height: 100px;">
+                                <td colspan="2">面试批语</td>
+                                <td colspan="4">
+                                    <textarea id="intnotes" class="layui-textarea" readOnly> </textarea>
+                                </td>
+                            </tr>
+                            <tr style="height: 45px;">
+                                <td>面试时间</td>
+                                <td colspan="2"><input class="inputss" id="intdate" readOnly></td>
+                                <td>面试官</td>
+                                <td colspan="2"><input class="inputss" id="intname" style="border-bottom: 1px solid #000000" readOnly></td>
+                            </tr>
+                        </table>
+                    </form>
+
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal -->
+    </div>
 </div>
 </body>
 <script>
@@ -210,8 +459,8 @@
                 $("#mytab").html("");
                 for ( var i = 0; i < data.list.length; i++) {
                     var tr="<tr>";
-                    tr+="<td>"+data.list[i].intid+"</td>";
-                    tr+="<td>"+data.list[i].resumename+"</td>";
+                    tr+="<td data-toggle='modal' data-target='#myModal2' onclick='details("+data.list[i].intid+")'>"+data.list[i].intid+"</td>";
+                    tr+="<td data-toggle='modal' data-target='#myModal2' onclick='details("+data.list[i].intid+")'>"+data.list[i].resumename+"</td>";
                     tr+="<td>"+data.list[i].sex+"</td>";
                     tr+="<td>"+data.list[i].age+"</td>";
                     tr+="<td>"+data.list[i].education+"</td>";
@@ -347,7 +596,39 @@
         queryAllInteTwo(nowPage+1);
     });
 
+    //员工面试信息
+    function details(obj) {
+        //第二轮面试信息
+        $.ajax({
+            url: "queryOneInteTwoYLP",
+            type: "post",
+            data:{intid:obj},
+            dataType: "json",
+            success: function (data) {
+                $("#resumename2").val(data[0].resumename);
+                $("#sex").val(data[0].sex);
+                $("#age").val(data[0].age);
+                $("#resposition").val(data[0].resposition);
+                $("#education").val(data[0].education);
+                $("#resmajor").val(data[0].resmajor);
 
+                $("#intone").val(data[0].intone);
+                $("#inttwo").val(data[0].inttwo);
+                $("#intthree").val(data[0].intthree);
+                $("#intfour").val(data[0].intfour);
+                $("#intfive").val(data[0].intfive);
+                $("#intsix").val(data[0].intsix);
+                $("#intseven").val(data[0].intseven);
+                $("#inteight").val(data[0].inteight);
+                $("#intnine").val(data[0].intnine);
+                $("#intten").val(data[0].intten);
+                $("#intgrade").val(data[0].intgrade);
+                $("#intnotes").val(data[0].intnotes);
+                $("#intname").val(data[0].intname);
+                $("#intdate").val(data[0].intdate);
+            }
+        })
+    }
 
     //系统时间
     var date=new Date();
