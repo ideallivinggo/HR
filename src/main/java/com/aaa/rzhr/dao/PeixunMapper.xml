@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.aaa.rzhr.dao.PeixunMapper">
+       <insert id="addkecheng" parameterType="Kecheng" useGeneratedKeys="true" keyProperty="keid" >
+        INSERT  into kecheng (kename, kemiaoshu, kexiangqing, kebegintime, keendtime, kebaomingtimebegin, kebaomingtimeend, kechengmaxren, keaddress, kestate) VALUES (#{kename},#{kemiaoshu},#{kexiangqing},
+        #{kebegintime},#{keendtime},#{kebaomingtimebegin},#{kebaomingtimeend},
+        #{kechengmaxren},#{keaddress},#{kestate})
+       </insert>
+
+      <select id="queryEmpByEmp" resultType="Emp" parameterType="Map" >
+          SELECT  * from  emp
+          <where>
+                <if test="empname!=''">
+                      and empname like  CONCAT(CONCAT('%',#{empname},'%'))
+                </if>
+                <if test="empnumber!=''">
+                     and empnumber =#{empnumber}
+                </if>
+
+
+          </where>
+      </select>
+    <insert id="addKeTeacher" parameterType="java.util.List"  >
+          INSERT INTO  keteacher(keid, empid) VALUES
+        <foreach collection="list" item="keteacher" separator=",">
+            (#{keteacher.keid},#{keteacher.empid})
+        </foreach>
+    </insert>
+    <select id="getKechengByEmpid" resultType="Kecheng" parameterType="int">
+           SELECT * from kecheng WHERE keid in( SELECT keid from keteacher  WHERE empid=#{empid})
+                    and  keendtime > STR_TO_DATE(curdate(),'%Y-%m-%d')
+    </select>
+
+
+</mapper>

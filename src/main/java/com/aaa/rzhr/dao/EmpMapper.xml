@@ -43,7 +43,7 @@
         left join education edu on e.eduid = edu.eduid
         left join dept d on e.deptid = d.deptid
         left join emp_type et on e.emptypeid = et.emptypeid
-        left join role r on e.poid = r.roid
+        left join position p on e.poid = p.poid
         left join empstate es on es.empstateid=e.empstateid
         <if test="deptid!=null">
             WHERE e.deptid=#{deptid}
