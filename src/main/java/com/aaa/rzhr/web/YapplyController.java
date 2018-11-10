@@ -6,7 +6,6 @@ import com.aaa.rzhr.pojo.*;
 import com.aaa.rzhr.service.MailService;
 import com.aaa.rzhr.service.YapplyService;
 import com.github.pagehelper.PageInfo;
-import jxl.Cell;
 import jxl.Sheet;
 import jxl.Workbook;
 import jxl.read.biff.BiffException;
@@ -210,7 +209,6 @@ public class YapplyController {
     @RequestMapping("addIntTwoYLP")
     public String addIntTwo(Interviewtwo interviewtwo, Interviewone interviewone, String emali, String notice) {
         service.addIntTwo(interviewtwo, interviewone);
-        System.out.println(emali);
         String shijian = interviewtwo.getIntdate();
         mailService.sendSimpleMail(emali,"面试通知",notice+"面试时间"+shijian);
         return "true";
@@ -230,7 +228,8 @@ public class YapplyController {
         return service.queryOneInteTwo(interviewtwo);
     }
     /**
-     * 修改第二次面试
+     * 清除过期和不过面试
+     * 添加通过二次面试
      * */
     @RequestMapping("updateInteTwoYLP")
     public String updateInteTwo(Interviewtwo interviewtwo){
@@ -285,7 +284,7 @@ public class YapplyController {
         return service.queryAllAct(activation, pageNum);
     }
     /**
-     * 撤除
+     * 不入职撤除
      */
     @RequestMapping("ccActYLP")
     public  String ccAct (Activation activation) {
@@ -293,9 +292,29 @@ public class YapplyController {
         return "true";
     }
 
-
-
-
+////////////////////////////////////////////////////////////////////////////////////////
+    /**
+     * 分页查询课程审批
+     * */
+    @RequestMapping("queryAllkecJSR")
+    public  PageInfo<Map> queryAllkec(Kecheng kecheng, Integer pageNum) {
+        return service.queryAllkec(kecheng, pageNum);
+    }
+    /**
+     * 课程审批详情
+     * */
+    @RequestMapping("queryOnekecJSR")
+    public List<Map> queryOnekec(Kecheng kecheng) {
+        return service.queryOnekec(kecheng);
+    }
+    /**
+     * 审批
+     */
+    @RequestMapping("updatekecYLP")
+    public  String updatekec (Kecheng kecheng) {
+        service.updatekec(kecheng);
+        return "true";
+    }
 
 
 

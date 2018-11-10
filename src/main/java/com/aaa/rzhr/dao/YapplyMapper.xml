@@ -92,13 +92,16 @@
 
     <!--添加第一次面试-->
     <insert id="addIntone" parameterType="Interviewone">
-        INSERT  INTO interviewone(resid, inograde, inodate, inonotes, inname, inostate)
-        VALUES (#{resid}, #{inograde}, #{inodate}, #{inonotes}, #{inname}, #{inostate})
+        INSERT  INTO interviewone(resid, inograde, inodate, inonotes, inname, inostate,
+        inoone, inotwo, inothree, inofour, inofive, inosix, inoseven, inoeight, inonine, inoten)
+        VALUES (#{resid}, #{inograde}, #{inodate}, #{inonotes}, #{inname}, #{inostate},
+        #{inoone}, #{inotwo}, #{inothree}, #{inofour}, #{inofive}, #{inosix}, #{inoseven}, #{inoeight}, #{inonine}, #{inoten})
     </insert>
     <!--查看第一次面试-->
     <select id="queryAllInte" resultType="java.util.Map" parameterType="Map">
-        SELECT r.*, i.inoid,i.inograde, i.inonotes, i.inname, i.inostate,
-        str_to_date(inodate,'%Y-%m-%d') inodate FROM interviewone i
+        SELECT r.*, i.inoid, i.inograde, i.inonotes, i.inname, i.inostate, i.inoone, i.inotwo,
+        i.inothree, i.inofour, i.inofive, i.inosix, i.inoseven, i.inoeight, i.inonine, i.inoten,
+        str_to_date(i.inodate,'%Y-%m-%d') AS inodate FROM interviewone i
         INNER JOIN resume r ON i.resid = r.resid WHERE 1=1
         <choose>
             <when test="inoid != null">
@@ -115,18 +118,20 @@
     <!--修改第一次面试-->
     <update id="updateInte" parameterType="Interviewone">
          UPDATE interviewone SET
-        <if test="inograde != null">
-            inograde=#{inograde},
-        </if>
-        <if test="inname != null">
-            inname=#{inname},
-        </if>
-        <if test="inonotes != null">
-            inonotes=#{inonotes},
-        </if>
-        <if test="inostate != null">
-            inostate=#{inostate}
-        </if>
+        <if test="inograde != null"> inograde=#{inograde}, </if>
+        <if test="inname != null"> inname=#{inname}, </if>
+        <if test="inonotes != null"> inonotes=#{inonotes}, </if>
+        <if test="inoone != null"> inoone=#{inoone}, </if>
+        <if test="inotwo != null"> inotwo=#{inotwo}, </if>
+        <if test="inothree != null"> inothree=#{inothree}, </if>
+        <if test="inofour != null"> inofour=#{inofour}, </if>
+        <if test="inofive != null"> inofive=#{inofive}, </if>
+        <if test="inosix != null"> inosix=#{inosix}, </if>
+        <if test="inoseven != null"> inoseven=#{inoseven}, </if>
+        <if test="inoeight != null"> inoeight=#{inoeight}, </if>
+        <if test="inonine != null"> inonine=#{inonine}, </if>
+        <if test="inoten != null"> inoten=#{inoten}, </if>
+        <if test="inostate != null"> inostate=#{inostate}</if>
          WHERE inoid=#{inoid}
     </update>
 
@@ -135,12 +140,15 @@
 
     <!--添加第二次面试-->
     <insert id="addIntTwo" parameterType="Interviewtwo">
-        INSERT INTO interviewtwo(resid, intgrade, intdate, intnotes, intname, intstate)
-        VALUES (#{resid}, #{intgrade}, #{intdate}, #{intnotes}, #{intname}, #{intstate})
+        INSERT INTO interviewtwo(resid, intgrade, intdate, intnotes, intname, intstate,
+        intone, inttwo, intthree, intfour, intfive, intsix, intseven, inteight, intnine, intten)
+        VALUES (#{resid}, #{intgrade}, #{intdate}, #{intnotes}, #{intname}, #{intstate},
+         #{intone}, #{inttwo}, #{intthree}, #{intfour}, #{intfive}, #{intsix}, #{intseven}, #{inteight}, #{intnine}, #{intten})
     </insert>
     <!--查看第二次面试-->
     <select id="queryAllInteTwo" resultType="java.util.Map" parameterType="Map">
-        SELECT r.*, i.intid, i.intgrade, i.intnotes, i.intname, i.intstate,
+        SELECT r.*, i.intid, i.intgrade, i.intnotes, i.intname, i.intstate, i.intone, i.inttwo,
+        i.intthree, i.intfour, i.intfive, i.intsix, i.intseven, i.inteight, i.intnine, i.intten,
         str_to_date(intdate,'%Y-%m-%d') intdate FROM interviewtwo i
         INNER JOIN resume r ON i.resid = r.resid WHERE 1=1
         <choose>
@@ -158,18 +166,20 @@
     <!--修改第二次面试-->
     <update id="updateInteTwo" parameterType="Interviewtwo">
         UPDATE interviewtwo SET
-        <if test="intgrade != null">
-            intgrade=#{intgrade},
-        </if>
-        <if test="intname != null">
-            intname=#{intname},
-        </if>
-        <if test="intnotes != null">
-            intnotes=#{intnotes},
-        </if>
-        <if test="intstate != null">
-            intstate=#{intstate}
-        </if>
+        <if test="intgrade != null"> intgrade=#{intgrade}, </if>
+        <if test="intname != null"> intname=#{intname}, </if>
+        <if test="intnotes != null"> intnotes=#{intnotes}, </if>
+        <if test="intone != null"> intone=#{intone}, </if>
+        <if test="inttwo != null"> inttwo=#{inttwo}, </if>
+        <if test="intthree != null"> intthree=#{intthree}, </if>
+        <if test="intfour != null"> intfour=#{intfour}, </if>
+        <if test="intfive != null"> intfive=#{intfive}, </if>
+        <if test="intsix != null"> intsix=#{intsix}, </if>
+        <if test="intseven != null"> intseven=#{intseven}, </if>
+        <if test="inteight != null"> inteight=#{inteight}, </if>
+        <if test="intnine != null"> intnine=#{intnine}, </if>
+        <if test="intten != null"> intten=#{intten}, </if>
+        <if test="intstate != null"> intstate=#{intstate}</if>
         WHERE intid=#{intid}
     </update>
     <!--面试完成推送-->
@@ -248,5 +258,44 @@
         SELECT COUNT(leasate) AS countnum FROM apply_leave where leasate = 0
     </select>
 
+    <!--公告栏-->
+  <!--  <select id="queryAllMes" resultType="">
+        SELECT * FROM rzmessage WHERE begintime = '2018-11-04' AND mestate = 2 AND deptid = 2
+    </select>-->
+
+
+
+    <!--培训管理-->
+    <!--培训课程审核-->
+    <select id="queryAllkec" parameterType="Kecheng" resultType="java.util.Map">
+        SELECT kt.keteacherid, kc.*, em.empname FROM keteacher AS kt
+        INNER JOIN kecheng AS kc ON kt.keid = kc.keid
+        INNER JOIN emp AS em ON kt.empid = em.empid WHERE 1 =1
+        <if test="kestate != null">
+            and kestate = #{kestate}
+        </if>
+        <if test="keid != null">
+            and kc.keid = #{keid}
+        </if>
+    </select>
+    <!--审批-->
+    <update id="updatekec" parameterType="Kecheng">
+        UPDATE kecheng SET kestate = #{kestate} WHERE keid = #{keid}
+    </update>
+    <!--员工培训记录-->
+    <select id="queryAllkee" parameterType="Keemp" resultType="java.util.Map">
+        SELECT km.*, kc.kename, em.empname, em.empnumber FROM keemp AS km
+        INNER JOIN kecheng AS kc ON km.keid = kc.keid
+        INNER JOIN emp AS em ON km.empid = em.empid WHERE 1 = 1
+        <if test="keokstate != null">
+            and keokstate = #{keokstate}
+        </if>
+        <if test="empnumber != null">
+            and empnumber = #{empnumber}
+        </if>
+        <if test="keempid != null">
+            and keempid = #{keempid}
+        </if>
+    </select>
 
 </mapper>

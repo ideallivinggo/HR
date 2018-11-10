@@ -159,7 +159,24 @@ public String Qemp(){
     public  String L_1111(){
         return "L_1111";
     }
-    //----------------------------------月亮鹏-------------------------
+
+
+    //----------------------------------靳风儒-------------------------
+    /**
+     * 课程审批
+     */
+    @RequestMapping("Japproval")
+    public  String Japproval(){
+        return "Japproval";
+    }
+
+    /**
+     * 培训记录
+     */
+    @RequestMapping("Jjilu")
+    public  String Jjilu(){
+        return "Jjilu";
+    }
 
     //----------------------------------岳梁朋-------------------------
     //招聘申请表
