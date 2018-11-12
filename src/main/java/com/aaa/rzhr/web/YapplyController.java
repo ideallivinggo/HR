@@ -316,8 +316,8 @@ public class YapplyController {
      * 剩余打分人数
      */
     @RequestMapping("shengyuYLP")
-    public Map shengyu() {
-        return service.shengyu();
+    public Map shengyu(Integer keid) {
+        return service.shengyu(keid);
     }
     /**
      * 培训课程完成

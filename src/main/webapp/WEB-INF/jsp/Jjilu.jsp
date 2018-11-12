@@ -123,7 +123,7 @@
                             </div>
                             <div class="layui-inline" style="float: right" >
                                 <div style="display: none"><input id="keid"></div>
-                                未打分剩余：<span id="sheng"></span>&nbsp;人&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                未打分剩余：<span id="sheng"></span>&nbsp;人&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                 <button class="layui-btn" onclick="wancheng()">培训完成</button>
                                 <button class="layui-btn" onclick="guanbi()">关闭</button>
                             </div>
@@ -310,7 +310,7 @@
         $.ajax({
             url: "queryAllkeeJSR",
             type: "post",
-            data:{empid:1, kestate:kestate, pageNum:pageNum},
+            data:{empid:'${emp.empid}', kestate:kestate, pageNum:pageNum},
             dataType: "json",
             async:false,
             success: function (data) {
@@ -326,8 +326,13 @@
                     tr+="<td>"+data.list[i].kechengmaxren+"</td>";
                     tr+="<td>"+data.list[i].keaddress+"</td>";
                     tr+="<td>"+data.list[i].empname+"</td>";
-                    if(data.list[i].kestate==2){
+                    if(data.list[i].kebegintime <= sjijian &data.list[i].kestate==2){
                         tr+="<td>待打分</td>";
+                        tr+="<td><button type='button' data-toggle='modal' data-target='#myModal' onclick='details("+data.list[i].keid+")'>员工详情</button></td>";
+                        tr+="</tr>";
+                    }
+                    if(data.list[i].kebegintime > sjijian & data.list[i].kestate==2){
+                        tr+="<td>未开始</td>";
                         tr+="<td><button type='button' data-toggle='modal' data-target='#myModal' onclick='details("+data.list[i].keid+")'>员工详情</button></td>";
                         tr+="</tr>";
                     }
@@ -470,9 +475,11 @@
 
     //剩余
      function shengyu() {
+         var keid=$("#keid").val();
         $.ajax({
              url: "shengyuYLP",
              type: "post",
+             data:{keid:keid},
              dataType: "json",
              success: function (data) {
                  $("#sheng").html(data.sheng);
@@ -481,8 +488,8 @@
      }
      //完成
     function wancheng() {
+        var keid=$("#keid").val();
         if($("#sheng").html()==0){
-            var keid=$("#keid").val();
             $.ajax({
                 url:"wanchengYLP",
                 type:"post",
@@ -527,6 +534,6 @@
     if(min<10){ min="0"+min;}
     if(second<10){second="0"+second; }
     var kebegintime=year+"-"+month+"-"+day;
-
+    var sjijian=year+"-"+month+"-"+day;
 </script>
 </html>

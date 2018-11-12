@@ -345,8 +345,8 @@
     </update>
 
     <!--剩余打分人数-->
-    <select id="shengyu" resultType="java.util.Map">
-       SELECT COUNT(keokstate) AS sheng FROM keemp where keokstate = 0
+    <select id="shengyu" resultType="java.util.Map" parameterType="Map">
+       SELECT COUNT(keokstate) AS sheng FROM keemp where keokstate = 0 AND keid = #{keid}
     </select>
     <!--培训完成-->
     <update id="wancheng" parameterType="Kecheng">

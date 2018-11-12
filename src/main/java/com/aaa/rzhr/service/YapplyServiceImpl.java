@@ -243,8 +243,8 @@ public class YapplyServiceImpl implements YapplyService {
     }
 
     @Override
-    public Map shengyu() {
-        return yapplyMapper.shengyu();
+    public Map shengyu(Integer keid) {
+        return yapplyMapper.shengyu(keid);
     }
 
     @Override

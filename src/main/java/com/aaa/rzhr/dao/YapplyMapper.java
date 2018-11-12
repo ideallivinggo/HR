@@ -183,7 +183,7 @@ public interface YapplyMapper {
     /**
      * 剩余打分人数
      * */
-    Map shengyu();
+    Map shengyu(@Param("keid") Integer keid);
 
     /**
      * 培训打分完成
