@@ -7,6 +7,10 @@
          select e.empname,d.deptname,d.deptnum,d.roid,e.deptid,count(*) as num
          from dept d left join emp e on d.deptid=e.deptid GROUP BY deptname
      </select>
+    <!--查询部门-->
+    <select id="QueryDeptSelectYqx" resultType="java.util.Map" parameterType="Map">
+         select deptid,count(*) as num from emp e GROUP BY deptid
+    </select>
     <insert id="addDept" parameterType="Map">
           INSERT  INTO dept(deptname,deptnum,roid) VALUES(#{deptName},#{deptnum},3)
     </insert>
