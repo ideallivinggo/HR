@@ -178,6 +178,9 @@ WHERE  e.empid=#{empid}
             <if test="leasate!=null">
                 AND  al.leasate=#{leasate}
             </if>
+            <if test="deptid!=null">
+                AND  al.deptid=#{deptid}
+            </if>
         </where>
     </select>
     <!--加班查询-->
@@ -202,6 +205,9 @@ WHERE  e.empid=#{empid}
             <if test="apovstate!=null">
                 AND  ao.apovstate=#{apovstate}
             </if>
+            <if test="deptid!=null">
+                AND  al.deptid=#{deptid}
+            </if>
         </where>
     </select>
     <!--离职查询-->
@@ -224,6 +230,9 @@ WHERE  e.empid=#{empid}
             </if>
             <if test="dimstate!=null">
                 AND  ad.dimstate=#{dimstate}
+            </if>
+            <if test="deptid!=null">
+                AND  al.deptid=#{deptid}
             </if>
         </where>
     </select>

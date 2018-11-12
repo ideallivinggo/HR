@@ -61,9 +61,9 @@
     </style>
 </head>
 <body style="background-color: #c9cdd7">
+<input hidden id="deptid" value="${emp.deptid}"/>
    <div style="width:1000px;height: 600px;margin-top:50px;margin-left:150px">
        <div id="top" style="border-bottom:1px solid #4cae4c">
-           <input hidden id="deptid" value="${emp.deptid}"/>
            <div onclick="o1()" style=" background-color: #00AEAE;color: #1F1F1F;" id="top_1" class="div_1">待审批事项</div>
            <div  onclick="o2()" style=" background-color: #FFFFFF;color: #999999;" id="top_2" class="div_1">已审批事项</div>
            <div id="div_2">
@@ -79,7 +79,6 @@
        </div>
        <div id="center">
            <div id="yin_1">
-               <input hidden id="val_1" value="${emp.deptid}"/>
                <input hidden id="val_2" value="${emp.empname}"/>
                    <div id="aaa"></div>
            </div>
@@ -247,13 +246,13 @@
     }
     /*页面加载显示未办理*/
     $(function () {
+        alert($("#deptid").val()+"aaaaaaaaaaaaaaaaaaaaaaaaaaaa")
     $.ajax({
         url:"L_shen_leave",
         type:"post",
-        data:{"deptid":$("#deptid").val()},
+        data:{deptid:$("#deptid").val()},
         dataType:"json",
         success:function (data) {
-              alert(data)
             for (var i = 0; i < data.length; i++) {
                 var div = "<div style='background-color: #FFFFFF;margin-top: 20px;padding-left: 20px'>";
                 div+="<input hidden id='id_val_1' value='"+data[i].leaid+"'/>"
@@ -266,7 +265,7 @@
                 div += "<span>" + '理由:' + data[i].leareason + "</span><br/><br/>";
                 div += "<span>" + '请假时间/天数:' + data[i].leaenterdate + '/' + data[i].leaday + "天</span><br/><br/>";
                 div += "<span>" + '审批人:'+ $("#val_2").val() + "</span><br/><br/>";
-                div += "<span>" + '驳回理由:'+  "<input id='liyou6' style='width: 500px'/>" + "</span>";
+                div += "<span>" + '驳回理由:'+  "<input id='liyou' style='width: 500px'/>" + "</span>";
                 div += "<button onclick='pass_xiujia()' value='1'>通过</button>";
                 div += "<button onclick='unpass_xiujia()' value='2'>驳回</button>";
                 div += "</div>"
@@ -279,8 +278,6 @@
         data:{"deptid":$("#deptid").val()},
         dataType:"json",
         success:function (data) {
-            alert(data)
-
             for(var i=0;i<data.length;i++){
                 var div = "<div style='background-color: #FFFFFF;margin-top: 20px;padding-left: 20px'>";
                 div+="<input hidden  id='id_val_2' value='"+data[i].apovid+"'/>"
@@ -331,16 +328,15 @@
 })
     /*休假点击通过驳回*/
      function  pass_xiujia() {
-         var  zhi=$("#liyou6").val();
-         if(zhi!=""){
+         var  bbb=$("#liyou").val();
+         if(bbb!=""){
              alert("zhixing");
              $.ajax({
                  url:"L_upd_xiujia_unpass",
                  type:"post",
-                 data:{"leasate":1,"bohui":$("#liyou6").val(),"leaid":$("#id_val_1").val(),"pipeople":$("#val_2").val()},
+                 data:{"leasate":1,"bohui":$("#liyou").val(),"leaid":$("#id_val_1").val(),"pipeople":$("#val_2").val()},
                  dataType:"text",
                  success:function (data) {
-
                      location=location;
                  }})
          }else {
@@ -348,13 +344,13 @@
          }
      }
     function  unpass_xiujia() {
-         var  zhi=$("#liyou6").val();
-         if(zhi!=""){
+         var  bbb=$("#liyou").val();
+         if(bbb!=""){
              alert("zhixing");
              $.ajax({
                  url:"L_upd_xiujia_unpass",
                  type:"post",
-                 data:{"leasate":2,"bohui":$("#liyou6").val(),"leaid":$("#id_val_1").val(),"pipeople":$("#val_2").val()},
+                 data:{"leasate":2,"bohui":$("#liyou").val(),"leaid":$("#id_val_1").val(),"pipeople":$("#val_2").val()},
                  dataType:"text",
                  success:function (data) {
                      location=location;
@@ -449,7 +445,7 @@
               $.ajax({
                   url:"L_query_xiujia",
                   type:"post",
-                  data:{"fristdate":$("#test1").val(),"overdate":$("#test2").val()},
+                  data:{"fristdate":$("#test1").val(),"overdate":$("#test2").val(),"deptid":$("#deptid").val()},
                   dataType:"json",
                   success:function (data) {
                       alert(data);
@@ -463,7 +459,7 @@
                               div += "<input id='leaid' hidden value='"+data[i].leaid+"' />";
                               div += "<span  style='font-size:20px;color: #668FB8'> 休假申请</span>";
                               div += "<span style='font-size: 12px;font-weight:500;color:#999999 '>" + data[i].shendate + "</span>";
-                              div += "<span style='margin-left:650px; '>已通过 </span><br/>";
+                              div += "<span style='margin-left:650px; '>已审核 </span><br/>";
                               div += "<div style='border-top:1px solid #2a6496;width: auto'></div><br/>"
                               div += "<span>" + '姓名:' + data[i].empname + "<span>";
                               div += "<span style='margin-left: 250px'>" + '类型:' + data[i].leatype + "</span><br/><br/>";
@@ -502,6 +498,7 @@
                    data: {
                        "fristdate": $("#test1").val(),
                        "overdate": $("#test2").val(),
+                       "deptid":$("#deptid").val()
                    },
                    dataType: "json",
                    success: function (data) {
@@ -557,7 +554,7 @@
                $.ajax({
                    url:"L_query_cizhi",
                    type:"post",
-                   data:{"fristdate":$("#test1").val(),"overdate":$("#test2").val()},
+                   data:{"fristdate":$("#test1").val(),"overdate":$("#test2").val(),"deptid":$("#deptid").val()},
                    dataType:"json",
                    success:function (data) {
                        alert(data);
@@ -609,13 +606,13 @@
             * */
            alert("执行未审批");
            if(sel_val==5){
-               alert("执行休假审批未审核")
+               alert("执行休假审批未审核"+$("#deptid").val())
                /**休假的状态0
                 * */
                $.ajax({
                    url:"L_query_xiujia",
                    type:"post",
-                   data:{"fristdate":$("#test1").val(),"overdate":$("#test2").val()},
+                   data:{"fristdate":$("#test1").val(),"overdate":$("#test2").val(),"deptid":$("#deptid").val()},
                    dataType:"json",
                    success:function (data) {
                        alert(data);
@@ -657,6 +654,7 @@
                    data: {
                        "fristdate": $("#test1").val(),
                        "overdate": $("#test2").val(),
+                       "deptid":$("#deptid").val()
                    },
                    dataType: "json",
                    success: function (data) {
@@ -682,13 +680,14 @@
 
                        }}})
                }
+                //aa
 
            if(sel_val==7){
                alert("执行离职审批未审核")
                $.ajax({
                    url:"L_query_cizhi",
                    type:"post",
-                   data:{"fristdate":$("#test1").val(),"overdate":$("#test2").val()},
+                   data:{"fristdate":$("#test1").val(),"overdate":$("#test2").val(),"deptid":$("#deptid").val()},
                    dataType:"json",
                    success:function (data) {
                        alert(data);
