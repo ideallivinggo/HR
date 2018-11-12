@@ -472,11 +472,12 @@
     function queryOneInte(obj) {
 
         $.ajax({
-            url: "queryOneInteYLP",
+            url: "queryAllInteYLP",
             type: "post",
-            data:{inoid:obj},
+            data:{inoid:obj,pageNum:1},
             dataType: "json",
             success: function (data) {
+                var data = data.list;
                 $("#resumename").val(data[0].resumename);
                 $("#sex").val(data[0].sex);
                 $("#age").val(data[0].age);

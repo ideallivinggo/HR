@@ -172,20 +172,6 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="layui-form-item">
-                            <div class="layui-inline">
-                                <label class="layui-form-label">开课老师</label>
-                                <div class="layui-input-block" style="width: 200px">
-                                    <input id="empname" class="layui-input"  disabled>
-                                </div>
-                            </div>
-                            <div class="layui-inline">
-                                <label class="layui-form-label">最大人数</label>
-                                <div class="layui-input-block" style="width: 200px">
-                                    <input id="kechengmaxren" class="layui-input" disabled>
-                                </div>
-                            </div>
-                        </div>
                         <div class="layui-form-item" style="display: none">
                             <div class="layui-inline" >
                                 <label class="layui-form-label">课id</label>
@@ -236,7 +222,21 @@
                     tr+="<td>"+data.list[i].kebaomingtimeend+"</td>";
                     tr+="<td>"+data.list[i].kechengmaxren+"</td>";
                     tr+="<td>"+data.list[i].keaddress+"</td>";
-                    tr+="<td>"+data.list[i].empname+"</td>";
+                    $.ajax({
+                        url: "queryAllketJSR",
+                        type: "post",
+                        data:{keid:data.list[i].keid},
+                        dataType: "json",
+                        async:false,
+                        success: function (data) {
+                            var tea="";
+                            for (var i = 0; i < data.length; i++){
+                                tea+=data[i].empname+",";
+                            }
+                            tr+="<td>"+tea+"</td>";
+                        }
+                    })
+
                    if(data.list[i].kestate==1){
                         tr+="<td>待审批</td>";
                         tr+="<td><button type='button' data-toggle='modal' data-target='#myModal' onclick='details("+data.list[i].keid+")'>详情</button></td>";
@@ -252,7 +252,6 @@
                         tr+="<td><button>详情</button></td>";
                         tr+="</tr>";
                     }
-
                     $("#mytab").append(tr);
                 }
                 $("#nowPage").html(data.pageNum);
@@ -261,6 +260,7 @@
             }
         })
     }
+
     //通过
     function tongguo() {
         var keid = $("#keid").val();
@@ -304,11 +304,12 @@
     //详情
     function details(obj) {
         $.ajax({
-            url: "queryOnekecJSR",
+            url: "queryAllkecJSR",
             type: "post",
-            data:{keid:obj},
+            data:{keid:obj, pageNum:1},
             dataType: "json",
             success: function (data) {
+                var data = data.list;
                 $("#kename").val(data[0].kename);
                 $("#kemiaoshu").val(data[0].kemiaoshu);
                 $("#kexiangqing").val(data[0].kexiangqing);
@@ -316,9 +317,7 @@
                 $("#keendtime").val(data[0].keendtime);
                 $("#kebaomingtimebegin").val(data[0].kebaomingtimebegin);
                 $("#kebaomingtimeend").val(data[0].kebaomingtimeend);
-                $("#kechengmaxren").val(data[0].kechengmaxren);
                 $("#keaddress").val(data[0].keaddress);
-                $("#empname").val(data[0].empname);
 
                 $("#keid").val(data[0].keid);
             }

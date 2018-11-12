@@ -502,11 +502,12 @@
     //查看单个详情
     function queryOneRec(obj) {
         $.ajax({
-            url: "queryOneRecYLP",
-            data:{recid:obj},
+            url: "queryAllRecYLP",
+            data:{recid:obj,pageNum:1},
             type: "post",
             dataType: "json",
             success: function (data) {
+                var data = data.list;
                 $("#rectitle").val(data[0].rectitle)
                 $("#recid").val(data[0].recid)
                 $("#deptname").val(data[0].deptname)

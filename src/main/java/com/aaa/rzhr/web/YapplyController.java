@@ -65,13 +65,6 @@ public class YapplyController {
         return info;
     }
     /**
-     * 查看招聘申请
-     */
-    @RequestMapping("queryOneRecYLP")
-    public List<Map> queryOneRec(Recruitment recruitment) {
-        return service.queryOneRec(recruitment);
-    }
-    /**
      * 修改招聘申请
      */
     @RequestMapping("updateRecYLP")
@@ -146,13 +139,6 @@ public class YapplyController {
         return info;
     }
 
-    /**
-     * 查看单个简历
-     */
-    @RequestMapping("queryOneRes")
-    public List<Map> queryOneRes(Resume resume) {
-        return service.queryOneRes(resume);
-    }
 
     /**
      * 筛选简历
@@ -181,13 +167,6 @@ public class YapplyController {
     @RequestMapping("queryAllInteYLP")
     public  PageInfo<Map> queryAllInte(Interviewone interviewone, Integer pageNum) {
         return service.queryAllInte(interviewone, pageNum);
-    }
-    /**
-     * 查看单个面试
-     */
-    @RequestMapping("queryOneInteYLP")
-    public List<Map> queryOneInte(Interviewone interviewone) {
-        return service.queryOneInte(interviewone);
     }
 
     /**
@@ -219,13 +198,6 @@ public class YapplyController {
     @RequestMapping("queryAllInteTwoYLP")
     public  PageInfo<Map> queryAllInteTwo(Interviewtwo interviewtwo, Integer pageNum) {
         return service.queryAllInteTwo(interviewtwo, pageNum);
-    }
-    /**
-     * 查看单个第二次面试
-     */
-    @RequestMapping("queryOneInteTwoYLP")
-    public List<Map> queryOneInteTwo(Interviewtwo interviewtwo) {
-        return service.queryOneInteTwo(interviewtwo);
     }
     /**
      * 清除过期和不过面试
@@ -292,6 +264,8 @@ public class YapplyController {
         return "true";
     }
 
+
+
 ////////////////////////////////////////////////////////////////////////////////////////
     /**
      * 分页查询课程审批
@@ -301,11 +275,11 @@ public class YapplyController {
         return service.queryAllkec(kecheng, pageNum);
     }
     /**
-     * 课程审批详情
+     * 查看上课老师
      * */
-    @RequestMapping("queryOnekecJSR")
-    public List<Map> queryOnekec(Kecheng kecheng) {
-        return service.queryOnekec(kecheng);
+    @RequestMapping("queryAllketJSR")
+    public  List<Map> queryAllket(Keteacher keteacher) {
+        return service.queryAllket(keteacher);
     }
     /**
      * 审批
@@ -316,9 +290,43 @@ public class YapplyController {
         return "true";
     }
 
-
-
-
+    /**
+     * 员工培训记录
+     * */
+    @RequestMapping("queryAllkeeJSR")
+    public  PageInfo<Map> queryAllkee(Integer empid, Integer kestate, Integer pageNum) {
+        return service.queryAllkee(empid, kestate, pageNum);
+    }
+    /**
+     * 查询培训课程员工
+     * */
+    @RequestMapping("queryAllkeempJSR")
+    public  List<Map> queryAllkeemp(Integer keempid,Integer keid, Integer keokstate, String empnumber) {
+        return service.queryAllkeemp(keempid,keid, keokstate, empnumber);
+    }
+    /**
+     * 打分
+     */
+    @RequestMapping("dafenYLP")
+    public  String dafen (Keemp keemp) {
+        service.dafen(keemp);
+        return "true";
+    }
+    /**
+     * 剩余打分人数
+     */
+    @RequestMapping("shengyuYLP")
+    public Map shengyu() {
+        return service.shengyu();
+    }
+    /**
+     * 培训课程完成
+     */
+    @RequestMapping("wanchengYLP")
+    public String wancheng (Kecheng kecheng) {
+        service.wancheng(kecheng);
+        return "true";
+    }
 
 
 

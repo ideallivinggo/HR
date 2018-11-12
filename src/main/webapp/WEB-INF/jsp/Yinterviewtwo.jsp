@@ -394,11 +394,12 @@
     //单个信息
     function queryOneInte(obj) {
         $.ajax({
-            url: "queryOneInteTwoYLP",
+            url: "queryAllInteTwoYLP",
             type: "post",
-            data:{intid:obj},
+            data:{intid:obj,pageNum:1},
             dataType: "json",
             success: function (data) {
+                var data = data.list;
                 $("#resumename").val(data[0].resumename);
                 $("#sex").val(data[0].sex);
                 $("#age").val(data[0].age);

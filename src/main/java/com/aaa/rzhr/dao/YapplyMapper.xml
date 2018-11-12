@@ -266,36 +266,91 @@
 
 
     <!--培训管理-->
+
     <!--培训课程审核-->
     <select id="queryAllkec" parameterType="Kecheng" resultType="java.util.Map">
-        SELECT kt.keteacherid, kc.*, em.empname FROM keteacher AS kt
-        INNER JOIN kecheng AS kc ON kt.keid = kc.keid
-        INNER JOIN emp AS em ON kt.empid = em.empid WHERE 1 =1
+        SELECT * FROM kecheng WHERE 1 =1
         <if test="kestate != null">
             and kestate = #{kestate}
         </if>
         <if test="keid != null">
-            and kc.keid = #{keid}
+            and keid = #{keid}
         </if>
     </select>
+    <!--查看培训老师-->
+    <select id="queryAllket" parameterType="Keteacher" resultType="java.util.Map">
+        SELECT * from keteacher  kt JOIN emp  e ON kt.empid=e.empid WHERE 1 =1
+        <if test="keid != null">
+            and keid = #{keid}
+        </if>
+    </select>
+
     <!--审批-->
     <update id="updatekec" parameterType="Kecheng">
         UPDATE kecheng SET kestate = #{kestate} WHERE keid = #{keid}
     </update>
+
     <!--员工培训记录-->
-    <select id="queryAllkee" parameterType="Keemp" resultType="java.util.Map">
-        SELECT km.*, kc.kename, em.empname, em.empnumber FROM keemp AS km
-        INNER JOIN kecheng AS kc ON km.keid = kc.keid
-        INNER JOIN emp AS em ON km.empid = em.empid WHERE 1 = 1
-        <if test="keokstate != null">
-            and keokstate = #{keokstate}
+    <select id="queryAllkee" parameterType="Map" resultType="java.util.Map">
+        SELECT kc.*, em.empname FROM kecheng kc
+        INNER JOIN keteacher kt ON kc.keid = kt.keid
+        INNER JOIN emp em ON em.empid = kt.empid
+        WHERE 1 = 1
+        <if test="kestate != null">
+            and kc.kestate = #{kestate}
         </if>
-        <if test="empnumber != null">
-            and empnumber = #{empnumber}
-        </if>
-        <if test="keempid != null">
-            and keempid = #{keempid}
+        <if test="empid != null">
+            and em.empid = #{empid}
         </if>
     </select>
+    <!--查询培训课程员工-->
+    <select id="queryAllkeemp" parameterType="Map" resultType="java.util.Map">
+        SELECT km.*, kc.kename, em.empname, em.empnumber FROM keemp AS km
+        INNER JOIN kecheng kc ON km.keid = kc.keid
+        INNER JOIN emp em ON km.empid = em.empid
+        WHERE 1 = 1
+        <choose>
+            <when test="keempid != null">
+                    and km.keempid = #{keempid}
+            </when>
+            <otherwise>
+                <if test="keid != null">
+                    and km.keid = #{keid}
+                </if>
+                <if test="keokstate != null">
+                    and km.keokstate = #{keokstate}
+                </if>
+                <if test="empnumber != ''">
+                    and em.empnumber = #{empnumber}
+                </if>
+            </otherwise>
+        </choose>
+    </select>
+    <!--打分-->
+    <update id="dafen" parameterType="Keemp">
+        UPDATE keemp SET
+        <if test="kepingyu != ''">
+            kepingyu = #{kepingyu},
+        </if>
+        <if test="keokstate != null">
+            keokstate = #{keokstate},
+        </if>
+        <if test="kefenshuo != null">
+            kefenshuo = #{kefenshuo},
+        </if>
+        <if test="kepingjiatime != ''">
+            kepingjiatime = #{kepingjiatime}
+        </if>
+         WHERE keempid = #{keempid}
+    </update>
+
+    <!--剩余打分人数-->
+    <select id="shengyu" resultType="java.util.Map">
+       SELECT COUNT(keokstate) AS sheng FROM keemp where keokstate = 0
+    </select>
+    <!--培训完成-->
+    <update id="wancheng" parameterType="Kecheng">
+        UPDATE kecheng SET kestate = 4  WHERE keid = #{keid}
+    </update>
 
 </mapper>
