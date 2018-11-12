@@ -271,6 +271,7 @@ public class ContractController {
     /**
      * 分组查询部门
      * */
+
     @RequestMapping("QueryGroupYqx")
     @ResponseBody
     public List<Map> QueryGroupYqx(Integer deptid){
