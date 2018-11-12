@@ -74,10 +74,8 @@
                 <tr>
                     <th>编号</th>
                     <th>课程名称</th>
-                    <th>课程开始时间</th>
-                    <th>课程结束时间</th>
-                    <th>报名开始时间</th>
-                    <th>报名结束时间</th>
+                    <th>课程开始/结束时间</th>
+                    <th>报名开始/结束时间</th>
                     <th>课程最大人数</th>
                     <th>开课地点</th>
                     <th>开课老师</th>
@@ -201,7 +199,7 @@
         queryAllkecJSR(1);
     });
 
-    //查看面试
+    //查看课程
     function queryAllkecJSR(pageNum) {
         var kestate=$("#kestate").val();
         $.ajax({
@@ -216,10 +214,8 @@
                     var tr="<tr>";
                     tr+="<td>"+data.list[i].keid+"</td>";
                     tr+="<td>"+data.list[i].kename+"</td>";
-                    tr+="<td>"+data.list[i].kebegintime+"</td>";
-                    tr+="<td>"+data.list[i].keendtime+"</td>";
-                    tr+="<td>"+data.list[i].kebaomingtimebegin+"</td>";
-                    tr+="<td>"+data.list[i].kebaomingtimeend+"</td>";
+                    tr+="<td>"+data.list[i].kebegintime+"&nbsp;&nbsp;»&nbsp;&nbsp;"+data.list[i].keendtime+"</td>";
+                    tr+="<td>"+data.list[i].kebaomingtimebegin+"&nbsp;&nbsp;»&nbsp;&nbsp;"+data.list[i].kebaomingtimeend+"</td>";
                     tr+="<td>"+data.list[i].kechengmaxren+"</td>";
                     tr+="<td>"+data.list[i].keaddress+"</td>";
                     $.ajax({

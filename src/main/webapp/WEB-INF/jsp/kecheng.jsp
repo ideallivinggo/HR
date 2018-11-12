@@ -40,7 +40,34 @@
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 </head>
+<style>
+    #fy {
+        height: 40px;
+        margin-left: 20px;
+        margin-top: -10px
 
+    }
+    .fy1 {
+        width: 35px;
+        height: 30px;
+        text-align: center;
+        cursor: pointer;
+        float: left;
+        line-height: 30px;
+        border-radius:5px;
+        margin-left: 10px;
+
+    }
+    .fy2 {
+        width: 100px;
+        height: 30px;
+        text-align: center;
+        float: left;
+        line-height: 30px;
+        border-radius:5px;
+        letter-spacing: 5px;
+    }
+</style>
 <body>
 
 <!-- 模态框（Modal） -->
@@ -263,55 +290,152 @@
 <section id="container" style="margin-top: -50px;" >
 
     <section class="wrapper">
-            <div class="row mt">
-                <div class="col-md-12">
-                    <div class="content-panel">
-                        <table class="table table-striped table-advance table-hover">
-                            <h4><i class="fa fa-angle-right"></i> 培训课程
-                                <button class="btn btn-primary btn-lg" data-toggle="modal" style="margin-left: 1000px" data-target="#myModal">创建课程</button></h4>
-                            <hr>
-                            <thead>
-                            <tr>
-                                <th><i class="fa fa-bullhorn"></i> </th>
-                                <th><i class="fa fa-bullhorn"></i> 课程名称</th>
-                                <th class="hidden-phone"><i class="fa fa-question-circle"></i> 培训内容</th>
-                                <th><i class="fa fa-lightbulb-o"></i> 开始/结束时间</th>
-                                <th><i class="fa fa-lightbulb-o"></i> 报名开始/结束时间</th>
-                                <th> 课程当前状态</th>
-                                <th>操作</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-
-                            <tr>
-                                <td> <input type="checkbox" id="inlineCheckbox1" value="option1"> </td>
-                                <td><a href="basic_table.html#">安全培训</a></td>
-                                <td class="hidden-phone">如何正确操作拖拉机炒菜</td>
-                                <td>2018-09-01  <i class="fa fa-angle-double-right" aria-hidden="true"></i>  2018-09-03
-
-                                </td>
-                                <td>2018-09-01  <i class="fa fa-angle-double-right" aria-hidden="true"></i>  2018-09-03
-
-                                </td>
-                                <td><span class="label label-info label-mini">进行中</span></td>
-                                <td>
-
-                                    <button class="btn btn-primary btn-xs">查看正在培训人员</button>
-
-                                </td>
-                            </tr>
+        <div class="panel panel-default" style="margin:1%">
+            <!-- 多条件查询  -->
+            <div class="panel-heading" style="height: 60px">
+                <div class="layui-form" >
+                    <div class="layui-form-item">
+                        <div class="layui-inline" style="margin: 0px">
+                            <select id="kestate">
+                                <option value="1">待审批</option>
+                                <option value="2">已通过</option>
+                                <option value="3">未通过</option>
+                            </select>
+                        </div>
+                        <div class="layui-inline" style="margin: 0px" >
+                            <button style="border: 1px solid #e6e6e6;width: 30px;height: 37px;margin-left:-6px;" onclick="queryAllkecJSR(1)"><i class="layui-icon">&#xe615;</i></button>
+                        </div>
+                        <div class="layui-inline" style="float: right" >
+                            <button class="layui-btn" data-toggle="modal"  data-target="#myModal">创建课程</button>
+                        </div>
 
 
+                    </div>
+                </div>
+            </div>
+            <!--table表格-->
+            <div class="panel-body">
+                <div class="table-responsive">
+                    <table class="layui-table">
+                        <thead>
+                        <tr>
+                            <th>编号</th>
+                            <th>课程名称</th>
+                            <th>课程开始/结束时间</th>
+                            <th>报名开始/结束时间</th>
+                            <th>课程最大人数</th>
+                            <th>开课地点</th>
+                            <th>开课老师</th>
+                            <th>状态</th>
+                            <th>操作</th>
+                        </tr>
+                        </thead>
+                        <tbody id="mytab">
+                        <!--数据-->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <!--分页-->
+            <div id="fy">
+                <div id="prepage" class="fy1"><i class="layui-icon">&#xe603;</i></div><!--上一页-->
+                <div class="fy1" style="background-color: #009688; color: #FFFFFF"><span id="nowPage"></span></div><!--第几页-->
+                <div id="nextpage" class="fy1"><i class="layui-icon">&#xe602;</i></div><!--下一页-->
+                <div class="fy2">共<span id="total"></span>条</div><!--条数-->
+                <div class="fy2">共<span id="pages"></span>页</div><!--页数-->
+            </div>
+        </div>
+
+        <!-- 模态详情（Modal） -->
+        <div class="modal fade" id="myModal2" >
+            <div class="modal-dialog"  style="width: 700px;margin-bottom: 80px" >
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title"  style="font-size:28px;font-weight:bold;font-family:'楷体';margin-left: 50px">
+                            课程详情
+                        </h4>
+                    </div>
+                    <div class="modal-body">
+                        <form class="layui-form" >
+                            <div class="layui-form-item">
+                                <div class="layui-inline">
+                                    <label class="layui-form-label">课程名称</label>
+                                    <div class="layui-input-block" style="width: 525px">
+                                        <input id="kename"  class="layui-input" disabled>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <div class="layui-inline">
+                                    <label class="layui-form-label">课程描述</label>
+                                    <div class="layui-input-block" style="width: 525px">
+                                        <textarea id="kemiaoshu" class="layui-textarea" disabled> </textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <div class="layui-inline">
+                                    <label class="layui-form-label">课程详情</label>
+                                    <div class="layui-input-block" style="width: 525px">
+                                        <textarea id="kexiangqing" class="layui-textarea" disabled> </textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <div class="layui-inline">
+                                    <label class="layui-form-label">课程时间</label>
+                                    <div class="layui-input-block" style="width: 200px">
+                                        <input id="kebegintime" class="layui-input" disabled>
+                                    </div>
+                                </div>
+                                <div class="layui-inline">
+                                    <label class="layui-form-label" style="width: 60px">→</label>
+                                    <div class="layui-input-block" style="width: 200px">
+                                        <input id="keendtime" class="layui-input" disabled>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <div class="layui-inline">
+                                    <label class="layui-form-label">报名时间</label>
+                                    <div class="layui-input-block" style="width: 200px">
+                                        <input id="kebaomingtimebegin" class="layui-input" disabled>
+                                    </div>
+                                </div>
+                                <div class="layui-inline">
+                                    <label class="layui-form-label" style="width: 60px">→</label>
+                                    <div class="layui-input-block" style="width: 200px">
+                                        <input id="kebaomingtimeend" class="layui-input" disabled>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <div class="layui-inline">
+                                    <label class="layui-form-label">开课地点</label>
+                                    <div class="layui-input-block" style="width: 525px">
+                                        <input id="keaddress" class="layui-input" disabled>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="layui-form-item" style="display: none">
+                                <div class="layui-inline" >
+                                    <label class="layui-form-label">课id</label>
+                                    <div class="layui-input-block" style="width: 200px">
+                                        <input id="keid" class="layui-input">
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal -->
+        </div>
 
 
-                            </tbody>
-                        </table>
-                    </div><!-- /content-panel -->
-                </div><!-- /col-md-12 -->
-            </div><!-- /row -->
 
 
-</section>
+    </section>
 
     <!--main content end-->
     <!--footer start-->
@@ -457,6 +581,106 @@
             })
 
        }
+
+    //添加表单属性
+    layui.use(['form', 'layedit', 'laydate','element'], function(){
+        var element = layui.element;
+    });
+    //自动查询
+    $(function(){
+        queryAllkecJSR(1);
+    });
+
+    //查看课程
+    function queryAllkecJSR(pageNum) {
+        var kestate=$("#kestate").val();
+        $.ajax({
+            url: "queryAllkecJSR",
+            type: "post",
+            data:{kestate:kestate, pageNum:pageNum},
+            dataType: "json",
+            async:false,
+            success: function (data) {
+                $("#mytab").html("");
+                for ( var i = 0; i < data.list.length; i++) {
+                    var tr="<tr>";
+                    tr+="<td>"+data.list[i].keid+"</td>";
+                    tr+="<td>"+data.list[i].kename+"</td>";
+                    tr+="<td>"+data.list[i].kebegintime+"&nbsp;&nbsp;»&nbsp;&nbsp;"+data.list[i].keendtime+"</td>";
+                    tr+="<td>"+data.list[i].kebaomingtimebegin+"&nbsp;&nbsp;»&nbsp;&nbsp;"+data.list[i].kebaomingtimeend+"</td>";
+                    tr+="<td>"+data.list[i].kechengmaxren+"</td>";
+                    tr+="<td>"+data.list[i].keaddress+"</td>";
+                    $.ajax({
+                        url: "queryAllketJSR",
+                        type: "post",
+                        data:{keid:data.list[i].keid},
+                        dataType: "json",
+                        async:false,
+                        success: function (data) {
+                            var tea="";
+                            for (var i = 0; i < data.length; i++){
+                                tea+=data[i].empname+",";
+                            }
+                            tr+="<td>"+tea+"</td>";
+                        }
+                    })
+                    if(data.list[i].kestate==1){
+                        tr+="<td>待审批</td>";
+                        tr+="<td><button type='button' data-toggle='modal' data-target='#myModal2' onclick='details("+data.list[i].keid+")'>详情</button></td>";
+                        tr+="</tr>";
+                    }
+                    if(data.list[i].kestate==2){
+                        tr+="<td>已通过</td>";
+                        tr+="<td><button type='button' data-toggle='modal' data-target='#myModal2' onclick='details("+data.list[i].keid+")'>详情</button></td>";
+                        tr+="</tr>";
+                    }
+                    if(data.list[i].kestate==3){
+                        tr+="<td>未通过</td>";
+                        tr+="<td><button type='button' data-toggle='modal' data-target='#myModal2' onclick='details("+data.list[i].keid+")'>详情</button></td>";
+                        tr+="</tr>";
+                    }
+                    $("#mytab").append(tr);
+                }
+                $("#nowPage").html(data.pageNum);
+                $("#total").html(data.total);//总条数
+                $("#pages").html(data.pages);//总页数
+            }
+        })
+    }
+    $("#prepage").click(function(){
+        //得到下一页的页码
+        var nowPage=parseInt($("#nowPage").html());
+        queryAllkecJSR(nowPage-1);
+    });
+    $("#nextpage").click(function(){
+        //得到下一页的页码
+        var nowPage=parseInt($("#nowPage").html());
+        queryAllkecJSR(nowPage+1);
+    });
+    //详情
+    function details(obj) {
+        $.ajax({
+            url: "queryAllkecJSR",
+            type: "post",
+            data:{keid:obj, pageNum:1},
+            dataType: "json",
+            success: function (data) {
+                var data = data.list;
+                $("#kename").val(data[0].kename);
+                $("#kemiaoshu").val(data[0].kemiaoshu);
+                $("#kexiangqing").val(data[0].kexiangqing);
+                $("#kebegintime").val(data[0].kebegintime);
+                $("#keendtime").val(data[0].keendtime);
+                $("#kebaomingtimebegin").val(data[0].kebaomingtimebegin);
+                $("#kebaomingtimeend").val(data[0].kebaomingtimeend);
+                $("#keaddress").val(data[0].keaddress);
+
+                $("#keid").val(data[0].keid);
+            }
+        })
+    }
+
+
 
 </script>
 
