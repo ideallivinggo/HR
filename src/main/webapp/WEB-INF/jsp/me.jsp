@@ -100,17 +100,17 @@
             <div class="ziti">待入职&nbsp;»</div>
         </div>
         <div class="empstate">
-            <div class="shu"><span id="dzz" style="font-size: 30px"></span>&nbsp;人</div>
+            <div class="shu"><span id="dzz" style="font-size: 30px">0</span>&nbsp;人</div>
             <img src="../../assets/img/dzz.png" width="100" height="100" class="tu">
             <div class="ziti">待转正&nbsp;»</div>
         </div>
         <div class="empstate">
-            <div class="shu"><span id="yzz" style="font-size: 30px"></span>&nbsp;人</div>
+            <div class="shu"><span id="yzz" style="font-size: 30px">0</span>&nbsp;人</div>
             <img src="../../assets/img/ddd.png" width="100" height="100" class="tu">
             <div class="ziti">已转正&nbsp;»</div>
         </div>
         <div class="empstate">
-            <div class="shu"><span id="dlz" style="font-size: 30px"></span>&nbsp;人</div>
+            <div class="shu"><span id="dlz" style="font-size: 30px">0</span>&nbsp;人</div>
             <img src="../../assets/img/dlz.png" width="100" height="100" class="tu">
             <div class="ziti">待离职&nbsp;»</div>
         </div>
@@ -145,7 +145,7 @@
             <canvas id="bar" height="300" width="470"></canvas><!--图表-->
         </div>
         <div class="matter1">
-            <p style="font-size: 20px">快捷入口</p>
+            <p style="font-size: 20px">公告栏</p>
         </div>
     </div>
 

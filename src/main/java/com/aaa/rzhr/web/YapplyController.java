@@ -6,7 +6,6 @@ import com.aaa.rzhr.pojo.*;
 import com.aaa.rzhr.service.MailService;
 import com.aaa.rzhr.service.YapplyService;
 import com.github.pagehelper.PageInfo;
-import jxl.Cell;
 import jxl.Sheet;
 import jxl.Workbook;
 import jxl.read.biff.BiffException;
@@ -64,13 +63,6 @@ public class YapplyController {
     public PageInfo<Map> queryAllRec(Recruitment recruitment,Integer pageNum) {
         PageInfo<Map> info = service.queryAllRec(recruitment, pageNum);
         return info;
-    }
-    /**
-     * 查看招聘申请
-     */
-    @RequestMapping("queryOneRecYLP")
-    public List<Map> queryOneRec(Recruitment recruitment) {
-        return service.queryOneRec(recruitment);
     }
     /**
      * 修改招聘申请
@@ -147,13 +139,6 @@ public class YapplyController {
         return info;
     }
 
-    /**
-     * 查看单个简历
-     */
-    @RequestMapping("queryOneRes")
-    public List<Map> queryOneRes(Resume resume) {
-        return service.queryOneRes(resume);
-    }
 
     /**
      * 筛选简历
@@ -183,13 +168,6 @@ public class YapplyController {
     public  PageInfo<Map> queryAllInte(Interviewone interviewone, Integer pageNum) {
         return service.queryAllInte(interviewone, pageNum);
     }
-    /**
-     * 查看单个面试
-     */
-    @RequestMapping("queryOneInteYLP")
-    public List<Map> queryOneInte(Interviewone interviewone) {
-        return service.queryOneInte(interviewone);
-    }
 
     /**
      * 清除过期和不过面试
@@ -210,7 +188,6 @@ public class YapplyController {
     @RequestMapping("addIntTwoYLP")
     public String addIntTwo(Interviewtwo interviewtwo, Interviewone interviewone, String emali, String notice) {
         service.addIntTwo(interviewtwo, interviewone);
-        System.out.println(emali);
         String shijian = interviewtwo.getIntdate();
         mailService.sendSimpleMail(emali,"面试通知",notice+"面试时间"+shijian);
         return "true";
@@ -223,14 +200,8 @@ public class YapplyController {
         return service.queryAllInteTwo(interviewtwo, pageNum);
     }
     /**
-     * 查看单个第二次面试
-     */
-    @RequestMapping("queryOneInteTwoYLP")
-    public List<Map> queryOneInteTwo(Interviewtwo interviewtwo) {
-        return service.queryOneInteTwo(interviewtwo);
-    }
-    /**
-     * 修改第二次面试
+     * 清除过期和不过面试
+     * 添加通过二次面试
      * */
     @RequestMapping("updateInteTwoYLP")
     public String updateInteTwo(Interviewtwo interviewtwo){
@@ -285,7 +256,7 @@ public class YapplyController {
         return service.queryAllAct(activation, pageNum);
     }
     /**
-     * 撤除
+     * 不入职撤除
      */
     @RequestMapping("ccActYLP")
     public  String ccAct (Activation activation) {
@@ -295,11 +266,67 @@ public class YapplyController {
 
 
 
+////////////////////////////////////////////////////////////////////////////////////////
+    /**
+     * 分页查询课程审批
+     * */
+    @RequestMapping("queryAllkecJSR")
+    public  PageInfo<Map> queryAllkec(Kecheng kecheng, Integer pageNum) {
+        return service.queryAllkec(kecheng, pageNum);
+    }
+    /**
+     * 查看上课老师
+     * */
+    @RequestMapping("queryAllketJSR")
+    public  List<Map> queryAllket(Keteacher keteacher) {
+        return service.queryAllket(keteacher);
+    }
+    /**
+     * 审批
+     */
+    @RequestMapping("updatekecYLP")
+    public  String updatekec (Kecheng kecheng) {
+        service.updatekec(kecheng);
+        return "true";
+    }
 
-
-
-
-
+    /**
+     * 员工培训记录
+     * */
+    @RequestMapping("queryAllkeeJSR")
+    public  PageInfo<Map> queryAllkee(Integer empid, Integer kestate, Integer pageNum) {
+        return service.queryAllkee(empid, kestate, pageNum);
+    }
+    /**
+     * 查询培训课程员工
+     * */
+    @RequestMapping("queryAllkeempJSR")
+    public  List<Map> queryAllkeemp(Integer keempid,Integer keid, Integer keokstate, String empnumber) {
+        return service.queryAllkeemp(keempid,keid, keokstate, empnumber);
+    }
+    /**
+     * 打分
+     */
+    @RequestMapping("dafenYLP")
+    public  String dafen (Keemp keemp) {
+        service.dafen(keemp);
+        return "true";
+    }
+    /**
+     * 剩余打分人数
+     */
+    @RequestMapping("shengyuYLP")
+    public Map shengyu(Integer keid) {
+        return service.shengyu(keid);
+    }
+    /**
+     * 培训课程完成
+     */
+    @RequestMapping("wanchengYLP")
+    public String wancheng (Kecheng kecheng) {
+        service.wancheng(kecheng);
+        return "true";
+    }
 
 
 

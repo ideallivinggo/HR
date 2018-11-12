@@ -51,11 +51,6 @@ public class YapplyServiceImpl implements YapplyService {
     }
 
     @Override
-    public List<Map> queryOneRec(Recruitment recruitment) {
-        return yapplyMapper.queryAllRec(recruitment);
-    }
-
-    @Override
     public void updateRec(Recruitment recruitment) {
         yapplyMapper.updateRec(recruitment);
     }
@@ -71,12 +66,6 @@ public class YapplyServiceImpl implements YapplyService {
         List<Map> list=yapplyMapper.queryAllRes(resume);
         PageInfo<Map> info = new PageInfo<Map>(list);
         return info;
-    }
-
-    //查看单个
-    @Override
-    public List<Map> queryOneRes(Resume resume) {
-        return yapplyMapper.queryAllRes(resume);
     }
 
 
@@ -100,11 +89,6 @@ public class YapplyServiceImpl implements YapplyService {
         PageInfo<Map> info = new PageInfo<Map>(list);
         return info;
     }
-    //查看单个第一次面试表
-    @Override
-    public List<Map> queryOneInte(Interviewone interviewone) {
-        return yapplyMapper.queryAllInte(interviewone);
-    }
 
 
     //清除过期和不过的面试,修改简历成状态3（回收站）
@@ -127,11 +111,6 @@ public class YapplyServiceImpl implements YapplyService {
         List<Map> list = yapplyMapper.queryAllInteTwo(interviewtwo);
         PageInfo<Map> info = new PageInfo<Map>(list);
         return info;
-    }
-    //查看单个第二次面试表
-    @Override
-    public List<Map> queryOneInteTwo(Interviewtwo interviewtwo) {
-        return yapplyMapper.queryAllInteTwo(interviewtwo);
     }
 
     @Override
@@ -220,6 +199,57 @@ public class YapplyServiceImpl implements YapplyService {
     @Override
     public Map countLeave() {
         return yapplyMapper.countLeave();
+    }
+
+
+
+
+
+    @Override
+    public PageInfo<Map> queryAllkec(Kecheng kecheng, Integer pageNum) {
+        PageHelper.startPage(pageNum,10);
+        List<Map> list = yapplyMapper.queryAllkec(kecheng);
+        PageInfo<Map> pageInfo = new PageInfo<Map>(list);
+        return pageInfo;
+    }
+
+    @Override
+    public List<Map> queryAllket(Keteacher keteacher) {
+        return yapplyMapper.queryAllket(keteacher);
+    }
+
+
+    @Override
+    public void updatekec(Kecheng kecheng) {
+        yapplyMapper.updatekec(kecheng);
+    }
+
+    @Override
+    public PageInfo<Map> queryAllkee(Integer empid, Integer kestate, Integer pageNum) {
+        PageHelper.startPage(pageNum,10);
+        List<Map> list = yapplyMapper.queryAllkee(empid, kestate);
+        PageInfo<Map> pageInfo = new PageInfo<Map>(list);
+        return pageInfo;
+    }
+
+    @Override
+    public List<Map> queryAllkeemp(Integer keempid, Integer keid, Integer keokstate, String empnumber) {
+        return yapplyMapper.queryAllkeemp(keempid, keid, keokstate,empnumber);
+    }
+
+    @Override
+    public void dafen(Keemp keemp) {
+        yapplyMapper.dafen(keemp);
+    }
+
+    @Override
+    public Map shengyu(Integer keid) {
+        return yapplyMapper.shengyu(keid);
+    }
+
+    @Override
+    public void wancheng(Kecheng kecheng) {
+        yapplyMapper.wancheng(kecheng);
     }
 
 

@@ -11,6 +11,7 @@ public interface PermissionService {
     boolean needInterceptor(String requestUrl);
     Set<String> listPermissionURLs(String userName);
     Permission getPermissionByid(Integer pid);
+
     List<Permission> queryPermissionByRoleX(Role role);
     //查询全部权限信息
     List<Permission> QueryAll();

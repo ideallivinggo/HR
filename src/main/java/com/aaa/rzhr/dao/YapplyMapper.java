@@ -146,13 +146,49 @@ public interface YapplyMapper {
      * */
     Map countLeave();
 
+    /**
+     * wx公告栏
+     * */
+    List<Map> queryAllMes(Rzmessage rzmessage);
 
 
+    //////////////////////////////////////////培训////////////////////////////////////////////////////////
+    /**
+     * 查看培训课程
+     * */
+    List<Map> queryAllkec(Kecheng kecheng);
+    /**
+     * 查看培训老师
+     * */
+    List<Map> queryAllket(Keteacher keteacher);
 
+    /**
+     * 课程审批
+     * */
+    void updatekec(Kecheng kecheng);
 
+    /**
+     * 已开课程
+     * */
+    List<Map> queryAllkee(@Param("empid") Integer empid, @Param("kestate") Integer kestate);
+    /**
+     * 查询培训课程员工
+     * */
+    List<Map> queryAllkeemp(@Param("keempid") Integer keempid, @Param("keid") Integer keid, @Param("keokstate") Integer keokstate, @Param("empnumber") String empnumber);
+    /**
+     * 员工培训打分
+     * */
+    void dafen(Keemp keemp);
 
+    /**
+     * 剩余打分人数
+     * */
+    Map shengyu(@Param("keid") Integer keid);
 
-
+    /**
+     * 培训打分完成
+     * */
+    void wancheng(Kecheng kecheng);
 
 
 
