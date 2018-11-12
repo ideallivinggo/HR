@@ -1,9 +1,11 @@
 package com.aaa.rzhr.dao;
 
+import com.aaa.rzhr.pojo.Apply_Office;
 import com.aaa.rzhr.pojo.Emp;
+import com.aaa.rzhr.pojo.Keapply;
+import com.aaa.rzhr.pojo.Zhuanzheng;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
-
 import java.util.List;
 import java.util.Map;
 
@@ -35,8 +37,6 @@ public interface UserDao {
     List<Map> L_query_jiaban(@Param("empid") Integer empid, @Param("fristdate") String fristdate, @Param("overdate") String overdate, @Param("apovstate") Integer apovstate);
     /**查询辞职*/
     List<Map> L_query_cizhi(@Param("empid") Integer empid, @Param("fristdate") String fristdate, @Param("overdate") String overdate, @Param("dimstate") Integer dimstate);
-
-
     /**修改休假的状态    为3*/
     void L_update_xiujia(Integer leaid);
     /**修改加班的状态  为3*/
@@ -67,13 +67,35 @@ public interface UserDao {
     List<Map> L_query_user_name(@Param("empnumber") String empnumber);
     /**修改emp状态 为3*/
     void L_update_emp_empstateid(Emp emp);
-
-
-
-
-
-
-
-
+    /**---------------------------------二级审核*/
+    /** 修改休假状态  1和2*/
+    void J_upd_xiujia_unpass(@Param("leasate") Integer leasate, @Param("zongshen") String zongshen, @Param("zongshendate") String zongshendate, @Param("zongbohui") String zongbohui, @Param("leaid") Integer leaid);
+    /** 修改加班状态  1和2*/
+    void J_upd_jiaban_unpass(@Param("apovstate") Integer apovstate, @Param("zongshen") String zongshen, @Param("zongshendate") String zongshendate, @Param("zongbohui") String zongbohui, @Param("apovid") Integer apovid);
+    /** 修改离职状态  1和2*/
+    void J_upd_lizhi_unpass(@Param("dimstate") Integer dimstate, @Param("zongshen") String zongshen, @Param("zongshendate") String zongshendate, @Param("zongbohui") String zongbohui, @Param("dimid") Integer dimid);
+     /**出差申请添加*/
+     void L_add_out(Apply_Office apply_office);
+    /**转正申请*/
+    void L_add_zhuanzheng(Zhuanzheng zhuanzheng);
+    /**一级审批查询培训  转正  出差*/
+    /**转正*/
+    List<Map>  L_shen_zhuan(@Param("deptid") Integer deptid, @Param("shenqingstate") Integer shenqingstate, @Param("fristdate") String fristdate, @Param("overdate") String overdate);
+    /**出差*/
+    List<Map>  L_shen_out(@Param("deptid") Integer deptid, @Param("offstate") Integer offstate, @Param("fristdate") String fristdate, @Param("overdate") String overdate);
+    /**一级审核修改状态 培训 转正 出差*/
+    /**转正*/
+    void L_upd_zhuan(Zhuanzheng zhuanzheng);
+    /**出差*/
+    void L_upd_out(Apply_Office apply_office);
+    /**  二级审核*/
+    /**转正*/
+    void L_upd_zong_zhuan(Zhuanzheng zhuanzheng);
+    /**出差*/
+    void L_upd_zong_out(Apply_Office apply_office);
+    /**培训课程查询*/
+    List<Map> L_query_pei();
+    /**报名课程*/
+    void  L_add_keapply(Keapply keapply);
 
 }

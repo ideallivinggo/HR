@@ -211,6 +211,65 @@ public String Qemp(){
     public  String L_1111(){
         return "L_1111";
     }
+    /**
+     * 老板二级审批请假休假离职审批
+     */
+    @RequestMapping("/L_zong_leave")
+    public  String L_zong_leave(){
+        return "/L_zong_leave";
+    }
+    @RequestMapping("/L_zong_jiaban")
+    public  String L_zong_jiaban(){
+        return "/L_zong_jiaban";
+    }
+    @RequestMapping("/L_zong_lizhi")
+    public  String L_zong_lizhi(){
+        return "/L_zong_lizhi";
+    }
+
+    /**培训申请*/
+    @RequestMapping("/L_pei")
+    public  String L_pei(){
+        return "/L_pei";
+    }
+    /**外出申请*/
+    @RequestMapping("/L_out")
+    public  String L_out(){
+        return "/L_out";
+    }
+    /**转正申请报告*/
+    @RequestMapping("/L_zhuan")
+    public  String L_zhuan(){
+        return "/L_zhuan";
+    }
+    /**一级审核 部门经理   出差 培训 转正*/
+    @RequestMapping("L_yiji_out")
+    public  String L_yiji_out(){
+        return "L_yiji_out";
+    }
+    @RequestMapping("L_shen_out")
+    public  String L_shen_out(){
+        return "L_shen_out";
+    }
+    @RequestMapping("L_shen_zhuan")
+    public  String L_shen_zhuan(){
+        return "L_shen_zhuan";
+    }
+    /**二级审核*/
+    @RequestMapping("L_erji_out")
+    public  String L_erji_out(){
+        return "L_erji_out";
+    }
+    @RequestMapping("L_zong_out")
+    public  String L_zong_out(){
+        return "L_zong_out";
+    }
+    @RequestMapping("L_zong_zhuan")
+    public  String L_zong_zhuan(){
+        return "L_zong_zhuan";
+    }
+
+
 
 
     //----------------------------------靳风儒-------------------------

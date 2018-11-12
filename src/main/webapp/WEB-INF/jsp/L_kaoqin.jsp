@@ -78,7 +78,7 @@
                         $("#mybody").append(div);
 
                     }
-                    if (data[i].leasate == 1) {
+                    if (data[i].leasate == 4) {
                         var div = "<div style='background-color: #FFFFFF;margin-top: 20px;padding-left: 20px'>";
                         div += "<span  style='font-size:20px;color: #668FB8'> 休假申请</span>";
                         div += "<span style='font-size: 12px;font-weight:500;color:#999999 '>" + data[i].shendate + "</span>";
@@ -88,7 +88,11 @@
                         div += "<span style='margin-left: 250px'>" + '类型:' + data[i].leatype + "</span><br/><br/>";
                         div += "<span>" + '理由:' + data[i].leareason + "</span><br/><br/>";
                         div += "<span>" + '请假时间/天数:' + data[i].leaenterdate + '/' + data[i].leaday + "天</span><br/><br/>";
-                        div += "<span>" + '审批人/审批时间:部门主管' + '/' + data[i].pidate + "</span><br/><br/>";
+                        div += "<span>" + '一级审批人/审批时间:部门主管' + '/' + data[i].pidate + "</span><br/><br/>";
+                        div += "<span>" + '部门主管意见'  + data[i].bohui + "</span><br/><br/>";
+                        div += "<span>" + '二级审批人/审批时间:' +data[i].zongshen+ '/' + data[i].zongshendate + "</span><br/><br/>";
+                        div += "<span>" +'总经理意见'+ data[i].zongbohui + "</span><br/><br/>";
+                        div += "<span>" + '人事审批/审批时间:' +data[i].renshishen+ '/' + data[i].renshishendate + "</span><br/><br/>";
                         div += "</div>"
 
                         $("#mybody").append(div);
@@ -104,8 +108,11 @@
                         div += "<span style='margin-left: 250px'>" + '类型:' + data[i].leatype + "</span><br/><br/>";
                         div += "<span>" + '理由:' + data[i].leareason + "</span><br/><br/>";
                         div += "<span>" + '请假时间/天数:' + data[i].leaenterdate + '/' + data[i].leaday + "天</span><br/><br/>";
-                        div += "<span>" + '审批人/审批时间:部门主管' + '/' + data[i].pidate + "</span><br/><br/>";
-                        div += "<span>" + '驳回理由' + data[i].noleareason + "</span>";
+                        div += "<span>" + '一级审批人/审批时间:部门主管' + '/' + data[i].pidate + "</span><br/><br/>";
+                        div += "<span>" + '部门主管意见'  + data[i].bohui + "</span><br/><br/>";
+                        div += "<span>" + '二级审批人/审批时间:' +data[i].zongshen+ '/' + data[i].zongshendate + "</span><br/><br/>";
+                        div += "<span>" +'总经理意见'+ data[i].zongbohui + "</span><br/><br/>";
+                        div += "<span>" + '人事审批/审批时间:' +data[i].renshishen+ '/' + data[i].renshishendate + "</span><br/><br/>";
                         div += "</div>"
 
                         $("#mybody").append(div);
@@ -163,7 +170,7 @@
                     $("#mybody").append(div);
 
                 }
-                if (data[i].leasate == 1) {
+                if (data[i].leasate == 4) {
                     var div = "<div style='background-color: #FFFFFF;margin-top: 20px;padding-left: 20px'>";
                     div += "<span  style='font-size:20px;color: #668FB8'> 休假申请</span>";
                     div += "<span style='font-size: 12px;font-weight:500;color:#999999 '>" + data[i].shendate + "</span>";
@@ -173,7 +180,11 @@
                     div += "<span style='margin-left: 250px'>" + '类型:' + data[i].leatype + "</span><br/><br/>";
                     div += "<span>" + '理由:' + data[i].leareason + "</span><br/><br/>";
                     div += "<span>" + '请假时间/天数:' + data[i].leaenterdate + '/' + data[i].leaday + "天</span><br/><br/>";
-                    div += "<span>" + '审批人/审批时间:部门主管' + '/' + data[i].pidate + "</span><br/><br/>";
+                    div += "<span>" + '一级审批人/审批时间:部门主管' + '/' + data[i].pidate + "</span><br/><br/>";
+                    div += "<span>" + '部门主管意见'  + data[i].bohui + "</span><br/><br/>";
+                    div += "<span>" + '二级审批人/审批时间:' +data[i].zongshen+ '/' + data[i].zongshendate + "</span><br/><br/>";
+                    div += "<span>" +'总经理意见'+ data[i].zongbohui + "</span><br/><br/>";
+                    div += "<span>" + '人事审批/审批时间:' +data[i].renshishen+ '/' + data[i].renshishendate + "</span><br/><br/>";
                     div += "</div>"
 
                     $("#mybody").append(div);
@@ -189,8 +200,11 @@
                     div += "<span style='margin-left: 250px'>" + '类型:' + data[i].leatype + "</span><br/><br/>";
                     div += "<span>" + '理由:' + data[i].leareason + "</span><br/><br/>";
                     div += "<span>" + '请假时间/天数:' + data[i].leaenterdate + '/' + data[i].leaday + "天</span><br/><br/>";
-                    div += "<span>" + '审批人/审批时间:部门主管' + '/' + data[i].pidate + "</span><br/><br/>";
-                    div += "<span>" + '驳回理由' + data[i].noleareason + "</span>";
+                    div += "<span>" + '一级审批人/审批时间:部门主管' + '/' + data[i].pidate + "</span><br/><br/>";
+                    div += "<span>" + '部门主管意见'  + data[i].bohui + "</span><br/><br/>";
+                    div += "<span>" + '二级审批人/审批时间:' +data[i].zongshen+ '/' + data[i].zongshendate + "</span><br/><br/>";
+                    div += "<span>" +'总经理意见'+ data[i].zongbohui + "</span><br/><br/>";
+                    div += "<span>" + '人事审批/审批时间:' +data[i].renshishen+ '/' + data[i].renshishendate + "</span><br/><br/>";
                     div += "</div>"
 
                     $("#mybody").append(div);
@@ -203,7 +217,7 @@
                     div += "<span style='margin-left:650px; '>审核中 </span><br/>";
                     div += "<div style='border-top:1px solid #2a6496;width: auto'></div><br/>"
                     div += "<span>" + '姓名:' + data[i].empname + "<span>";
-                    div += "<span style='margin-left: 250px'>" + '类型:' + data[i].leatype + "</span><br/><br/>";
+                    div += "<span   style='margin-left: 250px'>" + '类型:' + data[i].leatype + "</span><br/><br/>";
                     div += "<span>" + '理由:' + data[i].leareason + "</span><br/><br/>";
                     div += "<span>" + '请假时间/天数:' + data[i].leaenterdate + '/' + data[i].leaday + "天</span>";
                     div += "</div>"
@@ -246,11 +260,10 @@
                                         div += "<span>" + '加班时间/小时:' + data[i].apovhour + "/ 小时</span>";
                                         div+="<button  onclick='query2()' style='margin-left:80px'>撤回</button>";
                                         div += "</div>"
-
                                         $("#mybody").append(div);
 
-                                    }
-                                    if (data[i].apovstate == 1) {
+                                     }
+                                    if (data[i].apovstate == 4) {
                                         var div = "<div style='background-color: #FFFFFF;margin-top: 20px;padding-left: 20px'>";
                                         div += "<span  style='font-size:20px;color:#4cae4c'> 加班申请</span>";
                                         div += "<span style='font-size: 12px;font-weight:500;color:#999999 '>" + data[i].apoverdate + "</span>";
@@ -260,9 +273,12 @@
                                         div += "<span style='margin-left: 250px'>" + '类型:' + data[i].apovtype + "</span><br/><br/>";
                                         div += "<span>" + '理由:' + data[i].apovreason + "</span><br/><br/>";
                                         div += "<span>" + '加班时间/小时:' + data[i].apovhour + "/ 小时</span><br/><br/>";
-                                        div += "<span>" + '审批人/审批时间:部门主管' + '/' + data[i].shentime + "</span><br/><br/>";
-                                        div += "</div>"
-
+                                        div += "<span>" + '一级审批人/审批时间:部门主管' + '/' + data[i].shentime + "</span><br/><br/>";
+                                        div += "<span>" + '部门主管意见'  + data[i].bohui + "</span><br/><br/>";
+                                        div += "<span>" + '二级审批人/审批时间:' +data[i].zongshen+ '/' + data[i].zongshendate + "</span><br/><br/>";
+                                        div += "<span>" +'总经理意见'+ data[i].zongbohui + "</span><br/><br/>";
+                                        div += "<span>" + '人事审批/审批时间:' +data[i].renshishen+ '/' + data[i].renshishendate + "</span><br/><br/>";
+                                        div += "</div>";
                                         $("#mybody").append(div);
 
                                     }
@@ -275,9 +291,11 @@
                                         div += "<span>" + '姓名:' + data[i].empname + "<span>";
                                         div += "<span style='margin-left: 250px'>" + '类型:' + data[i].apovtype + "</span><br/><br/>";
                                         div += "<span>" + '理由:' + data[i].apovreason + "</span><br/><br/>";
-                                        div += "<span>" + '加班时间/小时:' + data[i].apovhour + "/ 小时</span>";
-                                        div += "<span>" + '审批人/审批时间:部门主管' + '/' + data[i].shentime + "</span><br/><br/>";
-                                        div += "<span>" + '驳回理由' + data[i].bohui + "</span>";
+                                        div += "<span>" + '加班时间/小时:' + data[i].apovhour + "/ 小时</span><br/><br/>";
+                                        div += "<span>" + '一级审批人/审批时间:部门主管' + '/' + data[i].shentime + "</span><br/><br/>";
+                                        div += "<span>" + '部门主管意见'  + data[i].bohui + "</span><br/><br/>";
+                                        div += "<span>" + '二级审批人/审批时间:' +data[i].zongshen+ '/' + data[i].zongshendate + "</span><br/><br/>";
+                                        div += "<span>" +'总经理意见'+ data[i].zongbohui + "</span><br/><br/>";
                                         div += "</div>"
 
                                         $("#mybody").append(div);
@@ -332,7 +350,7 @@
                                     $("#mybody").append(div);
 
                                 }
-                                if (data[i].dimstate == 1) {
+                                if (data[i].dimstate == 4) {
                                     var div = "<div style='background-color: #FFFFFF;margin-top: 20px;padding-left: 20px'>";
                                     div += "<span  style='font-size:20px;color:#ac2925'> 离职申请</span>";
                                     div += "<span style='font-size: 12px;font-weight:500;color:#999999 '>" + data[i].dimapplydate + "</span>";
@@ -342,8 +360,11 @@
                                     div += "<span style='margin-left: 250px'>" + '类型:' + data[i].dimtype + "</span><br/><br/>";
                                     div += "<span>" + '离职原因:' + data[i].dimdetails + "</span><br/><br/>";
                                     div += "<span>" + '对公司的建议:' + data[i].dimsuggest + "</span><br/><br/>";
-                                    div += "<span>" + '审批时间:' + data[i].nodim + "</span>";
-                                    div += "<span style='margin-left: 50px'>请尽快到人事部办理相关手续</span><br/><br/>";
+                                    div += "<span>" + '一级审批人/审批时间:部门主管' + '/' + data[i].shendimdate+ "</span><br/><br/>";
+                                    div += "<span>" + '部门主管意见'  + data[i].nodim + "</span><br/><br/>";
+                                    div += "<span>" + '二级审批人/审批时间:' +data[i].zongshen+ '/' + data[i].zongshendate + "</span><br/><br/>";
+                                    div += "<span>" +'总经理意见'+ data[i].zongbohui + "</span><br/><br/>";
+                                    div += "<span>" + '人事审批/审批时间:' +data[i].renshishen+ '/' + data[i].renshishendate + "</span><br/><br/>";
                                     div += "</div>"
                                     $("#mybody").append(div);
 
@@ -358,8 +379,10 @@
                                     div += "<span style='margin-left: 250px'>" + '类型:' + data[i].dimtype + "</span><br/><br/>";
                                     div += "<span>" + '离职原因:' + data[i].dimdetails + "</span><br/><br/>";
                                     div += "<span>" + '对公司的建议:' + data[i].dimsuggest + "</span><br/><br/>";
-                                    div += "<span>" + '驳回理由:' + data[i].bohui + "</span><br/><br/>";
-                                    div += "<span>" + '审批时间:' +  data[i].nodim + "</span><br/><br/>";
+                                    div += "<span>" + '一级审批人/审批时间:部门主管' + '/' + data[i].shendimdate+ "</span><br/><br/>";
+                                    div += "<span>" + '部门主管意见'  + data[i].nodim + "</span><br/><br/>";
+                                    div += "<span>" + '二级审批人/审批时间:' +data[i].zongshen+ '/' + data[i].zongshendate + "</span><br/><br/>";
+                                    div += "<span>" +'总经理意见'+ data[i].zongbohui + "</span><br/><br/>";
                                     div += "</div>"
                                     $("#mybody").append(div);
 
@@ -368,7 +391,7 @@
                                     var div = "<div style='background-color: #FFFFFF;margin-top: 20px;padding-left: 20px'>";
                                     div += "<span  style='font-size:20px;color:#ac2925'> 离职申请</span>";
                                     div += "<span style='font-size: 12px;font-weight:500;color:#999999 '>" + data[i].dimapplydate + "</span>";
-                                    div += "<span style='margin-left:650px; '>撤销 </span><br/>";
+                                    div += "<span style='margin-left:650px; '>审核中 </span><br/>";
                                     div += "<div style='border-top:1px solid #2a6496;width: auto'></div><br/>"
                                     div += "<span>" + '姓名:' + data[i].empname + "<span>";
                                     div += "<span style='margin-left: 250px'>" + '类型:' + data[i].dimtype + "</span><br/><br/>";

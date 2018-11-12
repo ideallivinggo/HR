@@ -1,7 +1,10 @@
 package com.aaa.rzhr.service;
 
 import com.aaa.rzhr.dao.UserDao;
+import com.aaa.rzhr.pojo.Apply_Office;
 import com.aaa.rzhr.pojo.Emp;
+import com.aaa.rzhr.pojo.Keapply;
+import com.aaa.rzhr.pojo.Zhuanzheng;
 import com.aaa.rzhr.util.LayuiFy;
 import com.aaa.rzhr.util.layuiUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +16,7 @@ import java.util.Map;
 /**
  * @author 15G5567
  */
+@SuppressWarnings("ALL")
 @Service
 
 public class UserServiceImpl implements UserService {
@@ -156,6 +160,91 @@ userDao.L_add_lizhi(empid, dimtype, dimdetails, dimsuggest, dimturn, dimapplydat
     @Override
     public void L_update_emp_empstateid(Emp emp) {
         userDao.L_update_emp_empstateid(emp);
+    }
+/**  二级经理---------------------------------------审核*/
+    @Override
+    public LayuiFy J_query_xiujia(Integer empid, String fristdate, String overdate, Integer leasate, Integer limit, Integer page) {
+        LayuiFy bb =  layuiUtil.getData(userDao.L_query_xiujia(empid, fristdate, overdate, leasate),limit,page);
+        return bb;
+    }
+
+    @Override
+    public LayuiFy J_query_jiaban(Integer empid, String fristdate, String overdate, Integer apovstate, Integer limit, Integer page) {
+        LayuiFy bb =   layuiUtil.getData(userDao.L_query_jiaban(empid, fristdate, overdate, apovstate),limit,page);
+        return bb;
+    }
+
+    @Override
+    public LayuiFy J_query_cizhi(Integer empid, String fristdate, String overdate, Integer dimstate,Integer limit, Integer page) {
+        LayuiFy bb =layuiUtil.getData(userDao.L_query_cizhi(empid, fristdate, overdate, dimstate),limit,page);
+        return bb;
+    }
+
+    @Override
+    public void J_upd_xiujia_unpass(Integer leasate, String zongshen, String zongshendate, String zongbohui, Integer leaid) {
+        userDao.J_upd_xiujia_unpass(leasate,zongshen,zongshendate,zongbohui,leaid);
+    }
+
+    @Override
+    public void J_upd_jiaban_unpass(Integer apovstate, String zongshen, String zongshendate, String zongbohui, Integer apovid) {
+       userDao.J_upd_jiaban_unpass(apovstate,zongshen,zongshendate,zongbohui,apovid);
+    }
+
+    @Override
+    public void J_upd_lizhi_unpass(Integer dimstate, String zongshen, String zongshendate, String zongbohui, Integer dimid) {
+        userDao.J_upd_lizhi_unpass(dimstate, zongshen, zongshendate, zongbohui, dimid);
+    }
+/**出差申请*/
+    @Override
+    public void L_add_out(Apply_Office apply_office) {
+        userDao.L_add_out(apply_office);
+    }
+/**转正申请报告*/
+    @Override
+    public void L_add_zhuanzheng(Zhuanzheng zhuanzheng) {
+        userDao.L_add_zhuanzheng(zhuanzheng);
+    }
+/**一级审核查询  出差  转正*/
+    @Override
+    public LayuiFy L_shen_zhuan(Integer deptid, Integer shenqingstate, String fristdate, String overdate,Integer limit, Integer page) {
+        LayuiFy bb =layuiUtil.getData(userDao.L_shen_zhuan(deptid, shenqingstate,fristdate, overdate),limit,page);
+        return bb;
+    }
+
+    @Override
+    public LayuiFy L_shen_out(Integer deptid, Integer offstate, String fristdate, String overdate,Integer limit, Integer page) {
+        LayuiFy bb =layuiUtil.getData(userDao.L_shen_out(deptid, offstate,fristdate, overdate),limit,page);
+        return bb;
+    }
+/**二级审核*/
+    @Override
+    public void L_upd_zhuan(Zhuanzheng zhuanzheng) {
+     userDao.L_upd_zhuan(zhuanzheng);
+    }
+    @Override
+    public void L_upd_out(Apply_Office apply_office) {
+       userDao.L_upd_out(apply_office);
+    }
+
+    @Override
+    public void L_upd_zong_zhuan(Zhuanzheng zhuanzheng) {
+       userDao.L_upd_zong_zhuan(zhuanzheng);
+    }
+
+    @Override
+    public void L_upd_zong_out(Apply_Office apply_office) {
+  userDao.L_upd_zong_out(apply_office);
+    }
+
+    @Override
+    public LayuiFy L_query_pei(Integer limit, Integer page) {
+        LayuiFy bb =layuiUtil.getData(userDao.L_query_pei(),limit,page);
+        return bb;
+    }
+/** 课程报名*/
+    @Override
+    public void L_add_keapply(Keapply keapply) {
+      userDao.L_add_keapply(keapply);
     }
 }
 

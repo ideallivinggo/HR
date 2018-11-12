@@ -10,7 +10,6 @@
 <head>
     <title>个人中心</title>
     <script src="assets/js/jquery.js"></script>
-
     <style>
         #top {
             background:url('assets/img/ess-background.png');
@@ -55,16 +54,23 @@
            border: none;
             color: #babcbf;
         }
-
-
-
-
-
-
-
-
-
-
+        #di {
+           margin-left: 120px;
+        }
+   #di div{
+       float: left;
+   }
+        #di div img{
+            widtd: 150px;
+            height: 150px;
+            margin-left:20px;
+        }
+        #di div img:hover{
+            filter:alpha(Opacity=80);
+            -moz-opacity:0.3;
+            opacity: 0.3;
+            cursor:pointer
+        }
 
     </style>
 </head>
@@ -82,17 +88,17 @@
         <div onclick="d5()"><img src="assets/img/shouye5.PNG"/></div>
         <div onclick="d6()"><img  src="assets/img/shoye6.PNG"/></div>
     </div>
-
-
+    <div id="di">
+        <div onclick="d7()"><img src="assets/img/s4.PNG"/></div>
+        <div onclick="d8()"><img  src="assets/img/pei.png"/></div>
+        <div onclick="d9()"><img  src="assets/img/zhuan.PNG"/></div>
+    </div>
 </div>
 <input value="${emp.empid}" id="empidid" type="hidden">
 </body>
 </html>
 <script>
-
     function i1() {
-        alert("请假申请");
-//请假申请
 
         $.ajax({
                 url:"L_query_user",
@@ -107,321 +113,7 @@
             }
         )
     }
-    /*//三个按钮点击事件
-    var b3 = document.getElementById('bottom_1_3');
-    var b2 = document.getElementById('bottom_1_2');
-    var b1 = document.getElementById('bottom_1_1');
-    var y3 = document.getElementById('yin_3');
-    var y2 = document.getElementById('yin_2');
-    var y1 = document.getElementById('yin_1');
-    function o1(){
-        b2.style.background='#fff';
-        b3.style.background='#fff';
-        b1.style.background='#19AA8D';
-        y1.style.display='block';
-        y3.style.display='none';
-        y2.style.display='none';
-        $.ajax({
-            url: "L_query_leave",
-            type: "post",
-            data: {"empid": $("#empidid").val(), "leasate": 0},
-            dataType: "json",
-            success: function (data) {
-                $("#mybody1").html("");
-                for (var i = 0; i < data.length; i++) {
 
-                    alert(data);
-                    $("#mybody").html("");
-                    for (var i = 0; i < data.length; i++) {
-                        /!*请假所有申请*!/
-                        if (data[i].leasate == '') {
-
-                        }
-                        if (data[i].leasate == 0) {
-                            var div = "<div style='background-color: #FFFFFF;margin-top: 20px;padding-left: 20px'>";
-                            div += "<span  style='font-size:20px;color: #668FB8'> 休假申请</span>";
-                            div += "<span style='font-size: 12px;font-weight:500;color:#999999 '>" + data[i].shendate + "</span>";
-                            div += "<span style='margin-left:650px; '>审核中 </span><br/>";
-                            div += "<div style='border-top:1px solid #2a6496;width: auto'></div><br/>"
-                            div += "<span>" + '姓名:' + data[i].empname + "<span>";
-                            div += "<span style='margin-left: 250px'>" + '类型:' + data[i].leatype + "</span><br/><br/>";
-                            div += "<span>" + '理由:' + data[i].leareason + "</span><br/><br/>";
-                            div += "<span>" + '请假时间/天数:' + data[i].leaenterdate + '/' + data[i].leaday + "天</span>";
-                            div += "</div>"
-
-                            $("#mybody").append(div);
-
-                        }
-                        if (data[i].leasate == 1) {
-
-
-                        }
-                        if (data[i].leasate == 2) {
-                        }
-
-
-                        /!*-------------------------------------------------------------------*!/
-
-                        /!*加班所有申请*!/
-                        if (data[i].apovstate == '') {
-
-                        }
-                        if (data[i].apovstate == 0) {
-                            var div = "<div style='background-color: #FFFFFF;margin-top: 20px;padding-left: 20px'>";
-                            div += "<span  style='font-size:20px;color:#4cae4c'> 加班申请</span>";
-                            div += "<span style='font-size: 12px;font-weight:500;color:#999999 '>" + data[i].apoverdate + "</span>";
-                            div += "<span style='margin-left:650px; '>审核中 </span><br/>";
-                            div += "<div style='border-top:1px solid #2a6496;width: auto'></div><br/>"
-                            div += "<span>" + '姓名:' + data[i].empname + "<span>";
-                            div += "<span style='margin-left: 250px'>" + '类型:' + data[i].apovtype + "</span><br/><br/>";
-                            div += "<span>" + '理由:' + data[i].apovreason + "</span><br/><br/>";
-                            div += "<span>" + '加班时间/小时:' + data[i].apovhour + "/ 小时</span>";
-                            div += "</div>"
-
-                            $("#mybody").append(div);
-
-                        }
-                        if (data[i].apovstate == 1) {
-
-
-                        }
-                        if (data[i].apovstate == 2) {
-
-                        }
-
-                        /!*-------------------------------------------------------------------*!/
-
-                        /!*离职*!/
-                        if (data[i].dimstate == '') {
-
-                        }
-                        if (data[i].dimstate == 0) {
-                            var div = "<div style='background-color: #FFFFFF;margin-top: 20px;padding-left: 20px'>";
-                            div += "<span  style='font-size:20px;color:#ac2925'> 离职申请</span>";
-                            div += "<span style='font-size: 12px;font-weight:500;color:#999999 '>" + data[i].dimapplydate + "</span>";
-                            div += "<span style='margin-left:650px; '>审核中 </span><br/>";
-                            div += "<div style='border-top:1px solid #2a6496;width: auto'></div><br/>"
-                            div += "<span>" + '姓名:' + data[i].empname + "<span>";
-                            div += "<span style='margin-left: 250px'>" + '类型:' + data[i].dimtype + "</span><br/><br/>";
-                            div += "<span>" + '离职原因:' + data[i].dimdetails + "</span><br/><br/>";
-                            div += "<span>" + '对公司的建议:' + data[i].dimsuggest + "</span><br/><br/>";
-                            div += "</div>"
-                            $("#mybody").append(div);
-
-                        }
-                        if (data[i].dimstate == 1) {
-
-                        }
-                        if (data[i].dimstate == 2) {
-                        }
-
-                    }
-                }
-            }
-        } )
-    }
-    function o2(){
-        alert("aaa");
-        b1.style.background='#fff';
-        b3.style.background='#fff';
-        b2.style.background='#19AA8D';
-        y3.style.display='none';
-        y2.style.display='block';
-        y1.style.display='none';
-        $.ajax({
-                url:"L_query_leave",
-                type:"post",
-                data:{"empid":$("#empidid").val()},
-                dataType:"json",
-                success:function (data) {
-                    alert(data);
-                    $("#mybody").html("");
-                    for (var i = 0; i < data.length; i++) {
-                        /!*请假所有申请*!/
-                        if (data[i].leasate == '') {
-
-                        }
-                        if (data[i].leasate == 0) {
-                            var div = "<div style='background-color: #FFFFFF;margin-top: 20px;padding-left: 20px'>";
-                            div += "<span  style='font-size:20px;color: #668FB8'> 休假申请</span>";
-                            div += "<span style='font-size: 12px;font-weight:500;color:#999999 '>" + data[i].shendate + "</span>";
-                            div += "<span style='margin-left:650px; '>审核中 </span><br/>";
-                            div += "<div style='border-top:1px solid #2a6496;width: auto'></div><br/>"
-                            div += "<span>" + '姓名:' + data[i].empname + "<span>";
-                            div += "<span style='margin-left: 250px'>" + '类型:' + data[i].leatype + "</span><br/><br/>";
-                            div += "<span>" + '理由:' + data[i].leareason + "</span><br/><br/>";
-                            div += "<span>" + '请假时间/天数:' + data[i].leaenterdate + '/' + data[i].leaday + "天</span>";
-                            div += "</div>"
-
-                            $("#mybody").append(div);
-
-                        }
-                        if (data[i].leasate == 1) {
-                            var div = "<div style='background-color: #FFFFFF;margin-top: 20px;padding-left: 20px'>";
-                            div += "<span  style='font-size:20px;color: #668FB8'> 休假申请</span>";
-                            div += "<span style='font-size: 12px;font-weight:500;color:#999999 '>" + data[i].shendate + "</span>";
-                            div += "<span style='margin-left:650px; '>通过</span><br/>";
-                            div += "<div style='border-top:1px solid #2a6496;width: auto'></div><br/>"
-                            div += "<span>" + '姓名:' + data[i].empname + "<span>";
-                            div += "<span style='margin-left: 250px'>" + '类型:' + data[i].leatype + "</span><br/><br/>";
-                            div += "<span>" + '理由:' + data[i].leareason + "</span><br/><br/>";
-                            div += "<span>" + '请假时间/天数:' + data[i].leaenterdate + '/' + data[i].leaday + "天</span><br/><br/>";
-                            div += "<span>" + '审批人/审批时间:部门主管' + '/' + data[i].pidate + "</span><br/><br/>";
-                            div += "</div>"
-
-                            $("#mybody").append(div);
-
-                        }
-                        if (data[i].leasate == 2) {
-                            var div = "<div style='background-color: #FFFFFF;margin-top: 20px;padding-left: 20px'>";
-                            div += "<span  style='font-size:20px;color: #668FB8'> 休假申请</span>";
-                            div += "<span style='font-size: 12px;font-weight:500;color:#999999 '>" + data[i].shendate + "</span>";
-                            div += "<span style='margin-left:650px; '>驳回</span><br/>";
-                            div += "<div style='border-top:1px solid #2a6496;width: auto'></div><br/>"
-                            div += "<span>" + '姓名:' + data[i].empname + "<span>";
-                            div += "<span style='margin-left: 250px'>" + '类型:' + data[i].leatype + "</span><br/><br/>";
-                            div += "<span>" + '理由:' + data[i].leareason + "</span><br/><br/>";
-                            div += "<span>" + '请假时间/天数:' + data[i].leaenterdate + '/' + data[i].leaday + "天</span><br/><br/>";
-                            div += "<span>" + '审批人/审批时间:部门主管' + '/' + data[i].pidate + "</span><br/><br/>";
-                            div += "<span>" + '驳回理由' + data[i].noleareason + "</span>";
-                            div += "</div>"
-
-                            $("#mybody").append(div);
-
-
-                            /!*-------------------------------------------------------------------*!/
-
-                            /!*加班所有申请*!/
-                            if (data[i].apovstate == '') {
-
-                            }
-                            if (data[i].apovstate == 0) {
-                                var div = "<div style='background-color: #FFFFFF;margin-top: 20px;padding-left: 20px'>";
-                                div += "<span  style='font-size:20px;color:#4cae4c'> 加班申请</span>";
-                                div += "<span style='font-size: 12px;font-weight:500;color:#999999 '>" + data[i].apoverdate + "</span>";
-                                div += "<span style='margin-left:650px; '>审核中 </span><br/>";
-                                div += "<div style='border-top:1px solid #2a6496;width: auto'></div><br/>"
-                                div += "<span>" + '姓名:' + data[i].empname + "<span>";
-                                div += "<span style='margin-left: 250px'>" + '类型:' + data[i].apovtype + "</span><br/><br/>";
-                                div += "<span>" + '理由:' + data[i].apovreason + "</span><br/><br/>";
-                                div += "<span>" + '加班时间/小时:' + data[i].apovhour + "/ 小时</span>";
-                                div += "</div>"
-
-                                $("#mybody").append(div);
-
-                            }
-                            if (data[i].apovstate == 1) {
-                                var div = "<div style='background-color: #FFFFFF;margin-top: 20px;padding-left: 20px'>";
-                                div += "<span  style='font-size:20px;color:#4cae4c'> 加班申请</span>";
-                                div += "<span style='font-size: 12px;font-weight:500;color:#999999 '>" + data[i].apoverdate + "</span>";
-                                div += "<span style='margin-left:650px; '>通过 </span><br/>";
-                                div += "<div style='border-top:1px solid #2a6496;width: auto'></div><br/>"
-                                div += "<span>" + '姓名:' + data[i].empname + "<span>";
-                                div += "<span style='margin-left: 250px'>" + '类型:' + data[i].apovtype + "</span><br/><br/>";
-                                div += "<span>" + '理由:' + data[i].apovreason + "</span><br/><br/>";
-                                div += "<span>" + '加班时间/小时:' + data[i].apovhour + "/ 小时</span><br/><br/>";
-                                div += "<span>" + '审批人/审批时间:部门主管' + '/' + data[i].shentime + "</span><br/><br/>";
-                                div += "</div>"
-
-                                $("#mybody").append(div);
-
-                            }
-                            if (data[i].apovstate == 2) {
-                                var div = "<div style='background-color: #FFFFFF;margin-top: 20px;padding-left: 20px'>";
-                                div += "<span  style='font-size:20px;color:#4cae4c'> 加班申请</span>";
-                                div += "<span style='font-size: 12px;font-weight:500;color:#999999 '>" + data[i].apoverdate + "</span>";
-                                div += "<span style='margin-left:650px; '>驳回 </span><br/>";
-                                div += "<div style='border-top:1px solid #2a6496;width: auto'></div><br/>"
-                                div += "<span>" + '姓名:' + data[i].empname + "<span>";
-                                div += "<span style='margin-left: 250px'>" + '类型:' + data[i].apovtype + "</span><br/><br/>";
-                                div += "<span>" + '理由:' + data[i].apovreason + "</span><br/><br/>";
-                                div += "<span>" + '加班时间/小时:' + data[i].apovhour + "/ 小时</span>";
-                                div += "<span>" + '审批人/审批时间:部门主管' + '/' + data[i].shentime + "</span><br/><br/>";
-                                div += "<span>" + '驳回理由' + data[i].bohui + "</span>";
-                                div += "</div>"
-
-                                $("#mybody").append(div);
-
-
-
-
-
-                                /!*-------------------------------------------------------------------*!/
-
-                                /!*离职*!/
-                                if (data[i].dimstate == '') {
-
-                                }
-                                if (data[i].dimstate == 0) {
-                                    var div = "<div style='background-color: #FFFFFF;margin-top: 20px;padding-left: 20px'>";
-                                    div += "<span  style='font-size:20px;color:#ac2925'> 离职申请</span>";
-                                    div += "<span style='font-size: 12px;font-weight:500;color:#999999 '>" + data[i].dimapplydate + "</span>";
-                                    div += "<span style='margin-left:650px; '>审核中 </span><br/>";
-                                    div += "<div style='border-top:1px solid #2a6496;width: auto'></div><br/>"
-                                    div += "<span>" + '姓名:' + data[i].empname + "<span>";
-                                    div += "<span style='margin-left: 250px'>" + '类型:' + data[i].dimtype + "</span><br/><br/>";
-                                    div += "<span>" + '离职原因:' + data[i].dimdetails + "</span><br/><br/>";
-                                    div += "<span>" + '对公司的建议:' + data[i].dimsuggest + "</span><br/><br/>";
-                                    div += "</div>"
-                                    $("#mybody").append(div);
-
-                                }
-                                if (data[i].dimstate == 1) {
-                                    var div = "<div style='background-color: #FFFFFF;margin-top: 20px;padding-left: 20px'>";
-                                    div += "<span  style='font-size:20px;color:#ac2925'> 离职申请</span>";
-                                    div += "<span style='font-size: 12px;font-weight:500;color:#999999 '>" + data[i].dimapplydate + "</span>";
-                                    div += "<span style='margin-left:650px; '>同意离职 </span><br/>";
-                                    div += "<div style='border-top:1px solid #2a6496;width: auto'></div><br/>"
-                                    div += "<span>" + '姓名:' + data[i].empname + "<span>";
-                                    div += "<span style='margin-left: 250px'>" + '类型:' + data[i].dimtype + "</span><br/><br/>";
-                                    div += "<span>" + '离职原因:' + data[i].dimdetails + "</span><br/><br/>";
-                                    div += "<span>" + '对公司的建议:' + data[i].dimsuggest + "</span><br/><br/>";
-                                    div += "<span>" + '审批时间:' + data[i].shendimdate + "</span>";
-                                    div += "<span style='margin-left: 50px'>请尽快到人事部办理相关手续</span><br/><br/>";
-                                    div += "</div>"
-                                    $("#mybody").append(div);
-
-                                }
-                                if (data[i].dimstate == 2) {
-                                    var div = "<div style='background-color: #FFFFFF;margin-top: 20px;padding-left: 20px'>";
-                                    div += "<span  style='font-size:20px;color:#ac2925'> 离职申请</span>";
-                                    div += "<span style='font-size: 12px;font-weight:500;color:#999999 '>" + data[i].dimapplydate + "</span>";
-                                    div += "<span style='margin-left:650px; '>驳回离职 </span><br/>";
-                                    div += "<div style='border-top:1px solid #2a6496;width: auto'></div><br/>"
-                                    div += "<span>" + '姓名:' + data[i].empname + "<span>";
-                                    div += "<span style='margin-left: 250px'>" + '类型:' + data[i].dimtype + "</span><br/><br/>";
-                                    div += "<span>" + '离职原因:' + data[i].dimdetails + "</span><br/><br/>";
-                                    div += "<span>" + '对公司的建议:' + data[i].dimsuggest + "</span><br/><br/>";
-                                    div += "<span>" + '驳回理由:' + data[i].nodim + "</span><br/><br/>";
-                                    div += "<span>" + '审批时间:' + data[i].shendimdate + "</span><br/><br/>";
-                                    div += "</div>"
-                                    $("#mybody").append(div);
-
-
-
-
-
-
-                                }
-                        }
-                    }
-                }}}
-        )
-        alert("hello world222");
-    }
-    function o3(){
-
-        b1.style.background='#fff';
-        b2.style.background='#fff';
-        b3.style.background='#19AA8D';
-        y2.style.display='none';
-        y3.style.display='block';
-        y1.style.display='none';
-        alert("hello world.3333");
-    }
-
-
-*/
 function d1() {
     window.location.href="L_leave";
 }
@@ -452,6 +144,15 @@ function d5() {
     }
 function d6() {
         window.location.href="L_list";
+    }
+    function d7() {
+        window.location.href="L_out";
+    }
+    function d8() {
+        window.location.href="L_pei";
+    }
+    function d9() {
+        window.location.href="L_zhuan";
     }
 
 </script>

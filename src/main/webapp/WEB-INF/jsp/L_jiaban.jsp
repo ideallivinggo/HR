@@ -79,7 +79,7 @@
     laydate.render({
         elem: '#test16'
         ,type: 'datetime'
-        ,range: '至'
+        ,range: '到'
         ,format: 'yyyy-MM-dd HH:mm:ss'
     });
 </script>

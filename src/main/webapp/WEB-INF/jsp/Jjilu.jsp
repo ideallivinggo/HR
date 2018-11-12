@@ -101,7 +101,7 @@
     <div class="modal fade" id="myModal" >
         <div class="modal-dialog"  style="width: 100%;margin-top: -2px" >
             <div class="modal-content">
-                <div class="modal-body"style="height: 625px;overflow:auto" >
+                <div class="modal-body"style="height: 640px;overflow:auto" >
                     <div class="panel panel-default" style="margin: 1%;">
                         <!-- 多条件查询  -->
                         <div class="layui-form panel-heading" style="height: 60px">
