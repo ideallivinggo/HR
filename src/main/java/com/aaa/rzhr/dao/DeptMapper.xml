@@ -4,8 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.aaa.rzhr.dao.DeptMapper">
      <select id="QueryDeptYqx" resultType="java.util.Map" parameterType="Map">
-         select e.empname,d.deptname,d.deptnum,d.roid,e.deptid,count(*) as num
-         from dept d left join emp e on d.deptid=e.deptid GROUP BY deptname
+         select deptid,count(*) as num from emp e GROUP BY deptid
      </select>
     <insert id="addDept" parameterType="Map">
           INSERT  INTO dept(deptname,deptnum,roid) VALUES(#{deptName},#{deptnum},3)
