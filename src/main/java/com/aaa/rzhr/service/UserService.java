@@ -63,7 +63,7 @@ public interface UserService {
     /** 修改离职状态  1和2*/
     void L_upd_lizhi_unpass(Integer dimstate, String dimsign, String nodim, String bohui, Integer dimid);
    /**  根据时间查询工资单*/
-   LayuiFy L_query_pay_time(String empid, String time1, String time2, Integer limit, Integer page);
+    LayuiFy L_query_pay_time(String empid, String time1, String time2, Integer limit, Integer page);
    /**number查询emp*/
     List<Map> L_query_user_name(String empnumber);
 

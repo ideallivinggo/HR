@@ -210,11 +210,14 @@ public  String    L_add_j(Apply_Overtime app, double apovhour_1, double apovhour
     /*休假---加班----离职  ----审批 ---*/
     @RequestMapping("L_upd_xiujia_unpass")
     public @ResponseBody String L_upd_xiujia_pass(Integer leasate,String pipeople, String pidate,  String bohui, Integer leaid){
+        System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa[[[[[[[[[[[[[[[");
         Date date = new Date();
         //设置要获取到什么样的时间
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         //获取String类型的时间
         String createdate = sdf.format(date);
+        System.out.println(leaid+"ffffffffffffffffffffss");
+        System.out.println(leasate+"zzzzzzzzzzzzzzz");
         userService.L_upd_xiujia_unpass(leasate,pipeople,createdate,bohui,leaid);
         return  "chenggong";
     }

@@ -266,7 +266,7 @@
                 div += "<span>" + '理由:' + data[i].leareason + "</span><br/><br/>";
                 div += "<span>" + '请假时间/天数:' + data[i].leaenterdate + '/' + data[i].leaday + "天</span><br/><br/>";
                 div += "<span>" + '审批人:'+ $("#val_2").val() + "</span><br/><br/>";
-                div += "<span>" + '驳回理由:'+  "<input id='liyou' style='width: 500px'/>" + "</span>";
+                div += "<span>" + '驳回理由:'+  "<input id='liyou6' style='width: 500px'/>" + "</span>";
                 div += "<button onclick='pass_xiujia()' value='1'>通过</button>";
                 div += "<button onclick='unpass_xiujia()' value='2'>驳回</button>";
                 div += "</div>"
@@ -331,13 +331,13 @@
 })
     /*休假点击通过驳回*/
      function  pass_xiujia() {
-         var  zhi=$("#liyou_2").val();
+         var  zhi=$("#liyou6").val();
          if(zhi!=""){
              alert("zhixing");
              $.ajax({
                  url:"L_upd_xiujia_unpass",
                  type:"post",
-                 data:{"leasate":1,"bohui":$("#liyou").val(),"leaid":$("#id_val_1").val(),"pipeople":$("#val_2").val()},
+                 data:{"leasate":1,"bohui":$("#liyou6").val(),"leaid":$("#id_val_1").val(),"pipeople":$("#val_2").val()},
                  dataType:"text",
                  success:function (data) {
 
@@ -348,13 +348,13 @@
          }
      }
     function  unpass_xiujia() {
-         var  zhi=$("#liyou").val();
+         var  zhi=$("#liyou6").val();
          if(zhi!=""){
              alert("zhixing");
              $.ajax({
                  url:"L_upd_xiujia_unpass",
                  type:"post",
-                 data:{"leasate":2,"bohui":$("#liyou").val(),"leaid":$("#id_val_1").val(),"pipeople":$("#val_2").val()},
+                 data:{"leasate":2,"bohui":$("#liyou6").val(),"leaid":$("#id_val_1").val(),"pipeople":$("#val_2").val()},
                  dataType:"text",
                  success:function (data) {
                      location=location;
