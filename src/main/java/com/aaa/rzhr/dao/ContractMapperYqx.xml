@@ -95,6 +95,9 @@
         SELECT * from resume r
         inner join activation a on r.resid=a.resid
         WHERE a.actstate=1
+        <if test="actname!=null and actname!=''">
+            and a.actname LIKE CONCAT(CONCAT('%',#{actname},'%'))
+        </if>
     </select>
     <!--修改员工（入职添加员工）-->
     <update id="UpdateEmpYu" parameterType="Emp">
@@ -118,5 +121,29 @@
     <!--修改面试状态（默认1为已入职）-->
     <update id="UpdateActivationYqx" parameterType="String">
         UPDATE activation SET actstate=2 WHERE actnumber=#{actnumber}
+    </update>
+    <!--分组查询部门-->
+    <select id="QueryGroupYqx" resultType="java.util.Map" parameterType="Map">
+        select e.empid,e.empname,d.deptname,d.deptnum,e.deptid,e.poid,d.roid from dept d inner join emp e on d.deptid=e.deptid and e.poid=1
+        <if test="deptid!=null and deptid!=''">
+            and e.deptid=#{deptid}
+        </if>
+        ORDER BY d.deptid
+    </select>
+    <!--查询员工-->
+    <select id="QueryEmpSelectYqx" resultType="java.util.Map" parameterType="Map">
+        select * from emp
+    </select>
+    <!--添加部门经理-->
+    <insert id="AddDeptManageYqx"  parameterType="Dept" useGeneratedKeys="true" keyProperty="deptid">
+        insert into dept(deptname, deptnum) values (#{deptname},#{deptnum})
+    </insert>
+    <!--修改员工-->
+    <update id="UpdateEmpManageYqx" parameterType="Emp" >
+        update emp set poid=#{poid},deptid=#{deptid} where empid=#{empid}
+    </update>
+    <!--修改部门-->
+    <update id="UpdateDeptYqx" parameterType="Dept">
+        update dept set deptname=#{deptname},deptnum=#{deptnum} where deptid=#{deptid}
     </update>
 </mapper>

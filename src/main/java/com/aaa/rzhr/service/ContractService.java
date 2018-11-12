@@ -2,7 +2,6 @@ package com.aaa.rzhr.service;
 
 import com.aaa.rzhr.pojo.*;
 import com.aaa.rzhr.util.LayuiFy;
-import com.aaa.rzhr.util.layuiPage;
 
 import java.util.List;
 import java.util.Map;
@@ -73,7 +72,7 @@ public interface ContractService {
     /**
      * 查询面试成功(简历)
      * */
-    public LayuiFy QueryResumeYqx(Integer limit, Integer page);
+    public LayuiFy QueryResumeYqx(String actname,Integer limit, Integer page);
     /**
      * 修改员工（入职添加）
      * */
@@ -90,4 +89,24 @@ public interface ContractService {
      * 修改面试状态（默认2为已入职）
      * */
     public void UpdateActivationYqx(String actnumber);
+    /**
+     * 分组查询部门
+     * */
+    public List<Map> QueryGroupYqx(Dept dept);
+    /**
+     * 查询员工
+     * */
+    public List<Map> QueryEmpSelectYqx();
+    /**
+     * 添加部门
+     * */
+    public int AddDeptManageYqx(Dept dept);
+    /**
+     * 修改员工经理
+     * */
+    public void UpdateEmpManageYqx(Emp emp);
+    /**
+     * 修改部门
+     * */
+    public void UpdateDeptYqx(Dept dept);
 }

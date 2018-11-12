@@ -20,6 +20,9 @@
     {{# } }}
     <a class="layui-btn layui-btn-sm layui-btn-warm" lay-event="edit">驳回</a>
 
+   <%-- <div class="site-demo-button" id="layerDemo" style="margin-bottom: 0;">
+        <button data-method="offset" data-type="auto" class="layui-btn layui-btn-sm layui-btn-normal">居中弹出</button>
+    </div>--%>
 </script>
 <div style="padding: 20px; background-color: #F2F2F2;">
     <div class="layui-row layui-col-space15">
@@ -32,6 +35,7 @@
                             <input type="text" id="name"  autocomplete="off" class="layui-input">
                         </div>
                         <div class="layui-btn" data-type="reload">搜索</div>
+                        <button onclick="Reload() " class="layui-btn">刷新</button>
                     </div>
                 </div>
                 <div class="layui-card-body" style="height:90%;">
@@ -41,11 +45,25 @@
         </div>
     </div>
 </div>
+<div class="site-demo-button" id="layerDemo" style="margin-bottom: 0;">
+    <button data-method="offset" data-type="auto" class="layui-btn layui-btn-sm layui-btn-normal">居中弹出</button>
+</div>
+<%--弹出框--%>
+<div id="addDept" style="display: none;">
+    <div style="padding-top: 40px;padding-left: 50px;">
+        部门名称:<input id="deptname" style="width: 200px;height: 40px;border: 1px solid #cdcdcd"><br>
+    </div>
+    <div style="padding-top: 40px;padding-left: 50px;">
+        部门人数:<input id="deptnamenum" style="width: 200px;height: 40px;border: 1px solid #cdcdcd">
+    </div>
+</div>
+
 </body>
 </html>
 <script>
-    layui.use(['form', 'layedit', 'laydate','table'], function(){
+    layui.use(['form', 'layedit', 'laydate','table','layer'], function(){
         var table = layui.table;
+        var $ = layui.jquery,layer = layui.layer;
         table.render({
             elem: '#EmpState'
             ,url:'QueryEmpStateTurn'
@@ -66,7 +84,8 @@
                 ,{field:'right', title: '操作',toolbar: '#barDemo', align:'center'}
             ]]
         });
-      var $ = layui.$, active = {
+        var $ = layui.$, active = {
+          //模糊查询执行
             reload: function(){
                 var demoReload = $('#name').val();
                 //执行重载
@@ -81,6 +100,7 @@
                     }
                 });
             }
+
         };
         $('.demoTable .layui-btn').on('click', function(){
             var type = $(this).data('type');
@@ -107,7 +127,38 @@
                 });
             }
             if(obj.event === 'edit2'){
-                layer.confirm('该员工通过实习期，确定转正？', function(index){
+                alert(empid);
+                //通过id查询转正申请
+                /*layui.use('layer', function(){ //独立版的layer无需执行这一句
+                    var $ = layui.jquery,
+                        layer = layui.layer; //独立版的layer无需执行这一句
+                    //触发事件1
+                    var active = {
+                        offset: function(othis){
+                            var type = othis.data('type');
+                            layer.open({
+                                type: 1
+                                ,title:'添加部门'
+                                ,offset: type //具体配置参考：http://www.layui.com/doc/modules/layer.html#offset
+                                ,id: 'layerDemo'+type //防止重复弹出
+                                ,area: ['400px', '300px']
+                                ,content: $('#addDept')
+                                ,btn:  ['提交', '关闭']
+                                ,btnAlign: 'c' //按钮居中
+                                ,shade: 0 //不显示遮罩
+                                ,yes: function(){
+                                    /!*layer.closeAll();*!/
+                                }
+                            });
+                        }
+                    };
+                    $('#layerDemo .layui-btn').on('click', function(){
+                        var othis = $(this), method = othis.data('method');
+                        active[method] ? active[method].call(this, othis) : '';
+                    });
+                });*/
+                //修改状态
+                /*layer.confirm('该员工通过实习期，确定转正？', function(index){
                     $.ajax({
                         url:'UpdateEmpStateTurn',
                         type:'post',
@@ -117,12 +168,21 @@
                             location.reload();
                         }
                     })
-                });
+                });*/
             }
         });
+        //弹出框
+
+
     });
-
-
+     //刷新整个页面
+    function Reload(){
+        location.reload();
+    }
+    //
+    function TurnPositive() {
+        
+    }
 
 </script>
 

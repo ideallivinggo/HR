@@ -72,7 +72,7 @@ public interface ContractMapperYqx {
      *
      *
      * */
-    public List<Map> QueryResumeYqx();
+    public List<Map> QueryResumeYqx(@Param("actname") String actname);
     /**
      * 职位查询
      * */
@@ -85,4 +85,24 @@ public interface ContractMapperYqx {
      * 修改面试状态（默认1为已入职）
      * */
     public void UpdateActivationYqx(@Param("actnumber") String actnumber);
+    /**
+     * 分组查询部门
+     * */
+    public List<Map> QueryGroupYqx(Dept dept);
+    /**
+     * 查询员工
+     * */
+    public List<Map> QueryEmpSelectYqx();
+    /**
+     * 添加部门
+     * */
+    public int AddDeptManageYqx(Dept dept);
+    /**
+     * 修改员工经理
+     * */
+    public void UpdateEmpManageYqx(Emp emp);
+    /**
+     * 修改部门
+     * */
+    public void UpdateDeptYqx(Dept dept);
 }

@@ -128,6 +128,13 @@ public String Qemp(){
     public String Qmanage(){
         return "Qmanage";
     }
+    /**
+     * 分组查询部门
+     * */
+    @RequestMapping("QGroupDept")
+    public String QGroupDept(){
+        return "QGroupDept";
+    }
     ///----------------------------------李佳鹏区--------------------------------//
 
     /**
