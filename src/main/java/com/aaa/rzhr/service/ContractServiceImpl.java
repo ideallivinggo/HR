@@ -174,7 +174,7 @@ public class ContractServiceImpl implements ContractService {
     @Override
     public List<Map> QueryGroupYqx(Dept dept) {
         List<Map> list1 = mapperYqx.QueryGroupYqx(dept);
-        List<Map> list = deptMapper.QueryDeptYqx();
+        List<Map> list = deptMapper.QueryDeptSelectYqx();
         for(int i = 0; i < list1.size(); i++) {
             list1.get(i).put("roid", list.get(i).get("num"));
         }

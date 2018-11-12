@@ -33,8 +33,8 @@
                     <table class="layui-table">
                         <tr style="background-color: #f2f2f2;color: #009688">
                             <th>序号</th>
-                            <th>deptid</th>
-                            <th>empid</th>
+                            <%--<th>deptid</th>
+                            <th>empid</th>--%>
                             <th>部门名称</th>
                             <th>部门经理</th>
                             <th>部门人数</th>
@@ -49,7 +49,7 @@
     </div>
 </div>
 <div class="addDept" style="display: none;">
-    <form class="layui-form" action="" class="EmpForm">
+    <form class="layui-form" action="" id="EmpForm">
         <div class="layui-form-item" >
             <div class="layui-inline" style="margin-top: 30px;margin-left: 20px;">
                 <label class="layui-form-label">部门名称</label>
@@ -81,6 +81,7 @@
     $(function () {
         QueryDeptYqx();
         QueryEmpSelectYqx();
+        QueryEmpSelectYqx2();
     })
     function QueryDeptYqx() {
         $.ajax({
@@ -101,14 +102,14 @@
                     var roid = data[i].roid;
                     var tr="<tr>";
                     tr+="<th>"+(i+1)+"</th>";
-                    tr+="<th>"+data[i].deptid+"</th>";
-                    tr+="<th>"+data[i].empid+"</th>";
+                    /*tr+="<th>"+data[i].deptid+"</th>";
+                    tr+="<th>"+data[i].empid+"</th>";*/
                     tr+="<th>"+data[i].deptname+"</th>";
                     tr+="<th>"+name+"</th>";
                     tr+="<th>"+data[i].deptnum+"</th>";
                     tr+="<th>"+data[i].roid+"</th>";
-                    tr+="<th><button class='layui-btn layui-btn-sm' onclick='delDept("+data[i].deptid+")'><i class='layui-icon'>&#xe640;</i></button>" +
-                        "<button class='layui-btn layui-btn-sm layui-btn-normal' onclick='UpdateDept("+data[i].deptid+")'><i class='layui-icon'>&#xe642;</i></th>";
+                        /*<button class='layui-btn layui-btn-sm' onclick='delDept("+data[i].deptid+")'><i class='layui-icon'>&#xe640;</i></button>*/
+                    tr+="<th><button class='layui-btn layui-btn-sm layui-btn-normal' onclick='UpdateDept("+data[i].deptid+")'><i class='layui-icon'>&#xe642;</i></th>";
                     tr+="</tr>";
                     $("#MyBody").append(tr);
                 }
@@ -126,7 +127,7 @@
             dataType:'json',
             success:function (data) {
                 for (var i=0;i<data.length;i++){
-                    $(".ByEmp").append("<option value='"+data[i].empid+"'>"+data[i].empname+"</option>");
+                        $(".ByEmp").append("<option value='"+data[i].empid+"'>"+data[i].empname+"</option>");
                 }
             }
         })
@@ -135,7 +136,6 @@
      * 修改部门人数
      * */
     function UpdateDept(a) {
-        alert(a)
         $.ajax({
             url:'QueryGroupYqx',
             type:'post',
@@ -162,6 +162,9 @@
                         var num = $("#deptnamenum").val();
                         UpdateDeptYqx(id,deptid,empid,name,num);
                     }
+                    ,btn2: function(index, layero){
+                        $('#EmpForm')[0].reset();
+                    }
                 });
 
             }
@@ -169,7 +172,6 @@
 
     }
     function UpdateDeptYqx(id,deptid,empid,name,num) {
-        alert(id+"==="+deptid+"==="+empid+"==="+name+"==="+num)
         $.ajax({
             url:'UpdateDeptYqx',
             type:'post',
@@ -186,7 +188,6 @@
      * 删除
      * */
     function delDept(obj) {
-        alert(obj)
         $.ajax({
             url:'delDept',
             type:'post',
@@ -224,7 +225,7 @@
                         /*layer.closeAll();*/
                         var name = $("#deptname").val();
                         var num = $("#deptnamenum").val();
-                        var id=$("#ByEmp").val();
+                        var id=$(".ByEmp").val();
                         addDept(name,num,id);
                     }
                 });

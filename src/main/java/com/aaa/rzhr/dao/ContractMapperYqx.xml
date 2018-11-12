@@ -132,7 +132,7 @@
     </select>
     <!--查询员工-->
     <select id="QueryEmpSelectYqx" resultType="java.util.Map" parameterType="Map">
-        select * from emp
+        select * from emp where poid=2
     </select>
     <!--添加部门经理-->
     <insert id="AddDeptManageYqx"  parameterType="Dept" useGeneratedKeys="true" keyProperty="deptid">

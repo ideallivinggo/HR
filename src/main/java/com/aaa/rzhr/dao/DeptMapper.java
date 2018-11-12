@@ -17,6 +17,10 @@ public interface DeptMapper {
      * */
     public List<Map> QueryDeptYqx();
     /**
+     * 查询部门2
+     * */
+    public List<Map> QueryDeptSelectYqx();
+    /**
      * 添加部门1
      * */
     public void addDept(@Param("deptName") String deptName,@Param("deptnum") Integer deptnum);
