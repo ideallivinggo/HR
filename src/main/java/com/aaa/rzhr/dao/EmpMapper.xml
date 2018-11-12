@@ -23,6 +23,7 @@
         left join dept d on e.deptid = d.deptid
         left join emp_type et on e.emptypeid = et.emptypeid
         left join position p on e.poid = p.poid
+        left join role r on e.poid = r.roid
         <if test="deptid!=null">
             WHERE e.deptid=#{deptid}
         </if>
@@ -69,7 +70,6 @@
         left join position p on e.poid = p.poid
         left join empstate state on e.empstateid = state.empstateid
         left join contract c on c.empid = e.empid
-        left join contract_type ct on c.contypeid=ct.contypeid
         left join education_experience eduex on eduex.empid = e.empid
         left join work_experience workex on workex.empid = e.empid
         left join social_benefits sb on sb.empid = e.empid
