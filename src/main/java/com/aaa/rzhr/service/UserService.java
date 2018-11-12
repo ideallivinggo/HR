@@ -33,11 +33,11 @@ public interface UserService {
     void L_add_lizhi(int empid, String dimtype, String dimdetails, String dimsuggest, String dimturn, String dimapplydate, int dimstate, int deptid);
 
     /**查询休假*/
-    List<Map> L_query_xiujia(Integer empid, String fristdate, String overdate, Integer leasate);
+    List<Map> L_query_xiujia(Integer empid, String fristdate, String overdate, Integer leasate, Integer deptid);
     /**查询加班*/
-    List<Map> L_query_jiaban(Integer empid, String fristdate, String overdate, Integer apovstate);
+    List<Map> L_query_jiaban(Integer empid, String fristdate, String overdate, Integer apovstate, Integer deptid);
     /**查询  辞职*/
-    List<Map> L_query_cizhi(Integer empid, String fristdate, String overdate, Integer dimstate);
+    List<Map> L_query_cizhi(Integer empid, String fristdate, String overdate, Integer dimstate, Integer deptid);
     /**修改休假的状态  为3*/
     void L_update_xiujia(Integer leaid);
     /**修改加班的状态  为3*/
@@ -74,11 +74,11 @@ public interface UserService {
     /**经理查询休假    ---------------------------------二级审核
      * */
     /**查询休假*/
-    LayuiFy J_query_xiujia(Integer empid, String fristdate, String overdate, Integer leasate, Integer limit, Integer page);
+    LayuiFy J_query_xiujia(Integer empid, String fristdate, String overdate, Integer leasate, Integer deptid, Integer limit, Integer page);
     /**查询加班*/
-    LayuiFy J_query_jiaban(Integer empid, String fristdate, String overdate, Integer apovstate, Integer limit, Integer page);
+    LayuiFy J_query_jiaban(Integer empid, String fristdate, String overdate, Integer apovstate, Integer deptid, Integer limit, Integer page);
     /**查询  辞职*/
-    LayuiFy J_query_cizhi(Integer empid, String fristdate, String overdate, Integer dimstate, Integer limit, Integer page);
+    LayuiFy J_query_cizhi(Integer empid, String fristdate, String overdate, Integer dimstate, Integer deptid, Integer limit, Integer page);
     /** 修改休假状态  5 和2*/
     void J_upd_xiujia_unpass(Integer leasate, String zongshen, String zongshendate, String zongbohui, Integer leaid);
     /** 修改加班状态  5 和2*/

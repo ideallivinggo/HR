@@ -69,19 +69,19 @@ userDao.L_add_lizhi(empid, dimtype, dimdetails, dimsuggest, dimturn, dimapplydat
     }
 /**休假加班离职*/
     @Override
-    public List<Map> L_query_xiujia(Integer empid,String fristdate,String overdate, Integer leasate) {
+    public List<Map> L_query_xiujia(Integer empid,String fristdate,String overdate, Integer leasate,Integer deptid) {
 
-        return userDao.L_query_xiujia(empid,fristdate,overdate,leasate);
+        return userDao.L_query_xiujia(empid,fristdate,overdate,leasate,deptid);
     }
 
     @Override
-    public List<Map> L_query_jiaban(Integer empid, String fristdate, String overdate, Integer apovstate) {
-        return userDao.L_query_jiaban(empid,fristdate,overdate,apovstate);
+    public List<Map> L_query_jiaban(Integer empid, String fristdate, String overdate, Integer apovstate,Integer deptid) {
+        return userDao.L_query_jiaban(empid,fristdate,overdate,apovstate,deptid);
     }
 
     @Override
-    public List<Map> L_query_cizhi(Integer empid, String fristdate, String overdate, Integer dimstate) {
-        return userDao.L_query_cizhi(empid,fristdate,overdate,dimstate);
+    public List<Map> L_query_cizhi(Integer empid, String fristdate, String overdate, Integer dimstate,Integer deptid) {
+        return userDao.L_query_cizhi(empid,fristdate,overdate,dimstate,deptid);
     }
     /**休假加班离职撤回*/
     @Override
@@ -163,20 +163,20 @@ userDao.L_add_lizhi(empid, dimtype, dimdetails, dimsuggest, dimturn, dimapplydat
     }
 /**  二级经理---------------------------------------审核*/
     @Override
-    public LayuiFy J_query_xiujia(Integer empid, String fristdate, String overdate, Integer leasate, Integer limit, Integer page) {
-        LayuiFy bb =  layuiUtil.getData(userDao.L_query_xiujia(empid, fristdate, overdate, leasate),limit,page);
+    public LayuiFy J_query_xiujia(Integer empid, String fristdate, String overdate, Integer leasate,Integer deptid, Integer limit, Integer page) {
+        LayuiFy bb =  layuiUtil.getData(userDao.L_query_xiujia(empid, fristdate, overdate, leasate,deptid),limit,page);
         return bb;
     }
 
     @Override
-    public LayuiFy J_query_jiaban(Integer empid, String fristdate, String overdate, Integer apovstate, Integer limit, Integer page) {
-        LayuiFy bb =   layuiUtil.getData(userDao.L_query_jiaban(empid, fristdate, overdate, apovstate),limit,page);
+    public LayuiFy J_query_jiaban(Integer empid, String fristdate, String overdate, Integer apovstate,Integer deptid ,Integer limit, Integer page) {
+        LayuiFy bb =   layuiUtil.getData(userDao.L_query_jiaban(empid, fristdate, overdate, apovstate,deptid),limit,page);
         return bb;
     }
 
     @Override
-    public LayuiFy J_query_cizhi(Integer empid, String fristdate, String overdate, Integer dimstate,Integer limit, Integer page) {
-        LayuiFy bb =layuiUtil.getData(userDao.L_query_cizhi(empid, fristdate, overdate, dimstate),limit,page);
+    public LayuiFy J_query_cizhi(Integer empid, String fristdate, String overdate, Integer dimstate,Integer deptid,Integer limit, Integer page) {
+        LayuiFy bb =layuiUtil.getData(userDao.L_query_cizhi(empid, fristdate, overdate, dimstate,deptid),limit,page);
         return bb;
     }
 
