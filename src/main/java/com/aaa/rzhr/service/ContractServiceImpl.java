@@ -1,9 +1,9 @@
 package com.aaa.rzhr.service;
 
 import com.aaa.rzhr.dao.ContractMapperYqx;
+import com.aaa.rzhr.dao.DeptMapper;
 import com.aaa.rzhr.pojo.*;
 import com.aaa.rzhr.util.LayuiFy;
-import com.aaa.rzhr.util.layuiPage;
 import com.aaa.rzhr.util.layuiUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,7 +20,8 @@ import java.util.Map;
 public class ContractServiceImpl implements ContractService {
     @Autowired
     private ContractMapperYqx mapperYqx;
-
+    @Autowired
+    private DeptMapper deptMapper;
     /**
      * 查询合同
      * */
@@ -112,9 +113,6 @@ public class ContractServiceImpl implements ContractService {
         LayuiFy layui = layuiUtil.getData(mapperYqx.QueryEmpState(empname,"4"),limit,page);
         return layui;
     }*/
-
-
-
     @Override
     public List<Map> QueryEmpStateName() {
         return mapperYqx.QueryStateName();
@@ -137,8 +135,8 @@ public class ContractServiceImpl implements ContractService {
      * 查询面试成功(简历)
      * */
     @Override
-    public LayuiFy QueryResumeYqx(Integer limit, Integer page) {
-        LayuiFy layui = layuiUtil.getData(mapperYqx.QueryResumeYqx(),limit,page);
+    public LayuiFy QueryResumeYqx(String actname,Integer limit, Integer page) {
+        LayuiFy layui = layuiUtil.getData(mapperYqx.QueryResumeYqx(actname),limit,page);
         return layui;
     }
     /**
@@ -169,5 +167,45 @@ public class ContractServiceImpl implements ContractService {
     public void UpdateActivationYqx(String actnumber) {
         System.out.println(actnumber+"kkkkkkkkkkkkkkkkkkkkkkkkkkkkkk");
         mapperYqx.UpdateActivationYqx(actnumber);
+    }
+    /**
+     * 分组查询部门
+     * */
+    @Override
+    public List<Map> QueryGroupYqx(Dept dept) {
+        List<Map> list1 = mapperYqx.QueryGroupYqx(dept);
+        List<Map> list = deptMapper.QueryDeptYqx();
+        for(int i = 0; i < list1.size(); i++) {
+            list1.get(i).put("roid", list.get(i).get("num"));
+        }
+        return list1;
+    }
+    /**
+     * 查询员工
+     * */
+    @Override
+    public List<Map> QueryEmpSelectYqx() {
+        return mapperYqx.QueryEmpSelectYqx();
+    }
+/**
+ * 添加部门
+ * */
+    @Override
+    public int AddDeptManageYqx(Dept dept) {
+        return mapperYqx.AddDeptManageYqx(dept);
+    }
+    /**
+     * 修改员工经理
+     * */
+    @Override
+    public void UpdateEmpManageYqx(Emp emp) {
+        mapperYqx.UpdateEmpManageYqx(emp);
+    }
+    /**
+     * 修改部门
+     * */
+    @Override
+    public void UpdateDeptYqx(Dept dept) {
+        mapperYqx.UpdateDeptYqx(dept);
     }
 }

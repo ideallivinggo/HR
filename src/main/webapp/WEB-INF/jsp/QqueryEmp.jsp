@@ -19,13 +19,13 @@
         <div class="layui-col-md12">
             <div class="layui-card">
                 <div class="layui-card-header" style="height: 60px;">
-                    <%--姓名--%>
                         <div class="demoTable layui-form">
+                            <%--姓名--%>
                             <div class="layui-inline">
-                                <input id="empname">
+                                <input id="empname" class="layui-input">
                             </div>
                             <div class="layui-btn" data-type="reload"><i class="layui-icon"> &#xe615;</i></div>
-                        <%--下拉--%>
+                            <%--下拉--%>
                             <div class="layui-inline">
                                 <select id="ByType">
                                     <option value="">--部门--</option>
@@ -35,15 +35,14 @@
                             <%--员工类型--%>
                                 <div class="layui-inline">
                                     <select id="ByEmpType">
-                                        <option value="0">待入职</option>
-                                        <option value="1">待转正</option>
+                                        <option value="">全部</option>
+                                        <option value="1">实习期</option>
                                         <option value="2">已转正</option>
                                         <option value="3">待离职</option>
                                         <option value="4">已离职</option>
                                     </select>
                                 </div>
                                 <div class="layui-btn" data-type="reload"><i class="layui-icon"> &#xe615;</i></div>
-
                          </div>
                 </div>
                 <div class="layui-card-body" style="height:90%;">
@@ -92,7 +91,7 @@
                     ,{field:'sex', title: '性别', align:'center',width:50, sort: true}
                     ,{field:'phone', title: '电话', align:'center'}
                     ,{field:'deptname', title: '部门', align:'center'}
-                    ,{field:'roname', title: '职位', align:'center'}
+                    ,{field:'posname', title: '职位', align:'center'}
                     /*,{field:'emptype', title: '员工类型', align:'center', sort: true}*/
                     ,{field:'emppay', title: '薪资',width:80, align:'center'}
                    /* ,{field:'empstateid', title: '入职状态', align:'center'}*/

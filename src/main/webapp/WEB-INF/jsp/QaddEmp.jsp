@@ -52,18 +52,29 @@
                         <div class="layui-inline" >
                             <label class="layui-form-label">工号</label>
                             <div class="layui-input-inline">
-                                <input type="text" name="empnumber" value="${list.actnumber}" lay-verify="required" autocomplete="off" class="layui-input">
+                                <input type="text" name="empnumber" value="${list.actnumber}" autocomplete="off" class="layui-input">
                             </div>
                         </div>
                     </div>
                     <div class="layui-form-item">
                         <div class="layui-inline" >
-                            <label class="layui-form-label">薪资</label>
+                            <label class="layui-form-label">薪资<i style="color: red;">*</i></label>
                             <div class="layui-input-inline">
-                                <input type="text" name="emppay"  lay-verify="required" autocomplete="off" class="layui-input">
+                                <input type="text" name="emppay" lay-verify="required" autocomplete="off" class="layui-input">
                             </div>
                         </div>
                         <div class="layui-inline" >
+                            <label class="layui-form-label">员工类型</label>
+                            <div class="layui-input-inline">
+                                <select name="emptypeid">
+                                    <option value="">请选择</option>
+                                    <option value="1">全职</option>
+                                    <option value="2">兼职</option>
+                                    <option value="3">外派</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="layui-inline" style="display: none;">
                             <label class="layui-form-label">密码</label>
                             <div class="layui-input-inline">
                                 <input value="${list.actpwd}" type="text" name="password"  autocomplete="off" class="layui-input">
@@ -72,9 +83,9 @@
                     </div>
                     <div class="layui-form-item">
                         <div class="layui-inline">
-                            <label class="layui-form-label">部门</label>
+                            <label class="layui-form-label">部门<i style="color: red;">*</i></label>
                             <div class="layui-input-inline">
-                                <select id="ByDype">
+                                <select id="ByDype" name="deptid" lay-verify="required">
                                     <option value="">请选择</option>
                                 </select>
                             </div>
@@ -82,7 +93,7 @@
                         <div class="layui-inline" >
                             <label class="layui-form-label">职位</label>
                             <div class="layui-input-inline">
-                                <select id="ByPoid">
+                                <select id="ByPoid" name="poid">
                                     <option value="">请选择</option>
                                 </select>
                             </div>
@@ -90,7 +101,7 @@
                     </div>
                     <div class="layui-form-item">
                         <div class="layui-inline">
-                            <label class="layui-form-label">手机</label>
+                            <label class="layui-form-label">手机<i style="color: red;">*</i></label>
                             <div class="layui-input-inline">
                                 <input value="${list.phone}" type="tel" name="phone" lay-verify="required|phone" autocomplete="off" class="layui-input">
                             </div>
@@ -106,7 +117,7 @@
                         <div class="layui-inline" >
                             <label class="layui-form-label">证件类型</label>
                             <div class="layui-input-inline">
-                                <select name="typeid">
+                                <select name="typeid" id="typeid" disabled="disabled;">
                                     <option value="1">身份证</option>
                                     <option value="2">驾驶证</option>
                                     <option value="3">军官证</option>
@@ -116,9 +127,9 @@
                             </div>
                         </div>
                         <div class="layui-inline" >
-                            <label class="layui-form-label">证件号</label>
+                            <label class="layui-form-label">证件号<i style="color: red;">*</i></label>
                             <div class="layui-input-inline">
-                                <input type="text" name="idnumber" autocomplete="off" class="layui-input">
+                                <input type="text" name="idnumber" lay-verify="idnumber" autocomplete="off" class="layui-input">
                             </div>
                         </div>
                     </div>
@@ -130,9 +141,9 @@
                             </div>
                         </div>
                         <div class="layui-inline" >
-                            <label class="layui-form-label">出生日期</label>
+                            <label class="layui-form-label">出生日期<i style="color: red;">*</i></label>
                             <div class="layui-input-inline">
-                                <input type="text" name="birthdate" id="date2" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input">
+                                <input type="text" name="birthdate" id="date2" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input">
                             </div>
                         </div>
                     </div>
@@ -175,7 +186,7 @@
                             </div>
                         </div>
                         <div class="layui-inline" >
-                            <label class="layui-form-label">入职日期</label>
+                            <label class="layui-form-label">入职日期<i style="color: red;">*</i></label>
                             <div class="layui-input-inline">
                                 <input type="text" name="empstatedate" id="date" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input">
                             </div>
@@ -183,34 +194,23 @@
                     </div>
                     <div class="layui-form-item">
                         <div class="layui-inline" >
-                            <label class="layui-form-label">紧急联系人</label>
+                            <label class="layui-form-label">紧急联系人<i style="color: red;">*</i></label>
                             <div class="layui-input-inline">
-                                <input type="text" name="urgencyname" autocomplete="off" class="layui-input">
+                                <input type="text" name="urgencyname" lay-verify="required" autocomplete="off" class="layui-input">
                             </div>
                         </div>
                         <div class="layui-inline" >
-                            <label class="layui-form-label">紧急联系人电话</label>
+                            <label class="layui-form-label">紧急联系人电话<i style="color: red;">*</i></label>
                             <div class="layui-input-inline">
                                 <input type="tel" name="urgencyphone" lay-verify="required|phone" autocomplete="off" class="layui-input">
                             </div>
                         </div>
                     </div>
-                    <div class="layui-form-item">
+                    <div class="layui-form-item" style="display:none;">
                        <div class="layui-inline" >
                             <label class="layui-form-label">入职状态</label>
                             <div class="layui-input-inline">
                                 <input value="1" name="empstateid">
-                            </div>
-                        </div>
-                        <div class="layui-inline" >
-                            <label class="layui-form-label">员工类型</label>
-                            <div class="layui-input-inline">
-                                <select name="emptypeid">
-                                    <option value="">请选择</option>
-                                    <option value="1">全职</option>
-                                    <option value="2">兼职</option>
-                                    <option value="3">外派</option>
-                                </select>
                             </div>
                         </div>
                     </div>
@@ -255,8 +255,6 @@
         laydate.render({
             elem: '#date2'
         });
-
-
         //自定义验证规则
         form.verify({
             title: function(value){
@@ -264,6 +262,7 @@
                     return '标题至少得5个字符啊';
                 }
             }
+            ,idnumber:[/(^\d{15}$)|(^\d{17}(x|X|\d)$)/, "请输入正确的身份证号"]
             ,pass: [/(.+){6,12}$/, '密码必须6到12位']
             ,content: function(value){
                 layedit.sync(editIndex);
@@ -272,19 +271,17 @@
         //监听提交
         form.on('submit(SubmitEmp)', function(data){
             var con = $("#EmpForm").serialize();
-            alert(con)
-            alert("添加员工")
             $.ajax({
                 url:'AddEmpYqx',
                 type:'post',
                 data:con,
                 dataType:'text',
                 success:function (data) {
-                    alert(true+"添加")
-                    window.location.href="QoneEmp"
+                    alert(data+"添加")
+                    window.location.href="QmanageTurn";
                 }
-            })
-            alert("tiajia")
+            });
+            return false;//禁止跳转，否则会提交两次，且页面会刷新
         });
 
     });
@@ -316,19 +313,15 @@
      * 下拉职位
      * */
     function QueryPosition(){
-        alert("职位下拉")
         $.ajax({
             url:'QueryPosition',
             type:'post',
             data:{},
             dataType:'json',
             success:function (data2) {
-                alert(data2.length)
-                alert(data2[0].posname+"ssssssssssssssssss")
                 for (var i=0;i<data2.length;i++){
                     $("#ByPoid").append("<option value='"+data2[i].poid+"'>"+data2[i].posname+"</option>");
                 }
-                alert("下拉==========================================================")
             }
         })
     }

@@ -2,6 +2,7 @@ package com.aaa.rzhr.web;
 
 import com.aaa.rzhr.pojo.*;
 import com.aaa.rzhr.service.ContractService;
+import com.aaa.rzhr.service.DeptService;
 import com.aaa.rzhr.util.LayuiFy;
 import com.alibaba.fastjson.JSONArray;
 import org.apache.shiro.crypto.SecureRandomNumberGenerator;
@@ -29,7 +30,8 @@ import java.util.*;
 public class ContractController {
     @Autowired
     ContractService contractService;
-
+    @Autowired
+    DeptService deptService;
     /**
      * 添加员工
      * */
@@ -91,8 +93,9 @@ public class ContractController {
      * */
     @RequestMapping("QueryResumeYqx")
     @ResponseBody
-    public LayuiFy QueryResumeYqx(Integer limit, Integer page){
-        return contractService.QueryResumeYqx(limit,page);
+    public LayuiFy QueryResumeYqx(String actname,Integer limit, Integer page){
+
+        return contractService.QueryResumeYqx(actname,limit,page);
     }
     /**
      * 员工员工驳回，离职
@@ -255,6 +258,76 @@ public class ContractController {
     @ResponseBody
     public String UpdateSociaYqx(Social_Benefits social){
         contractService.UpdateSociaYqx(social);
+        return "true";
+    }
+    /**
+     *  public List<Map> QueryEmpStateName(HttpServletRequest request){
+     List<Map> list = contractService.QueryEmpStateName();
+     HttpSession session = request.getSession();
+     session.setAttribute("list",list);
+     return list;
+     }
+     * */
+    /**
+     * 分组查询部门
+     * */
+    @RequestMapping("QueryGroupYqx")
+    @ResponseBody
+    public List<Map> QueryGroupYqx(Integer deptid){
+        System.out.println(deptid+"ssssssssssssssssssssssssssssssss");
+        Dept dept = new Dept();
+        dept.setDeptid(deptid);
+        List<Map> list = contractService.QueryGroupYqx(dept);
+        System.out.println(list+"ssssssssssssssssssssssssssssssssss");
+        return list;
+    }
+    /**
+     * 查询员工
+     * */
+    @RequestMapping("QueryEmpSelectYqx")
+    @ResponseBody
+    public List<Map> QueryEmpSelectYqx() {
+        return contractService.QueryEmpSelectYqx();
+    }
+    /**
+     * 添加部门，部门经理
+     * */
+    @RequestMapping("AddDeptManageYqx")
+    @ResponseBody
+    public String AddDeptManageYqx(Integer empid,String deptName,Integer deptnum) {
+        System.out.println(empid+"======"+deptnum+"======"+deptName);
+        Dept dept = new Dept();
+        dept.setDeptname(deptName);
+        dept.setDeptnum(deptnum);
+        contractService.AddDeptManageYqx(dept);
+        System.out.println(dept.getDeptid()+"sssssssssssssssssssssssssssssssssssssss");
+        Emp emp = new Emp();
+        emp.setEmpid(empid);
+        emp.setDeptid(dept.getDeptid());
+        emp.setPoid(1);
+        contractService.UpdateEmpManageYqx(emp);
+        return "true";
+    }
+    /**
+     * 修改部门
+     * */
+    @RequestMapping("UpdateDeptYqx")
+    @ResponseBody
+    public String UpdateDeptYqx(Integer deptid,Integer empid,String deptname,Integer deptnum,Integer id){
+        System.out.println(deptid+"==="+deptnum+"==="+deptname+"==="+empid+"==="+id+"ddddddddddddddddddddddddddddddddddddddddddd");
+        Dept dept = new Dept();
+        dept.setDeptid(deptid);
+        dept.setDeptnum(deptnum);
+        dept.setDeptname(deptname);
+        contractService.UpdateDeptYqx(dept);
+        Emp emp = new Emp();
+        emp.setEmpid(id);
+        emp.setDeptid(dept.getDeptid());
+        emp.setPoid(1);
+        contractService.UpdateEmpManageYqx(emp);
+        emp.setEmpid(empid);
+        emp.setPoid(2);
+        contractService.UpdateEmpManageYqx(emp);
         return "true";
     }
 }

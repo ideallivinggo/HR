@@ -33,7 +33,8 @@
                     <table class="layui-table">
                         <tr style="background-color: #f2f2f2;color: #009688">
                             <th>序号</th>
-                            <th>ID</th>
+                            <th>deptid</th>
+                            <th>empid</th>
                             <th>部门名称</th>
                             <th>部门经理</th>
                             <th>部门人数</th>
@@ -47,13 +48,31 @@
         </div>
     </div>
 </div>
-<div id="addDept" style="display: none;">
-           <div style="padding-top: 40px;padding-left: 50px;">
-               部门名称:<input id="deptname" style="width: 200px;height: 40px;border: 1px solid #cdcdcd"><br>
-           </div>
-           <div style="padding-top: 40px;padding-left: 50px;">
-               部门人数:<input id="deptnamenum" style="width: 200px;height: 40px;border: 1px solid #cdcdcd">
-           </div>
+<div class="addDept" style="display: none;">
+    <form class="layui-form" action="" class="EmpForm">
+        <div class="layui-form-item" >
+            <div class="layui-inline" style="margin-top: 30px;margin-left: 20px;">
+                <label class="layui-form-label">部门名称</label>
+                <div class="layui-input-inline">
+                    <input type="text" id="deptname" placeholder="请输入" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-inline" style="margin-top: 30px;margin-left: 20px;">
+                <label class="layui-form-label">部门经理</label>
+                <div class="layui-input-inline">
+                    <select class="ByEmp" id="bbb">
+                        <option id="aaa"></option>
+                    </select>
+                </div>
+            </div>
+            <div class="layui-inline" style="margin-top: 30px;margin-left: 20px;">
+                <label class="layui-form-label">部门人数</label>
+                <div class="layui-input-inline">
+                    <input type="text" id="deptnamenum"  autocomplete="off" class="layui-input">
+                </div>
+            </div>
+        </div>
+    </form>
 </div>
 
 </body>
@@ -61,11 +80,11 @@
 <script>
     $(function () {
         QueryDeptYqx();
+        QueryEmpSelectYqx();
     })
     function QueryDeptYqx() {
-
         $.ajax({
-            url:'QueryDeptYqx',
+            url:'QueryGroupYqx',
             type:'post',
             data:{},
             dataType:'json',
@@ -79,19 +98,15 @@
                         name=data[i].empname
                     }
                     var deptid=data[i].deptid;
-                    var num=data[i].num;
-                    if(deptid==null){
-                        num=0;
-                    }else {
-                        num=data[i].num;
-                    }
+                    var roid = data[i].roid;
                     var tr="<tr>";
                     tr+="<th>"+(i+1)+"</th>";
                     tr+="<th>"+data[i].deptid+"</th>";
+                    tr+="<th>"+data[i].empid+"</th>";
                     tr+="<th>"+data[i].deptname+"</th>";
                     tr+="<th>"+name+"</th>";
                     tr+="<th>"+data[i].deptnum+"</th>";
-                    tr+="<th>"+num+"</th>";
+                    tr+="<th>"+data[i].roid+"</th>";
                     tr+="<th><button class='layui-btn layui-btn-sm' onclick='delDept("+data[i].deptid+")'><i class='layui-icon'>&#xe640;</i></button>" +
                         "<button class='layui-btn layui-btn-sm layui-btn-normal' onclick='UpdateDept("+data[i].deptid+")'><i class='layui-icon'>&#xe642;</i></th>";
                     tr+="</tr>";
@@ -101,17 +116,77 @@
         })
     }
     /**
+     * 查询员工姓名
+     * */
+    function QueryEmpSelectYqx() {
+        $.ajax({
+            url:'QueryEmpSelectYqx',
+            type:'post',
+            data:{},
+            dataType:'json',
+            success:function (data) {
+                for (var i=0;i<data.length;i++){
+                    $(".ByEmp").append("<option value='"+data[i].empid+"'>"+data[i].empname+"</option>");
+                }
+            }
+        })
+    }
+    /**
      * 修改部门人数
      * */
-    function UpdateDept(id) {
-            alert(id)
+    function UpdateDept(a) {
+        alert(a)
+        $.ajax({
+            url:'QueryGroupYqx',
+            type:'post',
+            data:{"deptid":a},
+            dataType:'json',
+            success:function (data) {
+                $("#deptname").val(data[0].deptname);
+                $("#aaa").val(data[0].empname);
+                $("#deptnamenum").val(data[0].deptnum);
+                layer.open({
+                    type: 1
+                    ,title:'修改部门'
+                    ,area: ['400px', '360px']
+                    ,content: $('.addDept')
+                    ,btn:  ['提交', '关闭']
+                    ,btnAlign: 'c' //按钮居中
+                    ,shade: 0 //不显示遮罩
+                    ,yes:function () {
+                        alert("修改部门！");
+                        var id=$("#bbb").val();
+                        var deptid = data[0].deptid;
+                        var empid = data[0].empid;
+                        var name = $("#deptname").val();
+                        var num = $("#deptnamenum").val();
+                        UpdateDeptYqx(id,deptid,empid,name,num);
+                    }
+                });
+
+            }
+        })
+
     }
+    function UpdateDeptYqx(id,deptid,empid,name,num) {
+        alert(id+"==="+deptid+"==="+empid+"==="+name+"==="+num)
+        $.ajax({
+            url:'UpdateDeptYqx',
+            type:'post',
+            data:{"deptname":name,"deptnum":num,"deptid":deptid,"id":id,"empid":empid},
+            dataType:'text',
+            success:function (data) {
+                QueryDeptYqx();
+            }
+        })
+        layer.closeAll();
+    }
+
     /**
      * 删除
      * */
     function delDept(obj) {
         alert(obj)
-        alert(111)
         $.ajax({
             url:'delDept',
             type:'post',
@@ -123,8 +198,14 @@
         })
     }
 
-    layui.use('layer', function(){ //独立版的layer无需执行这一句
-        var $ = layui.jquery, layer = layui.layer; //独立版的layer无需执行这一句
+    layui.use(['form', 'layedit', 'laydate','layer'], function(){ //独立版的layer无需执行这一句
+        var $ = layui.jquery,
+            layer = layui.layer; //独立版的layer无需执行这一句
+        var form = layui.form
+            ,layer = layui.layer
+            ,layedit = layui.layedit
+            ,laydate = layui.laydate;
+        form.render();
         //触发事件1
         var active = {
           offset: function(othis){
@@ -134,8 +215,8 @@
                     ,title:'添加部门'
                     ,offset: type //具体配置参考：http://www.layui.com/doc/modules/layer.html#offset
                     ,id: 'layerDemo'+type //防止重复弹出
-                    ,area: ['400px', '300px']
-                    ,content: $('#addDept')
+                    ,area: ['400px', '360px']
+                    ,content: $('.addDept')
                     ,btn:  ['提交', '关闭']
                     ,btnAlign: 'c' //按钮居中
                     ,shade: 0 //不显示遮罩
@@ -143,7 +224,8 @@
                         /*layer.closeAll();*/
                         var name = $("#deptname").val();
                         var num = $("#deptnamenum").val();
-                        addDept(name,num);
+                        var id=$("#ByEmp").val();
+                        addDept(name,num,id);
                     }
                 });
             }
@@ -153,11 +235,11 @@
             active[method] ? active[method].call(this, othis) : '';
         });
     });
-    function addDept(name,num){
+    function addDept(name,num,id){
         $.ajax({
-            url:'addDept',
+            url:'AddDeptManageYqx',
             type:'post',
-            data:{"deptName":name,"deptnum":num},
+            data:{"deptName":name,"deptnum":num,"empid":id},
             dataType:'text',
             success:function (data) {
                 QueryDeptYqx();
