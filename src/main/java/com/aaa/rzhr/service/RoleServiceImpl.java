@@ -6,13 +6,17 @@ import com.aaa.rzhr.pojo.Emp;
 import com.aaa.rzhr.pojo.Role;
 import com.aaa.rzhr.pojo.Emp_Role;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @SuppressWarnings("ALL")
 @Service
+@Transactional
 public class RoleServiceImpl implements RoleService {
 
     @Autowired
@@ -26,6 +30,7 @@ public class RoleServiceImpl implements RoleService {
 
     @Override
     public List<Role> listRoles(String empName) {
+
            List<Role> roles=new ArrayList<>();
         Emp emp=empService.getByName(empName);
          if(null==emp) {
@@ -56,7 +61,8 @@ public class RoleServiceImpl implements RoleService {
 
     @Override
     public int addRoleX(Role r) {
+         Integer i=roleMapper.addRoleX(r);
 
-        return roleMapper.addRoleX(r);
+        return i;
     }
 }

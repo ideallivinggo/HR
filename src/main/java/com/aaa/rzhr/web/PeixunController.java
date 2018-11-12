@@ -33,8 +33,6 @@ public class PeixunController {
          kecheng.setKeendtime(end);
          kecheng.setKebegintime(begin);
 
-
-          System.out.println(kecheng);
            peixunService.addkecheng(kecheng);
            peixunService.addKeTeacher(empids,kecheng.getKeid());
 
@@ -64,7 +62,6 @@ public class PeixunController {
 
      @RequestMapping("/getKechengbyEmpid")
     public  List<Kecheng> getKechengbyEmpid(Integer empid){
-         System.out.println("*************************-------------------------+++++++++++++++");
          List<Kecheng> kechengByEmpid = peixunService.getKechengByEmpid(empid);
 
          return kechengByEmpid;

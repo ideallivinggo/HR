@@ -40,7 +40,7 @@ public class DingRecordSyncController {
 
     private static String accessTokenUrl = "https://oapi.dingtalk.com/gettoken";//通用
     private static String corpId = "ding93bd824d055b34cf35c2f4657eb6378f";
-    private static String corpSecret = "6iYix8o8cHXjCJKz4BYmTiy2bG_0x7BAEWlXWztO1SLjgPG2wbPm26MOrFMi4dBN";
+    private static String corpSecret = "n5bRK39g8LqyNkoiWsUw88jJxCaK9g5lSF0G1cUk1v3rt814_5qCkZlKE0DvU6wB";
 
     public static String getAccessToken() {
         Map<String,Object> map = new HashMap<>();
@@ -218,7 +218,7 @@ public class DingRecordSyncController {
        // AttendanceQvo attendanceQvo = Arrays.asList(users).get(0).get(5);
         String dates =  new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
              .format(new Date(Arrays.asList(users).get(0).get(0).getUserCheckTime()));
-     System.out.println("用户id "+Arrays.asList(users).get(0).get(2).getUserId());
+     System.out.println("用户id "+Arrays.asList(users).get(0).get(0).getUserId());
        System.out.println("员工打卡时间"+dates);
 
         System.out.println("打卡类型"+Arrays.asList(users).get(0).get(0).getCheckType());

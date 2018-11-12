@@ -42,7 +42,7 @@
     <h4></h4><br>
     <div class="btn-group btn-group-justified">
         <div class="btn-group">
-            <a href="/config/permissionconfig"> <button type="button" class="btn btn-theme">员工管理</button></a>
+            <a href="/config"> <button type="button" class="btn btn-theme">员工管理</button></a>
         </div>
         <div class="btn-group">
             <button type="button" class="btn btn-theme">角色管理</button>
