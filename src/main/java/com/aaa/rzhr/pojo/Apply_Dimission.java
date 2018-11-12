@@ -17,6 +17,11 @@ public class Apply_Dimission {
   private String shendimdate;
   private Integer deptid;
   private String bohui;
+  private String renshishendate;
+  private String renshishen;
+  private String zongshen;
+  private String zongshendate;
+  private String zongbohui;
 
 
   public Integer getDimid() {
@@ -142,6 +147,51 @@ public class Apply_Dimission {
 
   public void setBohui(String bohui) {
     this.bohui = bohui;
+  }
+
+
+  public String getRenshishendate() {
+    return renshishendate;
+  }
+
+  public void setRenshishendate(String renshishendate) {
+    this.renshishendate = renshishendate;
+  }
+
+
+  public String getRenshishen() {
+    return renshishen;
+  }
+
+  public void setRenshishen(String renshishen) {
+    this.renshishen = renshishen;
+  }
+
+
+  public String getZongshen() {
+    return zongshen;
+  }
+
+  public void setZongshen(String zongshen) {
+    this.zongshen = zongshen;
+  }
+
+
+  public String getZongshendate() {
+    return zongshendate;
+  }
+
+  public void setZongshendate(String zongshendate) {
+    this.zongshendate = zongshendate;
+  }
+
+
+  public String getZongbohui() {
+    return zongbohui;
+  }
+
+  public void setZongbohui(String zongbohui) {
+    this.zongbohui = zongbohui;
   }
 
 }

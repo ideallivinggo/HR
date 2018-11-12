@@ -1,7 +1,10 @@
 package com.aaa.rzhr.service;
 
 
+import com.aaa.rzhr.pojo.Apply_Office;
 import com.aaa.rzhr.pojo.Emp;
+import com.aaa.rzhr.pojo.Keapply;
+import com.aaa.rzhr.pojo.Zhuanzheng;
 import com.aaa.rzhr.util.LayuiFy;
 import org.apache.ibatis.annotations.Param;
 
@@ -63,7 +66,47 @@ public interface UserService {
    LayuiFy L_query_pay_time(String empid, String time1, String time2, Integer limit, Integer page);
    /**number查询emp*/
     List<Map> L_query_user_name(String empnumber);
-    /**修改emp状态 为3*/
+
+    /**
+     * 修改emp状态 为3
+     */
     void L_update_emp_empstateid(Emp emp);
+    /**经理查询休假    ---------------------------------二级审核
+     * */
+    /**查询休假*/
+    LayuiFy J_query_xiujia(Integer empid, String fristdate, String overdate, Integer leasate, Integer limit, Integer page);
+    /**查询加班*/
+    LayuiFy J_query_jiaban(Integer empid, String fristdate, String overdate, Integer apovstate, Integer limit, Integer page);
+    /**查询  辞职*/
+    LayuiFy J_query_cizhi(Integer empid, String fristdate, String overdate, Integer dimstate, Integer limit, Integer page);
+    /** 修改休假状态  5 和2*/
+    void J_upd_xiujia_unpass(Integer leasate, String zongshen, String zongshendate, String zongbohui, Integer leaid);
+    /** 修改加班状态  5 和2*/
+    void J_upd_jiaban_unpass(Integer apovstate, String zongshen, String zongshendate, String zongbohui, Integer apovid);
+    /** 修改离职状态 5 和2*/
+    void J_upd_lizhi_unpass(Integer dimstate, String zongshen, String zongshendate, String zongbohui, Integer dimid);
+    /**出差申请添加*/
+    void L_add_out(Apply_Office apply_office);
+    /**转正申请*/
+    void L_add_zhuanzheng(Zhuanzheng zhuanzheng);
+    /**一级审批查询培训  转正  出差*/
+    /**转正*/
+    LayuiFy L_shen_zhuan(Integer deptid, Integer shenqingstate, String fristdate, String overdate, Integer limit, Integer page);
+    /**出差*/
+    LayuiFy  L_shen_out(Integer deptid, Integer offstate, String fristdate, String overdate, Integer limit, Integer page);
+    /**一级审核修改状态 培训 转正 出差*/
+    /**转正*/
+    void L_upd_zhuan(Zhuanzheng zhuanzheng);
+    /**出差*/
+    void L_upd_out(Apply_Office apply_office);
+    /**  二级审核*/
+    /**转正*/
+    void L_upd_zong_zhuan(Zhuanzheng zhuanzheng);
+    /**出差*/
+    void L_upd_zong_out(Apply_Office apply_office);
+    /**培训课程查询*/
+    LayuiFy L_query_pei(Integer limit, Integer page);
+    /**报名课程*/
+    void  L_add_keapply(Keapply keapply);
 
 }

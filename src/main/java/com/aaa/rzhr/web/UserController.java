@@ -1,10 +1,7 @@
 package com.aaa.rzhr.web;
 
 
-import com.aaa.rzhr.pojo.Apply_Dimission;
-import com.aaa.rzhr.pojo.Apply_Leave;
-import com.aaa.rzhr.pojo.Apply_Overtime;
-import com.aaa.rzhr.pojo.Emp;
+import com.aaa.rzhr.pojo.*;
 import com.aaa.rzhr.service.UserService;
 import com.aaa.rzhr.util.LayuiFy;
 import org.apache.shiro.crypto.hash.SimpleHash;
@@ -84,6 +81,7 @@ public  @ResponseBody  List<Map> L_query_leave(Integer empid){
 public  @ResponseBody
 LayuiFy L_query_pay(Integer empid, Integer limit, Integer page){
 
+    System.out.println(empid+"========================-------------");
     return  userService.L_query_pay(empid,limit,page);
 }
 /**
@@ -91,11 +89,12 @@ LayuiFy L_query_pay(Integer empid, Integer limit, Integer page){
  */
 @RequestMapping("L_add_jiaban")
 public  String    L_add_j(Apply_Overtime app, double apovhour_1, double apovhour_2){
-
+    System.out.println(apovhour_1+".....................");
+    System.out.println(apovhour_2+"++++++++++++++++++");
     double aa=apovhour_1*8+apovhour_2;
     String bb="";
-
        String cc=   aa+bb;
+
     Date date = new Date();
     //设置要获取到什么样的时间
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -110,10 +109,6 @@ public  String    L_add_j(Apply_Overtime app, double apovhour_1, double apovhour
     @RequestMapping("L_add_lizhi")
     public  String    L_add_lizhi(Apply_Dimission ad){
         System.out.println(ad.getDeptid());
-        System.out.println(ad.getDeptid());
-        System.out.println(ad.getDimdetails());
-        System.out.println(ad.getDimsuggest());
-        System.out.println(ad.getDimtype());
         Date date = new Date();
         //设置要获取到什么样的时间
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -126,10 +121,6 @@ public  String    L_add_j(Apply_Overtime app, double apovhour_1, double apovhour
 /*休假*/
     @RequestMapping("L_query_xiujia")
     public  @ResponseBody  List<Map> L_query_xiujia(Integer empid, String fristdate, String overdate, Integer leasate){
-     /*   System.out.println(empid+"44444444444444444444444");
-       System.out.println(fristdate+"333333333333333");
-        System.out.println(overdate+"222222222222222222");
-        System.out.println(leasate+"111111111111111111111111");*/
 
         List<Map> list= userService.L_query_xiujia(empid, fristdate, overdate,leasate);
 
@@ -139,9 +130,9 @@ public  String    L_add_j(Apply_Overtime app, double apovhour_1, double apovhour
 /*加-------------班*/
     @RequestMapping("L_query_jiaban")
     public  @ResponseBody  List<Map> L_query_jiaban(Integer empid, String fristdate, String overdate, Integer apovstate){
-       /* System.out.println(empid+"44444444444444444444444");
+        System.out.println(empid+"44444444444444444444444");
         System.out.println(fristdate+"333333333333333");
-        System.out.println(overdate+"222222222222222222");*/
+        System.out.println(overdate+"222222222222222222");
 
 
         List<Map> list= userService.L_query_jiaban(empid, fristdate, overdate,apovstate);
@@ -152,10 +143,6 @@ public  String    L_add_j(Apply_Overtime app, double apovhour_1, double apovhour
 
     @RequestMapping("L_query_cizhi")
     public  @ResponseBody  List<Map> L_query_cizhi(Integer empid, String fristdate, String overdate, Integer dimstate){
-       /* System.out.println(empid+"44444444444444444444444");
-        System.out.println(fristdate+"333333333333333");
-        System.out.println(overdate+"222222222222222222");*/
-
         List<Map> list= userService.L_query_cizhi(empid, fristdate, overdate,dimstate);
 
         return list;
@@ -183,7 +170,6 @@ public  String    L_add_j(Apply_Overtime app, double apovhour_1, double apovhour
      userService.L_update_cizhi(dimid);
         return "ok";
     }
-
     /*------------------------------通讯录员工查询*/
     @RequestMapping("L_query_emp")
     public  @ResponseBody List<Map> L_query_emp(Integer deptid){
@@ -194,8 +180,8 @@ public  String    L_add_j(Apply_Overtime app, double apovhour_1, double apovhour
     /*------------------------------通讯录员工姓名查询*/
     @RequestMapping("L_query_emp_name")
     public  @ResponseBody List<Map> L_query_emp_name(String empname){
-     /*   System.out.println(empname+"------------------------------------");
-        System.out.println(userService.L_query_emp_name(empname));*/
+        System.out.println(empname+"------------------------------------");
+        System.out.println(userService.L_query_emp_name(empname));
         return userService.L_query_emp_name(empname);
     }
 /*员工岗位*/
@@ -251,21 +237,7 @@ public  String    L_add_j(Apply_Overtime app, double apovhour_1, double apovhour
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         //获取String类型的时间
         String createdate = sdf.format(date);
-        System.out.println(dimsign+"--------------");
-
-        System.out.println(createdate+"33333333333333333333");
-        System.out.println(dimstate+"4444444444444444444");
-        System.out.println(bohui+"55555555555555");
-        System.out.println(dimid+"2222222222222222222");
-        System.out.println(empid+"66666666666666666666666");
         userService.L_upd_lizhi_unpass(dimstate,dimsign,createdate,bohui,dimid);
-        if(empid!=null){
-            Emp emp=new Emp();
-            emp.setEmpid(empid);
-            emp.setEmpstateid(3);
-            userService.L_update_emp_empstateid(emp);
-        }
-
         return  "chenggong";
     }
     /*--------查询已审批过的-----*/
@@ -282,7 +254,7 @@ public  String    L_add_j(Apply_Overtime app, double apovhour_1, double apovhour
         System.out.println( userService.L_shen_lizhi(deptid,null)+"aaaaaaaaaaaaaaaa");
         return  userService.L_shen_lizhi(deptid,null);
     }
-    /*----------模糊查询工资单-------*/
+    /**----------模糊查询工资单-------*/
     @RequestMapping("L_query_pay_time")
     public @ResponseBody
     LayuiFy L_query_pay_time(String empid, String time1, String time2, Integer limit, Integer page){
@@ -294,14 +266,11 @@ public  String    L_add_j(Apply_Overtime app, double apovhour_1, double apovhour
         List<Map> list1=userService.L_query_user_name(empnumber);
         String salt = (String) list1.get(0).get("salt");
         String yuanmima= (String) list1.get(0).get("password");
-        System.out.println(yuanmima+"--------------------++++++++++++++++++");
-        System.out.println(list1);
         int times = 2;
         String algorithmName = "md5";
       String yanzhneg=new SimpleHash(algorithmName, pwd, salt, times).toString();
          if (yanzhneg.equals(yuanmima)){
            String encodedPassword = new SimpleHash(algorithmName, repwd, salt, times).toString();
-             System.out.println("***************************"+encodedPassword+"!!!!!");
              Emp emp=new Emp();
              emp.setEmpnumber(empnumber);
              emp.setPassword(encodedPassword);
@@ -312,8 +281,244 @@ public  String    L_add_j(Apply_Overtime app, double apovhour_1, double apovhour
              return "no";
          }
     }
+/**-----------------------------------------------------------------------二级审核处理*/
+/**二级审核查询*/
+    @RequestMapping("J_query_xiujia")
+    public @ResponseBody  LayuiFy J_query_xiujia(Integer empid, String time1, String time2,Integer leasate,  Integer limit, Integer page){
+        return  userService.J_query_xiujia(null,"","",1,limit,page);
+    }
+    /**模糊*/
+    @RequestMapping("J_query_xiujia_a")
+    public @ResponseBody  LayuiFy J_query_xiujia_a(Integer empid, String time1, String time2,Integer leasate,  Integer limit, Integer page){
+        return  userService.J_query_xiujia(null,time1,time2,1,limit,page);
+    }
+    /**二级审核- 查询加班*/
+    @RequestMapping("J_query_jiaban")
+    public @ResponseBody  LayuiFy J_query_jiaban(Integer empid, String time1, String time2,Integer leasate,  Integer limit, Integer page) {
 
+        return  userService.J_query_jiaban(null,"","",1,limit,page);
+    }
+    /**模糊查询*/
+    @RequestMapping("J_query_jiaban_a")
+    public @ResponseBody  LayuiFy J_query_jiaban_a(Integer empid, String time1, String time2,Integer leasate,  Integer limit, Integer page) {
+        return  userService.J_query_jiaban(null,time1,time2,1,limit,page);
+    }
+    /**二级离职查询*/
+    @RequestMapping("J_query_lizhi")
+    public @ResponseBody  LayuiFy J_query_lizhi(Integer empid, String time1, String time2,Integer leasate,  Integer limit, Integer page) {
+        return  userService.J_query_cizhi(null,"","",1,limit,page);
+    }
+    /**模糊查询*/
+    @RequestMapping("J_query_lizhi_a")
+    public @ResponseBody  LayuiFy J_query_lizhi_a(Integer empid, String time1, String time2,Integer leasate,  Integer limit, Integer page) {
+        return  userService.J_query_cizhi(null,time1,time2,1,limit,page);
+    }
 
+    /**  二级审核修改状态*/
+ /*休假---加班----离职  ----审批 ---*/
+    @RequestMapping("J_update_xiujia")
+    public @ResponseBody String J_upd_xiujia_pass(Integer leasate,String zongshen,String zongshendate,String zongbohui, Integer leaid){
+        Date date = new Date();
+        //设置要获取到什么样的时间
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        //获取String类型的时间
+        String createdate = sdf.format(date);
+        userService.J_upd_xiujia_unpass(leasate,zongshen,createdate,zongbohui,leaid);
+        return  "chenggong";
+    }
+    @RequestMapping("J_upd_jiaban")
+    public @ResponseBody String J_upd_jiaban_unpass(Integer apovstate,String zongshen,String zongshendate,String zongbohui, Integer apovid){
+        Date date = new Date();
+        //设置要获取到什么样的时间
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        //获取String类型的时间
+        String createdate = sdf.format(date);
+        userService.J_upd_jiaban_unpass(apovstate,zongshen,createdate,zongbohui,apovid);
+        return  "chenggong";
+    }
+    /**离职审批*/
+    @RequestMapping("J_upd_lizhi")
+    public @ResponseBody String J_upd_lizhi_unpass(Integer dimstate,String zongshen,String zongshendate,String zongbohui, Integer dimid,Integer empid){
+        System.out.println("zhici进来了");
+        Date date = new Date();
+        //设置要获取到什么样的时间
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        //获取String类型的时间
+        String createdate = sdf.format(date);
+        userService.J_upd_lizhi_unpass(dimstate,zongshen,createdate,zongbohui,dimid);
+        if(dimstate==5){
+            Emp emp=new Emp();
+            emp.setEmpid(empid);
+            emp.setEmpstateid(3);
+            userService.L_update_emp_empstateid(emp);
+        }
+
+        return  "chenggong";
+    }
+
+    /**出差申请*/
+    @RequestMapping("L_add_out")
+    public  String L_add_out(Apply_Office apply_office){
+        Date date = new Date();
+        //设置要获取到什么样的时间
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        //获取String类型的时间
+        String createdate = sdf.format(date);
+        apply_office.setShentime(createdate);
+        apply_office.setOffstate(0);
+        System.out.println(apply_office.getDeptid());
+        System.out.println("777777777777");
+        System.out.println(apply_office.getLeaday());
+        userService.L_add_out(apply_office);
+        return  "L_shouye";
+    }
+    /**转正申请*/
+    @RequestMapping("L_add_zhuan")
+    public  String L_add_zhuan(Zhuanzheng zhuanzheng){
+        Date date = new Date();
+        //设置要获取到什么样的时间
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        //获取String类型的时间
+        String createdate = sdf.format(date);
+        zhuanzheng.setShendate(createdate);
+        zhuanzheng.setShenqingstate(0);
+        System.out.println("777777777777");
+        userService.L_add_zhuanzheng(zhuanzheng);
+        return  "L_shouye";
+    }
+    /**一级审核   出差  转正 查询*/
+    /**转正*/
+    @RequestMapping("L_query_zhuan")
+    public @ResponseBody  LayuiFy L_shen_zhuan(Integer deptid, Integer shenqingstate ,String time1, String time2, Integer limit, Integer page) {
+        return  userService.L_shen_zhuan(deptid,0,"","",limit,page);
+    }
+    @RequestMapping("L_query_zhuan_a")
+    public @ResponseBody  LayuiFy L_shen_zhuan_a(Integer deptid, Integer shenqingstate ,String time1, String time2, Integer limit, Integer page) {
+        return  userService.L_shen_zhuan(deptid,0,time1,time2,limit,page);
+    }
+    /**出差*/
+    @RequestMapping("L_query_out")
+    public @ResponseBody  LayuiFy L_query_out(Integer deptid, Integer shenqingstate ,String time1, String time2, Integer limit, Integer page) {
+        System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+        return  userService.L_shen_out(deptid,0,"","",limit,page);
+    }
+    @RequestMapping("L_query_out_a")
+    public @ResponseBody  LayuiFy L_query_out_a(Integer deptid, Integer offstate ,String time1, String time2, Integer limit, Integer page) {
+        return  userService.L_shen_out(deptid,0,time1,time2,limit,page);
+    }
+
+    /**转正*/
+    @RequestMapping("L_query_zhuan_tow")
+    public @ResponseBody  LayuiFy L_query_zhuan_tow(Integer deptid, Integer shenqingstate ,String time1, String time2, Integer limit, Integer page) {
+        return  userService.L_shen_zhuan(deptid,1,"","",limit,page);
+    }
+    @RequestMapping("L_query_zhuan_tow_a")
+    public @ResponseBody  LayuiFy L_query_zhuan_tow_a(Integer deptid, Integer shenqingstate ,String time1, String time2, Integer limit, Integer page) {
+        return  userService.L_shen_zhuan(deptid,1,time1,time2,limit,page);
+    }
+    /**出差*/
+    @RequestMapping("L_query_out_tow")
+    public @ResponseBody  LayuiFy L_query_out_tow(Integer deptid, Integer shenqingstate ,String time1, String time2, Integer limit, Integer page) {
+        return  userService.L_shen_out(deptid,1,"","",limit,page);
+    }
+    @RequestMapping("L_query_out_tow_a")
+    public @ResponseBody  LayuiFy L_query_out_tow_a(Integer deptid, Integer offstate ,String time1, String time2, Integer limit, Integer page) {
+        return  userService.L_shen_out(deptid,1,time1,time2,limit,page);
+    }
+    /**审核状态   出差  培训  转正*/
+/**转正*/
+@RequestMapping("L_upd_zhuan")
+public @ResponseBody String L_upd_zhuan(Integer shenqingstate,String pipeople,String shentime,String bohui, Integer shenid){
+    Date date = new Date();
+    //设置要获取到什么样的时间
+    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    //获取String类型的时间
+    String createdate = sdf.format(date);
+    Zhuanzheng zz=new Zhuanzheng();
+   zz.setPipeople(pipeople);
+   zz.setShentime(createdate);
+   zz.setShenqingstate(shenqingstate);
+   zz.setBohui(bohui);
+   zz.setShenid(shenid);
+    userService.L_upd_zhuan(zz);
+    return  "chenggong";
+}
+
+    /**出差*/
+    @RequestMapping("L_upd_out")
+    public @ResponseBody String L_upd_out(Integer offstate,String pipeople,String pidate,String bohui, Integer offid){
+        Date date = new Date();
+        //设置要获取到什么样的时间
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        //获取String类型的时间
+        String createdate = sdf.format(date);
+        Apply_Office zz=new Apply_Office();
+        zz.setPipeople(pipeople);
+        zz.setOffstate(offstate);
+        zz.setPidate(createdate);
+        zz.setBohui(bohui);
+        zz.setOffid(offid);
+        userService.L_upd_out(zz);
+        return  "chenggong";
+    }
+
+/**二级审核*/
+    /**转正*/
+    @RequestMapping("L_upd_zong_zhuan")
+    public @ResponseBody String L_upd_zong_zhuan(Integer shenqingstate,String zongshen,String zongbohui,String zongshentiem,Integer shenid){
+        Date date = new Date();
+        //设置要获取到什么样的时间
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        //获取String类型的时间
+        String createdate = sdf.format(date);
+        Zhuanzheng zz=new Zhuanzheng();
+        zz.setZongshen(zongshen);
+        zz.setZongbohui(zongbohui);
+        zz.setShenqingstate(shenqingstate);
+         zz.setZongshentiem(createdate);
+        zz.setShenid(shenid);
+        userService.L_upd_zong_zhuan(zz);
+        return  "chenggong";
+    }
+
+    /**出差*/
+    @RequestMapping("L_upd_zong_out")
+    public @ResponseBody String L_upd_zong_out(Integer offstate,String zongshen,String zongbohui,String zongshendate, Integer offid){
+        Date date = new Date();
+        //设置要获取到什么样的时间
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        //获取String类型的时间
+        String createdate = sdf.format(date);
+        Apply_Office zz=new Apply_Office();
+        zz.setZongshen(zongshen);
+        zz.setZongbohui(zongbohui);
+        zz.setZongshendate(createdate);
+        zz.setOffstate(offstate);
+        zz.setOffid(offid);
+        userService.L_upd_zong_out(zz);
+        return  "chenggong";
+    }
+/**查询培训表*/
+    @RequestMapping("L_query_pei")
+    public  @ResponseBody  LayuiFy L_query_pei(Integer limit,Integer page) {
+        return userService.L_query_pei(limit,page);
+    }
+    /**课程报名*/
+    @RequestMapping("L_add_keapply")
+    public @ResponseBody    String L_add_keapply(Integer keid, Integer empid,Integer  kstate,String kadate) {
+        Date date = new Date();
+        //设置要获取到什么样的时间
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        //获取String类型的时间
+        String createdate = sdf.format(date);
+        Keapply ke=new Keapply();
+        ke.setEmpid(empid);
+        ke.setKadate(createdate);
+        ke.setKeid(keid);
+        ke.setKstate(kstate);
+        userService.L_add_keapply(ke);
+        return "chenggong";
+    }
 
 
     public Integer getEmpid() {

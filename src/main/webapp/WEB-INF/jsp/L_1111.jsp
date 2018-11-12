@@ -194,8 +194,8 @@
                         div += "<span>" + '姓名:' + data[i].empname + "<span>";
                         div += "<span style='margin-left: 250px'>" + '类型:' + data[i].apovtype + "</span><br/><br/>";
                         div += "<span>" + '理由:' + data[i].apovreason + "</span><br/><br/>";
-                        div += "<span>" + '加班时间/小时:' + data[i].apovhour + "/ 小时</span><br/><br/>";
-                        div += "<span>" + '审批人/审批时间:' + data[i].pipeople  + '/' + adta[i].shentime + "</span><br/><br/>";
+                        div += "<span>" + '加班时间/小时:' + data[i].apovhour + "/ 小时</span>";
+                        div += "<span>" + '审批人/审批时间:' + data[i].pipeople  + '/' + data[i].shentime + "</span><br/><br/>";
                         div += "<span>" + '驳回理由' + data[i].bohui + "</span>";
                         div += "</div>"
 
@@ -331,15 +331,21 @@
 })
     /*休假点击通过驳回*/
      function  pass_xiujia() {
-         $.ajax({
-             url:"L_upd_xiujia_unpass",
-             type:"post",
-             data:{"leasate":1,"bohui":$("#liyou").val(),"leaid":$("#id_val_1").val(),"pipeople":$("#val_2").val()},
-             dataType:"text",
-             success:function (data) {
+         var  zhi=$("#liyou_2").val();
+         if(zhi!=""){
+             alert("zhixing");
+             $.ajax({
+                 url:"L_upd_xiujia_unpass",
+                 type:"post",
+                 data:{"leasate":1,"bohui":$("#liyou").val(),"leaid":$("#id_val_1").val(),"pipeople":$("#val_2").val()},
+                 dataType:"text",
+                 success:function (data) {
 
-                 location=location;
-             }})
+                     location=location;
+                 }})
+         }else {
+             alert("请填写理由");
+         }
      }
     function  unpass_xiujia() {
          var  zhi=$("#liyou").val();
@@ -360,14 +366,20 @@
     }
     /*加班点击通过驳回*/
     function  pass_jiaban() {
-        $.ajax({
-            url:"L_upd_jiaban_unpass",
-            type:"post",
-            data:{"apovstate":1,"bohui":$("#liyou_2").val(),"apovid":$("#id_val_2").val(),"pipeople":$("#val_2").val()},
-            dataType:"text",
-            success:function (data) {
-                location=location;
-            }})
+        var  zhi=$("#liyou_2").val();
+        if(zhi!=""){
+            $.ajax({
+                url:"L_upd_jiaban_unpass",
+                type:"post",
+                data:{"apovstate":1,"bohui":$("#liyou_2").val(),"apovid":$("#id_val_2").val(),"pipeople":$("#val_2").val()},
+                dataType:"text",
+                success:function (data) {
+                    location=location;
+                }})
+        }else{
+            alert("请填写理由");
+        }
+
     }
     function  unpass_jiaban() {
         var  zhi=$("#liyou_2").val();
@@ -384,19 +396,25 @@
         }else {
             alert("请填写驳回理由");
         }
-
     }
 
     /*离职点击通过驳回*/
     function  pass_lizhi() {
-        $.ajax({
-            url:"L_upd_lizhi_unpass",
-            type:"post",
-            data:{"dimstate":1,"bohui":$("#liyou_3").val(),"dimid":$("#id_val_3").val(),"dimsign":$("#val_2").val()},
-            dataType:"text",
-            success:function (data) {
-                location=location;
-            }})
+
+        var  zhi=$("#liyou_3").val();
+        if(zhi!=""){
+            alert("执行状态2 emp状态3");
+            $.ajax({
+                url:"L_upd_lizhi_unpass",
+                type:"post",
+                data:{"dimstate":1,"bohui":$("#liyou_3").val(),"dimid":$("#id_val_3").val(),"dimsign":$("#val_2").val()},
+                dataType:"text",
+                success:function (data) {
+                    location=location;
+                }})
+        }else {
+            alert("请填写驳回理由");
+        }
     }
     function  unpass_lizhi(){
         var  zhi=$("#liyou_3").val();
@@ -487,7 +505,6 @@
                    },
                    dataType: "json",
                    success: function (data) {
-
                        alert(data);
                        $("#bbb").html("");
                        for (var i = 0; i < data.length; i++) {
@@ -525,12 +542,9 @@
                                div += "<span>" + '审批人/审批时间:部门主管' + '/' + data[i].shentime + "</span><br/><br/>";
                                div += "<span>" + '驳回理由' + data[i].bohui + "</span>";
                                div += "</div>"
-
                                $("#bbb").append(div);
 
-
                            }
-
                        }
                    }
                })

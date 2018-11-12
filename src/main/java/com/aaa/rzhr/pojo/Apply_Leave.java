@@ -17,6 +17,11 @@ public class Apply_Leave {
   private Integer deptid;
   private String bohui;
   private String pipeople;
+  private String renshishendate;
+  private String renshishen;
+  private String zongshen;
+  private String zongshendate;
+  private String zongbohui;
 
 
   public Integer getLeaid() {
@@ -142,6 +147,51 @@ public class Apply_Leave {
 
   public void setPipeople(String pipeople) {
     this.pipeople = pipeople;
+  }
+
+
+  public String getRenshishendate() {
+    return renshishendate;
+  }
+
+  public void setRenshishendate(String renshishendate) {
+    this.renshishendate = renshishendate;
+  }
+
+
+  public String getRenshishen() {
+    return renshishen;
+  }
+
+  public void setRenshishen(String renshishen) {
+    this.renshishen = renshishen;
+  }
+
+
+  public String getZongshen() {
+    return zongshen;
+  }
+
+  public void setZongshen(String zongshen) {
+    this.zongshen = zongshen;
+  }
+
+
+  public String getZongshendate() {
+    return zongshendate;
+  }
+
+  public void setZongshendate(String zongshendate) {
+    this.zongshendate = zongshendate;
+  }
+
+
+  public String getZongbohui() {
+    return zongbohui;
+  }
+
+  public void setZongbohui(String zongbohui) {
+    this.zongbohui = zongbohui;
   }
 
 }

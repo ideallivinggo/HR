@@ -47,73 +47,7 @@ WHERE  e.empid=#{empid}
     <insert id="L_add_lizhi"  parameterType="java.util.Map">
         insert into apply_dimission(empid,dimtype,dimdetails,dimsuggest,dimturn,dimapplydate,dimstate,deptid) values(#{0},#{1},#{2},#{3},#{4},#{5},#{6},#{7})
     </insert>
-    <!--休假查询-->
-    <select id="L_query_xiujia" resultType="java.util.Map" parameterType="Map">
-        SELECT
-        *
-        FROM
-        apply_leave al
-        LEFT JOIN emp e ON e.empid = al.empid
-        <where>
-        <if test="empid!=null">
-            and    e.empid = #{empid}
-        </if>
-        <if test="fristdate!=''">
-         and   al.shendate  &gt;= #{fristdate}
-        </if>
-        <if test="overdate!=''">
-        and  al.shendate &lt;= #{overdate}
-        </if>
-        <if test="leasate!=null">
-            AND  al.leasate=#{leasate}
-        </if>
-        </where>
-    </select>
-    <!--加班查询-->
-    <select id="L_query_jiaban" resultType="java.util.Map" parameterType="Map">
-        SELECT
-        *
-        FROM
-        apply_overtime ao
-        LEFT JOIN emp e ON e.empid = ao.empid
-        <where>
-        <if test="empid!=null">
-            and    e.empid = #{empid}
-        </if>
 
-        <if test="fristdate!=''">
-            and   ao.shentime  &gt;= #{fristdate}
-        </if>
-        <if test="overdate!=''">
-            and  ao.shentime &lt;= #{overdate}
-        </if>
-        <if test="apovstate!=null">
-            AND  ao.apovstate=#{apovstate}
-        </if>
-        </where>
-    </select>
-    <!--离职查询-->
-    <select id="L_query_cizhi" resultType="java.util.Map" parameterType="Map">
-        SELECT
-        *
-        FROM
-        apply_dimission ad
-        LEFT JOIN emp e ON e.empid = ad.empid
-        <where>
-            <if test="empid!=null">
-                and    e.empid = #{empid}
-            </if>
-        <if test="fristdate!=''">
-            and   ad.shendimdate  &gt;= #{fristdate}
-        </if>
-        <if test="overdate!=''">
-            and   ad.shendimdate &lt;= #{overdate}
-        </if>
-        <if test="dimstate!=null">
-            AND  ad.dimstate=#{dimstate}
-        </if>
-        </where>
-    </select>
     <!--修改休假状态-->
     <update id="L_update_xiujia"  parameterType="Integer">
        UPDATE  apply_leave  SET leasate=3
@@ -134,8 +68,9 @@ WHERE  e.empid=#{empid}
         select * from emp e
  LEFT JOIN dept d ON e.deptid = d.deptid
  LEFT JOIN role r ON r.roid = d.roid
+        WHERE   e.empstateid !=4
         <if test="deptid!=null">
-            WHERE e.deptid= #{deptid}
+            AND e.deptid= #{deptid}
         </if>
     </select>
     <!--通讯录员工姓名查询 -->
@@ -184,25 +119,19 @@ WHERE  e.empid=#{empid}
     <!--修改休假状0,1,装态-->
     <update id="L_upd_xiujia_unpass"  parameterType="Apply_Leave">
         UPDATE  apply_leave  SET leasate=#{leasate},pipeople=#{pipeople},pidate=#{pidate}
-        <if test="bohui">
           ,bohui=#{bohui}
-        </if>
         where leaid=#{leaid}
     </update>
     <!--修改加班状态-->
     <update id="L_upd_jiaban_unpass" parameterType="Apply_Overtime" >
         UPDATE  apply_overtime  SET apovstate=#{apovstate},pipeople=#{pipeople},shentime=#{shentime}
-        <if test="bohui">
             ,bohui=#{bohui}
-        </if>
         where apovid=#{apovid}
     </update>
     <!--修改离职状态-->
     <update id="L_upd_lizhi_unpass" parameterType="Apply_Dimission" >
         UPDATE  apply_dimission SET dimstate=#{dimstate},dimsign=#{dimsign},nodim=#{nodim}
-        <if test="bohui">
             ,bohui=#{bohui}
-        </if>
         where dimid=#{dimid}
     </update>
     <!--模糊查询工资单-->
@@ -228,9 +157,185 @@ WHERE  e.empid=#{empid}
     <update id="L_update_emp_empstateid"  parameterType="Emp">
         update emp set empstateid=#{empstateid} WHERE empid=#{empid}
     </update>
+    <!--休假查询-->
+    <select id="L_query_xiujia" resultType="java.util.Map" parameterType="Map">
+        SELECT
+        *
+        FROM
+        apply_leave al
+        LEFT JOIN emp e ON e.empid = al.empid
+        LEFT JOIN dept d ON e.deptid = d.deptid
+        <where>
+            <if test="empid!=null">
+                and    e.empid = #{empid}
+            </if>
+            <if test="fristdate!=''">
+                and   al.shendate  &gt;= #{fristdate}
+            </if>
+            <if test="overdate!=''">
+                and  al.shendate &lt;= #{overdate}
+            </if>
+            <if test="leasate!=null">
+                AND  al.leasate=#{leasate}
+            </if>
+        </where>
+    </select>
+    <!--加班查询-->
+    <select id="L_query_jiaban" resultType="java.util.Map" parameterType="Map">
+        SELECT
+        *
+        FROM
+        apply_overtime ao
+        LEFT JOIN emp e ON e.empid = ao.empid
+        LEFT JOIN dept d ON e.deptid = d.deptid
+        <where>
+            <if test="empid!=null">
+                and    e.empid = #{empid}
+            </if>
 
+            <if test="fristdate!=''">
+                and   ao.shentime  &gt;= #{fristdate}
+            </if>
+            <if test="overdate!=''">
+                and  ao.shentime &lt;= #{overdate}
+            </if>
+            <if test="apovstate!=null">
+                AND  ao.apovstate=#{apovstate}
+            </if>
+        </where>
+    </select>
+    <!--离职查询-->
+    <select id="L_query_cizhi" resultType="java.util.Map" parameterType="Map">
+        SELECT
+        *
+        FROM
+        apply_dimission ad
+        LEFT JOIN emp e ON e.empid = ad.empid
+        LEFT JOIN dept d ON e.deptid = d.deptid
+        <where>
+            <if test="empid!=null">
+                and    e.empid = #{empid}
+            </if>
+            <if test="fristdate!=''">
+                and   ad.shendimdate  &gt;= #{fristdate}
+            </if>
+            <if test="overdate!=''">
+                and   ad.shendimdate &lt;= #{overdate}
+            </if>
+            <if test="dimstate!=null">
+                AND  ad.dimstate=#{dimstate}
+            </if>
+        </where>
+    </select>
+    <!--aaaaaaaaaaaaaaaaaaaaaaa二级审核aaaaaaaaaaaaaaaaaaaaaaaaaaaaa-->
+    <!--修改休假状0,1,装态-->
+    <update id="J_upd_xiujia_unpass"  parameterType="Apply_Leave">
+        UPDATE  apply_leave  SET leasate=#{leasate},zongshen=#{zongshen},zongshendate=#{zongshendate}
+            ,zongbohui=#{zongbohui}
+        where leaid=#{leaid}
+    </update>
+    <!--修改加班状态-->
+    <update id="J_upd_jiaban_unpass" parameterType="Apply_Overtime" >
+        UPDATE  apply_overtime  SET apovstate=#{apovstate},zongshen=#{zongshen},zongshendate=#{zongshendate}
+        ,zongbohui=#{zongbohui}
+        where apovid=#{apovid}
+    </update>
+    <!--修改离职状态-->
+    <update id="J_upd_lizhi_unpass" parameterType="Apply_Dimission" >
+        UPDATE  apply_dimission SET dimstate=#{dimstate},zongshen=#{zongshen},zongshendate=#{zongshendate}
+        ,zongbohui=#{zongbohui}
+        where dimid=#{dimid}
+    </update>
+    <!--add  出差申请-->
+    <insert id="L_add_out"  parameterType="Apply_Office" >
+        insert into apply_office(empid, offdate,
+        offgoods, offreason, offstate,
+     deptid,shentime,leaday,didian) values(#{empid},#{offdate},
+     #{offgoods},#{offreason},#{offstate},#{deptid},#{shentime},#{leaday},#{didian})
+    </insert>
+    <!--add  转正申请-->
+    <insert id="L_add_zhuanzheng"  parameterType="Zhuanzheng" >
+        insert into zhuanzheng(empid, shendate, shentext,
+        shenqingstate, deptid)
+        values(#{empid},#{shendate},
+        #{shentext},#{shenqingstate},#{deptid})
+    </insert>
+    <!--培训申请-->
+    <!--一级审核 转正 培训  出差-->
+    <select id="L_shen_zhuan" resultType="java.util.Map" parameterType="Map">
+        SELECT
+        *
+        FROM
+        zhuanzheng zz
+        LEFT JOIN emp e ON e.empid = zz.empid
+        LEFT JOIN dept d ON e.deptid = d.deptid
+        WHERE zz.shenqingstate=#{shenqingstate}
+        <if test="deptid!=null">
+        and e.deptid=#{deptid}
+        </if>
+            <if test="fristdate!=''">
+                and   zz.shendate  &gt;= #{fristdate}
+            </if>
+            <if test="overdate!=''">
+                and  zz.shendate &lt;= #{overdate}
+            </if>
 
+    </select>
 
+    <select id="L_shen_out" resultType="java.util.Map" parameterType="Map">
+        SELECT
+        *
+        FROM
+        apply_office ao
+        LEFT JOIN emp e ON e.empid = ao.empid
+        LEFT JOIN dept d ON e.deptid = d.deptid
+        WHERE ao.offstate=#{offstate}
+        <if test="deptid!=null">
+            AND ao.deptid=#{deptid}
+        </if>
+        <if test="fristdate!=''">
+            and   ao.shentime  &gt;= #{fristdate}
+        </if>
+        <if test="overdate!=''">
+            and  ao.shentime &lt;= #{overdate}
+        </if>
 
-
+    </select>
+    <!--审核修改状态 转正 出差-->
+    <update id="L_upd_zhuan" parameterType="Zhuanzheng" >
+        UPDATE  zhuanzheng  SET shenqingstate=#{shenqingstate},pipeople=#{pipeople},shentime=#{shentime}
+            ,bohui=#{bohui}
+        where shenid=#{shenid}
+    </update>
+    <!--审核修改状态  出差-->
+    <update id="L_upd_out" parameterType="Apply_Office" >
+        UPDATE  apply_office  SET offstate=#{offstate},pipeople=#{pipeople},pidate=#{pidate}
+        ,bohui=#{bohui}
+        where offid=#{offid}
+    </update>
+    <!--二级审核000000000000000000000000000000000000-->
+    <!--审核修改状态 转正 出差-->
+    <update id="L_upd_zong_zhuan" parameterType="Zhuanzheng" >
+        UPDATE  zhuanzheng  SET shenqingstate=#{shenqingstate},zongshen=#{zongshen},zongshentiem=#{zongshentiem}
+        ,zongbohui=#{zongbohui}
+        where shenid=#{shenid}
+    </update>
+    <!--审核修改状态  出差-->
+    <update id="L_upd_zong_out" parameterType="Apply_Office" >
+        UPDATE  apply_office  SET offstate=#{offstate},zongshen=#{zongshen},zongshendate=#{zongshendate}
+        ,zongbohui=#{zongbohui}
+        where offid=#{offid}
+    </update>
+    <!--查询培训课程-->
+    <select id="L_query_pei" resultType="java.util.Map">
+     select * FROM kecheng WHERE date_format(NOW(),'%Y-%m-%d')
+  BETWEEN STR_TO_DATE(kebaomingtimebegin,'%Y-%m-%d')
+           AND STR_TO_DATE(kebaomingtimeend,'%Y-%m-%d') and kestate=2
+    </select>
+    <!--add 报名课程-->
+    <insert id="L_add_keapply"  parameterType="Keapply" >
+        insert into keapply(keid, empid, kstate, kadate)
+        values(#{keid},#{empid},
+        #{kstate},#{kadate})
+    </insert>
     </mapper>
