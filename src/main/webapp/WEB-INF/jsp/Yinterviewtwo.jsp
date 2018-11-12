@@ -96,7 +96,7 @@
                 <th>年龄</th>
                 <th>学历</th>
                 <th>专业</th>
-                <th>心仪职位</th>
+                <th>面试职位</th>
                 <th>面试时间</th>
                 <th>分数</th>
                 <th>面试官</th>
@@ -146,7 +146,7 @@
                             <td><input class="inputss" id="age" readOnly></td>
                         </tr>
                         <tr style="height: 45px;">
-                            <td>心仪职位：</td>
+                            <td>面试职位：</td>
                             <td><input class="inputss" id="resposition" readOnly></td>
                             <td>学历：</td>
                             <td><input class="inputss" id="education" readOnly></td>
@@ -164,105 +164,105 @@
                             <td rowspan="10">相关的工作经验及专业知识</td>
                             <td colspan="2">1：工作经验</td>
                             <td colspan="3" onclick="dian()">
-                                <input type="radio" class="one" value="5" title="优秀" name="one">
-                                <input type="radio" class="one" value="4" title="很好" name="one">
-                                <input type="radio" class="one" value="3" title="较好" name="one">
-                                <input type="radio" class="one" value="2" title="一般" name="one">
-                                <input type="radio" class="one" value="1" title="较差" name="one">
+                                <input type="radio" class="one" value="5" title="优秀" name="intone">
+                                <input type="radio" class="one" value="4" title="很好" name="intone">
+                                <input type="radio" class="one" value="3" title="较好" name="intone">
+                                <input type="radio" class="one" value="2" title="一般" name="intone">
+                                <input type="radio" class="one" value="1" title="较差" name="intone">
                             </td>
                         </tr>
                         <tr style="height: 40px;">
                             <td colspan="2">掌握的专业知识</td>
                             <td colspan="3" onclick="dian()">
-                                <input type="radio" class="two" value="5" title="优秀" name="two">
-                                <input type="radio" class="two" value="4" title="很好" name="two">
-                                <input type="radio" class="two" value="3" title="较好" name="two">
-                                <input type="radio" class="two" value="2" title="一般" name="two">
-                                <input type="radio" class="two" value="1" title="较差" name="two">
+                                <input type="radio" class="two" value="5" title="优秀" name="inttwo">
+                                <input type="radio" class="two" value="4" title="很好" name="inttwo">
+                                <input type="radio" class="two" value="3" title="较好" name="inttwo">
+                                <input type="radio" class="two" value="2" title="一般" name="inttwo">
+                                <input type="radio" class="two" value="1" title="较差" name="inttwo">
                             </td>
                         </tr>
                         <tr style="height: 40px;">
                             <td colspan="2">3：对企业的价值</td>
                             <td colspan="3" onclick="dian()">
-                                <input type="radio" class="three" value="5" title="优秀" name="three">
-                                <input type="radio" class="three" value="4" title="很好" name="three">
-                                <input type="radio" class="three" value="3" title="较好" name="three">
-                                <input type="radio" class="three" value="2" title="一般" name="three">
-                                <input type="radio" class="three" value="1" title="较差" name="three">
+                                <input type="radio" class="three" value="5" title="优秀" name="intthree">
+                                <input type="radio" class="three" value="4" title="很好" name="intthree">
+                                <input type="radio" class="three" value="3" title="较好" name="intthree">
+                                <input type="radio" class="three" value="2" title="一般" name="intthree">
+                                <input type="radio" class="three" value="1" title="较差" name="intthree">
                             </td>
                         </tr>
                         <tr style="height: 40px;">
                             <td colspan="2">4：个人工作观念</td>
                             <td colspan="3" onclick="dian()">
-                                <input type="radio" class="four" value="5" title="优秀" name="four">
-                                <input type="radio" class="four" value="4" title="很好" name="four">
-                                <input type="radio" class="four" value="3" title="较好" name="four">
-                                <input type="radio" class="four" value="2" title="一般" name="four">
-                                <input type="radio" class="four" value="1" title="较差" name="four">
+                                <input type="radio" class="four" value="5" title="优秀" name="intfour">
+                                <input type="radio" class="four" value="4" title="很好" name="intfour">
+                                <input type="radio" class="four" value="3" title="较好" name="intfour">
+                                <input type="radio" class="four" value="2" title="一般" name="intfour">
+                                <input type="radio" class="four" value="1" title="较差" name="intfour">
                             </td>
                         </tr>
                         <tr style="height: 40px;">
                             <td colspan="2">5：学习能力</td>
                             <td colspan="3" onclick="dian()">
-                                <input type="radio" class="five" value="5" title="优秀" name="five">
-                                <input type="radio" class="five" value="4" title="很好" name="five">
-                                <input type="radio" class="five" value="3" title="较好" name="five">
-                                <input type="radio" class="five" value="2" title="一般" name="five">
-                                <input type="radio" class="five" value="1" title="较差" name="five">
+                                <input type="radio" class="five" value="5" title="优秀" name="intfive">
+                                <input type="radio" class="five" value="4" title="很好" name="intfive">
+                                <input type="radio" class="five" value="3" title="较好" name="intfive">
+                                <input type="radio" class="five" value="2" title="一般" name="intfive">
+                                <input type="radio" class="five" value="1" title="较差" name="intfive">
                             </td>
                         </tr>
                         <tr style="height: 40px;">
                             <td colspan="2">6：工作创造能力</td>
                             <td colspan="3" onclick="dian()">
-                                <input type="radio" class="six" value="5" title="优秀" name="six">
-                                <input type="radio" class="six" value="4" title="很好" name="six">
-                                <input type="radio" class="six" value="3" title="较好" name="six">
-                                <input type="radio" class="six" value="2" title="一般" name="six">
-                                <input type="radio" class="six" value="1" title="较差" name="six">
+                                <input type="radio" class="six" value="5" title="优秀" name="intsix">
+                                <input type="radio" class="six" value="4" title="很好" name="intsix">
+                                <input type="radio" class="six" value="3" title="较好" name="intsix">
+                                <input type="radio" class="six" value="2" title="一般" name="intsix">
+                                <input type="radio" class="six" value="1" title="较差" name="intsix">
                             </td>
                         </tr>
                         <tr style="height: 40px;">
                             <td colspan="2">7：对企业的忠诚度</td>
                             <td colspan="3" onclick="dian()">
-                                <input type="radio" class="seven" value="5" title="优秀" name="seven">
-                                <input type="radio" class="seven" value="4" title="很好" name="seven">
-                                <input type="radio" class="seven" value="3" title="较好" name="seven">
-                                <input type="radio" class="seven" value="2" title="一般" name="seven">
-                                <input type="radio" class="seven" value="1" title="较差" name="seven">
+                                <input type="radio" class="seven" value="5" title="优秀" name="intseven">
+                                <input type="radio" class="seven" value="4" title="很好" name="intseven">
+                                <input type="radio" class="seven" value="3" title="较好" name="intseven">
+                                <input type="radio" class="seven" value="2" title="一般" name="intseven">
+                                <input type="radio" class="seven" value="1" title="较差" name="intseven">
                             </td>
                         </tr>
                         <tr style="height: 40px;">
                             <td colspan="2">8：职位胜任能力</td>
                             <td colspan="3" onclick="dian()">
-                                <input type="radio" class="eight" value="5" title="优秀" name="eight">
-                                <input type="radio" class="eight" value="4" title="很好" name="eight">
-                                <input type="radio" class="eight" value="3" title="较好" name="eight">
-                                <input type="radio" class="eight" value="2" title="一般" name="eight">
-                                <input type="radio" class="eight" value="1" title="较差" name="eight">
+                                <input type="radio" class="eight" value="5" title="优秀" name="inteight">
+                                <input type="radio" class="eight" value="4" title="很好" name="inteight">
+                                <input type="radio" class="eight" value="3" title="较好" name="inteight">
+                                <input type="radio" class="eight" value="2" title="一般" name="inteight">
+                                <input type="radio" class="eight" value="1" title="较差" name="inteight">
                             </td>
                         </tr>
                         <tr style="height: 40px;">
                             <td colspan="2">9：个性特征与企业文化的相融性</td>
                             <td colspan="3" onclick="dian()">
-                                <input type="radio" class="nine" value="5" title="优秀" name="nine">
-                                <input type="radio" class="nine" value="4" title="很好" name="nine">
-                                <input type="radio" class="nine" value="3" title="较好" name="nine">
-                                <input type="radio" class="nine" value="2" title="一般" name="nine">
-                                <input type="radio" class="nine" value="1" title="较差" name="nine">
+                                <input type="radio" class="nine" value="5" title="优秀" name="intnine">
+                                <input type="radio" class="nine" value="4" title="很好" name="intnine">
+                                <input type="radio" class="nine" value="3" title="较好" name="intnine">
+                                <input type="radio" class="nine" value="2" title="一般" name="intnine">
+                                <input type="radio" class="nine" value="1" title="较差" name="intnine">
                             </td>
                         </tr>
                         <tr style="height: 40px;">
                             <td colspan="2">10：稳定性、发展潜力</td>
                             <td colspan="3" onclick="dian()">
-                                <input type="radio" class="ten" value="5" title="优秀" name="ten">
-                                <input type="radio" class="ten" value="4" title="很好" name="ten">
-                                <input type="radio" class="ten" value="3" title="较好" name="ten">
-                                <input type="radio" class="ten" value="2" title="一般" name="ten">
-                                <input type="radio" class="ten" value="1" title="较差" name="ten">
+                                <input type="radio" class="ten" value="5" title="优秀" name="intten">
+                                <input type="radio" class="ten" value="4" title="很好" name="intten">
+                                <input type="radio" class="ten" value="3" title="较好" name="intten">
+                                <input type="radio" class="ten" value="2" title="一般" name="intten">
+                                <input type="radio" class="ten" value="1" title="较差" name="intten">
                             </td>
                         </tr>
                         <tr style="height: 45px;">
-                            <td>是否录取：</td>
+                            <td>是否通过：</td>
                             <td colspan="2">
                                 <input name="intstate" value="1" title="通过" type="radio">
                                 <input name="intstate" value="2" title="不通过" type="radio">
@@ -290,7 +290,7 @@
                     </table>
                     <div style="display: none">
                         面试id<input name="intid" id="intid">
-                        简历id<input name="resid" id="resid">
+
                     </div>
                     <input type="reset" class="layui-btn layui-btn-fluid" onclick="mianshi()" value="保存" style="letter-spacing:15px;"/>
                 </form>
@@ -394,11 +394,12 @@
     //单个信息
     function queryOneInte(obj) {
         $.ajax({
-            url: "queryOneInteTwoYLP",
+            url: "queryAllInteTwoYLP",
             type: "post",
-            data:{intid:obj},
+            data:{intid:obj,pageNum:1},
             dataType: "json",
             success: function (data) {
+                var data = data.list;
                 $("#resumename").val(data[0].resumename);
                 $("#sex").val(data[0].sex);
                 $("#age").val(data[0].age);

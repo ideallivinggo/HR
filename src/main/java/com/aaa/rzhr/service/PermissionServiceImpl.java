@@ -5,6 +5,7 @@ import com.aaa.rzhr.pojo.Permission;
 import com.aaa.rzhr.pojo.Role;
 import com.aaa.rzhr.pojo.Role_Permission;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -26,6 +27,7 @@ public class PermissionServiceImpl implements PermissionService {
     RolePermissionService rolePermissionService;
 
 @Override
+@Cacheable(value = "permission",keyGenerator = "wiselyKeyGenerator")
     public boolean needInterceptor(String requestUrl) {
         List<Permission> permissions = permissionMapper.QueryAll();
         for (Permission p: permissions
@@ -39,6 +41,7 @@ public class PermissionServiceImpl implements PermissionService {
     }
 
     @Override
+    @Cacheable(value = "permission",keyGenerator = "wiselyKeyGenerator")
     public Set<String> listPermissionURLs(String empName) {
         Set<String> result=new HashSet<>();
       List<Role> roles=roleService.listRoles(empName);
@@ -60,10 +63,12 @@ public class PermissionServiceImpl implements PermissionService {
 
     @Override
     public Permission getPermissionByid(Integer pid) {
+        System.out.println("55555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555");
         return permissionMapper.getPermissionByid(pid);
     }
 
     @Override
+    @Cacheable(value = "permission",keyGenerator = "wiselyKeyGenerator")
     public List<Permission> queryPermissionByRoleX(Role role) {
         List<Permission> result = new ArrayList<>();
         List<Role_Permission> allRPByRid = rolePermissionService.getAllRPByRid(role.getRoid());

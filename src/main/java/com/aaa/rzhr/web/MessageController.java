@@ -76,10 +76,7 @@ public class MessageController {
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         String date1 = formatter.format(currentTime);
         List<Rzmessage> rzmessages = rzmessageService.queryRzmessageX(date1,"1");
-        for (Rzmessage r:rzmessages
-             ) {
-            System.out.println(r.getMeid()+"meid");
-        }
+
         return rzmessages;
     }
     @RequestMapping("/betweendateyiban")
@@ -88,10 +85,7 @@ public class MessageController {
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         String date1 = formatter.format(currentTime);
         List<Rzmessage> rzmessages = rzmessageService.queryRzmessageX(date1,"2");
-        for (Rzmessage r:rzmessages
-                ) {
-            System.out.println(r.getMeid()+"meid");
-        }
+
         return rzmessages;
     }
 

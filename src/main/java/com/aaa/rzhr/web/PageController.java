@@ -211,7 +211,24 @@ public String Qemp(){
     public  String L_1111(){
         return "L_1111";
     }
-    //----------------------------------月亮鹏-------------------------
+
+
+    //----------------------------------靳风儒-------------------------
+    /**
+     * 课程审批
+     */
+    @RequestMapping("Japproval")
+    public  String Japproval(){
+        return "Japproval";
+    }
+
+    /**
+     * 培训记录
+     */
+    @RequestMapping("Jjilu")
+    public  String Jjilu(){
+        return "Jjilu";
+    }
 
     //----------------------------------岳梁朋-------------------------
     //招聘申请表
@@ -224,15 +241,15 @@ public String Qemp(){
 
 
     //招聘发布表
-    @RequestMapping("Yissue")
-    public String Yissue(){
-        return "Yissue";
+    @RequestMapping("Yfabu")
+    public String Yfabu(){
+        return "Yfabu";
     }
     //简历筛选
 
-    @RequestMapping("Yresume")
-    public String Yresume(){
-        return "Yresume";
+    @RequestMapping("Yshaixuan")
+    public String Yshaixuan(){
+        return "Yshaixuan";
     }
     @RequestMapping("Ytalents")
     public String Ytalents(){
@@ -248,14 +265,14 @@ public String Qemp(){
     }
 
     //员工录用推送
-    @RequestMapping("Yhire")
-    public String Yhire(){
-        return "Yhire";
+    @RequestMapping("Ytuisong")
+    public String Ytuisong(){
+        return "Ytuisong";
     }
-    //员工录用回复details
-    @RequestMapping("Yreply")
-    public String Yreply(){
-        return "Yreply";
+    //员工录用回复
+    @RequestMapping("Yhuifu")
+    public String Yhuifu(){
+        return "Yhuifu";
     }
 
     @RequestMapping("jihuo")
@@ -272,9 +289,9 @@ public String Qemp(){
       }
     }
     //激活详情
-    @RequestMapping("Ydetails")
-    public String Ydetails(){
-        return "Ydetails";
+    @RequestMapping("Yjihuo")
+    public String Yjihuo(){
+        return "Yjihuo";
     }
 
 

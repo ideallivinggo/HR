@@ -106,7 +106,7 @@
                 <th>QQ邮箱</th>
                 <th>学历</th>
                 <th>专业</th>
-                <th>心仪职位</th>
+                <th>应聘职位</th>
                 <th>录入时间</th>
                 <th>简历状态</th>
                 <th>操作</th>
@@ -270,11 +270,12 @@
     //查看单个简历
     function queryOneRes(obj) {
         $.ajax({
-            url: "queryOneRes",
+            url: "queryAllResYLP",
             type: "post",
-            data:{resid:obj},
+            data:{resid:obj, pageNum:1},
             dataType: "json",
             success: function (data) {
+                var data = data.list;
                 $("#resid").val(data[0].resid)
                 $("#resumename").val(data[0].resumename)
                 $("#emali").val(data[0].emali)
@@ -302,9 +303,9 @@
                     emali:emali, notice:notice},//发送邮件
                 dataType: "text",
                 success:function(data) {
-                    if(data=="true"){alert("已发送邮件");}
                     queryAllRes(1);
                     $("#myModal").modal("hide");
+                    if(data=="true"){alert("已发送邮件");}
                 }
             })
         }

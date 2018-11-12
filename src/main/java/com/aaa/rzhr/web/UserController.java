@@ -84,7 +84,6 @@ public  @ResponseBody  List<Map> L_query_leave(Integer empid){
 public  @ResponseBody
 LayuiFy L_query_pay(Integer empid, Integer limit, Integer page){
 
-    System.out.println(empid+"========================-------------");
     return  userService.L_query_pay(empid,limit,page);
 }
 /**
@@ -92,14 +91,11 @@ LayuiFy L_query_pay(Integer empid, Integer limit, Integer page){
  */
 @RequestMapping("L_add_jiaban")
 public  String    L_add_j(Apply_Overtime app, double apovhour_1, double apovhour_2){
-    System.out.println(apovhour_1+".....................");
-    System.out.println(apovhour_2+"++++++++++++++++++");
+
     double aa=apovhour_1*8+apovhour_2;
     String bb="";
 
-    System.out.println(aa+"------------------------");
        String cc=   aa+bb;
-    System.out.println(cc+"//////////////////////////////////");
     Date date = new Date();
     //设置要获取到什么样的时间
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -130,10 +126,10 @@ public  String    L_add_j(Apply_Overtime app, double apovhour_1, double apovhour
 /*休假*/
     @RequestMapping("L_query_xiujia")
     public  @ResponseBody  List<Map> L_query_xiujia(Integer empid, String fristdate, String overdate, Integer leasate){
-        System.out.println(empid+"44444444444444444444444");
+     /*   System.out.println(empid+"44444444444444444444444");
        System.out.println(fristdate+"333333333333333");
         System.out.println(overdate+"222222222222222222");
-        System.out.println(leasate+"111111111111111111111111");
+        System.out.println(leasate+"111111111111111111111111");*/
 
         List<Map> list= userService.L_query_xiujia(empid, fristdate, overdate,leasate);
 
@@ -143,9 +139,9 @@ public  String    L_add_j(Apply_Overtime app, double apovhour_1, double apovhour
 /*加-------------班*/
     @RequestMapping("L_query_jiaban")
     public  @ResponseBody  List<Map> L_query_jiaban(Integer empid, String fristdate, String overdate, Integer apovstate){
-        System.out.println(empid+"44444444444444444444444");
+       /* System.out.println(empid+"44444444444444444444444");
         System.out.println(fristdate+"333333333333333");
-        System.out.println(overdate+"222222222222222222");
+        System.out.println(overdate+"222222222222222222");*/
 
 
         List<Map> list= userService.L_query_jiaban(empid, fristdate, overdate,apovstate);
@@ -156,9 +152,9 @@ public  String    L_add_j(Apply_Overtime app, double apovhour_1, double apovhour
 
     @RequestMapping("L_query_cizhi")
     public  @ResponseBody  List<Map> L_query_cizhi(Integer empid, String fristdate, String overdate, Integer dimstate){
-        System.out.println(empid+"44444444444444444444444");
+       /* System.out.println(empid+"44444444444444444444444");
         System.out.println(fristdate+"333333333333333");
-        System.out.println(overdate+"222222222222222222");
+        System.out.println(overdate+"222222222222222222");*/
 
         List<Map> list= userService.L_query_cizhi(empid, fristdate, overdate,dimstate);
 
@@ -198,8 +194,8 @@ public  String    L_add_j(Apply_Overtime app, double apovhour_1, double apovhour
     /*------------------------------通讯录员工姓名查询*/
     @RequestMapping("L_query_emp_name")
     public  @ResponseBody List<Map> L_query_emp_name(String empname){
-        System.out.println(empname+"------------------------------------");
-        System.out.println(userService.L_query_emp_name(empname));
+     /*   System.out.println(empname+"------------------------------------");
+        System.out.println(userService.L_query_emp_name(empname));*/
         return userService.L_query_emp_name(empname);
     }
 /*员工岗位*/

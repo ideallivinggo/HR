@@ -123,7 +123,9 @@
                     <th>应聘职位</th>
                     <th>录入时间</th>
                     <th>筛选状态</th>
-                    <th>操作</th>
+                    <th>
+                        <input type="checkbox" onclick="selectAll(this);" />操作
+                    </th>
                 </tr>
                 </thead>
                 <tbody id="mytab">
@@ -299,7 +301,10 @@
         queryAllRes(nowPage+1);
     });
 
-
+    //全选
+    function selectAll(checkbox) {
+        $('input[type=checkbox]').prop('checked', $(checkbox).prop('checked'));
+    }
 
 
     //筛选加入简历库

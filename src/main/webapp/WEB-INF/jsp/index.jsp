@@ -55,7 +55,7 @@
             <div class="fa fa-bars tooltips" data-placement="right" data-original-title="Toggle Navigation"></div>
         </div>
         <!--logo start-->
-        <a href="index.html" class="logo"><b>DASHGUM FREE</b></a>
+        <a  class="logo"><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;·睿智管理·</b></a>
         <!--logo end-->
         <div class="nav notify-row" id="top_menu">
             <!--  notification start -->
@@ -65,9 +65,9 @@
                 <!-- settings end -->
                 <!-- inbox dropdown start-->
                 <li id="header_inbox_bar" class="dropdown">
-                    <a data-toggle="dropdown" class="dropdown-toggle" href="index.html#">
+                    <a data-toggle="dropdown" class="dropdown-toggle" >
                         <i class="fa fa-envelope-o"></i>
-                        <span class="badge bg-theme">5</span>
+                     <%--   <span class="badge bg-theme"></span>--%>
                     </a>
                     <ul class="dropdown-menu extended inbox" id="showfriend">
                         <div class="notify-arrow notify-arrow-green"></div>
@@ -112,12 +112,7 @@
                     <img src="../../assets/img/ui-sam.jpg" class="img-circle" width="60"></a></p>
                 <h5 class="centered">${emp.empnumber}</h5>
 
-                <li class="mt">
-                    <a href="index.html">
-                        <i class="fa fa-dashboard"></i>
-                        <span>全开面板</span>
-                    </a>
-                </li>
+
 
 
                 <c:forEach items="${treevo}" var="list">
@@ -162,7 +157,7 @@
     <!--main content start-->
     <section id="main-content">
         <section class="wrapper">
-            <div style=""  id="zcmessage">暂存message</div>
+            <div style="display: none"  id="zcmessage">暂存message</div>
 
             <div class="row mt" >
             <div class="col-lg-12" style="margin-top:-25px;margin-left:-16px">
