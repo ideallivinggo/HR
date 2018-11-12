@@ -270,11 +270,12 @@
     //查看单个简历
     function queryOneRes(obj) {
         $.ajax({
-            url: "queryOneRes",
+            url: "queryAllResYLP",
             type: "post",
-            data:{resid:obj},
+            data:{resid:obj, pageNum:1},
             dataType: "json",
             success: function (data) {
+                var data = data.list;
                 $("#resid").val(data[0].resid)
                 $("#resumename").val(data[0].resumename)
                 $("#emali").val(data[0].emali)

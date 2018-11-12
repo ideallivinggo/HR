@@ -33,7 +33,6 @@ public interface YapplyService {
      * 查看招聘申请信息
      */
     PageInfo<Map> queryAllRec(Recruitment recruitment, Integer pageNum);
-    List<Map> queryOneRec(Recruitment recruitment);
     /**
      * 修改申请信息
      * */
@@ -46,7 +45,6 @@ public interface YapplyService {
      * 查看简历信息
      */
     PageInfo<Map> queryAllRes(Resume resume, Integer pageNum);
-    List<Map> queryOneRes(Resume resume);
     /**
      * 晒选简历信息
      */
@@ -61,7 +59,6 @@ public interface YapplyService {
      * 查看第一次面试
      * */
     PageInfo<Map> queryAllInte(Interviewone interviewone, Integer pageNum);
-    List<Map> queryOneInte(Interviewone interviewone);
 
     /**
      * 清除过期和不过的面试,修改简历成状态（简历回收站）
@@ -78,7 +75,6 @@ public interface YapplyService {
      * 查看第二次 面试
      * */
     PageInfo<Map> queryAllInteTwo(Interviewtwo interviewtwo, Integer pageNum);
-    List<Map> queryOneInteTwo(Interviewtwo interviewtwo);
     /**
      * 修改第二次面试
      * */
@@ -156,7 +152,10 @@ public interface YapplyService {
      * 查看培训课程
      * */
     PageInfo<Map> queryAllkec(Kecheng kecheng, Integer pageNum);
-    List<Map> queryOnekec(Kecheng kecheng);
+    /**
+     * 查看培训老师
+     * */
+    List<Map> queryAllket(Keteacher keteacher);
     /**
      * 课程审批
      * */
@@ -164,7 +163,25 @@ public interface YapplyService {
     /**
      * 员工培训记录
      * */
-    PageInfo<Map> queryAllkee(Keemp keemp, Integer pageNum);
-    List<Map> queryOnekee(Keemp keemp);
+    PageInfo<Map> queryAllkee(Integer empid, Integer kestate, Integer pageNum);
+    /**
+     * 查询培训课程员工
+     * */
+    List<Map> queryAllkeemp(Integer keempid, Integer keid, Integer keokstate, String empnumber);
+    /**
+     * 员工培训打分
+     * */
+    void dafen(Keemp keemp);
+    /**
+     * 剩余打分人数
+     * */
+    Map shengyu(Integer keid);
+    /**
+     * 培训打分完成
+     * */
+    void wancheng(Kecheng kecheng);
+
+
+
 
 }
