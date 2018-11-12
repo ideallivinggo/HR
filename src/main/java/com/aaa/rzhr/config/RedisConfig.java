@@ -40,7 +40,12 @@ public class RedisConfig extends CachingConfigurerSupport {
         Map<String, RedisCacheConfiguration> redisCacheConfigurationMap = new HashMap<>();
         //SsoCache和BasicDataCache进行过期时间配置
         redisCacheConfigurationMap.put("SsoCache", this.getRedisCacheConfigurationWithTtl(3*60));
-        redisCacheConfigurationMap.put("BasicDataCache", this.getRedisCacheConfigurationWithTtl(1*60));
+          redisCacheConfigurationMap.put("BasicDataCache", this.getRedisCacheConfigurationWithTtl(1*60));
+        redisCacheConfigurationMap.put("permission", this.getRedisCacheConfigurationWithTtl(2*60));
+        redisCacheConfigurationMap.put("role", this.getRedisCacheConfigurationWithTtl(1*60));
+        redisCacheConfigurationMap.put("rolea", this.getRedisCacheConfigurationWithTtl(1*60));
+        redisCacheConfigurationMap.put("roleb", this.getRedisCacheConfigurationWithTtl(1*60));
+
         return redisCacheConfigurationMap;
     }
 
