@@ -17,4 +17,5 @@ public class AttendanceQvo implements Serializable {
     private long workDate;      //工作日
     private  long baseCheckTime;//上班基准  （应该上班时间和应该下班时间）
     private String timeResult;//上班结果
+    private AttendanceQvo atts;//下午
 }

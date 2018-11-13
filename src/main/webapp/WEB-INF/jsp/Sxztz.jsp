@@ -17,6 +17,7 @@
     </style>
 </head>
 <body>
+<a class="layui-btn layui-btn-xs layui-btn-xs" onclick="syuekaoqin()">点击导入月考勤</a>
 <table class="layui-hide" id="sdemo" lay-filter="stest"></table>
 
 
@@ -27,7 +28,9 @@
     <a class="layui-btn layui-btn-xs" lay-event="sfasong">发送工资单</a>
     <a class="layui-btn layui-btn-xs layui-btn-xs" lay-event="ssub">保存</a>
     <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="ssdel">删除</a>
-
+</script>
+<script type="text/html" id="sTpl">
+    {{d.LAY_TABLE_INDEX+1}}
 </script>
 <script>
     $(function () {
@@ -41,15 +44,14 @@
             table.render({
                 elem: '#sdemo'
                 ,url:'sgetattsjp'
-                ,width:1100
+                ,width:1000
                 ,page: true //开启分页
                 ,toolbar: 'default' //开启工具栏，此处显示默认图标，可以自定义模板，详见文档
                 ,totalRow: true //开启合计行
                 ,cols: [[
-                    {field:'staid', width:120, title: '#', sort: true,align:'center'}
-                    ,{field:'stagsname', width:200, title: '公司名称',align:'center'}
+                    {field:'staid', width:200, templet:'#sTpl', sort: true,align:'center'}
                     ,{field:'statjmonth', width:200, title: '月度台账', sort: true,align:'center'}
-                    ,{field:'', title: '操作', width: 300,align:'center', toolbar: '#sbarDemo'} //minWidth：局部定义当前单元格的最小宽度，layui 2.2.1 新增
+                    ,{field:'', title: '操作', width: 400,align:'center', toolbar: '#sbarDemo'} //minWidth：局部定义当前单元格的最小宽度，layui 2.2.1 新增
                 ]]
                 ,limit:5   //默认十条数据一页
                 ,limits:[10,20,30,50]  //数据分页条
@@ -59,8 +61,8 @@
                     var data = obj.data //获得当前行数据
                         ,layEvent = obj.event; //获得 lay-event 对应的值
                     if(layEvent === 'sedit'){
-                        alert(data.staid);
-                     var url ="sexportExcelsjp?id="+data.staid;
+
+                    var url ="sexportExcelsjp?id="+data.staid;
                         // 这里一定不能使用Ajax请求
                         window.open(url);
 
@@ -103,5 +105,24 @@
                 }
             }
         })
+    }
+    function syuekaoqin() {
+        layer.confirm('确定要导入吗', function(index){
+            $.ajax({
+                url:'saddyuekaoqin',
+                type:'post',
+                dataType:'json',
+                success:function(data){
+                    if(data==7){
+                        layer.msg('当月已经添加过了');
+                    }else if(data==1){
+                        layer.msg('添加成功');
+                        window.location.reload();
+                    }
+                }
+            })
+
+        });
+
     }
 </script>
