@@ -132,7 +132,6 @@
                    background-color: #424A5D;
                }
                .dian:focus{
-                   /*background:#293F45;*/
                    color: #68DFF0;
                }
            </style>

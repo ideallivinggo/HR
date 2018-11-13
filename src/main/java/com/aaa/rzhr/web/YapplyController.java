@@ -331,7 +331,7 @@ public class YapplyController {
 
 
 
-////////////////////////////////////////////首页////////////////////////////////////////////////
+////////////////////////////////////////////首页  待办事项///////////////////////////////////////////////
     /**
      * 待入职统计
      */
@@ -374,6 +374,13 @@ public class YapplyController {
     @RequestMapping("countLeaveYLP")
     public Map countLeave() {
         return service.countLeave();
+    }
+    /**
+     * 培训课程审批
+     */
+    @RequestMapping("countKecYLP")
+    public Map countKec() {
+        return service.countKec();
     }
 
 

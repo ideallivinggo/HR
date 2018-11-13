@@ -77,9 +77,6 @@
             <div class="layui-inline" style="margin-left: 300px; font-size: 28px;color: #000;" >
                 第二轮面试人员
             </div>
-            <div class="layui-inline" style="margin-left: 350px" >
-                <a href="Yinterview"><button class="layui-btn">查看第一次面试</button></a>
-            </div>
 
         </div>
     </div>

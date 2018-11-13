@@ -257,11 +257,42 @@
     <select id="countLeave" resultType="java.util.Map">
         SELECT COUNT(leasate) AS countnum FROM apply_leave where leasate = 0
     </select>
+    <!--培训课程审批-->
+    <select id="countKec" resultType="java.util.Map">
+        SELECT COUNT(kestate) AS countnum FROM kecheng where kestate = 1
+    </select>
 
-    <!--公告栏-->
-  <!--  <select id="queryAllMes" resultType="">
-        SELECT * FROM rzmessage WHERE begintime = '2018-11-04' AND mestate = 2 AND deptid = 2
-    </select>-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
