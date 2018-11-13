@@ -64,13 +64,7 @@ public interface ContractMapperYqx {
      * */
     public void UpdateEmpState(Emp emp);
     /**
-     * 员工转正
-     * */
-    public void UpdateEmpStateTurn(Emp emp);
-    /**
      * 查询面试成功(简历)
-     *
-     *
      * */
     public List<Map> QueryResumeYqx(@Param("actname") String actname);
     /**
@@ -80,7 +74,12 @@ public interface ContractMapperYqx {
     /**
      * 添加员工
      * */
-    public void AddEmpYqx(Emp emp);
+    public int AddEmpYqx(Emp emp);
+    /**
+     * 钉钉
+     * */
+    public int AddEmpdingdYqx(Empdingd empdingd);
+    public void AddEmp_EmpdingdYqx(Emp_Empdingd emp_empdingd);
     /**
      * 修改面试状态（默认1为已入职）
      * */
@@ -105,4 +104,35 @@ public interface ContractMapperYqx {
      * 修改部门
      * */
     public void UpdateDeptYqx(Dept dept);
+
+
+    /**
+     * 转正管理 查询 详情 已转正 已通过
+     * */
+    public List<Map> QueryZhuanzhengYqx(Emp emp);
+    public List<Map> QueryEmpAllYqx(Emp emp);
+    public void UpdateEmpStateTurn(Emp emp);
+    public void UpdateZhuanzhengYqx(Zhuanzheng zhuanzheng);
+    /**
+     * 离职管理 查询 详情 已离职（已转正同上） 已通过
+     * */
+    public List<Map> QueryApplyDimissionYqx(Emp emp);
+    public List<Map> QueryEmpAllApplyYqx(Emp emp);
+    public void UpdateApplyDimissionYqx(Apply_Dimission apply_dimission);
+    /**
+     * 请假管理 查询 详情 修改
+     * */
+    public List<Map> QueryLeaveYqx(Emp emp);
+    public void UpdateLeaveYqx(Apply_Leave apply_leave);
+    /**
+     * 加班管理 查询 详情 修改
+     * */
+    public List<Map> QueryOvertimeYqx(Emp emp);
+    public void UpdateOvertimeYqx(Apply_Overtime apply_overtime);
+    /**
+     * 出差管理 查询 详情 修改
+     * */
+    public List<Map> QueryTravelYqx(Emp emp);
+    public void UpdateTravelYqx(Apply_Office apply_office);
+
 }

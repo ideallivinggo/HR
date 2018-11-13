@@ -135,6 +135,61 @@ public String Qemp(){
     public String QGroupDept(){
         return "QGroupDept";
     }
+    /**
+     * 转正
+     * */
+    @RequestMapping("QTurnJob")
+    public String QTurnJob(){
+        return "QTurnJob";
+    }
+    /**
+     * 离职管理
+     * */
+    @RequestMapping("QResignation")
+    public String QResignation(){
+        return "QResignation";
+    }
+    /**
+     * 离职详情
+     * */
+    @RequestMapping("QResignationJob")
+    public String QResignationJob(){
+        return "QResignationJob";
+    }
+    /**
+     * 请假管理
+     * */
+    @RequestMapping("QManageLeave")
+    public String QManageLeave(){
+        return "QManageLeave";
+    }
+    @RequestMapping("QManageLeaveD")
+    public String QManageLeaveD(){
+        return "QManageLeaveD";
+    }
+    /**
+     * 加班管理
+     * */
+    @RequestMapping("QManageOvertime")
+    public String QManageOvertime(){
+        return "QManageOvertime";
+    }
+    @RequestMapping("QManageOvertimeD")
+    public String QManageOvertimeD(){
+        return "QManageOvertimeD";
+    }
+    /**
+     * 出差管理
+     * */
+    @RequestMapping("QManageTravel")
+    public String QManageTravel(){
+        return "QManageTravel";
+    }
+    @RequestMapping("QManageTravelD")
+    public String QManageTravelD(){
+        return "QManageTravelD";
+    }
+
     ///----------------------------------李佳鹏区--------------------------------//
 
     /**

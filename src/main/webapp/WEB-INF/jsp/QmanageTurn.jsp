@@ -15,24 +15,28 @@
 </head>
 <body>
 <script type="text/html" id="barDemo">
-    {{# if(d.empstateid==1){ }}
+    <%--{{# if(d.empstateid==1){ }}
     <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="edit2">转正</a>
-    {{# } }}
-    <a class="layui-btn layui-btn-sm layui-btn-warm" lay-event="edit">驳回</a>
-
-   <%-- <div class="site-demo-button" id="layerDemo" style="margin-bottom: 0;">
-        <button data-method="offset" data-type="auto" class="layui-btn layui-btn-sm layui-btn-normal">居中弹出</button>
-    </div>--%>
+    {{# } }}--%>
+    <a class="layui-btn layui-btn-sm layui-btn-normal" lay-event="edit2">转正审核</a>
 </script>
 <div style="padding: 20px; background-color: #F2F2F2;">
     <div class="layui-row layui-col-space15">
         <div class="layui-col-md12">
             <div class="layui-card">
-                <div class="layui-card-header" style="height: 60px;">
+                <div class="layui-card-header" style="height: 60px;padding-top: 15px;">
                     <div class="demoTable layui-form">
-                        <label class="layui-form-label">姓名</label>
                         <div class="layui-inline">
-                            <input type="text" id="name"  autocomplete="off" class="layui-input">
+                            <a href="QmanageEntry" class="layui-btn layui-btn-primary">入职管理</a>
+                        </div>
+                        <div class="layui-inline">
+                            <a href="QmanageTurn" style="color: #009688;" class="layui-btn layui-btn-primary">转正管理</a>
+                        </div>
+                        <div class="layui-inline">
+                            <a href="QResignation" class="layui-btn layui-btn-primary">离职管理</a>
+                        </div>
+                        <div class="layui-inline">
+                            <input type="text" id="name" placeholder="姓名" autocomplete="off" class="layui-input">
                         </div>
                         <div class="layui-btn" data-type="reload">搜索</div>
                         <button onclick="Reload() " class="layui-btn">刷新</button>
@@ -45,18 +49,6 @@
         </div>
     </div>
 </div>
-<div class="site-demo-button" id="layerDemo" style="margin-bottom: 0;">
-    <button data-method="offset" data-type="auto" class="layui-btn layui-btn-sm layui-btn-normal">居中弹出</button>
-</div>
-<%--弹出框--%>
-<div id="addDept" style="display: none;">
-    <div style="padding-top: 40px;padding-left: 50px;">
-        部门名称:<input id="deptname" style="width: 200px;height: 40px;border: 1px solid #cdcdcd"><br>
-    </div>
-    <div style="padding-top: 40px;padding-left: 50px;">
-        部门人数:<input id="deptnamenum" style="width: 200px;height: 40px;border: 1px solid #cdcdcd">
-    </div>
-</div>
 
 </body>
 </html>
@@ -66,41 +58,39 @@
         var $ = layui.jquery,layer = layui.layer;
         table.render({
             elem: '#EmpState'
-            ,url:'QueryEmpStateTurn'
+            ,url:'QueryZhuanzhengYqx'
             ,page: true//开启分页
-            ,limit :5//这个是每页面显示多少条，页面跳转后他会自动让下拉框里对应的值设为选中状态
-            ,limits: [ 5, 10, 20, 30, 40, 50]
+            ,limit :10//这个是每页面显示多少条，页面跳转后他会自动让下拉框里对应的值设为选中状态
+            ,limits: [ 10, 20, 30, 40, 50]
             ,cellMinWidth: 10 //全局定义常规单元格的最小宽度
             ,id:'a'
             ,cols: [[
                 {type:'numbers', title: '序号', align:'center'}
                 ,{field:'empname', title: '姓名', align:'center'}
-                ,{field:'sex', title: '性别', align:'center'}
+                ,{field:'sex', title: '性别', align:'center',width:40}
                 ,{field:'empnumber', title: '工号', align:'center'}
                 ,{field:'deptname', title: '部门', align:'center'}
                 ,{field:'emppay', title: '薪资', align:'center'}
-                /* ,{field:'empstateid', title: '入职状态id', align:'center', sort: true}*/
-                ,{field:'statename', title: '状态名称', align:'center'}
+                ,{field:'empstatedate', title: '入职时间', align:'center'}
+                ,{field:'conexpire', title: '实习结束日期', align:'center'}
                 ,{field:'right', title: '操作',toolbar: '#barDemo', align:'center'}
             ]]
         });
         var $ = layui.$, active = {
-          //模糊查询执行
             reload: function(){
-                var demoReload = $('#name').val();
+                var empname=$('#name').val();
                 //执行重载
                 table.reload('a', {
-                    url:'QueryEmpStateTurn',
+                    url:'QueryEmpAllIfYqx',
                     method:'post',
                     page: {
                         curr: 1 //重新从第 1 页开始
                     }
                     ,where: {
-                        empname: demoReload
+                        empname:empname
                     }
                 });
             }
-
         };
         $('.demoTable .layui-btn').on('click', function(){
             var type = $(this).data('type');
@@ -109,79 +99,23 @@
         //监听行工具事件
         table.on('tool(test)', function(obj){
             var data = obj.data;
-            var empstateid=data.empstateid;
             var empid = data.empid;
-            alert(empid)
-            if(obj.event === 'edit'){
-                layer.confirm('该员工实习期未通过，确定驳回？', function(index){
-                    $.ajax({
-                        url:'UpdateEmpState',
-                        type:'post',
-                        data:{"empstateid":empstateid,"empid":empid},
-                        dataType:'text',
-                        success:function (data) {
-                            alert("驳回成功!")
-                            location.reload();
-                        }
-                    })
-                });
-            }
             if(obj.event === 'edit2'){
-                alert(empid);
-                //通过id查询转正申请
-                /*layui.use('layer', function(){ //独立版的layer无需执行这一句
-                    var $ = layui.jquery,
-                        layer = layui.layer; //独立版的layer无需执行这一句
-                    //触发事件1
-                    var active = {
-                        offset: function(othis){
-                            var type = othis.data('type');
-                            layer.open({
-                                type: 1
-                                ,title:'添加部门'
-                                ,offset: type //具体配置参考：http://www.layui.com/doc/modules/layer.html#offset
-                                ,id: 'layerDemo'+type //防止重复弹出
-                                ,area: ['400px', '300px']
-                                ,content: $('#addDept')
-                                ,btn:  ['提交', '关闭']
-                                ,btnAlign: 'c' //按钮居中
-                                ,shade: 0 //不显示遮罩
-                                ,yes: function(){
-                                    /!*layer.closeAll();*!/
-                                }
-                            });
-                        }
-                    };
-                    $('#layerDemo .layui-btn').on('click', function(){
-                        var othis = $(this), method = othis.data('method');
-                        active[method] ? active[method].call(this, othis) : '';
-                    });
-                });*/
-                //修改状态
-                /*layer.confirm('该员工通过实习期，确定转正？', function(index){
-                    $.ajax({
-                        url:'UpdateEmpStateTurn',
-                        type:'post',
-                        data:{"empstateid":empstateid,"empid":empid},
-                        dataType:'text',
-                        success:function (data) {
-                            location.reload();
-                        }
-                    })
-                });*/
+                $.ajax({
+                    url:'QueryEmpAllYqx',
+                    type:'post',
+                    data:{"empid":empid},
+                    dataType:'json',
+                    success:function (data) {
+                        window.location.href="QTurnJob"
+                    }
+                })
             }
         });
-        //弹出框
-
-
     });
      //刷新整个页面
     function Reload(){
         location.reload();
-    }
-    //
-    function TurnPositive() {
-        
     }
 
 </script>

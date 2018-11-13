@@ -83,13 +83,6 @@
             empstateid =4 WHERE empid=#{empid}
         </if>
     </update>
-    <!--员工转正-->
-    <update id="UpdateEmpStateTurn" parameterType="Emp">
-        UPDATE emp SET
-        <if test="empstateid==1">
-            empstateid =2 WHERE empid=#{empid}
-        </if>
-    </update>
     <!--查询面试成功(简历)-->
     <select id="QueryResumeYqx" resultType="java.util.Map" parameterType="Map">
         SELECT * from resume r
@@ -114,9 +107,16 @@
         SELECT * FROM position
     </select>
     <!--添加员工-->
-    <insert id="AddEmpYqx" parameterType="Emp">
+    <insert id="AddEmpYqx" parameterType="Emp" useGeneratedKeys="true" keyProperty="empid">
         INSERT INTO emp(empnumber,empname,typeid,idnumber,sex,birthdate,nation,accounttype,eduid,address,politics,qqnumber,phone,password,salt,email,urgencyphone,urgencyname,empnotes,deptid,poid,emptypeid,emppay,empstateid,empstatedate)
         VALUE (#{empnumber},#{empname},#{typeid},#{idnumber},#{sex},#{birthdate},#{nation},#{accounttype},#{eduid},#{address},#{politics},#{qqnumber},#{phone},#{password},#{salt},#{email},#{urgencyphone},#{urgencyname},#{empnotes},#{deptid},#{poid},#{emptypeid},#{emppay},#{empstateid},#{empstatedate});
+    </insert>
+    <!--钉钉-->
+    <insert id="AddEmpdingdYqx" parameterType="Empdingd" useGeneratedKeys="true" keyProperty="eddid">
+        INSERT INTO empdingd(eddnumber) VALUE (#{eddnumber})
+    </insert>
+    <insert id="AddEmp_EmpdingdYqx" parameterType="Emp_Empdingd">
+        INSERT  INTO emp_empdingd(empid, eddid) VALUE (#{empid},#{eddid})
     </insert>
     <!--修改面试状态（默认1为已入职）-->
     <update id="UpdateActivationYqx" parameterType="String">
@@ -145,5 +145,101 @@
     <!--修改部门-->
     <update id="UpdateDeptYqx" parameterType="Dept">
         update dept set deptname=#{deptname},deptnum=#{deptnum} where deptid=#{deptid}
+    </update>
+    <!--转正管理 查询 详情 已转正 已通过-->
+    <select id="QueryZhuanzhengYqx" resultType="java.util.Map" parameterType="Map">
+        select * from emp e inner join zhuanzheng z on e.empid = z.empid
+        inner join dept d on d.deptid=e.deptid
+        inner join contract c on c.empid = e.empid
+        and z.shenqingstate=5
+        <if test="empname!=null and empname!=''">
+            AND e.empname LIKE CONCAT(CONCAT('%',#{empname},'%'))
+        </if>
+    </select>
+    <!--转正管理 查询 详情 -->
+    <select id="QueryEmpAllYqx" resultType="java.util.Map" parameterType="Map">
+        select * from emp e inner join zhuanzheng z on e.empid = z.empid
+        inner join dept d on d.deptid=e.deptid
+        inner join contract c on c.empid = e.empid
+        and shenqingstate = 5
+        <if test="empid!=null and empid!=''">
+            and e.empid=#{empid}
+        </if>
+    </select>
+    <!--转正管理 已转正 -->
+    <update id="UpdateEmpStateTurn" parameterType="Emp">
+        UPDATE emp SET empstateid =#{empstateid} WHERE empid=#{empid}
+    </update>
+    <!--转正管理 已通过-->
+    <update id="UpdateZhuanzhengYqx" parameterType="Zhuanzheng">
+        UPDATE zhuanzheng SET renshi=#{renshi},renshitiem=#{renshitiem},shenqingstate=#{shenqingstate} WHERE shenid=#{shenid}
+    </update>
+    <!--离职管理 查询 详情 已离职（已转正同上） 已通过-->
+    <select id="QueryApplyDimissionYqx" resultType="java.util.Map" parameterType="Map">
+        select * from emp e inner join apply_dimission ad on e.empid=ad.empid
+        inner join dept d on d.deptid=e.deptid
+        inner join contract c on c.empid = e.empid
+        and ad.dimstate=5
+        <if test="empname!=null and empname!=''">
+            AND e.empname LIKE CONCAT(CONCAT('%',#{empname},'%'))
+        </if>
+    </select>
+    <!--离职管理 详情-->
+    <select id="QueryEmpAllApplyYqx" resultType="java.util.Map" parameterType="Map">
+        select * from emp e inner join dept d on d.deptid=e.deptid
+        inner join contract c on c.empid = e.empid
+        inner join apply_dimission ad on e.empid=ad.empid
+        <if test="empid!=null and empid!=''">
+            and e.empid=#{empid}
+        </if>
+    </select>
+    <!--离职管理 已通过-->
+    <update id="UpdateApplyDimissionYqx" parameterType="Apply_Dimission">
+        UPDATE apply_dimission SET dimstate=#{dimstate},renshishen=#{renshishen},renshishendate=#{renshishendate} WHERE dimid=#{dimid}
+    </update>
+    <!--请假管理 查询 详情 修改-->
+    <select id="QueryLeaveYqx" resultType="java.util.Map" parameterType="Map">
+        SELECT * FROM apply_leave al INNER JOIN emp e on al.empid=e.empid
+        inner join dept d on d.deptid=e.deptid
+        AND al.leasate=5
+        <if test="empid!=null and empid!=''">
+            and e.empid=#{empid}
+        </if>
+        <if test="empname!=null and empname!=''">
+            AND e.empname LIKE CONCAT(CONCAT('%',#{empname},'%'))
+        </if>
+    </select>
+    <update id="UpdateLeaveYqx" parameterType="Apply_Leave">
+        UPDATE apply_leave set leasate=#{leasate},renshishen=#{renshishen},renshishendate=#{renshishendate} WHERE leaid=#{leaid}
+    </update>
+    <!--加班管理 查询 详情 修改-->
+    <select id="QueryOvertimeYqx" resultType="java.util.Map" parameterType="Map">
+        SELECT * FROM apply_overtime ao INNER JOIN emp e on ao.empid=e.empid
+        inner join dept d on d.deptid=e.deptid
+        AND ao.apovstate=5
+        <if test="empid!=null and empid!=''">
+            and e.empid=#{empid}
+        </if>
+        <if test="empname!=null and empname!=''">
+            AND e.empname LIKE CONCAT(CONCAT('%',#{empname},'%'))
+        </if>
+    </select>
+    <update id="UpdateOvertimeYqx" parameterType="Apply_Overtime">
+        UPDATE apply_overtime set apovstate=#{apovstate},renshishen=#{renshishen},renshishendate=#{renshishendate} WHERE apovid=#{apovid}
+    </update>
+    <!--出差管理 查询 详情 修改-->
+    <select id="QueryTravelYqx" resultType="java.util.Map" parameterType="Map">
+        SELECT * FROM apply_office af INNER JOIN emp e on af.empid=e.empid
+        inner join dept d on d.deptid=e.deptid
+        AND af.offstate=5
+        <if test="empid!=null and empid!=''">
+            and e.empid=#{empid}
+        </if>
+        <if test="empname!=null and empname!=''">
+            AND e.empname LIKE CONCAT(CONCAT('%',#{empname},'%'))
+        </if>
+    </select>
+    <update id="UpdateTravelYqx" parameterType="Apply_Office">
+        UPDATE apply_office set offstate=#{offstate},renshishen=#{renshishen},renshishendate=#{renshishendate} WHERE offid=#{offid}
     </update>
 </mapper>

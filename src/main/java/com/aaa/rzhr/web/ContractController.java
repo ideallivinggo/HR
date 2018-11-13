@@ -3,7 +3,9 @@ package com.aaa.rzhr.web;
 import com.aaa.rzhr.pojo.*;
 import com.aaa.rzhr.service.ContractService;
 import com.aaa.rzhr.service.DeptService;
+import com.aaa.rzhr.service.EmpRoleService;
 import com.aaa.rzhr.util.LayuiFy;
+import com.aaa.rzhr.util.layuiUtil;
 import com.alibaba.fastjson.JSONArray;
 import org.apache.shiro.crypto.SecureRandomNumberGenerator;
 import org.apache.shiro.crypto.hash.SimpleHash;
@@ -32,8 +34,10 @@ public class ContractController {
     ContractService contractService;
     @Autowired
     DeptService deptService;
+    @Autowired
+    EmpRoleService empRoleService;
     /**
-     * 添加员工
+     * 添加员工(入职)
      * */
     @RequestMapping("AddEmpYqx")
     @ResponseBody
@@ -47,6 +51,21 @@ public class ContractController {
         contractService.AddEmpYqx(emp);
         /*修改面试状态（默认2为已入职）*/
         contractService.UpdateActivationYqx(emp.getEmpnumber());
+        /*钉钉*/
+        Empdingd empdingd = new Empdingd();
+        empdingd.setEddnumber(emp.getEmpnumber());
+        contractService.AddEmpdingdYqx(empdingd);
+        /*中间表*/
+        Emp_Empdingd emp_empdingd = new Emp_Empdingd();
+        emp_empdingd.setEmpid(emp.getEmpid());
+        emp_empdingd.setEddid(empdingd.getEddid());
+        contractService.AddEmp_EmpdingdYqx(emp_empdingd);
+        String endroidstr="4,";
+        String[] endroidstrsplit = endroidstr.split(",");
+        List<String> nowroid= Arrays.asList(endroidstrsplit);
+            empRoleService.saveEmpRole(nowroid,emp.getEmpid());
+
+
         return "true";
     }
     /**
@@ -106,15 +125,7 @@ public class ContractController {
         contractService.UpdateEmpState(emp);
         return "true";
     }
-    /**
-     * 员工转正
-     * */
-    @RequestMapping("UpdateEmpStateTurn")
-    @ResponseBody
-    public String UpdateEmpStateTurn(Emp emp){
-        contractService.UpdateEmpStateTurn(emp);
-        return "true";
-    }
+
     /**
      *入职查询
      * */
@@ -137,7 +148,6 @@ public class ContractController {
     @RequestMapping("QueryEmpStateDimission")
     @ResponseBody
     public LayuiFy QueryEmpStateDimission(String empname,Integer limit, Integer page){
-        System.out.println("离职查询======"+limit+"bbbbbb"+page+"================================");
         return contractService.QueryEmpStateTurn(empname,limit,page);
     }
 
@@ -157,7 +167,6 @@ public class ContractController {
     @RequestMapping("QueryContractYqx")
     @ResponseBody
     public LayuiFy QueryContractYqx(String contypeid,Integer limit,Integer page){
-        System.out.println(limit+"dddddddddddddddddddddd"+contypeid);
         return contractService.QueryContractYqx(contypeid,limit,page);
     }
     /**
@@ -166,7 +175,6 @@ public class ContractController {
     @RequestMapping("AddContractYqx")
     @ResponseBody
     public String AddContractYqx(Contract contract,String qsrc){
-        System.out.println(contract.getEmpid()+"==============================================");
         System.out.println(qsrc);
         contract.setConcontent(qsrc);
         contractService.AddContractYqx(contract);
@@ -261,14 +269,6 @@ public class ContractController {
         return "true";
     }
     /**
-     *  public List<Map> QueryEmpStateName(HttpServletRequest request){
-     List<Map> list = contractService.QueryEmpStateName();
-     HttpSession session = request.getSession();
-     session.setAttribute("list",list);
-     return list;
-     }
-     * */
-    /**
      * 分组查询部门
      * */
 
@@ -329,6 +329,245 @@ public class ContractController {
         emp.setEmpid(empid);
         emp.setPoid(2);
         contractService.UpdateEmpManageYqx(emp);
+        return "true";
+    }
+    /**
+     * 查询转正申请
+     * */
+    @RequestMapping("QueryZhuanzhengYqx")
+    @ResponseBody
+    public LayuiFy QueryZhuanzhengYqx(Emp emp,Integer limit, Integer page){
+        return contractService.QueryZhuanzhengYqx(emp,limit,page);
+    }
+    /**
+     * 查询员工所有
+     * */
+    @RequestMapping("QueryEmpAllYqx")
+    @ResponseBody
+    public List<Map> QueryEmpAllYqx(Integer empid,HttpServletRequest request) {
+        Emp emp = new Emp();
+        emp.setEmpid(empid);
+        List<Map> list = contractService.QueryEmpAllYqx(emp);
+        HttpSession session = request.getSession();
+        session.setAttribute("list",list.get(0));
+        return list;
+    }
+    /**
+     * 转正管理 模糊查询
+     * */
+    @RequestMapping("QueryEmpAllIfYqx")
+    @ResponseBody
+    public LayuiFy QueryEmpAllIfYqx(String empname,Integer limit, Integer page) {
+        System.out.println(empname+"s========================================");
+        Emp emp = new Emp();
+        emp.setEmpname(empname);
+        return contractService.QueryZhuanzhengYqx(emp,limit,page);
+    }
+
+    /**
+     * 转正管理 修改员工入职状态 已转正
+     * */
+    @RequestMapping("UpdateTurnYqx")
+    @ResponseBody
+    public String UpdateTurnYqx(String name,String data,Integer empid,Integer shenid){
+        System.out.println(empid+"============="+shenid);
+        Emp emp = new Emp();
+        emp.setEmpid(empid);
+        emp.setEmpstateid(2);
+        contractService.UpdateEmpStateTurn(emp);
+        Zhuanzheng zhuanzheng = new Zhuanzheng();
+        zhuanzheng.setShenid(shenid);
+        zhuanzheng.setShenqingstate(4);
+        zhuanzheng.setRenshi(name);
+        zhuanzheng.setRenshitiem(data);
+        contractService.UpdateZhuanzhengYqx(zhuanzheng);
+        return "true";
+    }
+    /**
+     * 转正驳回
+     * */
+    @RequestMapping("UpdateTurnDownYqx")
+    @ResponseBody
+    public String UpdateTurnDownYqx(Integer shenid){
+        Zhuanzheng zhuanzheng = new Zhuanzheng();
+        zhuanzheng.setShenid(shenid);
+        zhuanzheng.setShenqingstate(2);
+        contractService.UpdateZhuanzhengYqx(zhuanzheng);
+        return "true";
+    }
+    /**
+     * 离职管理 查询离职申请
+     * */
+    @RequestMapping("QueryApplyDimissionYqx")
+    @ResponseBody
+    public LayuiFy QueryApplyDimissionYqx(Emp emp,Integer limit, Integer page){
+        return contractService.QueryApplyDimissionYqx(emp,limit,page);
+    }
+    /**
+     * 离职管理 模糊查询
+     * */
+    @RequestMapping("QueryApplyDimissionIfYqx")
+    @ResponseBody
+    public LayuiFy QueryApplyDimissionIfYqx(String empname,Integer limit, Integer page){
+        System.out.println(empname+"==============----------------------------------------");
+        Emp emp = new Emp();
+        emp.setEmpname(empname);
+        return contractService.QueryApplyDimissionYqx(emp,limit,page);
+    }
+    /**
+     * 离职管理 查询详情
+     * */
+    @RequestMapping("QueryEmpAllApplyYqx")
+    @ResponseBody
+    public List<Map> QueryEmpAllApplyYqx(Integer empid,HttpServletRequest request) {
+        Emp emp = new Emp();
+        emp.setEmpid(empid);
+        List<Map> list = contractService.QueryEmpAllApplyYqx(emp);
+        HttpSession session = request.getSession();
+        session.setAttribute("list",list.get(0));
+        return list;
+    }
+    /**
+     * 离职管理 修改员工入职状态 已离职
+     * */
+    @RequestMapping("UpdateApplyDimissionYqx")
+    @ResponseBody
+    public String UpdateApplyDimissionYqx(String name,String data,Integer empid,Integer dimid){
+        System.out.println(empid+"============="+dimid);
+        Emp emp = new Emp();
+        emp.setEmpid(empid);
+        emp.setEmpstateid(4);
+        contractService.UpdateEmpStateTurn(emp);
+        Apply_Dimission apply_dimission = new Apply_Dimission();
+        apply_dimission.setDimid(dimid);
+        apply_dimission.setDimstate(4);
+        apply_dimission.setRenshishen(name);
+        apply_dimission.setRenshishendate(data);
+        contractService.UpdateApplyDimissionYqx(apply_dimission);
+        return "true";
+    }
+    /**
+     * 离职驳回
+     * */
+    @RequestMapping("UpdateApplyYqx")
+    @ResponseBody
+    public String UpdateApplyYqx(Integer dimid){
+        Apply_Dimission apply_dimission = new Apply_Dimission();
+        apply_dimission.setDimid(dimid);
+        apply_dimission.setDimstate(2);
+        contractService.UpdateApplyDimissionYqx(apply_dimission);
+        return "true";
+    }
+    /**
+     * 请假管理 查询 详情 修改
+     * */
+    @RequestMapping("QueryLeaveYqx")
+    @ResponseBody
+    public LayuiFy QueryLeaveYqx(String empname,Integer limit, Integer page){
+        System.out.println(empname+"==============----------------------------------------");
+        Emp emp = new Emp();
+        emp.setEmpname(empname);
+        return contractService.QueryLeaveYqx(emp,limit,page);
+    }
+    /**
+     * 请假管理 详情
+     * */
+    @RequestMapping("QueryLeaveDYqx")
+    @ResponseBody
+    public List<Map> QueryLeaveDYqx(Integer empid,HttpServletRequest request){
+        Emp emp = new Emp();
+        emp.setEmpid(empid);
+        List<Map> list = contractService.QueryLeaveDYqx(emp);
+        HttpSession session = request.getSession();
+        session.setAttribute("list",list.get(0));
+        return list;
+    }
+    /**
+     * 请假管理 修改
+     * */
+    @RequestMapping("UpdateLeaveYqx")
+    @ResponseBody
+    public String UpdateLeaveYqx(String name,String data,Integer leaid) {
+        Apply_Leave apply_leave= new Apply_Leave();
+        apply_leave.setLeaid(leaid);
+        apply_leave.setLeasate(4);
+        apply_leave.setRenshishen(name);
+        apply_leave.setRenshishendate(data);
+        contractService.UpdateLeaveYqx(apply_leave);
+        return "true";
+    }
+    /**
+     *加班管理 查询 详情 修改
+     * */
+    @RequestMapping("QueryOvertimeYqx")
+    @ResponseBody
+    public LayuiFy QueryOvertimeYqx(String empname,Integer limit, Integer page){
+        Emp emp = new Emp();
+        emp.setEmpname(empname);
+        return contractService.QueryOvertimeYqx(emp,limit,page);
+    }
+    /**
+     * 请假管理 详情
+     * */
+    @RequestMapping("QueryOvertimeDYqx")
+    @ResponseBody
+    public List<Map> QueryOvertimeDYqx(Integer empid,HttpServletRequest request){
+        Emp emp = new Emp();
+        emp.setEmpid(empid);
+        List<Map> list = contractService.QueryOvertimeDYqx(emp);
+        HttpSession session = request.getSession();
+        session.setAttribute("list",list.get(0));
+        return list;
+    }
+    /**
+     * 请假管理 修改
+     * */
+    @RequestMapping("UpdateOvertimeYqx")
+    @ResponseBody
+    public String UpdateOvertimeYqx(String name,String data,Integer apovid) {
+        Apply_Overtime apply_overtime = new Apply_Overtime();
+        apply_overtime.setApovid(apovid);
+        apply_overtime.setApovstate(4);
+        apply_overtime.setRenshishen(name);
+        apply_overtime.setRenshishendate(data);
+        contractService.UpdateOvertimeYqx(apply_overtime);
+        return "true";
+    }
+    /**
+     *出差管理 查询 详情 修改
+     * */
+    @RequestMapping("QueryTravelYqx")
+    @ResponseBody
+    public LayuiFy QueryTravelYqx(String empname,Integer limit, Integer page){
+        Emp emp = new Emp();
+        emp.setEmpname(empname);
+        return contractService.QueryTravelYqx(emp,limit,page);
+    }
+    /**
+     * 出差管理 详情
+     * */
+    @RequestMapping("QueryTravelDYqx")
+    @ResponseBody
+    public List<Map> QueryTravelDYqx(Integer empid,HttpServletRequest request){
+        Emp emp = new Emp();
+        emp.setEmpid(empid);
+        List<Map> list = contractService.QueryTravelDYqx(emp);
+        HttpSession session = request.getSession();
+        session.setAttribute("list",list.get(0));
+        return list;
+    }
+    /**
+     * 出差管理 修改
+     * */
+    @RequestMapping("UpdateTravelYqx")
+    @ResponseBody
+    public String UpdateTravelYqx(String name,String data,Integer offid) {
+        Apply_Office apply_Office = new Apply_Office();
+        apply_Office.setOffid(offid);
+        apply_Office.setOffstate(4);
+        apply_Office.setRenshishen(name);
+        apply_Office.setRenshishendate(data);
+        contractService.UpdateTravelYqx(apply_Office);
         return "true";
     }
 }
