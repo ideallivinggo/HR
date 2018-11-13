@@ -37,9 +37,20 @@ public class ConfigPermissionController {
 
 
     @RequestMapping("")
-    public String aaa(Model m){
+    public String aaa(Model m,Emp e){
+        List<Emp> emps=new ArrayList<Emp>();
+       if(e.getEmpnumber()==null){
+           emps=empService.queryallempX();
+       }else if (e.getEmpnumber().equals("")){
+           emps=empService.queryallempX();
+
+       }else {
+           emps.add(empService.getByName(e.getEmpnumber()));
+       }
+
+
         //查询所有用户
-        List<Emp> emps = empService.queryallempX();
+
         m.addAttribute("list",emps);
 
         Map<Emp,List<Role>> emp_role=new HashMap<>();
