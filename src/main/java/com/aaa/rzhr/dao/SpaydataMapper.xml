@@ -38,12 +38,190 @@
         DELETE from att_statistics WHERE staid=#{id}
     </delete>
     <select id="SgetAll" parameterType="Int" resultType="java.util.Map">
-         select att.stagsname,att.statjmonth,e.empname,e.idnumber,sb.socbank,sb.soccardno,axq.worday,axq.worbelate,axq.worpaffairs,axq.worklatesum,
+         select att.statjmonth,e.empid,e.empname,e.idnumber,sb.socbank,sb.soccardno,axq.worday,axq.worbelate,axq.worpaffairs,axq.worklatesum,
 axq.worweekwork,axq.worpswork,axq.empid,axq.worhdaywork,p.paynumber,p.paytakehome from att_statisticsxq axq JOIN emp e ON axq.empid=e.empid JOIN payroll p ON
   axq.empid=p.empid JOIN social_benefits sb ON axq.empid=sb.empid JOIN att_statistics att on axq.staid=att.staid WHERE axq.staid=#{id}
      </select>
+    <select id="sgetjixiao" parameterType="String" resultType="java.util.Map">
+  SELECT * FROM performancexq where perid=#{id} GROUP BY empid
+</select>
 <update id="Saddpayroll" parameterType="java.util.Map">
 UPDATE payroll set paytakehome=#{shifaa} WHERE empid=#{empidd}
 </update>
+<select id="Sgetygxz" parameterType="String" resultType="java.util.Map">
+SELECT e.empid,e.empname,e.idnumber,d.deptname,c.constart,p.paytry,p.payjust,p.paynumber from emp e JOIN dept d
+ON e.deptid=d.deptid JOIN contract c ON e.empid=c.empid JOIN payroll p ON e.empid=p.empid
+ <if test="cs != null and cs!=''">
+where (e.empid like ${cs} or e.empname  like ${cs} or e.idnumber like ${cs} or d.deptname like ${cs} or c.constart like ${cs}
+or p.paytry like ${cs} or p.payjust like ${cs} or p.paynumber like ${cs})
+ </if>
+</select>
+    <update id="supdatexz" parameterType="java.util.Map">
+   UPDATE payroll SET paytry=#{ssy},payjust=#{szz},paynumber=#{sdq} WHERE payid=#{sid}
+    </update>
+    <select id="sgetmb" resultType="java.util.Map">
+        SELECT * FROM template_name
+    </select>
+    <select id="Sgetmbmx" parameterType="Int" resultType="java.util.Map">
+        SELECT * FROM template_content WHERE tnaid=#{id}
+    </select>
+    <select id="Sgetjxmbwj" parameterType="int" resultType="java.util.Map">
+       SELECT  * FROM template_content WHERE temid=#{id}
+    </select>
+    <update id="Supdjxmx" parameterType="java.util.Map" >
+        update template_content
+            <trim prefix="set" suffixOverrides=",">
+                <trim prefix="temcontent =case" suffix="end,">
+                    <foreach collection="list" item="cus">
+                        <if test="cus.khxm!=null">
+                            when temid=#{cus.khid} then #{cus.khxm}
+                        </if>
+                    </foreach>
+                </trim>
+                <trim prefix="temscoreone =case" suffix="end,">
+                    <foreach collection="list" item="cus">
+                        when temid=#{cus.khid} then #{cus.khfz1}
+                    </foreach>
+                </trim>
+                <trim prefix="temscoretwo =case" suffix="end,">
+                    <foreach collection="list" item="cus">
+                        when temid=#{cus.khid} then #{cus.khfz2}
+                    </foreach>
+                </trim>
+                <trim prefix="temnumsm =case" suffix="end,">
+                    <foreach collection="list" item="cus">
+                        when temid=#{cus.khid} then #{cus.khfzsm}
+                    </foreach>
+                </trim>
+            </trim>
+           <where>
+               <foreach collection="list" separator="or" item="cus">
+                   temid = #{cus.khid}
+               </foreach>
+           </where>
+    </update>
+    <insert id="Saddjxmx" parameterType="java.util.List">
+      insert into  template_content(tnaid,temcontent,temscoreone,temscoretwo,temnumsm) VALUES
+        <foreach collection="list" item="m"  separator="," >
+            (#{m.tnaid},#{m.khxm},#{m.khfz1},#{m.khfz2},#{m.khfzsm})
+        </foreach>
+    </insert>
+    <delete id="sdeljxmx" parameterType="java.util.List">
+        DELETE FROM template_content WHERE temid IN
+        <foreach collection="list" item="m" open="(" close=")" separator=",">
+            #{m.sdel}
+        </foreach>
+    </delete>
+    <select id="getdept" resultType="java.util.Map">
+        SELECT * from dept
+    </select>
+    <select id="getyuang" parameterType="Int" resultType="java.util.Map">
+       SELECT * FROM  emp WHERE deptid=#{id}
+    </select>
+    <insert id="Saddjxmb" parameterType="java.util.Map">
+        INSERT INTO template_name (empnumber,tanname,temcontext) VALUES (#{khyg},#{skhmx},#{sxmms})
+    </insert>
+    <delete id="Sdeljxmb" parameterType="Int">
+        DELETE FROM template_name WHERE tnaid=#{tnaid}
+    </delete>
+    <delete id="Sdeljxmbmx" parameterType="Int">
+        DELETE FROM template_content WHERE tnaid=#{tnaid}
+    </delete>
+    <select id="sgetmbmx" parameterType="Int" resultType="java.util.Map">
+        SELECT * FROM template_content WHERE tnaid=#{tnaid}
+    </select>
+    <insert id="saddjxfq" parameterType="java.util.Map">
+ INSERT INTO performance (tnaid,pername,perdate1,perdate2,perstate,perzhuangtai) VALUES (#{tnaid},#{jxmc},#{jxsj1},#{jxsj2},#{khzq},0)
+    </insert>
+    <select id="getjxkh" resultType="java.util.Map">
+        SELECT * from performance;
+    </select>
+    <delete id="sdeljxkh" parameterType="Int">
+        DELETE FROM performance WHERE perid=#{id}
+    </delete>
+    <select id="sgetbumen" parameterType="Int" resultType="java.util.Map">
+        SELECT deptid from emp WHERE empid=#{id}
+    </select>
+    <select id="sgetyg" parameterType="Int" resultType="java.util.Map">
+        SELECT e.empnumber,e.empid from emp e join dept d on e.deptid=d.deptid WHERE d.deptid=#{id}
+    </select>
+    <select id="sgetjxkhmb"  resultType="java.util.Map">
+        SELECT * FROM template_name t JOIN performance p ON t.tnaid=p.tnaid GROUP BY t.tnaid
+    </select>
+    <select id="sbyempidbymb" parameterType="String" resultType="java.util.Map">
+        SELECT * FROM emp e JOIN performancexq p ON e.empid=p.empid WHERE e.empnumber='${empnumber}' and p.perid=${perid} GROUP BY e.empid
+    </select>
 
+    <select id="sgetjxkhygmx" parameterType="Int" resultType="java.util.Map">
+        SELECT e.empid,e.empnumber,d.deptname,e.empname,pxq.pxqdate,pxq.perjieguo,pxq.peizgpj FROM performance p JOIN performancexq pxq ON
+ p.perid=pxq.perid JOIN emp e ON pxq.empid=e.empid JOIN dept d ON e.deptid=d.deptid WHERE pxq.perid =#{id} GROUP BY pxq.empid
+    </select>
+    <select id="sgetygkhmx" parameterType="Int" resultType="java.util.Map">
+SELECT p.*,e.empname from performancexq p JOIN emp e ON p.empid=e.empid WHERE p.empid=${id} and p.perid=${pid}
+    </select>
+    <select id="sgetkhbymbyg" parameterType="Int" resultType="java.util.Map">
+ SELECT t.empnumber FROM performance p JOIN template_name t ON p.tnaid=t.tnaid WHERE p.perid=#{id}
+    </select>
+    <select id="sgetygbygh" parameterType="String" resultType="java.util.Map">
+ SELECT e.empid,e.empname,d.deptname FROM emp e JOIN dept d on e.deptid=d.deptid WHERE d.deptid=${did} and e.empnumber='${gh}'
+    </select>
+    <select id="sgetygsfpg" parameterType="String" resultType="java.util.Map">
+        SELECT * from performancexq where empid=${empid} and perid=${perid}
+    </select>
+    <select id="sgetmbmxbyygkh" parameterType="Int" resultType="java.util.Map">
+SELECT t.* from performance p JOIN template_content t ON p.tnaid=t.tnaid where p.perid=#{perid}
+    </select>
+    <select id="sgetygbyid" parameterType="Int" resultType="java.util.Map">
+        SELECT empname FROM emp where empid=#{empid}
+    </select>
+<insert id="saddjxkhpg" parameterType="java.util.List">
+    insert into  performancexq(perid,empid,pxqname,pxqdefen,pxqdate,perjieguo,peizgpj) VALUES
+    <foreach collection="list" item="m"  separator="," >
+        (#{m.perid},#{m.empid},#{m.temcontent},#{m.pxqdefen},#{m.pxqdate},#{m.perjieguo},#{m.peizgpj})
+    </foreach>
+</insert>
+    <select id="sgetyikhyg" parameterType="String" resultType="java.util.Map">
+       SELECT e.empname,e.empid,p.pxqdate,p.perjieguo,p.pxqdefen,p.pxqname from performancexq p JOIN emp e ON p.empid=e.empid
+ JOIN performance per ON per.perid=p.perid  where p.perid=${perid} and e.empid=${empid}
+</select>
+    <select id="sgetsfqj" parameterType="String" resultType="java.util.Map">
+      SELECT * FROM empdingd di JOIN emp_empdingd ed ON di.eddid=ed.eddid JOIN apply_leave ap ON ed.empid=ap.empid
+WHERE di.eddnumber='${empnumber}' GROUP BY ap.empid
+    </select>
+    <select id="sgetmbyid" parameterType="Int" resultType="java.util.Map">
+        SELECT * from template_content  where tnaid=#{id}
+    </select>
+    <select id="sgetAll" resultType="java.util.Map">
+        SELECT * FROM att_statistics
+    </select>
+    <select id="sgetempdingAll" resultType="java.util.Map">
+SELECT * FROM empdingd ed JOIN emp_empdingd eed ON ed.eddid=eed.eddid
+    </select>
+    <insert id="saddykq" parameterType="java.util.List">
+        INSERT INTO att_statisticsxq (staid,empid,worday,workzaotui,workyzchidao,worklatesum) VALUES
+        <foreach collection="list" item="m"  separator="," >
+            (#{m.staid},#{m.empid},#{m.queqincs},#{m.zaotuics},#{m.yzchidao},${m.chidaocs})
+        </foreach>
+    </insert>
+    <insert id="saddyqkhdate" parameterType="String">
+        INSERT  INTO att_statistics (statjmonth) VALUES (#{date})
+    </insert>
+    <select id="sgetbyyf" parameterType="java.util.Map" resultType="java.util.Map">
+SELECT * FROM att_statisticsxq WHERE staid=#{staid}
+    </select>
+    <select id="sgetsumyfkh" parameterType="Int" resultType="java.util.Map">
+        SELECT * FROM att_statistics att JOIN performance p ON att.statjmonth=p.perdate1 WHERE att.staid=#{a}
+    </select>
+    <select id="sgetalled" resultType="java.util.Map">
+        SELECT * from empdingd
+    </select>
+    <select id="sgetallby" parameterType="java.util.Map" resultType="java.util.Map">
+        SELECT ed.empid from empdingd e JOIN emp_empdingd ed on e.eddid=ed.eddid WHERE e.eddnumber=#{empid}
+    </select>
+    <insert id="saddycdj" parameterType="java.util.List">
+        INSERT INTO attendancelate (staid,empid,attchidao,attchidaodate) VALUES
+        <foreach collection="list" item="m"  separator="," >
+            (#{m.staid},#{m.empids},#{m.chidao},#{m.chidaofz})
+        </foreach>
+    </insert>
 </mapper>

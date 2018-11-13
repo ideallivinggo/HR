@@ -61,7 +61,7 @@
     <tr><td id="stt1">事假扣款 = 基本工资 × <input class="sinp" id="skk2"/>/<input class="sinp" id="skid2"/>/<input class="sinp" id="skidd2">× 事假折算出的小时数</td></tr>
     <tr><td id="stt2">病假扣款 = 基本工资 × <input class="sinp" id="skk3"/>/<input class="sinp" id="skid3" />/<input class="sinp" id="skidd3" />× 病假折算出的小时数</td></tr>
     <tr><td id="stt3">加班工资= 基本工资 × <input class="sinp" id="skk4"/>/<input class="sinp" id="skid4"/>/<input class="sinp" id="skidd4"/>× (平时加班 × <input class="sinp" id="ski4"/> + 周末加班×<input class="sinp" id="sk4"/> + 法定加班 × <input class="sinp" id="skd4" />)</td></tr>
-    <tr><td id="stt4">绩效工资= 基本工资 × <input class="sinp" id="skk5"/> × 绩效考核结果<input class="sinp" id="skid5" /></tr>
+    <tr><td id="stt4">绩效工资= 基本工资 × <input class="sinp" id="skk5"/> × 绩效考核结果 /<input class="sinp" id="skid5" /></tr>
     <tr class="strs1">
         <td><span style="font-size:24px;color:#009688">迟到扣款规则</span><hr style="width:1200px"/>
             <table id="stab">
@@ -127,7 +127,7 @@
             success:function(data) {
                 if(data!=null){
                     for (var i = 0; i < data.length; i++) {
-var tr="<tr id='str'><td>迟到<input name='sinp' class='sinp' onkeyup=\"if(isNaN(value))execCommand('undo')\" onafterpaste=\"if(isNaN(value))execCommand('undo')\" id='sfz"+i+"'/></td> <td>分钟到<input name='sinput2' class='sinp' onkeyup=\"if(isNaN(value))execCommand('undo')\" onafterpaste=\"if(isNaN(value))execCommand('undo')\" id='sfzz"+i+"'/></td><td>分钟," +
+var tr="<tr id='str'><td>迟到<input name='sinp' class='sinp' onkeyup=\"if(isNaN(value))execCommand('undo')\" onafterpaste=\"if(isNaN(value))execCommand('undo')\" id='sfz"+i+"'/></td> <td>到<input name='sinput2' class='sinp' onkeyup=\"if(isNaN(value))execCommand('undo')\" onafterpaste=\"if(isNaN(value))execCommand('undo')\" id='sfzz"+i+"'/></td><td>次," +
      "每次扣款 <input name='sinput3' class='sinp' onkeyup=\"if(isNaN(value))execCommand('undo')\" onafterpaste=\"if(isNaN(value))execCommand('undo')\" id='sprice"+i+"'/> 元</td>" +
     " <td onclick='sdel(this)'><div class='layui-btn layui-btn-sm layui-btn-radius layui-btn-danger'> 删除 </div></td></tr>";
             $("#stabody").append(tr);
@@ -153,8 +153,8 @@ var tr="<tr id='str'><td>迟到<input name='sinp' class='sinp' onkeyup=\"if(isNa
     }
     $("#sdiv").click(function () {
 
-        var tr="<tr id='str'><td>迟到 <input name='sinput1' class='sinp' onkeyup=\"if(isNaN(value))execCommand('undo')\" onafterpaste=\"if(isNaN(value))execCommand('undo')\" /></td> <td>分钟到<input name='sinput2' class='sinp' onkeyup=\"if(isNaN(value))execCommand('undo')\" onafterpaste=\"if(isNaN(value))execCommand('undo')\" /></td><td>分钟," +
-            "每次扣款 <input name='sinput3' class='sinp' onkeyup=\"if(isNaN(value))execCommand('undo')\" onafterpaste=\"if(isNaN(value))execCommand('undo')\" /> 元</td>" +
+        var tr="<tr id='str'><td>迟到 <input name='sinput1' class='sinp' onkeyup=\"if(isNaN(value))execCommand('undo')\" onafterpaste=\"if(isNaN(value))execCommand('undo')\" /></td> <td>到<input name='sinput2' class='sinp' onkeyup=\"if(isNaN(value))execCommand('undo')\" onafterpaste=\"if(isNaN(value))execCommand('undo')\" /></td><td>次," +
+            "扣款 <input name='sinput3' class='sinp' onkeyup=\"if(isNaN(value))execCommand('undo')\" onafterpaste=\"if(isNaN(value))execCommand('undo')\" /> 元</td>" +
             " <td onclick='sdel(this)'><div class='layui-btn layui-btn-sm layui-btn-radius layui-btn-danger'> 删除 </div></td></tr>";
         $("#stabody").append(tr);
     })

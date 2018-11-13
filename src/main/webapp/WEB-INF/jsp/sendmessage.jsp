@@ -43,7 +43,7 @@
                 <div class="panel-body">
 
                       <form id="zhong">
-                    标题<br/><input name="metitle"><input name="mestate" value="1"><br/>
+                    标题<br/><input name="metitle"><input style="display: none" name="mestate" value="1"><br/>
                     正文<br/>
                          <textarea rows="10" cols="25" name="metext">
 						 </textarea><br/>
@@ -67,7 +67,7 @@
                 </div>
                 <div class="panel-body">
                     <form id="yiban">
-                        标题<br/><input name="metitle"><input name="mestate" value="2"><br/>
+                        标题<br/><input name="metitle"><input style="display: none" name="mestate" value="2"><br/>
                         正文<br/>
                         <textarea rows="10" cols="25" name="metext">
 						 </textarea><br/>
@@ -140,7 +140,8 @@
                             data:ssa,
                             dataType:'text',
                             success:function (data) {
-                                alert(data)
+                                alert("发送成功");
+                                location=location;
                             }
                         })
                     }
