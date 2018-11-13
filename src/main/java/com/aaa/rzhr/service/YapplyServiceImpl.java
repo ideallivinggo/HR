@@ -201,8 +201,10 @@ public class YapplyServiceImpl implements YapplyService {
         return yapplyMapper.countLeave();
     }
 
-
-
+    @Override
+    public Map countKec() {
+        return yapplyMapper.countKec();
+    }
 
 
     @Override

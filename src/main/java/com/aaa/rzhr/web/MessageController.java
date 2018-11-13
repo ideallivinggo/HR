@@ -69,7 +69,7 @@ public class MessageController {
              return false;
          }
     }
-
+///
     @RequestMapping("/betweendatezhong")
     public  List<Rzmessage>  betweendatezhong(){
         Date currentTime = new Date();
@@ -79,6 +79,7 @@ public class MessageController {
 
         return rzmessages;
     }
+    //bum
     @RequestMapping("/betweendateyiban")
     public  List<Rzmessage>  betweendateyiban(){
         Date currentTime = new Date();
