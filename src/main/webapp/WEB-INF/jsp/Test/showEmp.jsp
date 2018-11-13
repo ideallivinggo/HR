@@ -101,7 +101,14 @@
     <div class="col-md-12">
         <div class="content-panel">
             <table class="table table-striped table-advance table-hover">
-                <h4><i class="fa fa-angle-right"></i> 员工角色详情</h4>
+                <h4><i class="fa fa-angle-right"></i> 员工角色详情
+                    <
+                    <form action="/config">
+                   <input style="margin-left:50px;height:35px;  " name="empnumber">
+                    <input type="submit" value="工号查询" style="width:60px;height:35px;  " >
+                    </form>
+                </h4>
+
                 <hr>
                 <thead>
                 <tr>
@@ -140,6 +147,9 @@
 
                 </tbody>
             </table>
+
+
+
         </div><!-- /content-panel -->
     </div><!-- /col-md-12 -->
 </div><!-- /row -->
