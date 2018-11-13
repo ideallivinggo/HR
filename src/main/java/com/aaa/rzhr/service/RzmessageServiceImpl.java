@@ -32,6 +32,9 @@ public class RzmessageServiceImpl implements  RzmessageService {
         Subject subject= SecurityUtils.getSubject();
         Session s=  subject.getSession();
         Emp emp= (Emp) s.getAttribute("emp");
+         if (mestate=="1"){
+             return rzmessageMapper.queryRzmessageX(nowate,mestate,null);
+         }
         return rzmessageMapper.queryRzmessageX(nowate,mestate,emp.getDeptid().toString());
     }
 }

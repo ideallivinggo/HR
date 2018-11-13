@@ -10,7 +10,10 @@
     <select id="queryRzmessageX" parameterType="String" resultType="Rzmessage">
        SELECT * FROM rzmessage WHERE STR_TO_DATE(#{nowate},'%Y-%m-%d')
            BETWEEN STR_TO_DATE(begintime,'%Y-%m-%d')
-           AND STR_TO_DATE(endtime,'%Y-%m-%d')     AND mestate=#{mestate} AND  deptid=#{deptid}
+           AND STR_TO_DATE(endtime,'%Y-%m-%d')     AND mestate=#{mestate}
+             <if test="deptid !=null">
+                       and deptid=#{deptid}
+             </if>
     </select>
 
 
