@@ -3,12 +3,12 @@ package com.aaa.rzhr.pojo;
 
 public class Zhuanzheng {
 
-  private long shenid;
-  private long empid;
+  private Integer shenid;
+  private Integer empid;
   private String shendate;
   private String shentext;
-  private long shenqingstate;
-  private long deptid;
+  private Integer shenqingstate;
+  private Integer deptid;
   private String pipeople;
   private String shentime;
   private String bohui;
@@ -19,20 +19,20 @@ public class Zhuanzheng {
   private String renshitiem;
 
 
-  public long getShenid() {
+  public Integer getShenid() {
     return shenid;
   }
 
-  public void setShenid(long shenid) {
+  public void setShenid(Integer shenid) {
     this.shenid = shenid;
   }
 
 
-  public long getEmpid() {
+  public Integer getEmpid() {
     return empid;
   }
 
-  public void setEmpid(long empid) {
+  public void setEmpid(Integer empid) {
     this.empid = empid;
   }
 
@@ -55,20 +55,20 @@ public class Zhuanzheng {
   }
 
 
-  public long getShenqingstate() {
+  public Integer getShenqingstate() {
     return shenqingstate;
   }
 
-  public void setShenqingstate(long shenqingstate) {
+  public void setShenqingstate(Integer shenqingstate) {
     this.shenqingstate = shenqingstate;
   }
 
 
-  public long getDeptid() {
+  public Integer getDeptid() {
     return deptid;
   }
 
-  public void setDeptid(long deptid) {
+  public void setDeptid(Integer deptid) {
     this.deptid = deptid;
   }
 
