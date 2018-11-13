@@ -157,9 +157,21 @@ public class ContractServiceImpl implements ContractService {
      * 添加员工
      * */
     @Override
-    public void AddEmpYqx(Emp emp) {
-        mapperYqx.AddEmpYqx(emp);
+    public int AddEmpYqx(Emp emp) {
+        return mapperYqx.AddEmpYqx(emp);
     }
+    /**
+     * 钉钉
+     * */
+    @Override
+    public int AddEmpdingdYqx(Empdingd empdingd) {
+        return mapperYqx.AddEmpdingdYqx(empdingd);
+    }
+    @Override
+    public void AddEmp_EmpdingdYqx(Emp_Empdingd emp_empdingd) {
+        mapperYqx.AddEmp_EmpdingdYqx(emp_empdingd);
+    }
+
     /**
      * 修改面试状态（默认2为已入职）
      * */
@@ -207,5 +219,100 @@ public class ContractServiceImpl implements ContractService {
     @Override
     public void UpdateDeptYqx(Dept dept) {
         mapperYqx.UpdateDeptYqx(dept);
+    }
+    /**
+     * 转正管理 查询 详情 已转正 已通过
+     * */
+    @Override
+    public LayuiFy QueryZhuanzhengYqx(Emp emp,Integer limit, Integer page){
+        LayuiFy layui = layuiUtil.getData(mapperYqx.QueryZhuanzhengYqx(emp),limit,page);
+        return layui;
+    }
+    /**
+     * 转正管理 详情
+     * */
+    @Override
+    public List<Map> QueryEmpAllYqx(Emp emp) {
+        return mapperYqx.QueryEmpAllYqx(emp);
+    }
+    /**
+     * 转正管理 已通过
+     * */
+    @Override
+    public void UpdateZhuanzhengYqx(Zhuanzheng zhuanzheng) {
+        mapperYqx.UpdateZhuanzhengYqx(zhuanzheng);
+    }
+    /**
+     * 离职管理 查询 详情 已离职（已转正同上） 已通过
+     * */
+    @Override
+    public LayuiFy QueryApplyDimissionYqx(Emp emp,Integer limit, Integer page) {
+        LayuiFy layui = layuiUtil.getData(mapperYqx.QueryApplyDimissionYqx(emp),limit,page);
+        return layui;
+    }
+    /**
+     * 离职管理 详情
+     * */
+    @Override
+    public List<Map> QueryEmpAllApplyYqx(Emp emp) {
+        return mapperYqx.QueryEmpAllApplyYqx(emp);
+    }
+
+    /**
+     * 离职管理 已通过
+     * */
+    @Override
+    public void UpdateApplyDimissionYqx(Apply_Dimission apply_dimission) {
+        mapperYqx.UpdateApplyDimissionYqx(apply_dimission);
+    }
+    /**
+     * 请假管理 查询 详情 修改
+     * */
+    @Override
+    public LayuiFy QueryLeaveYqx(Emp emp,Integer limit, Integer page){
+        LayuiFy layui = layuiUtil.getData(mapperYqx.QueryLeaveYqx(emp),limit,page);
+        return layui;
+    }
+    @Override
+    public List<Map> QueryLeaveDYqx(Emp emp) {
+        return mapperYqx.QueryLeaveYqx(emp);
+    }
+    @Override
+    public void UpdateLeaveYqx(Apply_Leave apply_leave) {
+        mapperYqx.UpdateLeaveYqx(apply_leave);
+    }
+    /**
+     *加班管理 查询 详情 修改
+     * */
+    @Override
+    public LayuiFy QueryOvertimeYqx(Emp emp, Integer limit, Integer page) {
+        LayuiFy layui = layuiUtil.getData(mapperYqx.QueryOvertimeYqx(emp),limit,page);
+        return layui;
+    }
+    /** 详情* */
+    @Override
+    public List<Map> QueryOvertimeDYqx(Emp emp) {
+        return mapperYqx.QueryOvertimeYqx(emp);
+    }
+    /**修改* */
+    @Override
+    public void UpdateOvertimeYqx(Apply_Overtime apply_overtime) {
+        mapperYqx.UpdateOvertimeYqx(apply_overtime);
+    }
+    /**
+     * 出差管理 查询 详情 修改
+     * */
+    @Override
+    public LayuiFy QueryTravelYqx(Emp emp, Integer limit, Integer page) {
+        LayuiFy layui = layuiUtil.getData(mapperYqx.QueryTravelYqx(emp),limit,page);
+        return layui;
+    }
+    @Override
+    public List<Map> QueryTravelDYqx(Emp emp) {
+        return mapperYqx.QueryTravelYqx(emp);
+    }
+    @Override
+    public void UpdateTravelYqx(Apply_Office apply_Office) {
+        mapperYqx.UpdateTravelYqx(apply_Office);
     }
 }

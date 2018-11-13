@@ -3,6 +3,7 @@ package com.aaa.rzhr.service;
 import com.aaa.rzhr.pojo.*;
 import com.aaa.rzhr.util.LayuiFy;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Map;
 
@@ -84,7 +85,12 @@ public interface ContractService {
     /**
      * 添加员工
      * */
-    public void AddEmpYqx(Emp emp);
+    public int AddEmpYqx(Emp emp);
+    /**
+     * 钉钉
+     * */
+    public int AddEmpdingdYqx(Empdingd empdingd);
+    public void AddEmp_EmpdingdYqx(Emp_Empdingd emp_empdingd);
     /**
      * 修改面试状态（默认2为已入职）
      * */
@@ -109,4 +115,46 @@ public interface ContractService {
      * 修改部门
      * */
     public void UpdateDeptYqx(Dept dept);
+    /**
+     * 转正管理 查询 详情 已转正 已通过
+     * */
+    public LayuiFy QueryZhuanzhengYqx(Emp emp,Integer limit, Integer page);
+    /**
+     * 转正管理 详情
+     * */
+    public List<Map> QueryEmpAllYqx(Emp emp);
+    /**
+     * 转正管理 已通过
+     * */
+    public void UpdateZhuanzhengYqx(Zhuanzheng zhuanzheng);
+    /**
+     * 离职管理 查询 详情 已离职（已转正同上） 已通过
+     * */
+    public LayuiFy QueryApplyDimissionYqx(Emp emp,Integer limit, Integer page);
+    /**
+     * 离职管理 详情
+     * */
+    public List<Map> QueryEmpAllApplyYqx(Emp emp);
+    /**
+     * 离职管理 已通过
+     * */
+    public void UpdateApplyDimissionYqx(Apply_Dimission apply_dimission);
+    /**
+     * 请假管理 查询 详情 修改
+     * */
+    public LayuiFy QueryLeaveYqx(Emp emp,Integer limit, Integer page);
+    public List<Map> QueryLeaveDYqx(Emp emp);
+    public void UpdateLeaveYqx(Apply_Leave apply_leave);
+    /**
+     * 加班管理 查询 详情 修改
+     * */
+    public LayuiFy QueryOvertimeYqx(Emp emp,Integer limit, Integer page);
+    public List<Map> QueryOvertimeDYqx(Emp emp);
+    public void UpdateOvertimeYqx(Apply_Overtime apply_overtime);
+    /**
+     * 出差管理 查询 详情 修改
+     * */
+    public LayuiFy QueryTravelYqx(Emp emp,Integer limit, Integer page);
+    public List<Map> QueryTravelDYqx(Emp emp);
+    public void UpdateTravelYqx(Apply_Office apply_Office);
 }
