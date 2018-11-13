@@ -143,6 +143,10 @@ public interface YapplyService {
      * 休假审批
      * */
     Map countLeave();
+    /**
+     * 培训课程审批
+     * */
+    Map countKec();
 
 
 

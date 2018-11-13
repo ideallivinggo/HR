@@ -72,7 +72,7 @@
             <div class="layui-inline" style="margin: 0px" >
                 <button style="border: 1px solid #e6e6e6;width: 30px;height: 37px;margin-left:-6px;" onclick="queryAllInteTwo(1)"><i class="layui-icon">&#xe615;</i></button>
             </div>
-            <div class="layui-inline" style="margin-left: 750px" >
+            <div class="layui-inline" style="margin-left: 860px" >
                 <button class="layui-btn" onclick="inteTwoPash(4)">录取</button>
                 <button class="layui-btn" onclick="inteTwoPash(0)">弃用</button>
             </div>
