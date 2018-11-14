@@ -22,6 +22,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 /**
@@ -166,8 +167,34 @@ public class ContractController {
      * */
     @RequestMapping("QueryContractYqx")
     @ResponseBody
-    public LayuiFy QueryContractYqx(String contypeid,Integer limit,Integer page){
-        return contractService.QueryContractYqx(contypeid,limit,page);
+    public LayuiFy QueryContractYqx(String contypeid,String empname,String conexpire,String conover,Integer limit,Integer page){
+        return contractService.QueryContractYqx(contypeid,empname,conexpire,conover,limit,page);
+    }
+    /**实习合同*/
+    @RequestMapping("QueryConPracticeDataYqx")
+    @ResponseBody
+    public LayuiFy QueryConPracticeDataYqx(String contypeid,String empname,String conover,Integer limit,Integer page){
+        SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
+        Date date=new Date();
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        calendar.add(Calendar.DAY_OF_MONTH, -7);
+        date = calendar.getTime();
+        String conexpire = sdf.format(date);
+        return contractService.QueryContractYqx(contypeid,empname,conexpire,conover,limit,page);
+    }
+    /**劳动合同*/
+    @RequestMapping("QueryContractDataYqx")
+    @ResponseBody
+    public LayuiFy QueryContractDataYqx(String contypeid,String empname,String conexpire,Integer limit,Integer page){
+        SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
+        Date date=new Date();
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        calendar.add(Calendar.DAY_OF_MONTH, -7);
+        date = calendar.getTime();
+        String conover = sdf.format(date);
+        return contractService.QueryContractYqx(contypeid,empname,conexpire,conover,limit,page);
     }
     /**
      *  添加合同
@@ -275,11 +302,9 @@ public class ContractController {
     @RequestMapping("QueryGroupYqx")
     @ResponseBody
     public List<Map> QueryGroupYqx(Integer deptid){
-        System.out.println(deptid+"ssssssssssssssssssssssssssssssss");
         Dept dept = new Dept();
         dept.setDeptid(deptid);
         List<Map> list = contractService.QueryGroupYqx(dept);
-        System.out.println(list+"ssssssssssssssssssssssssssssssssss");
         return list;
     }
     /**
@@ -296,12 +321,10 @@ public class ContractController {
     @RequestMapping("AddDeptManageYqx")
     @ResponseBody
     public String AddDeptManageYqx(Integer empid,String deptName,Integer deptnum) {
-        System.out.println(empid+"======"+deptnum+"======"+deptName);
         Dept dept = new Dept();
         dept.setDeptname(deptName);
         dept.setDeptnum(deptnum);
         contractService.AddDeptManageYqx(dept);
-        System.out.println(dept.getDeptid()+"sssssssssssssssssssssssssssssssssssssss");
         Emp emp = new Emp();
         emp.setEmpid(empid);
         emp.setDeptid(dept.getDeptid());
@@ -315,7 +338,6 @@ public class ContractController {
     @RequestMapping("UpdateDeptYqx")
     @ResponseBody
     public String UpdateDeptYqx(Integer deptid,Integer empid,String deptname,Integer deptnum,Integer id){
-        System.out.println(deptid+"==="+deptnum+"==="+deptname+"==="+empid+"==="+id+"ddddddddddddddddddddddddddddddddddddddddddd");
         Dept dept = new Dept();
         dept.setDeptid(deptid);
         dept.setDeptnum(deptnum);
@@ -358,7 +380,6 @@ public class ContractController {
     @RequestMapping("QueryEmpAllIfYqx")
     @ResponseBody
     public LayuiFy QueryEmpAllIfYqx(String empname,Integer limit, Integer page) {
-        System.out.println(empname+"s========================================");
         Emp emp = new Emp();
         emp.setEmpname(empname);
         return contractService.QueryZhuanzhengYqx(emp,limit,page);
@@ -370,7 +391,6 @@ public class ContractController {
     @RequestMapping("UpdateTurnYqx")
     @ResponseBody
     public String UpdateTurnYqx(String name,String data,Integer empid,Integer shenid){
-        System.out.println(empid+"============="+shenid);
         Emp emp = new Emp();
         emp.setEmpid(empid);
         emp.setEmpstateid(2);
@@ -409,7 +429,6 @@ public class ContractController {
     @RequestMapping("QueryApplyDimissionIfYqx")
     @ResponseBody
     public LayuiFy QueryApplyDimissionIfYqx(String empname,Integer limit, Integer page){
-        System.out.println(empname+"==============----------------------------------------");
         Emp emp = new Emp();
         emp.setEmpname(empname);
         return contractService.QueryApplyDimissionYqx(emp,limit,page);
@@ -433,7 +452,6 @@ public class ContractController {
     @RequestMapping("UpdateApplyDimissionYqx")
     @ResponseBody
     public String UpdateApplyDimissionYqx(String name,String data,Integer empid,Integer dimid){
-        System.out.println(empid+"============="+dimid);
         Emp emp = new Emp();
         emp.setEmpid(empid);
         emp.setEmpstateid(4);
@@ -464,7 +482,6 @@ public class ContractController {
     @RequestMapping("QueryLeaveYqx")
     @ResponseBody
     public LayuiFy QueryLeaveYqx(String empname,Integer limit, Integer page){
-        System.out.println(empname+"==============----------------------------------------");
         Emp emp = new Emp();
         emp.setEmpname(empname);
         return contractService.QueryLeaveYqx(emp,limit,page);

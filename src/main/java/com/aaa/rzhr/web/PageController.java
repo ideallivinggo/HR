@@ -189,6 +189,16 @@ public String Qemp(){
     public String QManageTravelD(){
         return "QManageTravelD";
     }
+    /**实习合同.jsp*/
+    @RequestMapping("QqueryConPractice")
+    public String QqueryConPractice(){
+        return "QqueryConPractice";
+    }
+    /**查看合同QqueryContractD*/
+    @RequestMapping("QqueryContractD")
+    public String QqueryContractD(){
+        return "QqueryContractD";
+    }
 
     ///----------------------------------李佳鹏区--------------------------------//
 

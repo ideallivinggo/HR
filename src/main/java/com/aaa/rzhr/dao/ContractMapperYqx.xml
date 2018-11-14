@@ -6,10 +6,21 @@
     <!--查询合同-->
     <select id="QueryContractYqx" resultType="java.util.Map" parameterType="Map">
         SELECT * FROM contract c
-        LEFT JOIN contract_type ct on c.contypeid = ct.contypeid
-        LEFT JOIN emp e on c.empid = e.empid
-        <if test="contypeid!=null and contypeid!=''">
-            WHERE c.contypeid = #{contypeid}
+        INNER JOIN contract_type ct on c.contypeid = ct.contypeid
+        INNER JOIN emp e on c.empid = e.empid
+        and c.contypeid = #{contypeid}
+        <if test="empname!=null and empname!='' ">
+             AND e.empname LIKE CONCAT(CONCAT('%',#{empname},'%'))
+        </if>
+        <if test="conexpire!=null and conexpire!='' ">
+            WHERE STR_TO_DATE(conexpire,'%Y-%m-%d')
+            BETWEEN STR_TO_DATE(#{conexpire},'%Y-%m-%d')
+            AND STR_TO_DATE(NOW(),'%Y-%m-%d')
+        </if>
+        <if test="conover!=null and conover!='' ">
+            WHERE STR_TO_DATE(conover,'%Y-%m-%d')
+            BETWEEN STR_TO_DATE(#{conover},'%Y-%m-%d')
+            AND STR_TO_DATE(NOW(),'%Y-%m-%d')
         </if>
     </select>
     <!--添加合同-->
