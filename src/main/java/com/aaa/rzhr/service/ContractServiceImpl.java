@@ -26,8 +26,8 @@ public class ContractServiceImpl implements ContractService {
      * 查询合同
      * */
     @Override
-    public LayuiFy QueryContractYqx(String contypeid,Integer limit,Integer page) {
-        LayuiFy layui = layuiUtil.getData(mapperYqx.QueryContractYqx(contypeid),limit,page);
+    public LayuiFy QueryContractYqx(String contypeid,String empname,String conexpire,String conover,Integer limit,Integer page) {
+        LayuiFy layui = layuiUtil.getData(mapperYqx.QueryContractYqx(contypeid,empname,conexpire,conover),limit,page);
         return layui;
     }
     /**
