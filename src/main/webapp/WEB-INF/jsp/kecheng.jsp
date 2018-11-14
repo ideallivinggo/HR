@@ -153,7 +153,7 @@
 
                                         <div class="step-pane" id="step2">
                                               <center><h5>课程详细</h5></center>
-                                        <textarea rows="13" cols="130" name="kexiangqing">
+                                        <textarea rows="13" cols="113" name="kexiangqing">
 
                                         </textarea>
 
@@ -240,10 +240,10 @@
                                                         </div>
                                                     </div>
                                             </div><br/>
-                                            上课地点:<input type="text" name="keaddress"><br/>
-                                           最大人数:<input type="text" name="kechengmaxren"><br/>
+                                            上课地点:<input type="text" name="keaddress"><br/><br/>
+                                             最大人数:<input type="text" name="kechengmaxren"><br/><br/>
                                             上课老师: &nbsp;&nbsp;<span id="showteacher"></span>
-                                              id<input name="kebaomingtimeend" id="empidaa">
+                                              <input name="kebaomingtimeend" style="display: none" id="empidaa">
 
                                         </div>
                                         </form>

@@ -24,7 +24,6 @@
 </head>
 <body style="background-color: #f3f3f3">
 <div id="head" style="margin:1%;width:100%;height: 50%;background-color: #19aa8d">
-    <input type="button" value="返回" onclick="back()" style="width: 60px;height: 36px;">
     <div style="overflow:hidden;width:120px;height:120px;border: 1px solid #fff9ec;border-radius:60px;position: absolute;top:18%;left:15%;">
         <h1><%--${list.mppicture} --%><img src="../../assets/img/ui-zac.jpg"></h1>
     </div>
@@ -232,6 +231,7 @@
                         <div class="layui-input-block">
                             <button  class="layui-btn" lay-submit="" lay-filter="SubmitEmp">立即提交</button>
                             <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                            <button onclick="back()" class="layui-btn layui-btn-primary">返回</button>
                         </div>
                     </div>
                 </form>
@@ -324,6 +324,9 @@
                 }
             }
         })
+    }
+    function back() {
+        window.history.back();//返回上一页
     }
 
 </script>

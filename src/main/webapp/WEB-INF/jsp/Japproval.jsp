@@ -235,17 +235,17 @@
 
                    if(data.list[i].kestate==1){
                         tr+="<td>待审批</td>";
-                        tr+="<td><button type='button' data-toggle='modal' data-target='#myModal' onclick='details("+data.list[i].keid+")'>详情</button></td>";
+                        tr+="<td><button type='button' data-toggle='modal' data-target='#myModal' onclick='details("+data.list[i].keid+")'>审批</button></td>";
                         tr+="</tr>";
                     }
                     if(data.list[i].kestate==2){
                         tr+="<td>已通过</td>";
-                        tr+="<td><button>详情</button></td>";
+                        tr+="<td></td>";
                         tr+="</tr>";
                     }
                     if(data.list[i].kestate==3){
                         tr+="<td>未通过</td>";
-                        tr+="<td><button>详情</button></td>";
+                        tr+="<td></td>";
                         tr+="</tr>";
                     }
                     $("#mytab").append(tr);

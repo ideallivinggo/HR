@@ -382,6 +382,13 @@ public class YapplyController {
     public Map countKec() {
         return service.countKec();
     }
+    /**
+     * 待录取员工
+     */
+    @RequestMapping("countInttwoYLP")
+    public Map countInttwo() {
+        return service.countInttwo();
+    }
 
 
 

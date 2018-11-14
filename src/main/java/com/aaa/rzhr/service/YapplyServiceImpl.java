@@ -206,6 +206,11 @@ public class YapplyServiceImpl implements YapplyService {
         return yapplyMapper.countKec();
     }
 
+    @Override
+    public Map countInttwo() {
+        return yapplyMapper.countInttwo();
+    }
+
 
     @Override
     public PageInfo<Map> queryAllkec(Kecheng kecheng, Integer pageNum) {

@@ -135,6 +135,61 @@ public String Qemp(){
     public String QGroupDept(){
         return "QGroupDept";
     }
+    /**
+     * 转正
+     * */
+    @RequestMapping("QTurnJob")
+    public String QTurnJob(){
+        return "QTurnJob";
+    }
+    /**
+     * 离职管理
+     * */
+    @RequestMapping("QResignation")
+    public String QResignation(){
+        return "QResignation";
+    }
+    /**
+     * 离职详情
+     * */
+    @RequestMapping("QResignationJob")
+    public String QResignationJob(){
+        return "QResignationJob";
+    }
+    /**
+     * 请假管理
+     * */
+    @RequestMapping("QManageLeave")
+    public String QManageLeave(){
+        return "QManageLeave";
+    }
+    @RequestMapping("QManageLeaveD")
+    public String QManageLeaveD(){
+        return "QManageLeaveD";
+    }
+    /**
+     * 加班管理
+     * */
+    @RequestMapping("QManageOvertime")
+    public String QManageOvertime(){
+        return "QManageOvertime";
+    }
+    @RequestMapping("QManageOvertimeD")
+    public String QManageOvertimeD(){
+        return "QManageOvertimeD";
+    }
+    /**
+     * 出差管理
+     * */
+    @RequestMapping("QManageTravel")
+    public String QManageTravel(){
+        return "QManageTravel";
+    }
+    @RequestMapping("QManageTravelD")
+    public String QManageTravelD(){
+        return "QManageTravelD";
+    }
+
     ///----------------------------------李佳鹏区--------------------------------//
 
     /**
@@ -365,6 +420,28 @@ public String Qemp(){
     public String Sxztz(){
         return "Sxztz";
     }
+    @RequestMapping("sygxz")
+    public String Sygxz(){ return "Sygxz"; }
+    @RequestMapping("sjxbd")
+    public String Sjxbd(){ return "Sjxbd"; }
+    @RequestMapping("skhmb")
+    public String Sjxkh(){ return "Skhmb"; }
+    @RequestMapping("sjxpg")
+    public String Sjxpg(){ return "Sjxpg"; }
+    @RequestMapping("spgmx")
+    public String Spgmx(String perid,String empid,Model mo){
+        mo.addAttribute("perid",perid);
+        mo.addAttribute("empid",empid);
+        return "Spgmx";
+    }
+    @RequestMapping("sjxpgyg")
+    public String Sjxpgyg(String perid,String empid,Model mo){
+        mo.addAttribute("perid",perid);
+        mo.addAttribute("empid",empid);
+        return "Sjxpgyg";
+    }
+
+
 
     //--------------------------------靳风儒
   @RequestMapping("/J200")

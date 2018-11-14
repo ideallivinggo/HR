@@ -150,6 +150,10 @@ public interface YapplyMapper {
      * 培训课程审批
      * */
     Map countKec();
+    /**
+     * 员工待录取
+     * */
+    Map countInttwo();
 
 
 

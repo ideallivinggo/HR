@@ -1,5 +1,8 @@
 package com.aaa.rzhr.pojo;
+
+
 public class Zhuanzheng {
+
   private Integer shenid;
   private Integer empid;
   private String shendate;
