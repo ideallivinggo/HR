@@ -21,7 +21,7 @@ public interface ContractMapperYqx {
     /**
      * 查询合同
      * */
-    public List<Map> QueryContractYqx(@Param("contypeid") String contypeid);
+    public List<Map> QueryContractYqx(@Param("contypeid") String contypeid,@Param("empname") String empname,@Param("conexpire") String conexpire,@Param("conover") String conover);
     /**
      * 添加合同
      */

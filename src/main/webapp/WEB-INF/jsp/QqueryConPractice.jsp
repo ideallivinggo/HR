@@ -1,8 +1,8 @@
 <%--
   Created by IntelliJ IDEA.
   User: YQX
-  Date: 2018/10/26
-  Time: 8:47
+  Date: 2018/11/14
+  Time: 21:14
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -21,10 +21,10 @@
                 <div class="layui-card-header" style="height: 60px;padding-top: 15px;">
                     <div class="demoTable layui-form">
                         <div class="layui-inline">
-                            <a href="QqueryConPractice" class="layui-btn layui-btn-primary">实习合同</a>
+                            <a href="QqueryConPractice" style="color: #009688;" class="layui-btn layui-btn-primary">实习合同</a>
                         </div>
                         <div class="layui-inline">
-                            <a href="QqueryContract"  style="color: #009688;"  class="layui-btn layui-btn-primary">劳动合同</a>
+                            <a href="QqueryContract" class="layui-btn layui-btn-primary">劳动合同</a>
                         </div>
                         <div class="layui-inline">
                             <input type="text" id="name" placeholder="姓名" autocomplete="off" class="layui-input">
@@ -49,7 +49,7 @@
 <script>
     layui.use('table', function(){
         var table = layui.table;
-        var contypeid = 1;
+        var contypeid = 2;
         table.render({
             elem: '#Contract'
             ,url:'QueryContractYqx?contypeid='+contypeid
@@ -59,15 +59,13 @@
             ,cellMinWidth: 80 //全局定义常规单元格的最小宽度
             ,id:'a'
             ,cols: [[
-                 {type:'numbers', title: '序号', align:'center'}
+                {type:'numbers', title: '序号', align:'center'}
                 ,{field:'empname', title: '员工', align:'center'}
                 ,{field:'sex', title: '性别', align:'center'}
                 ,{field:'empnumber', title: '工号', align:'center'}
                 ,{field:'contype', title: '合同类型', align:'center', sort: true}
                 ,{field:'empstatedate', title: '入职日期', align:'center'}
                 ,{field:'conexpire', title: '实习期结束时间', align:'center', sort: true}
-                ,{field:'constart', title: '合同开始时间', align:'center'}
-                ,{field:'conover', title: '合同结束时间', align:'center', sort: true}
                 ,{field:'right', title: '操作',toolbar: '#barDemo', align:'center'}
             ]]
 
@@ -75,7 +73,7 @@
         var $ = layui.$, active = {
             reload: function(){
                 var demoReload = $('#name').val();
-                var contypeid = 1;
+                var contypeid = 2;
                 alert(demoReload)
                 //执行重载
                 if(demoReload!=''){
@@ -92,16 +90,17 @@
                 }
                 if(demoReload==''){
                     table.reload('a', {
-                        url:'QueryContractDataYqx?contypeid='+contypeid,
+                        url:'QueryConPracticeDataYqx?contypeid='+contypeid,
                         method:'post',
                         page: {
                             curr: 1 //重新从第 1 页开始
                         }
                         ,where: {
-                            conover: demoReload
+                            conexpire: demoReload
                         }
                     });
                 }
+
             }
         };
 
