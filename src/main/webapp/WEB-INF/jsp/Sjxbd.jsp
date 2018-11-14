@@ -36,6 +36,10 @@
             position: absolute;
             top: 170px;
         }
+        #sfqjx{
+            position: absolute;
+            top:-100px;
+        }
     </style>
 </head>
 <body>
@@ -54,8 +58,8 @@
     {{d.LAY_TABLE_INDEX+1}}
 </script>
 <script type="text/html" id="sfqjx">
-    <div>
-        <div class="layui-form" id="sform">
+    <div id="sdic">
+        <form class="layui-form" id="sform">
         <table id="stabbb">
             <tr><td><span style="font-family: 微软雅黑">绩效考核名称:</span>  <input></td></tr>
             <tr> <td><span style="font-family: 微软雅黑">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;考核时间:</span>
@@ -85,7 +89,7 @@
             </tr>
             </tbody>
         </table>
-        </div>
+        </form>
     </div>
 </script>
 <script>
@@ -150,6 +154,7 @@
                         , offsett: type //具体配置参考：http://www.layui.com/doc/modules/layer.html#offset
                         , id: 'slay' + type //防止重复弹出
                         , content:$('#sfqjx').html()
+                        ,offset: '50px'
                         ,area: ['800px', '500px']
                         , btn: '发起'
                         , btnAlign: 'c' //按钮居中
@@ -166,6 +171,10 @@
                 active[method] ? active[method].call(this, othis) : '';
             });
         })
+        layui.use('form', function(){
+            var form = layui.form;
+            form.render();
+        });
     }
     function sdatetab() {
         layui.use('laydate', function () {
@@ -176,17 +185,7 @@
                 , type: 'month'
                 , done: function (value, date, endDate) {
                     console.log(value); //得到日期生成的值，如：2017-08-18
-                    var myDate = new Date();
-                    var year = myDate.getFullYear();
-                    var month = myDate.getMonth() + 1;
-                    var now = year + '-' + month;
-                    var start = new Date(value.replace("-", "/").replace("-", "/"));
-                    var end = new Date(now.replace("-", "/").replace("-", "/"));
 
-                    if (start >= end) {
-                        $("#test1").val("");
-                        layer.msg('时间不能大于或等于这个月');
-                    }
                 }
             });
 
@@ -211,6 +210,7 @@
         }
     }
     function saddfaqijx() {
+
         var myDate = new Date;
         var year = myDate.getFullYear();//获取当前年
         var yue = myDate.getMonth()+1;//获取当前月
@@ -220,25 +220,33 @@
         var s3= year+"-"+yue+"-"+date ;
         var s4= $("#ssel").val();
         var s5=$("#ssel2").val();
-        $.ajax({
-            url: 'saddjxfq',
-            type: "post",
-            data:{jxmc:s1,
-                skhsjone:s2,
-                skhsjtwo:s3,
-                khzq:s4,
-                tnaid:s5
-            },
-            dataType: "json",
-            success: function (data) {//AJAX发送后成功执行。
-                if(data!=0){
-                    window.location.reload();
-                    layer.msg('绩效已发起');
-                }else{
-                    layer.msg('请完善该模板');
-                }
-            }
-        })
+        var now = year + '-' + yue;
+        var start = new Date(s2.replace("-", "/").replace("-", "/"));
+        var end = new Date(now.replace("-", "/").replace("-", "/"));
+        if (start >= end) {
+            $("#test1").val("");
+            layer.msg('时间不能大于或等于这个月');
+        }else {
+             $.ajax({
+                  url: 'saddjxfq',
+                  type: "post",
+                  data:{jxmc:s1,
+                      skhsjone:s2,
+                      skhsjtwo:s3,
+                      khzq:s4,
+                      tnaid:s5
+                  },
+                  dataType: "json",
+                  success: function (data) {//AJAX发送后成功执行。
+                      if(data!=0){
+                          window.location.reload();
+                          layer.msg('绩效已发起');
+                      }else{
+                          layer.msg('请完善该模板');
+                      }
+                  }
+              })
+        }
     }
     function sgetjxmb() {
         $.ajax({

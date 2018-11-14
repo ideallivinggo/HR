@@ -167,7 +167,7 @@
             </div>
             <div class="items">
                 <img src="../../assets/img/drz.png" width="80" height="60">
-                <p><span ></span>&nbsp;人</p>
+                <p><span id="luqu"></span>&nbsp;人</p>
                 <p>面试录取</p>
             </div>
         </div>
@@ -298,10 +298,15 @@
                 $("#peixin").html(data.countnum);
             }
         })
-
-
-
-
+        //培训课程审批
+        $.ajax({
+            url: "countInttwoYLP",
+            type: "post",
+            dataType: "json",
+            success: function (data) {
+                $("#luqu").html(data.countnum);
+            }
+        })
 
 
       //公司公告栏

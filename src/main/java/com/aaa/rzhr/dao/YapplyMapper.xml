@@ -232,27 +232,22 @@
     <select id="countAct" resultType="java.util.Map">
         SELECT  COUNT(actstate) AS countnum FROM activation where actstate = 1
     </select>
-
     <!--统计员工类型-->
     <select id="countEmpState" resultType="java.util.Map">
         SELECT COUNT(empstateid) AS countstate FROM emp GROUP BY empstateid
     </select>
-
     <!--合同到期提醒小于或者等于当前日期-->
     <select id="countContract" resultType="java.util.Map">
         SELECT COUNT(conid) AS countnum FROM contract where conover &lt;= (select current_date as Systemtime);
     </select>
-
     <!--加班审批-->
     <select id="countOvertime" resultType="java.util.Map">
         SELECT COUNT(apovstate) AS countnum FROM apply_overtime where apovstate = 0
     </select>
-
     <!--离职审批-->
     <select id="countDimission" resultType="java.util.Map">
         SELECT COUNT(dimstate) AS countnum FROM apply_dimission where dimstate = 0
     </select>
-
     <!--休假审批-->
     <select id="countLeave" resultType="java.util.Map">
         SELECT COUNT(leasate) AS countnum FROM apply_leave where leasate = 0
@@ -260,6 +255,10 @@
     <!--培训课程审批-->
     <select id="countKec" resultType="java.util.Map">
         SELECT COUNT(kestate) AS countnum FROM kecheng where kestate = 1
+    </select>
+    <!--培训课程审批-->
+    <select id="countInttwo" resultType="java.util.Map">
+        SELECT COUNT(intstate)AS countnum FROM interviewtwo where intstate = 4
     </select>
 
 

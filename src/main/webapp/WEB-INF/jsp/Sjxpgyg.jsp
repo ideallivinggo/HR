@@ -43,8 +43,8 @@
             width: 50px;
             height: 25px;
             position: fixed;
-            right:740px;
-            bottom: 100px;
+            right:730px;
+            bottom: 15px;
         }
     </style>
 </head>
@@ -193,6 +193,7 @@ function spgalert(sempid) {
                     , offfset: type //具体配置参考：http://www.layui.com/doc/modules/layer.html#offset
                     , id: 'sslaer' + type //防止重复弹出
                     , content:$('#sjxpgs').html()
+                    ,offset: '50px'
                     ,area: ['800px', '500px']
                     , btn: '完成'
                     , btnAlign: 'c' //按钮居中
