@@ -27,7 +27,7 @@ public class  URLPathMatchingFilter extends PathMatchingFilter {
         String requestURI = getPathWithinApplication(request);
 
         System.out.println("requestURI:" + requestURI);
-
+    /////3、得到Subject及创建用户名/密码身份验证Token（即用户身份/凭证）
         Subject subject = SecurityUtils.getSubject();
       //  System.out.println( "--------------"+subject.getPrincipal().toString());
         // 如果没有登录，就跳转到登录页面
@@ -65,10 +65,11 @@ public class  URLPathMatchingFilter extends PathMatchingFilter {
             if (hasPermission){
                 return true;}
             else {
+                 ///未授权异常
                 UnauthorizedException ex = new UnauthorizedException("当前用户没有访问路径 " + requestURI + " 的权限");
 
                 subject.getSession().setAttribute("ex", ex);
-
+                   //权限不足跳转页面
                 WebUtils.issueRedirect(request, response, "/unauthorized");
                 return false;
             }
