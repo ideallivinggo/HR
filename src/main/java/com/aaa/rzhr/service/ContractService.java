@@ -15,7 +15,7 @@ public interface ContractService {
     /**
      * 查询合同
      * */
-    public LayuiFy QueryContractYqx(String contypeid, Integer limit, Integer page);
+    public LayuiFy QueryContractYqx(String contypeid,String empname,String conexpire,String conover, Integer limit, Integer page);
     /**
      * 添加合同
      */
