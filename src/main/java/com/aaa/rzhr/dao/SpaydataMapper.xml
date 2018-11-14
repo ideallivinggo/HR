@@ -103,7 +103,7 @@ or p.paytry like ${cs} or p.payjust like ${cs} or p.paynumber like ${cs})
     <insert id="Saddjxmx" parameterType="java.util.List">
       insert into  template_content(tnaid,temcontent,temscoreone,temscoretwo,temnumsm) VALUES
         <foreach collection="list" item="m"  separator="," >
-            (#{m.tnaid},#{m.khxm},#{m.khfz1},#{m.khfz2},#{m.khfzsm})
+            (#{m.khid},#{m.khxm},#{m.khfz1},#{m.khfz2},#{m.khfzsm})
         </foreach>
     </insert>
     <delete id="sdeljxmx" parameterType="java.util.List">

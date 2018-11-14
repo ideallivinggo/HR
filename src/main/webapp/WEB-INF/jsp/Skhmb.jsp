@@ -53,7 +53,7 @@
         #ssb td{
             padding-left: 3px;
             padding-right: 30px;
-            padding-top:7px;
+            padding-top:0px;
             padding-bottom:7px;
         }
         #sdivv{
@@ -61,8 +61,8 @@
             height:150px;
             display: none;
             position: absolute;
-          left:160px;
-            top:120px;
+          left:118px;
+            top:92px;
         }
        #citySel{
            width: 200px;
@@ -128,6 +128,9 @@
                             </thead>
                             <tbody id="stboy">
                             </tbody>
+                            <tbody id="stboy2">
+                            </tbody>
+
                             <tr><button class="layui-btn layui-btn-warm" onclick="saddjimx()">添加</button></tr>
                         </table>
                     </div><!-- /content-panel -->
@@ -161,16 +164,16 @@
     <table id='ssb' border="1px" cellpadding="0px">
         <tr>
         <td><span style="font-family: 微软雅黑">考核项目名称:</span></td>
-        <td><input id="skhmx"></td>
+        <td><input id="skhmx" style="height: 25px"></td>
         </tr>
        <tr>
            <td>考核项目描述:</td>
-           <td><textarea id="stext" style="width: 180px;height: 50px"/>(最多输入25个字符)</td>
+           <td><textarea id="stext" style="width: 180px;height: 40px"/>(最多输入25个字符)</td>
        </tr>
        <tr>
            <td>被考核员工:</td>
            <td>
-               <input id="citySel" type="text" readonly="readonly" onclick="ssxcd()"><button onclick="squeding()">确定</button>
+               <input id="citySel"  style="height: 25px" type="text" readonly="readonly" onclick="ssxcd()"><button onclick="squeding()">确定</button>
            </td>
            <div id="sdivv" class="ztree-wrap">
                <ul id="treeDemo" class="ztree selectZtree"></ul>
@@ -267,10 +270,11 @@
                         , content:$('#scrdiv').html()
                         ,area: ['1000px', '500px']
                         , btn: '保存'
+                        ,offset: '30px'
                         , btnAlign: 'c' //按钮居中
                         , shade: 0 //不显示遮罩
                         , yes: function () {
-                            sbaocunjimx();
+                            syzmx();
                             layer.closeAll();
                         }
                     });
@@ -302,7 +306,7 @@
 function saddjimx() {
    var str="<tr><td><input class='sinputnone' id='input1'><input id='' class='sfuzhu'></td><td><input class='sinst' id='' onkeyup=\"this.value=this.value.replace(/[^\\d]/g,'') \" onafterpaste=\"this.value=this.value.replace(/[^\\d]/g,'') \">～<input class='sinst' id='' onkeyup=\"this.value=this.value.replace(/[^\\d]/g,'') \" onafterpaste=\"this.value=this.value.replace(/[^\\d]/g,'') \">" +
         "</td><td><input id='' onkeyup='this.value=this.value.replace(/[^\u4e00-\u9fa5\\w]/g,\"\")'></td><td><a  id='' class='layui-btn layui-btn-danger layui-btn-xs' onclick='sdelkhmxh(this)'>删除</a></td></tr>";
-    $("#stboy").append(str);
+    $("#stboy2").append(str);
 }
 function sdelkhmxh(soj) {
         $(soj).parent().parent().remove();
@@ -318,6 +322,14 @@ function sbaocunjimx() {
          var jxmxfive = new Array();
          var i = 0;
          $("#stboy tr").each(function () {
+             jxmxone[i] = $(this).find('td:eq(0)').find('#input1').val();
+             jxmxtwo[i] = $(this).find('td:eq(0)').find('.sfuzhu').val();
+             jxmxthree[i] = $(this).find('td:eq(1)').find('.sinst:eq(0)').val();
+             jxmxfour[i] = $(this).find('td:eq(1)').find('.sinst:eq(1)').val();
+             jxmxfive[i] = $(this).find('td:eq(2) input').val();
+             i++;
+         });
+         $("#stboy2 tr").each(function () {
              jxmxone[i] = $(this).find('td:eq(0)').find('#input1').val();
              jxmxtwo[i] = $(this).find('td:eq(0)').find('.sfuzhu').val();
              jxmxthree[i] = $(this).find('td:eq(1)').find('.sinst:eq(0)').val();
@@ -364,6 +376,7 @@ function sjxmb(){
                     , content:$('#sipt').html()
                     ,area: ['800px', '500px']
                     , btn: '添加'
+                    ,offset: '50px'
                     , btnAlign: 'c' //按钮居中
                     , shade: 0 //不显示遮罩
                     , yes: function () {
@@ -454,6 +467,24 @@ function saddyanzheng() {
         layer.msg('不能有空');
     }
 }
+function syzmx(){
+    var s=$("#stboy").find("tr").length*5;
+    var s2=$("#stboy2").find("tr").length*4;
+    var a=0;
+    var ss=parseInt(s)+parseInt(s2);
+    $("#staab input").each(function() {
+        var ss= $(this).val();
+        if(Number(ss)!=0){
+            a++;
+        }
+    });
+if(parseInt(a)<parseInt(ss)){
+    layer.msg('不能有空');
+}else{
+    sbaocunjimx();
+}
+
+}
 function saddjxkhmb() {
     $.ajax({
         url: 'sddjxkh',
@@ -475,52 +506,6 @@ function saddjxkhmb() {
         }
     })
 }
-/*function sjxalert(){
-    var $ = layui.jquery, layer = layui.layer;
-    layui.use('layer', function () {
-        //触发事件
-        var active = {
-            offset: function (othis) {
-                var type = othis.data('type')
-                    , text = othis.text();
-                layer.open({
-                    type: 1
-                    , offset: type //具体配置参考：http://www.layui.com/doc/modules/layer.html#offset
-                    , id: 'slayer' + type //防止重复弹出
-                    , content:$('#sfqjx').html()
-                    ,area: ['700px', '300px']
-                    , btn: '发起'
-                    , btnAlign: 'c' //按钮居中
-                    , shade: 0 //不显示遮罩
-                    , yes: function () {
-                        sjxmbyanzheng();
-                        //layer.closeAll();
-                    }
-                    ,end:function(){
-                        window.location.reload();
-                    }
-
-                });
-            }
-        };
-        $('#slayer .layui-btn').on('click', function () {
-            var othis = $(this), method = othis.data('method');
-            active[method] ? active[method].call(this, othis) : '';
-        });
-    })
-}
-function sdatetab(){
-    layui.use('laydate', function() {
-        var laydate = layui.laydate;
-        //常规用法
-        laydate.render({
-            elem: '#test1'
-        });
-        laydate.render({
-            elem: '#test2'
-        });
-    })
-}*/
 function sjxmbyanzheng(){
     var a=0;
     $("#stabbb input").each(function() {

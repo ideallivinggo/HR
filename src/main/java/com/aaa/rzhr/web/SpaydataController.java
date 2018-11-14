@@ -324,6 +324,12 @@ int ss=service.SdelattById(sid);
     }
     @RequestMapping("supdkhmxid")
     public @ResponseBody List<Map> Supdkhmxid(String smbid,String jxmxone,String jxmxtwo,String jxmxthree,String jxmxfour,String jxmxfive){
+        System.out.println(smbid);
+        System.out.println(jxmxone.length()+"lenghr");
+        System.out.println(jxmxtwo);
+        System.out.println(jxmxthree);
+        System.out.println(jxmxfour);
+        System.out.println(jxmxfive);
        int ssid=Integer.parseInt(smbid);
         List<Map> li=service.Sgetmbmx(ssid);
        List<Map> lit=new ArrayList();
@@ -355,8 +361,11 @@ int ss=service.SdelattById(sid);
         String[] jxmx5=jxmxfive.split(",");
         List<Map> list=new ArrayList();
         List<Map> list1=new ArrayList();
+        System.out.println(jxmxone+"ssss");
+        System.out.println(jxmxone.length()+"ddddd");
+        System.out.println(jxmx1.length+"jxmx");
        for(int i=0;i<jxmx2.length;i++){
-           if(jxmx1.length!=0) {
+           if(jxmxone.length()!=0) {
                if (i + 1 > jxmx1.length) {
                    Map m = new HashMap();
                    m.put("khxm", jxmx2[i]);
@@ -373,7 +382,8 @@ int ss=service.SdelattById(sid);
                    m1.put("khfzsm", jxmx5[i]);
                    list1.add(m1);
                }
-           }else {
+           }else if(jxmxone.length()==0){
+               System.out.println(1111);
                    Map m = new HashMap();
                    m.put("khxm", jxmx2[i]);
                    m.put("khfz1", jxmx3[i]);
@@ -382,24 +392,20 @@ int ss=service.SdelattById(sid);
                    list.add(m);
            }
        }
+        System.out.println(list+"list");
+        System.out.println(list1+"sss");
        int succ=0;
         if(list1.size()!=0){
              succ=service.Supdjxmx(list1);
+            System.out.println(succ+"sssssddadadaadjjjj");
         }
         if(list.size()!=0){
                 for (int i = 0; i < list.size(); i++) {
-                    if(list1.size()!=0) {
                         Map ma = list.get(i);
-                        Map map = list1.get(i);
-                        ma.put("khid", map.get("khid"));
-                        String sa = (String) list.get(0).get("khid");
-                        int idd = Integer.parseInt(sa);
-                        Map mm = service.Sgetjxmbwj(idd);
-                    }else{
-                        Map ma = list.get(i);
-                        ma.put("tnaid",ssid);
-                    }
+                        ma.put("khid",ssid);
+
                 }
+            System.out.println(list+"yyyyyyyyyyyy");
              int a= service.Saddjxmx(list);
     }
 
