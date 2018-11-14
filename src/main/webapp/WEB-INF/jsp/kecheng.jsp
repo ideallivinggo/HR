@@ -153,7 +153,7 @@
 
                                         <div class="step-pane" id="step2">
                                               <center><h5>课程详细</h5></center>
-                                        <textarea rows="13" cols="130" name="kexiangqing">
+                                        <textarea rows="13" cols="113" name="kexiangqing">
 
                                         </textarea>
 
