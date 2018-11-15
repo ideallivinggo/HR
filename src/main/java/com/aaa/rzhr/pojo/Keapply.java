@@ -8,6 +8,12 @@ public class Keapply {
   private Integer empid;
   private Integer kstate;
   private String kadate;
+  private String pipeople;
+  private String pidate;
+  private String bohui;
+  private String zongshen;
+  private String zongshendate;
+  private String zongbohui;
 
 
   public Integer getKaid() {
@@ -52,6 +58,60 @@ public class Keapply {
 
   public void setKadate(String kadate) {
     this.kadate = kadate;
+  }
+
+
+  public String getPipeople() {
+    return pipeople;
+  }
+
+  public void setPipeople(String pipeople) {
+    this.pipeople = pipeople;
+  }
+
+
+  public String getPidate() {
+    return pidate;
+  }
+
+  public void setPidate(String pidate) {
+    this.pidate = pidate;
+  }
+
+
+  public String getBohui() {
+    return bohui;
+  }
+
+  public void setBohui(String bohui) {
+    this.bohui = bohui;
+  }
+
+
+  public String getZongshen() {
+    return zongshen;
+  }
+
+  public void setZongshen(String zongshen) {
+    this.zongshen = zongshen;
+  }
+
+
+  public String getZongshendate() {
+    return zongshendate;
+  }
+
+  public void setZongshendate(String zongshendate) {
+    this.zongshendate = zongshendate;
+  }
+
+
+  public String getZongbohui() {
+    return zongbohui;
+  }
+
+  public void setZongbohui(String zongbohui) {
+    this.zongbohui = zongbohui;
   }
 
 }

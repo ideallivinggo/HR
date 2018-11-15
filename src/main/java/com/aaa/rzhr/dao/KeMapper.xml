@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.aaa.rzhr.dao.KeMapper">
+    <select id="p_query_ke" resultType="java.util.Map" parameterType="int">
+      select * from kecheng kc,keemp ke  where kc.keid=ke.keid and ke.empid=#{empid}
+    </select>
+
+</mapper>

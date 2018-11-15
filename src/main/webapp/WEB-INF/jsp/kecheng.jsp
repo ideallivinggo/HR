@@ -483,6 +483,7 @@
                 alert("请选择培训日期");
                 return false;
             }
+             //序列化表单数据
              var aaa=$("#sample-form").serialize();
            //  alert(aaa);
                 $.ajax({
@@ -491,6 +492,7 @@
                  data:aaa,
                 dataType: "text",
                 success:function (data) {
+                    //跳转页面
                     window.location.href="/J200";
                 }
                 })

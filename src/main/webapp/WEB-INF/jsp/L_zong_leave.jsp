@@ -24,13 +24,22 @@
 <body style="width: auto;height: 500px;">
 <div class="demoTable layui-form">
     <div class="layui-inline">
+        <a href="L_zong_leave" style="color: #009688;"  class="layui-btn layui-btn-primary">休假审批</a>
+    </div>
+    <div class="layui-inline">
+        <a href="L_zong_jiaban" class="layui-btn layui-btn-primary">加班审批</a>
+    </div>
+    <div class="layui-inline">
+        <a href="L_zong_lizhi" class="layui-btn layui-btn-primary">离职审批</a>
+    </div>
+    <div class="layui-inline">
         申请时间:<input readonly="readonly" type="text" id="test1"/>至
         <input readonly="readonly" type="text" id="test2"/>
     </div>
     <div onclick="query()" class="layui-btn" data-type="reload">搜索</div>
+    <div  style="margin-left:350px" class="layui-btn" data-type="reload"><a href="L_ershen_leave">已审批</a></div>
 </div>
-<a href="L_zong_jiaban">加班</a>
-<a href="L_zong_lizhi">离职</a>
+
 
 
 <table class="layui-hide" lay-filter="dome" id="test">
@@ -42,6 +51,8 @@
 </body>
 </html>
 <script>
+    var strM = "undefined";
+    strM.replace("undefined","");
     laydate.render({
         elem: '#test1'
         ,type: 'datetime'
@@ -60,6 +71,9 @@
             ,url: 'J_query_xiujia'
             , limit: 1
             , limits: [1, 2, 3]
+            ,where:{
+                leasate:1
+            }
             ,cols: [[
                 , {field: 'empname', width: 130, title: '姓名'}
                 , {field: 'leatype', width: 120, title: '请假类型'}
@@ -83,7 +97,7 @@
                         curr: 1 //重新从第 1 页开始
                     }
                     ,where: {
-                     time1:$("#test1").val(),time2:$("#test2").val()
+                     time1:$("#test1").val(),time2:$("#test2").val(),leasate:1
                     }
                 });
             }

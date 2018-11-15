@@ -1,10 +1,7 @@
 package com.aaa.rzhr.service;
 
 
-import com.aaa.rzhr.pojo.Apply_Office;
-import com.aaa.rzhr.pojo.Emp;
-import com.aaa.rzhr.pojo.Keapply;
-import com.aaa.rzhr.pojo.Zhuanzheng;
+import com.aaa.rzhr.pojo.*;
 import com.aaa.rzhr.util.LayuiFy;
 import org.apache.ibatis.annotations.Param;
 
@@ -91,9 +88,9 @@ public interface UserService {
     void L_add_zhuanzheng(Zhuanzheng zhuanzheng);
     /**一级审批查询培训  转正  出差*/
     /**转正*/
-    LayuiFy L_shen_zhuan(Integer deptid, Integer shenqingstate, String fristdate, String overdate, Integer limit, Integer page);
+    LayuiFy L_shen_zhuan(Integer empid, Integer deptid, Integer shenqingstate, String fristdate, String overdate, Integer limit, Integer page);
     /**出差*/
-    LayuiFy  L_shen_out(Integer deptid, Integer offstate, String fristdate, String overdate, Integer limit, Integer page);
+    LayuiFy  L_shen_out(Integer empid, Integer deptid, Integer offstate, String fristdate, String overdate, Integer limit, Integer page);
     /**一级审核修改状态 培训 转正 出差*/
     /**转正*/
     void L_upd_zhuan(Zhuanzheng zhuanzheng);
@@ -108,5 +105,15 @@ public interface UserService {
     LayuiFy L_query_pei(Integer limit, Integer page);
     /**报名课程*/
     void  L_add_keapply(Keapply keapply);
-
+    /** 部门主管审核  培训申请*/
+    /**查询部门经理要审批的培训*/
+    LayuiFy L_query_kecheng(Integer deptid, Integer empid, String fristdate, String overdate, Integer kstate, Integer limit, Integer page);
+    /**一级部门审核*/
+    void L_upd_pei(Keapply keapply);
+    /** 培训中心审核*/
+    void L_zong_pei(Keapply keapply);
+    /**查询报名课程现在人数*/
+    Integer L_query_ren(Keemp keemp);
+    /**add课*/
+    void L_add_ke(Keemp keemp);
 }

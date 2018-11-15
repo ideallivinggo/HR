@@ -44,7 +44,8 @@
 </html>
 <script>
 
-
+    var strM = "undefined";
+    strM.replace("undefined","");
     laydate.render({
         elem: '#test1'
         ,type: 'datetime'

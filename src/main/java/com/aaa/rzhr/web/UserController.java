@@ -30,7 +30,7 @@ public class UserController {
     private UserService userService;
 
     private Integer empid;
-    /**个人信息中心*/
+    /**个人信息中心a*/
 @RequestMapping("/L_query_user")
     public @ResponseBody List<Map> L_query_user(Integer empid, HttpServletRequest request){
     List<Map> list=userService.L_query_user(empid);
@@ -64,7 +64,6 @@ public class UserController {
             e.printStackTrace();
             return "上传失败," + e.getMessage();
         }
-
         return "L_shouye";
     }
     /*查询未审核  待审核0 通过1 驳回2 待审核撤销3 撤销同意4 撤销驳回5 */
@@ -80,8 +79,6 @@ public  @ResponseBody  List<Map> L_query_leave(Integer empid){
 @RequestMapping("L_query_pay")
 public  @ResponseBody
 LayuiFy L_query_pay(Integer empid, Integer limit, Integer page){
-
-    System.out.println(empid+"========================-------------");
     return  userService.L_query_pay(empid,limit,page);
 }
 /**
@@ -89,8 +86,6 @@ LayuiFy L_query_pay(Integer empid, Integer limit, Integer page){
  */
 @RequestMapping("L_add_jiaban")
 public  String    L_add_j(Apply_Overtime app, double apovhour_1, double apovhour_2){
-    System.out.println(apovhour_1+".....................");
-    System.out.println(apovhour_2+"++++++++++++++++++");
     double aa=apovhour_1*8+apovhour_2;
     String bb="";
        String cc=   aa+bb;
@@ -119,33 +114,30 @@ public  String    L_add_j(Apply_Overtime app, double apovhour_1, double apovhour
     }
 
 /*休假*/
-    @RequestMapping("L_query_xiujia")
+/*    @RequestMapping("L_query_xiujia")
     public  @ResponseBody  List<Map> L_query_xiujia(Integer empid, String fristdate, String overdate, Integer leasate,Integer deptid){
         System.out.println(deptid+"nnnnnnnnnnnnnnnnnnnnnnnnn");
         List<Map> list= userService.L_query_xiujia(empid, fristdate, overdate,leasate,deptid);
         return list;
-    }
+    }*/
 
 /*加-------------班*/
-    @RequestMapping("L_query_jiaban")
+   /* @RequestMapping("L_query_jiaban")
     public  @ResponseBody  List<Map> L_query_jiaban(Integer empid, String fristdate, String overdate, Integer apovstate,Integer deptid){
         System.out.println(empid+"44444444444444444444444");
         System.out.println(fristdate+"333333333333333");
         System.out.println(overdate+"222222222222222222");
-
-
         List<Map> list= userService.L_query_jiaban(empid, fristdate, overdate,apovstate,deptid);
 
         return list;
-    }
+    }*/
     /*-----------离职*/
 
-    @RequestMapping("L_query_cizhi")
+  /*  @RequestMapping("L_query_cizhi")
     public  @ResponseBody  List<Map> L_query_cizhi(Integer empid, String fristdate, String overdate, Integer dimstate,Integer deptid){
         List<Map> list= userService.L_query_cizhi(empid, fristdate, overdate,dimstate,deptid);
-
         return list;
-    }
+    }*/
 
 
 /*------------------------------撤回休假*/
@@ -285,35 +277,62 @@ public  String    L_add_j(Apply_Overtime app, double apovhour_1, double apovhour
 /**二级审核查询*/
     @RequestMapping("J_query_xiujia")
     public @ResponseBody  LayuiFy J_query_xiujia(Integer empid, String time1, String time2,Integer leasate,Integer deptid,  Integer limit, Integer page){
-        return  userService.J_query_xiujia(null,"","",1,deptid,limit,page);
+        return  userService.J_query_xiujia(null,"","",leasate,deptid,limit,page);
     }
     /**模糊*/
     @RequestMapping("J_query_xiujia_a")
     public @ResponseBody  LayuiFy J_query_xiujia_a(Integer empid, String time1, String time2,Integer leasate, Integer deptid, Integer limit, Integer page){
-        return  userService.J_query_xiujia(null,time1,time2,1,deptid,limit,page);
+        return  userService.J_query_xiujia(null,time1,time2,leasate,deptid,limit,page);
+    }
+    @RequestMapping("J_shen_xiujia")
+    public @ResponseBody  LayuiFy J_shen_xiujia(Integer empid, String time1, String time2,Integer leasate,Integer deptid,  Integer limit, Integer page){
+        return  userService.J_query_xiujia(empid,"","",leasate,deptid,limit,page);
+    }
+    /**模糊*/
+    @RequestMapping("J_shen_xiujia_a")
+    public @ResponseBody  LayuiFy J_shen_xiujia_a(Integer empid, String time1, String time2,Integer leasate, Integer deptid, Integer limit, Integer page){
+        System.out.println(empid+"aaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+        return  userService.J_query_xiujia(empid,time1,time2,leasate,deptid,limit,page);
     }
     /**二级审核- 查询加班*/
     @RequestMapping("J_query_jiaban")
-    public @ResponseBody  LayuiFy J_query_jiaban(Integer empid, String time1, String time2,Integer leasate,Integer deptid , Integer limit, Integer page) {
+    public @ResponseBody  LayuiFy J_query_jiaban(Integer empid, String time1, String time2,Integer apovstate,Integer deptid , Integer limit, Integer page) {
 
-        return  userService.J_query_jiaban(null,"","",1,deptid,limit,page);
+        return  userService.J_query_jiaban(empid,"","",apovstate,deptid,limit,page);
+    }
+    @RequestMapping("J_query_jiaban_shen")
+    public @ResponseBody  LayuiFy J_query_jiaban_shen(Integer empid, String time1, String time2,Integer apovstate,Integer deptid , Integer limit, Integer page) {
+
+        return  userService.J_query_jiaban(null,"","",apovstate,deptid,limit,page);
     }
     /**模糊查询*/
     @RequestMapping("J_query_jiaban_a")
-    public @ResponseBody  LayuiFy J_query_jiaban_a(Integer empid, String time1, String time2,Integer leasate,Integer deptid,  Integer limit, Integer page) {
+    public @ResponseBody  LayuiFy J_query_jiaban_a(Integer empid, String time1, String time2,Integer apovstate,Integer deptid,  Integer limit, Integer page) {
         return  userService.J_query_jiaban(null,time1,time2,1,deptid,limit,page);
+    }
+    @RequestMapping("J_query_jiaban_shen_a")
+    public @ResponseBody  LayuiFy J_query_jiaban_shen_a(Integer empid, String time1, String time2,Integer apovstate,Integer deptid,  Integer limit, Integer page) {
+        return  userService.J_query_jiaban(empid,time1,time2,apovstate,deptid,limit,page);
     }
     /**二级离职查询*/
     @RequestMapping("J_query_lizhi")
-    public @ResponseBody  LayuiFy J_query_lizhi(Integer empid, String time1, String time2,Integer leasate,Integer deptid  ,Integer limit, Integer page) {
-        return  userService.J_query_cizhi(null,"","",1,deptid,limit,page);
+    public @ResponseBody  LayuiFy J_query_lizhi(Integer empid, String time1, String time2,Integer dimstate,Integer deptid  ,Integer limit, Integer page) {
+        return  userService.J_query_cizhi(null,"","",dimstate,deptid,limit,page);
     }
     /**模糊查询*/
     @RequestMapping("J_query_lizhi_a")
-    public @ResponseBody  LayuiFy J_query_lizhi_a(Integer empid, String time1, String time2,Integer leasate,Integer deptid,  Integer limit, Integer page) {
-        return  userService.J_query_cizhi(null,time1,time2,1,deptid,limit,page);
+    public @ResponseBody  LayuiFy J_query_lizhi_a(Integer empid, String time1, String time2,Integer dimstate,Integer deptid,  Integer limit, Integer page) {
+        return  userService.J_query_cizhi(null,time1,time2,dimstate,deptid,limit,page);
     }
 
+    @RequestMapping("J_shen_lizhi")
+    public @ResponseBody  LayuiFy J_shen_lizhi(Integer empid, String time1, String time2,Integer dimstate,Integer deptid  ,Integer limit, Integer page) {
+        return  userService.J_query_cizhi(empid,"","",dimstate,deptid,limit,page);
+    }
+    /**模糊查询*/
+    @RequestMapping("J_shen_lizhi_a")
+    public @ResponseBody  LayuiFy J_shen_lizhi_a(Integer empid, String time1, String time2,Integer dimstate,Integer deptid,  Integer limit, Integer page) {
+        return  userService.J_query_cizhi(empid,time1,time2,dimstate,deptid,limit,page);}
     /**  二级审核修改状态*/
  /*休假---加班----离职  ----审批 ---*/
     @RequestMapping("J_update_xiujia")
@@ -389,41 +408,67 @@ public  String    L_add_j(Apply_Overtime app, double apovhour_1, double apovhour
     /**一级审核   出差  转正 查询*/
     /**转正*/
     @RequestMapping("L_query_zhuan")
-    public @ResponseBody  LayuiFy L_shen_zhuan(Integer deptid, Integer shenqingstate ,String time1, String time2, Integer limit, Integer page) {
-        return  userService.L_shen_zhuan(deptid,0,"","",limit,page);
+    public @ResponseBody  LayuiFy L_shen_zhuan(Integer empid,Integer deptid, Integer shenqingstate ,String time1, String time2, Integer limit, Integer page) {
+        return  userService.L_shen_zhuan(empid,deptid,0,"","",limit,page);
     }
     @RequestMapping("L_query_zhuan_a")
-    public @ResponseBody  LayuiFy L_shen_zhuan_a(Integer deptid, Integer shenqingstate ,String time1, String time2, Integer limit, Integer page) {
-        return  userService.L_shen_zhuan(deptid,0,time1,time2,limit,page);
+    public @ResponseBody  LayuiFy L_shen_zhuan_a(Integer empid,Integer deptid, Integer shenqingstate ,String time1, String time2, Integer limit, Integer page) {
+        return  userService.L_shen_zhuan(empid,deptid,0,time1,time2,limit,page);
+    }
+    /**转正记录*/
+    @RequestMapping("L_chaxun_zhuan_a")
+    public @ResponseBody  LayuiFy L_chaxun_zhuan_a(Integer empid,Integer deptid, Integer shenqingstate ,String time1, String time2, Integer limit, Integer page) {
+        return  userService.L_shen_zhuan(empid,deptid,shenqingstate,"","",limit,page);
+    }
+    @RequestMapping("L_chaxun_zhuan_a_b")
+    public @ResponseBody  LayuiFy L_chaxun_zhuan_a_b(Integer empid,Integer deptid, Integer shenqingstate ,String time1, String time2, Integer limit, Integer page) {
+        return  userService.L_shen_zhuan(empid,deptid,shenqingstate,time1,time2,limit,page);
     }
     /**出差*/
     @RequestMapping("L_query_out")
-    public @ResponseBody  LayuiFy L_query_out(Integer deptid, Integer shenqingstate ,String time1, String time2, Integer limit, Integer page) {
-        System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
-        return  userService.L_shen_out(deptid,0,"","",limit,page);
+    public @ResponseBody  LayuiFy L_query_out(Integer empid,Integer deptid, Integer offstate ,String time1, String time2, Integer limit, Integer page) {
+        return  userService.L_shen_out(empid,deptid,0,"","",limit,page);
     }
     @RequestMapping("L_query_out_a")
-    public @ResponseBody  LayuiFy L_query_out_a(Integer deptid, Integer offstate ,String time1, String time2, Integer limit, Integer page) {
-        return  userService.L_shen_out(deptid,0,time1,time2,limit,page);
+    public @ResponseBody  LayuiFy L_query_out_a(Integer empid,Integer deptid, Integer offstate ,String time1, String time2, Integer limit, Integer page) {
+        return  userService.L_shen_out(empid,deptid,0,time1,time2,limit,page);
+    }
+    /**出差审核查询*/
+    @RequestMapping("J_yishen_out")
+    public @ResponseBody  LayuiFy J_yishen_out(Integer empid,Integer deptid, Integer offstate ,String time1, String time2, Integer limit, Integer page) {
+        return  userService.L_shen_out(empid,deptid,offstate,"","",limit,page);
+    }
+    @RequestMapping("J_yishen_out_a")
+    public @ResponseBody  LayuiFy J_yishen_out_a(Integer empid,Integer deptid, Integer offstate ,String time1, String time2, Integer limit, Integer page) {
+        return  userService.L_shen_out(empid,deptid,offstate,time1,time2,limit,page);
     }
 
     /**转正*/
     @RequestMapping("L_query_zhuan_tow")
-    public @ResponseBody  LayuiFy L_query_zhuan_tow(Integer deptid, Integer shenqingstate ,String time1, String time2, Integer limit, Integer page) {
-        return  userService.L_shen_zhuan(deptid,1,"","",limit,page);
+    public @ResponseBody  LayuiFy L_query_zhuan_tow(Integer empid, Integer deptid, Integer shenqingstate ,String time1, String time2, Integer limit, Integer page) {
+        return  userService.L_shen_zhuan(empid,deptid,1,"","",limit,page);
     }
     @RequestMapping("L_query_zhuan_tow_a")
-    public @ResponseBody  LayuiFy L_query_zhuan_tow_a(Integer deptid, Integer shenqingstate ,String time1, String time2, Integer limit, Integer page) {
-        return  userService.L_shen_zhuan(deptid,1,time1,time2,limit,page);
+    public @ResponseBody  LayuiFy L_query_zhuan_tow_a(Integer empid,Integer deptid, Integer shenqingstate ,String time1, String time2, Integer limit, Integer page) {
+        return  userService.L_shen_zhuan(empid,deptid,1,time1,time2,limit,page);
     }
     /**出差*/
     @RequestMapping("L_query_out_tow")
-    public @ResponseBody  LayuiFy L_query_out_tow(Integer deptid, Integer shenqingstate ,String time1, String time2, Integer limit, Integer page) {
-        return  userService.L_shen_out(deptid,1,"","",limit,page);
+    public @ResponseBody  LayuiFy L_query_out_tow(Integer empid,Integer deptid, Integer offstate ,String time1, String time2, Integer limit, Integer page) {
+        return  userService.L_shen_out(empid,deptid,1,"","",limit,page);
     }
     @RequestMapping("L_query_out_tow_a")
-    public @ResponseBody  LayuiFy L_query_out_tow_a(Integer deptid, Integer offstate ,String time1, String time2, Integer limit, Integer page) {
-        return  userService.L_shen_out(deptid,1,time1,time2,limit,page);
+    public @ResponseBody  LayuiFy L_query_out_tow_a(Integer empid,Integer deptid, Integer offstate ,String time1, String time2, Integer limit, Integer page) {
+        return  userService.L_shen_out(empid,deptid,1,time1,time2,limit,page);
+    }
+    /**出差记录查询*/
+    @RequestMapping("L_chaxun_out_a")
+    public @ResponseBody  LayuiFy L_chaxun_out(Integer empid,Integer deptid, Integer offstate ,String time1, String time2, Integer limit, Integer page) {
+        return  userService.L_shen_out(empid,deptid,offstate,"","",limit,page);
+    }
+    @RequestMapping("L_chaxun_out_a_b")
+    public @ResponseBody  LayuiFy L_chaxun_out_a(Integer empid,Integer deptid, Integer offstate ,String time1, String time2, Integer limit, Integer page) {
+        return  userService.L_shen_out(empid,deptid,offstate,time1,time2,limit,page);
     }
     /**审核状态   出差  培训  转正*/
 /**转正*/
@@ -519,8 +564,83 @@ public @ResponseBody String L_upd_zhuan(Integer shenqingstate,String pipeople,St
         userService.L_add_keapply(ke);
         return "chenggong";
     }
+    /**查询部门主管审批的培训*/
+    @RequestMapping("L_query_kecheng")
+    public  @ResponseBody  LayuiFy L_query_kecheng(Integer deptid, Integer empid, String time1, String time2, Integer kstate,Integer limit, Integer page) {
 
+        return userService.L_query_kecheng(deptid,empid,"","",1,limit,page);
+    }
+    @RequestMapping("L_query_kecheng_a")
+    public  @ResponseBody  LayuiFy L_query_kecheng_a(Integer deptid, Integer empid, String time1, String time2, Integer kstate,Integer limit, Integer page) {
 
+        return userService.L_query_kecheng(deptid,empid,time1,time2,1,limit,page);
+    }
+    @RequestMapping("L_query_kecheng_tow")
+    public  @ResponseBody  LayuiFy L_query_kecheng_tow(Integer deptid, Integer empid, String time1, String time2, Integer kstate,Integer keid,Integer limit, Integer page) {
+
+        return userService.L_query_kecheng(deptid,empid,"","",kstate,limit,page);
+    }
+    @RequestMapping("L_query_kecheng_tow_a")
+    public  @ResponseBody  LayuiFy L_query_kecheng_tow_a(Integer deptid, Integer empid, String time1, String time2, Integer kstate,Integer limit, Integer page) {
+        System.out.println("bbbbbbbbbbbbbbbbbbbbbbbbbbbbb"+time1+time2);
+        return userService.L_query_kecheng(deptid,empid,time1,time2,kstate,limit,page);
+    }
+    /**一级部门审核*/
+    @RequestMapping("L_upd_pei")
+    public @ResponseBody String L_upd_pei(Integer kstate ,String pidate, String pipeople,String bohui,Integer kaid){
+        Date date = new Date();
+        //设置要获取到什么样的时间
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        //获取String类型的时间
+        String createdate = sdf.format(date);
+        Keapply k=new Keapply();
+        k.setKaid(kaid);
+        k.setBohui(bohui);
+        k.setPidate(createdate);
+        k.setKstate(kstate);
+        k.setPipeople(pipeople);
+        userService.L_upd_pei(k);
+        return  "chenggong";
+    }
+    /**二级培训部门审核*/
+    @RequestMapping("J_zong_pei")
+    public @ResponseBody String J_zong_pei(Integer kstate ,String zongshendate, String zongshen,String zongbohui,Integer kaid,Integer keid,Integer empid){
+        Date date = new Date();
+        //设置要获取到什么样的时间
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        //获取String类型的时间
+        String createdate = sdf.format(date);
+        System.out.println(keid+"eeeeeeeeeeeeeeee"+empid);
+        Keapply k=new Keapply();
+        k.setZongbohui(zongbohui);
+        k.setZongshen(zongshen);
+        k.setZongshendate(createdate);
+        k.setKaid(kaid);
+        k.setKstate(kstate);
+        Keemp ke=new Keemp();
+        ke.setEmpid(empid);
+        ke.setKeid(keid);
+        ke.setKeokstate(0);
+    userService.L_zong_pei(k);
+        userService.L_add_ke(ke);
+        return  "chenggong";
+    }
+
+    @RequestMapping("J_query_kecheng")
+    public  @ResponseBody  LayuiFy J_query_kecheng(Integer deptid, Integer empid, String time1, String time2, Integer kstate,Integer limit, Integer page) {
+        System.out.println("bbbbbbbbbbbbbbbbbbbbbbbbbbbbbaaa");
+        return userService.L_query_kecheng(deptid,empid,"","",kstate,limit,page);
+    }
+    @RequestMapping("J_query_kecheng_a")
+    public  @ResponseBody  LayuiFy J_query_kecheng_a(Integer deptid, Integer empid, String time1, String time2, Integer kstate,Integer limit, Integer page) {
+        System.out.println("bbbbbbbbbbbbbbbbbbbbbbbbbbbbb"+time1+time2);
+        return userService.L_query_kecheng(deptid,empid,time1,time2,kstate,limit,page);
+    }
+    @RequestMapping("L_renshu")
+    public  @ResponseBody  Integer L_renshu(Keemp keemp) {
+
+        return userService.L_query_ren(keemp);
+    }
     public Integer getEmpid() {
 
         return empid;
