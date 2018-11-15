@@ -198,7 +198,8 @@
 </body>
 </html>
 <script>
-
+    var strM = "undefined";
+    strM.replace("undefined","");
     $("form :input").blur(function(){
         //验证手机号
         if($(this).is("#empnumber")){

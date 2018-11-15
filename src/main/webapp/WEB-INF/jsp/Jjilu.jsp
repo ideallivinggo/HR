@@ -294,7 +294,7 @@
 <script>
     //添加表单属性
     layui.use(['form', 'layedit', 'laydate','element'], function(){
-        var element = layui.element;
+
     });
     //自动查询
     $(function(){

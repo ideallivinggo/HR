@@ -28,10 +28,17 @@
 
 <div class="demoTable layui-form">
     <div class="layui-inline">
+        <a href="L_zong_out"   class="layui-btn layui-btn-primary">出差审批</a>
+    </div>
+    <div class="layui-inline">
+        <a href="L_zong_zhuan" style="color: #009688;" class="layui-btn layui-btn-primary">转正审批</a>
+    </div>
+    <div class="layui-inline">
         申请时间:<input readonly="readonly" type="text" id="test1"/>至
         <input readonly="readonly" type="text" id="test2"/>
     </div>
     <div onclick="query()" class="layui-btn" data-type="reload">搜索</div>
+    <div  style="margin-left:450px" class="layui-btn" data-type="reload"><a href="L_ershen_zhuan">已审批</a></div>
 </div>
 
 
@@ -46,7 +53,8 @@
 </html>
 <script>
 
-
+    var strM = "undefined";
+    strM.replace("undefined","");
     laydate.render({
         elem: '#test1'
         ,type: 'datetime'

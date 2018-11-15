@@ -17,15 +17,18 @@
     <style>
         #left{
             float:left;
-            margin-left: 50px;
         }
         #right{
             float:left;
-            margin-left: 100px;
+            margin-left: 20px;
+        }
+        #t1 td{
+            border: 1px solid #0A0A0A;
         }
     </style>
 </head>
 <body style="background-color: #F3F3F3">
+<input hidden  id="aa"value="${emp.empid}">
 <input hidden id="deptid" value="${emp.deptid}">
     <div id="left"  style="border:1px solid red;width:700px;height:600px">
         <table class="layui-hide"  lay-filter="dome" id="test">
@@ -34,10 +37,18 @@
             <button data-method="offset" lay-event="edit" data-type="auto" id="deld" class="layui-btn layui-btn-normal">报名详情</button>
         </script>
     </div>
-    <div id="right" style="border:1px solid red;width:350px;height:600px"></div>
+    <div id="right" style="border:1px solid red;width:550px;height:600px">
+        <table id="t1">
+
+            <tr><td>课程名称</td><td>课程得分</td><td>状态</td><td>课程评语</td></tr>
+        </table>
+
+    </div>
 </body>
 </html>
 <script>
+    var strM = "undefined";
+    strM.replace("undefined","");
     var parentId=$("#deptid").val();
     layui.use('table', function(){
         var table = layui.table;
@@ -79,7 +90,7 @@
 
                             $.ajax({
                                 url: 'L_add_keapply',
-                                data: {"empid":$("#empid").val(),"keid":keid,"kstate":2},
+                                data: {"empid":$("#empid").val(),"keid":keid,"kstate":1},
                                 type: 'POST',
                                 dataType: "text",
                                 success: function (data) {
@@ -91,13 +102,37 @@
 
                                 }
                             })
-
-
                     },
                 });
             }
         });
     });
-
+     $(function () {
+         $.ajax({
+             url: 'p_query_ke',
+             data: {"empid":$("#aa").val()},
+             type: 'POST',
+             dataType: "JSON",
+             success: function (data) {
+           alert(data)
+                 var state="";
+                 for(var i=0;i<data.length;i++){
+                     if(data[i].keokstate==0){
+                         state="未完成"
+                     }
+                     if(data[i].keokstate==1){
+                         state="完成"
+                     }
+                 var tr="<tr>"
+                 tr+="<td>"+data[i].kename+"</td>"
+                 tr+="<td>"+data[i].kefenshuo+"</td>"
+                 tr+="<td id='stat'>"+state+"</td>"
+                 tr+="<td>"+data[i].kepingyu+"</td>"
+                 tr+="</tr>";
+                 $("#t1").append(tr);
+                 }
+             }
+         })
+     })
 </script>
 

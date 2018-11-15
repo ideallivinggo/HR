@@ -206,7 +206,7 @@ WHERE  e.empid=#{empid}
                 AND  ao.apovstate=#{apovstate}
             </if>
             <if test="deptid!=null">
-                AND  al.deptid=#{deptid}
+                AND  ao.deptid=#{deptid}
             </if>
         </where>
     </select>
@@ -232,7 +232,7 @@ WHERE  e.empid=#{empid}
                 AND  ad.dimstate=#{dimstate}
             </if>
             <if test="deptid!=null">
-                AND  al.deptid=#{deptid}
+                AND  ad.deptid=#{deptid}
             </if>
         </where>
     </select>
@@ -265,7 +265,7 @@ WHERE  e.empid=#{empid}
     <!--add  转正申请-->
     <insert id="L_add_zhuanzheng"  parameterType="Zhuanzheng" >
         insert into zhuanzheng(empid, shendate, shentext,
-        shenqingstate, deptid)
+        shenqingstate,deptid)
         values(#{empid},#{shendate},
         #{shentext},#{shenqingstate},#{deptid})
     </insert>
@@ -278,19 +278,24 @@ WHERE  e.empid=#{empid}
         zhuanzheng zz
         LEFT JOIN emp e ON e.empid = zz.empid
         LEFT JOIN dept d ON e.deptid = d.deptid
-        WHERE zz.shenqingstate=#{shenqingstate}
-        <if test="deptid!=null">
-        and e.deptid=#{deptid}
-        </if>
+        <where>
+            <if test="empid!=null">
+                AND  zz.empid=#{empid}
+            </if>
+            <if test="shenqingstate!=null">
+               AND   zz.shenqingstate=#{shenqingstate}
+            </if>
+           <if test="deptid!=null">
+          and zz.deptid=#{deptid}
+           </if>
             <if test="fristdate!=''">
                 and   zz.shendate  &gt;= #{fristdate}
             </if>
             <if test="overdate!=''">
                 and  zz.shendate &lt;= #{overdate}
             </if>
-
+        </where>
     </select>
-
     <select id="L_shen_out" resultType="java.util.Map" parameterType="Map">
         SELECT
         *
@@ -298,17 +303,26 @@ WHERE  e.empid=#{empid}
         apply_office ao
         LEFT JOIN emp e ON e.empid = ao.empid
         LEFT JOIN dept d ON e.deptid = d.deptid
-        WHERE ao.offstate=#{offstate}
-        <if test="deptid!=null">
+        <where>
+            <if test="empid!=null">
+                AND  ao.empid=#{empid}
+            </if>
+            <if test="deptid!=null">
+                AND  e.deptid=#{deptid}
+            </if>
+            <if test="offstate!=null">
+                AND  ao.offstate=#{offstate}
+            </if>
+          <if test="deptid!=null">
             AND ao.deptid=#{deptid}
-        </if>
-        <if test="fristdate!=''">
+          </if>
+          <if test="fristdate!=''">
             and   ao.shentime  &gt;= #{fristdate}
         </if>
         <if test="overdate!=''">
             and  ao.shentime &lt;= #{overdate}
         </if>
-
+        </where>
     </select>
     <!--审核修改状态 转正 出差-->
     <update id="L_upd_zhuan" parameterType="Zhuanzheng" >
@@ -346,5 +360,51 @@ WHERE  e.empid=#{empid}
         insert into keapply(keid, empid, kstate, kadate)
         values(#{keid},#{empid},
         #{kstate},#{kadate})
+    </insert>
+
+    <!--部门主管审核  查询-->
+    <select id="L_query_kecheng" resultType="java.util.Map" parameterType="Map">
+        SELECT
+        *
+        FROM
+        keapply ke
+        LEFT JOIN kecheng kc ON kc.keid = ke.keid
+        LEFT JOIN emp e ON e.empid =ke.empid
+        LEFT JOIN dept d ON e.deptid =d.deptid
+        <where>
+        <if test="deptid!=null">
+            AND e.deptid=#{deptid}
+        </if>
+         <if test="empid!=null">
+              AND  ke.empid=#{empid}
+         </if>
+        <if test="fristdate!=''">
+            and   ke.kadate  &gt;= #{fristdate}
+        </if>
+        <if test="overdate!=''">
+            and  ke.kadate &lt;= #{overdate}
+        </if>
+            <if test="kstate!=null">
+                AND  ke.kstate=#{kstate}
+            </if>
+        </where>
+    </select>
+    <!--一级审核  部门审核-->
+    <update id="L_upd_pei" parameterType="Keapply" >
+        UPDATE  keapply  SET kstate=#{kstate},pipeople=#{pipeople},pidate=#{pidate},bohui=#{bohui}
+        where kaid=#{kaid}
+    </update>
+    <!--培训部门审核-->
+    <update id="L_zong_pei" parameterType="Keapply" >
+        UPDATE  keapply  SET kstate=#{kstate},zongshen=#{zongshen},zongshendate=#{zongshendate},zongbohui=#{zongbohui}
+        where kaid=#{kaid}
+    </update>
+    <!--查询报名课程人数-->
+    <select id="L_query_ren" resultType="int"  parameterType="int">
+     select count(*) from keemp where    keokstate=0  and keid=#{keid}
+    </select>
+    <!--add课-->
+    <insert id="L_add_ke" parameterType="Keemp">
+        insert INTO keemp(keid,empid,keokstate) VALUES (#{keid},#{empid},#{keokstate})
     </insert>
     </mapper>

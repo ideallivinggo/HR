@@ -8,7 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>请假申请</title>
+    <title>出差申请</title>
     <script src="assets/js/laydate/laydate.js"></script>
     <script src="assets/js/jquery-1.10.2.min.js"></script>
     <style>
@@ -48,15 +48,11 @@
             font-weight: 700;
             font-size: 12px;
         }
-        #sel{
-            width: 350px;
-            height: 20px;
-        }
     </style>
 </head>
 <body style="background-color: #F3F3F3">
 <div id="body">
-    <div id="top">出差申请</div>
+    <div id="top">出差申请 <span style="width: 50px;height: 35px;background-color:#92B8B1;margin-left:900px"><a href="L_chaxun_out">出差记录</a></span></div>
     <div id="center" class="layui-input-block">
         <form class="layui-form" action="L_add_out" method="post">
             <%--请假日期--%>

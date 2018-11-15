@@ -1,14 +1,14 @@
 <%--
   Created by IntelliJ IDEA.
   User: Administrator
-  Date: 2018/11/8
-  Time: 21:56
+  Date: 2018/11/14
+  Time: 20:40
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>总经理审核离职</title>
+    <title>离职审核</title>
     <script src="assets/js/laydate/laydate.js"></script>
     <script type="text/javascript" src="../../assets/js/jquery.js"></script>
     <script type="text/javascript" src="../../assets/layui/layui.js"></script>
@@ -27,20 +27,21 @@
 
 <div class="demoTable layui-form">
     <div class="layui-inline">
-        <a href="L_zong_leave" class="layui-btn layui-btn-primary">休假审批</a>
+        <a href="L_sh_leave"  class="layui-btn layui-btn-primary">休假审批</a>
     </div>
     <div class="layui-inline">
-        <a href="L_zong_jiaban"  class="layui-btn layui-btn-primary">加班审批</a>
+        <a href="L_sh_jiaban"   class="layui-btn layui-btn-primary">加班审批</a>
     </div>
     <div class="layui-inline">
-        <a href="L_zong_lizhi" style="color: #009688;" class="layui-btn layui-btn-primary">离职审批</a>
+        <a href="L_sh_lizhi"  style="color: #009688;" class="layui-btn layui-btn-primary">离职审批</a>
     </div>
     <div class="layui-inline">
         申请时间:<input readonly="readonly" type="text" id="test1"/>至
         <input readonly="readonly" type="text" id="test2"/>
+        <input hidden id="deptid"  value="${emp.deptid}">
     </div>
     <div onclick="query()" class="layui-btn" data-type="reload">搜索</div>
-    <div  style="margin-left:350px" class="layui-btn" data-type="reload"><a href="L_ershen_lizhi">已审批</a></div>
+    <div  style="margin-left:350px" class="layui-btn" data-type="reload"><a href="L_yishen_lizhi">已审批</a></div>
 </div>
 
 
@@ -54,7 +55,6 @@
 </body>
 </html>
 <script>
-
     laydate.render({
         elem: '#test1'
         ,type: 'datetime'
@@ -64,6 +64,7 @@
         elem: '#test2'
         ,type: 'datetime'
     });
+    var dept=$("#deptid").val();
     layui.use('table', function(){
         var table = layui.table;
         //方法级渲染
@@ -73,7 +74,8 @@
             , limit: 1
             , limits: [1, 2, 3]
             ,where:{
-                dimstate:1
+                "deptid":dept,
+                "dimstate":0
             }
             ,cols: [[
                 , {field: 'empname', width: 120, title: '姓名'}
@@ -97,7 +99,8 @@
                         curr: 1 //重新从第 1 页开始
                     }
                     ,where: {
-                        time1:$("#test1").val(),time2:$("#test2").val(),dimstate:1
+                        time1:$("#test1").val(),time2:$("#test2").val(),deptid:dept,
+                        dimstate:0
                     }
                 });
             }
@@ -121,11 +124,9 @@
                     '离职类型：<span>'+data.dimtype+'</span><br><br>' +
                     '离职理由：<span>'+data.dimdetails+'</span><br><br>' +
                     '对公司的建议：<span>'+data.dimsuggest+'</span><br><br>' +
-                    '一级审批人/审批时间：<span>'+data.dimsign+'</span>&nbsp&nbsp&nbsp&nbsp<span>'+data.nodim+'</span><br><br>' +
-                    '通过理由：<span>'+data.bohui+'</span><br><br>' +
-                    '审批理由：<input type="text" style="width: 350px" id="zongbohui"/><input hidden id="zongshen" value="${emp.empname}"><br><br></div>',
+                    '审批理由：<input type="text" style="width: 350px" id="bohui"/><input hidden id="pipeople" value="${emp.empname}"><br><br></div>',
                     btn1: function(index,layero){
-                        var zhi=$("#zongbohui").val();
+                        var zhi=$("#bohui").val();
                         var dimid=data.dimid;
                         var empid=data.empid;
 
@@ -133,8 +134,8 @@
                             alert("请填写理由");
                         }else{
                             $.ajax({
-                                url: 'J_upd_lizhi',
-                                data: {"zongbohui":$("#zongbohui").val(),"zongshen":$("#zongshen").val(),"dimstate":5,"dimid":dimid,"empid":empid},
+                                url: 'L_upd_lizhi_unpass',
+                                data: {"bohui":$("#bohui").val(),"dimsign":$("#pipeople").val(),"dimstate":1,"dimid":dimid,"empid":empid},
                                 type: 'POST',
                                 dataType: "text",
                                 success: function (data) {
@@ -156,8 +157,8 @@
                             return false
                         }else{
                             $.ajax({
-                                url: 'J_upd_lizhi',
-                                data: {"zongbohui":$("#zongbohui").val(),"zongshen":$("#zongshen").val(),"dimstate":2,"dimid":dimid},
+                                url: 'L_upd_lizhi_unpass',
+                                data: {"bohui":$("#bohui").val(),"dimsign":$("#pipeople").val(),"dimstate":2,"dimid":dimid,"empid":empid},
                                 type: 'POST',
                                 dataType: "text",
                                 success: function (data) {
@@ -173,8 +174,6 @@
                         }
                     }
                 });
-
-
             }
         });
     });

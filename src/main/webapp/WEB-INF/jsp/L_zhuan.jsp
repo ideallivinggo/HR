@@ -51,7 +51,7 @@
 </head>
 <body style="background-color: #F3F3F3">
 <div id="body">
-    <div id="top">转正申请</div>
+    <div id="top">转正申请<span style="width: 50px;height: 35px;background-color:#92B8B1;margin-left:900px"><a href="L_chaxun_zhuan">申请记录</a></span></div>
     <div id="center" class="layui-input-block">
         <center>
             <div style="color:#0A0A0A;font-size: 16px;font-weight:800">实习报告</div>

@@ -320,6 +320,10 @@ public String Qemp(){
     public  String L_shen_zhuan(){
         return "L_shen_zhuan";
     }
+    @RequestMapping("L_shen_pei")
+    public  String L_shen_pei(){
+        return "L_shen_pei";
+    }
     /**二级审核*/
     @RequestMapping("L_erji_out")
     public  String L_erji_out(){
@@ -333,9 +337,75 @@ public String Qemp(){
     public  String L_zong_zhuan(){
         return "L_zong_zhuan";
     }
+    @RequestMapping("L_zong_pei")
+    public  String L_zong_pei(){
+        return "L_zong_pei";
+    }
+    @RequestMapping("L_chaxun_out")
+    public  String L_chaxun_out(){
+        return "L_chaxun_out";}
+    @RequestMapping("L_chaxun_zhuan")
+    public  String L_chaxun_zhuan(){
+        return "L_chaxun_zhuan";}
+    @RequestMapping("L_yishen_out")
+    public  String L_yishen_out(){
+        return "L_yishen_out";}
+    @RequestMapping("L_yishen_pei")
+    public  String L_yishen_pei(){
+        return "L_yishen_pei";}
+    @RequestMapping("L_yishen_zhuan")
+    public  String L_yishen_zhuan(){
+        return "L_yishen_zhuan";}
 
+    /**二级审核记录*/
+    @RequestMapping("L_ershen_zhuan")
+    public  String L_ershen_zhuan(){
+        return "L_ershen_zhuan";}
+    @RequestMapping("L_ershen_out")
+    public  String L_ershen_out(){
+        return "L_ershen_out";}
+    @RequestMapping("L_ershen_lizhi")
+    public  String L_ershen_lizhi(){
+        return "L_ershen_lizhi";}
+    @RequestMapping("L_ershen_pei")
+    public  String L_ershen_pei(){
+        return "L_ershen_pei";}
+    @RequestMapping("L_ershen_jiaban")
+    public  String L_ershen_jiaban(){
+        return "L_ershen_jiaban";}
+    @RequestMapping("L_ershen_leave")
+    public  String L_ershen_leave(){
+        return "L_ershen_leave";}
 
+    @RequestMapping("L_kai_leave")
+    public  String L_kai_leave(){
+        return "L_kai_leave";}
+    @RequestMapping("L_kai_jiaban")
+    public  String L_kai_jiaban(){
+        return "L_kai_jiaban";}
+    @RequestMapping("L_kai_lizhi")
+    public  String L_kai_lizhi(){
+        return "L_kai_lizhi";}
 
+    @RequestMapping("L_sh_leave")
+    public  String L_sh_leave(){
+        return "L_sh_leave";}
+    @RequestMapping("L_sh_jiaban")
+    public  String L_sh_jiaban(){
+        return "L_sh_jiaban";}
+    @RequestMapping("L_sh_lizhi")
+    public  String L_sh_lizhi(){
+        return "L_sh_lizhi";}
+
+    @RequestMapping("L_yishen_leave")
+    public  String L_yishen_leave(){
+        return "L_yishen_leave";}
+    @RequestMapping("L_yishen_jiaban")
+    public  String L_yishen_jiaban(){
+        return "L_yishen_jiaban";}
+    @RequestMapping("L_yishen_lizhi")
+    public  String L_yishen_lizhi(){
+        return "L_yishen_lizhi";}
 
     //----------------------------------靳风儒-------------------------
     /**

@@ -1,10 +1,7 @@
 package com.aaa.rzhr.service;
 
 import com.aaa.rzhr.dao.UserDao;
-import com.aaa.rzhr.pojo.Apply_Office;
-import com.aaa.rzhr.pojo.Emp;
-import com.aaa.rzhr.pojo.Keapply;
-import com.aaa.rzhr.pojo.Zhuanzheng;
+import com.aaa.rzhr.pojo.*;
 import com.aaa.rzhr.util.LayuiFy;
 import com.aaa.rzhr.util.layuiUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -206,14 +203,14 @@ userDao.L_add_lizhi(empid, dimtype, dimdetails, dimsuggest, dimturn, dimapplydat
     }
 /**一级审核查询  出差  转正*/
     @Override
-    public LayuiFy L_shen_zhuan(Integer deptid, Integer shenqingstate, String fristdate, String overdate,Integer limit, Integer page) {
-        LayuiFy bb =layuiUtil.getData(userDao.L_shen_zhuan(deptid, shenqingstate,fristdate, overdate),limit,page);
+    public LayuiFy L_shen_zhuan(Integer empid,Integer deptid, Integer shenqingstate, String fristdate, String overdate,Integer limit, Integer page) {
+        LayuiFy bb =layuiUtil.getData(userDao.L_shen_zhuan(empid,deptid, shenqingstate,fristdate, overdate),limit,page);
         return bb;
     }
 
     @Override
-    public LayuiFy L_shen_out(Integer deptid, Integer offstate, String fristdate, String overdate,Integer limit, Integer page) {
-        LayuiFy bb =layuiUtil.getData(userDao.L_shen_out(deptid, offstate,fristdate, overdate),limit,page);
+    public LayuiFy L_shen_out(Integer empid,Integer deptid, Integer offstate, String fristdate, String overdate,Integer limit, Integer page) {
+        LayuiFy bb =layuiUtil.getData(userDao.L_shen_out(empid,deptid, offstate,fristdate, overdate),limit,page);
         return bb;
     }
 /**二级审核*/
@@ -246,5 +243,34 @@ userDao.L_add_lizhi(empid, dimtype, dimdetails, dimsuggest, dimturn, dimapplydat
     public void L_add_keapply(Keapply keapply) {
       userDao.L_add_keapply(keapply);
     }
+/**报名课程查询
+*/
+    @Override
+    public LayuiFy L_query_kecheng(Integer deptid, Integer empid, String fristdate, String overdate, Integer kstate,Integer limit, Integer page) {
+        LayuiFy bb =layuiUtil.getData(userDao.L_query_kecheng(deptid,empid,fristdate,overdate,kstate),limit,page);
+        return bb;
+    }
+
+    @Override
+    public void L_upd_pei(Keapply keapply) {
+        userDao.L_upd_pei(keapply);
+    }
+
+    @Override
+    public void L_zong_pei(Keapply keapply) {
+    userDao.L_zong_pei(keapply);
+    }
+/** 查询报名课程*/
+    @Override
+    public Integer L_query_ren(Keemp keemp) {
+      return userDao.L_query_ren(keemp);
+    }
+
+    @Override
+    public void L_add_ke(Keemp keemp) {
+        userDao.L_add_ke(keemp);
+    }
+
+
 }
 

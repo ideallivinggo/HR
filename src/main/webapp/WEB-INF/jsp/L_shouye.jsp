@@ -98,6 +98,8 @@
 </body>
 </html>
 <script>
+    var strM = "undefined";
+    strM.replace("undefined","");
     function i1() {
 
         $.ajax({
@@ -140,7 +142,7 @@ function d4() {
         )
     }
 function d5() {
-        window.location.href= "L_kaoqin";
+        window.location.href= "L_kai_leave";
     }
 function d6() {
         window.location.href="L_list";
