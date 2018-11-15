@@ -24,18 +24,20 @@
         left join emp_type et on e.emptypeid = et.emptypeid
         left join position p on e.poid = p.poid
         left join role r on e.poid = r.roid
-        <if test="deptid!=null">
-            WHERE e.deptid=#{deptid}
-        </if>
-        <if test="empname!=null and empname!=''">
-            WHERE e.empname LIKE CONCAT(CONCAT('%',#{empname},'%'))
-        </if>
-        <if test="poid!=null and poid!=''">
-            WHERE  e.poid = #{poid}
-        </if>
-        <if test="emptypeid!=null and emptypeid!=''">
-            WHERE e.emptypeid = #{emptypeid}
-        </if>
+        <where>
+            <if test="deptid!=null">
+                AND e.deptid=#{deptid}
+            </if>
+            <if test="empname!=null and empname!=''">
+                AND e.empname LIKE CONCAT(CONCAT('%',#{empname},'%'))
+            </if>
+            <if test="poid!=null and poid!=''">
+                AND  e.poid = #{poid}
+            </if>
+            <if test="emptypeid!=null and emptypeid!=''">
+                AND e.emptypeid = #{emptypeid}
+            </if>
+        </where>
     </select>
     <!--查询员工-->
     <select id="QueryEmpYqx" resultType="java.util.Map" parameterType="Map" >
@@ -45,21 +47,23 @@
         left join emp_type et on e.emptypeid = et.emptypeid
         left join position p on e.poid = p.poid
         left join empstate es on es.empstateid=e.empstateid
-        <if test="deptid!=null">
-            WHERE e.deptid=#{deptid}
-        </if>
-        <if test="empname!=null and empname!=''">
-            WHERE e.empname LIKE CONCAT(CONCAT('%',#{empname},'%'))
-        </if>
-        <if test="poid!=null and poid!=''">
-            WHERE  e.poid = #{poid}
-        </if>
-        <if test="emptypeid!=null and emptypeid!=''">
-            WHERE e.emptypeid = #{emptypeid}
-        </if>
-        <if test="empstateid!=null and empstateid!=''">
-            WHERE  e.empstateid = #{empstateid}
-        </if>
+        <where>
+            <if test="deptid!=null">
+                AND e.deptid=#{deptid}
+            </if>
+            <if test="empname!='' and empname!=null">
+                AND e.empname LIKE CONCAT(CONCAT('%',#{empname},'%'))
+            </if>
+            <if test="poid!=null">
+                AND  e.poid = #{poid}
+            </if>
+            <if test="emptypeid!=null">
+                AND e.emptypeid = #{emptypeid}
+            </if>
+            <if test="empstateid!=null">
+                AND  e.empstateid = #{empstateid}
+            </if>
+        </where>
     </select>
     <select id="QqueryEmpIf" resultType="java.util.Map">
         SELECT * from emp e

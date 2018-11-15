@@ -277,7 +277,6 @@
                 data:con,
                 dataType:'text',
                 success:function (data) {
-                    alert(data+"添加")
                     window.location.href="QmanageTurn";
                 }
             });

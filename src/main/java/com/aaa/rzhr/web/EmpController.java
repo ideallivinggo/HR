@@ -70,7 +70,6 @@ public class EmpController {
     @RequestMapping("QueryEmpYqx")
     @ResponseBody
     public LayuiFy QueryEmpYqx(Emp emp, Integer limit, Integer page){
-        System.out.println(limit+"dddddddddddddddddddddd"+emp.getDeptid()+"ccccccc"+emp.getEmpstateid());
         /*Emp emp = new Emp();
         emp.setDeptid(deptid);*/
         return empService.QueryEmpYqx(emp,limit,page);
@@ -78,7 +77,6 @@ public class EmpController {
     @RequestMapping("QqueryEmpIf")
     public @ResponseBody
     List<Map> QqueryEmpIf(Integer empid, HttpServletRequest request){
-        System.out.println(empid+"sqqqqqqqqqqqqqqqqqs");
         List<Map> list = empService.QqueryEmpIf(empid);
 
         System.out.println(list);
@@ -90,7 +88,6 @@ public class EmpController {
     @ResponseBody
     public String DelEmpYqx(String s){
         String ss = s.substring(0,s.length()-1);
-        System.out.println(ss+"ssssssssssssssssssssssssssssssss");
         empService.DelEmpYqx(ss);
         return "true";
     }
@@ -101,9 +98,7 @@ public class EmpController {
     @RequestMapping("UpdateEmpYqx")
     @ResponseBody
     public String UpdateEmpYqx(Emp emp){
-        System.out.println(emp.getEmpid()+"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
         empService.UpdateEmpYqx(emp);
-        System.out.println("99999999999999999999999999");
         return "true";
     }
     @RequestMapping("queryEmpById")

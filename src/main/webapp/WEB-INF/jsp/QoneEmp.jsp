@@ -693,15 +693,12 @@
               //监听提交（员工）
               form.on('submit(SubmitEmp)', function(data){
                   var con = $("#EmpForm").serialize();
-                  alert(con)
-                      alert("修改员工")
                       $.ajax({
                           url:'UpdateEmpYu',
                           type:'post',
                           data:con,
                           dataType:'text',
                           success:function (data) {
-                              alert(true+"修改")
                               $(".layui-tab-item").load(location.href+".layui-tab-item");
                               alert("操作成功！");
                           }
@@ -714,38 +711,30 @@
                   var img=$("#demo1").attr('src');
                   var a = $("#ByConid").val();
                   if(a ==""){
-                      alert("添加合同")
                       $.ajax({
                           url:'AddContractYqx?qsrc='+qsrc,
                           type:'post',
                           data:con,
                           dataType:'text',
                           success:function (data) {
-                              alert(true+"添加")
                               $(".layui-tab-item").load(location.href+".layui-tab-item");
                               alert("操作成功！");
                           }
                       })
                       return false;//禁止跳转，否则会提交两次，且页面会刷新
                   }else{
-                      alert("修改合同")
                       $.ajax({
                           url:'UpdateContractYqx?qsrc='+img,
                           type:'post',
                           data:con,
                           dataType:'text',
                           success:function (data) {
-                              alert(true+"修改")
                               $(".layui-tab-item").load(location.href+".layui-tab-item");
                               alert("操作成功！");
                           }
                       })
                       return false;//禁止跳转，否则会提交两次，且页面会刷新
                   }
-                  /*layer.alert(JSON.stringify(data.field), {
-                      title: '最终的提交信息'
-                  })
-                  return false;*/
               });
               //监听提交（教育经历）
               form.on('submit(SubmitEducation)', function(data){
@@ -753,28 +742,24 @@
                   var img=$("#demo2").attr('src');
                   var a = $("#ByExpid").val();
                   if(a ==""){
-                      alert("添加教育")
                       $.ajax({
                           url:'AddEducationYqx?Uedu='+Uedu,
                           type:'post',
                           data:edu,
                           dataType:'text',
                           success:function (data) {
-                              alert(true+"添加")
                               $(".layui-tab-item").load(location.href+".layui-tab-item");
                               alert("操作成功！");
                           }
                       })
                       return false;//禁止跳转，否则会提交两次，且页面会刷新
                   }else{
-                      alert("修改教育")
                       $.ajax({
                           url:'UpdateEducationYqx?Uedu='+img,
                           type:'post',
                           data:edu,
                           dataType:'text',
                           success:function (data) {
-                              alert(true+"修改")
                               $(".layui-tab-item").load(location.href+".layui-tab-item");
                               alert("操作成功！");
                           }
@@ -787,28 +772,24 @@
                   var work = $("#WorkForm").serialize();
                   var a = $("#ByWorkid").val();
                   if(a ==""){
-                      alert("添加教育")
                       $.ajax({
                           url:'AddWorkYqx',
                           type:'post',
                           data:work,
                           dataType:'text',
                           success:function (data) {
-                              alert(true+"添加")
                               $(".layui-tab-item").load(location.href+".layui-tab-item");
                               alert("操作成功！");
                           }
                       });
                       return false;//禁止跳转，否则会提交两次，且页面会刷新
                   }else{
-                      alert("修改教育")
                       $.ajax({
                           url:'UpdateWorkYqx',
                           type:'post',
                           data:work,
                           dataType:'text',
                           success:function (data) {
-                              alert(true+"修改")
                               $(".layui-tab-item").load(location.href+".layui-tab-item");
                               alert("操作成功！");
                           }
@@ -821,28 +802,24 @@
                   var social = $("#SocialForm").serialize();
                   var a = $("#BySocid").val();
                   if(a ==""){
-                      alert("添加教育")
                       $.ajax({
                           url:'AddSocialYqx',
                           type:'post',
                           data:social,
                           dataType:'text',
                           success:function (data) {
-                              alert(true+"添加")
                               $(".layui-tab-item").load(location.href+".layui-tab-item");
                               alert("操作成功！");
                           }
                       });
                       return false;//禁止跳转，否则会提交两次，且页面会刷新
                   }else{
-                      alert("修改教育")
                       $.ajax({
                           url:'UpdateSociaYqx',
                           type:'post',
                           data:social,
                           dataType:'text',
                           success:function (data) {
-                              alert(true+"修改")
                               $(".layui-tab-item").load(location.href+".layui-tab-item");
                               alert("操作成功！");
                           }

@@ -76,7 +76,6 @@
             reload: function(){
                 var demoReload = $('#name').val();
                 var contypeid = 1;
-                alert(demoReload)
                 //执行重载
                 if(demoReload!=''){
                     table.reload('a', {
