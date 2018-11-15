@@ -1,12 +1,6 @@
 package com.aaa.rzhr.pojo;
 
-import java.math.BigInteger;
 
-/**
- * @author YLP
- * @date 2018-10-14 16:46
- * 简历
- */
 public class Resume {
 
   private Integer resid;
@@ -19,6 +13,8 @@ public class Resume {
   private String resposition;
   private String emali;
   private String resdate;
+  private String dizhi;
+  private String jieshao;
   private Integer resstate;
 
 
@@ -102,12 +98,31 @@ public class Resume {
     this.emali = emali;
   }
 
+
   public String getResdate() {
     return resdate;
   }
 
   public void setResdate(String resdate) {
     this.resdate = resdate;
+  }
+
+
+  public String getDizhi() {
+    return dizhi;
+  }
+
+  public void setDizhi(String dizhi) {
+    this.dizhi = dizhi;
+  }
+
+
+  public String getJieshao() {
+    return jieshao;
+  }
+
+  public void setJieshao(String jieshao) {
+    this.jieshao = jieshao;
   }
 
 
@@ -119,21 +134,4 @@ public class Resume {
     this.resstate = resstate;
   }
 
-  public Resume(Integer resid, String resumename, String sex, String education, Integer age, String phone, String resmajor, String resposition, String emali, String resdate, Integer resstate) {
-    this.resid = resid;
-    this.resumename = resumename;
-    this.sex = sex;
-    this.education = education;
-    this.age = age;
-    this.phone = phone;
-    this.resmajor = resmajor;
-    this.resposition = resposition;
-    this.emali = emali;
-    this.resdate = resdate;
-    this.resstate = resstate;
-  }
-
-  public Resume() {
-    super();
-  }
 }
