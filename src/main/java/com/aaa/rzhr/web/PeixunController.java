@@ -21,10 +21,13 @@ public class PeixunController {
      @RequestMapping("/addkecheng")
     public  String  addkecheng(Kecheng kecheng){
                kecheng.setKestate(1);
+               //用split方法 截取出来string数组
          String[] empid=kecheng.getKebaomingtimeend().split(",");
+          //使用工具类Arrays.asList()把数组转换成集合
          List<String> empids= Arrays.asList(empid);
-
+         System.out.println(kecheng.getKebaomingtimebegin()+"||||||||||||||||||||||||||||||||||||||");
                String baomingbegin=kecheng.getKebaomingtimebegin().substring(0,10);
+               //substring  截取指定位置字符串
                String baomingend=kecheng.getKebaomingtimebegin().substring(13,23);
                String begin=kecheng.getKebegintime().substring(0,10);
                String end=kecheng.getKebegintime().substring(13,23);
@@ -34,12 +37,10 @@ public class PeixunController {
          kecheng.setKebegintime(begin);
 
            peixunService.addkecheng(kecheng);
+
            peixunService.addKeTeacher(empids,kecheng.getKeid());
 
-       /*  Emp emp=new Emp();
-         List<Emp> emps =  peixunService.queryEmpByEmp(emp);
-         System.out.println(emps.get(0).getEmpname());
-         System.out.println("涛涛涛涛涛涛涛涛涛涛涛涛+++");*/
+
         return "okok";
     }
     @RequestMapping("/queryEmpByEmp")

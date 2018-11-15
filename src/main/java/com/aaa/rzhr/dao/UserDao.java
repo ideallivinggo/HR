@@ -1,9 +1,6 @@
 package com.aaa.rzhr.dao;
 
-import com.aaa.rzhr.pojo.Apply_Office;
-import com.aaa.rzhr.pojo.Emp;
-import com.aaa.rzhr.pojo.Keapply;
-import com.aaa.rzhr.pojo.Zhuanzheng;
+import com.aaa.rzhr.pojo.*;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import java.util.List;
@@ -80,9 +77,9 @@ public interface UserDao {
     void L_add_zhuanzheng(Zhuanzheng zhuanzheng);
     /**一级审批查询培训  转正  出差*/
     /**转正*/
-    List<Map>  L_shen_zhuan(@Param("deptid") Integer deptid, @Param("shenqingstate") Integer shenqingstate, @Param("fristdate") String fristdate, @Param("overdate") String overdate);
+    List<Map>  L_shen_zhuan(@Param("empid") Integer empid, @Param("deptid") Integer deptid, @Param("shenqingstate") Integer shenqingstate, @Param("fristdate") String fristdate, @Param("overdate") String overdate);
     /**出差*/
-    List<Map>  L_shen_out(@Param("deptid") Integer deptid, @Param("offstate") Integer offstate, @Param("fristdate") String fristdate, @Param("overdate") String overdate);
+    List<Map>  L_shen_out(@Param("empid") Integer empid, @Param("deptid") Integer deptid, @Param("offstate") Integer offstate, @Param("fristdate") String fristdate, @Param("overdate") String overdate);
     /**一级审核修改状态 培训 转正 出差*/
     /**转正*/
     void L_upd_zhuan(Zhuanzheng zhuanzheng);
@@ -97,5 +94,15 @@ public interface UserDao {
     List<Map> L_query_pei();
     /**报名课程*/
     void  L_add_keapply(Keapply keapply);
+    /**查询部门经理要审批的培训*/
+    List<Map> L_query_kecheng(@Param("deptid") Integer deptid, @Param("empid") Integer empid, @Param("fristdate") String fristdate, @Param("overdate") String overdate, @Param("kstate") Integer kstate);
+    /**一级部门审核*/
+    void L_upd_pei(Keapply keapply);
+    /** 培训中心审核*/
+    void L_zong_pei(Keapply keapply);
+    /**查询报名课程现在人数*/
+      Integer L_query_ren(Keemp keemp);
+      /**add课*/
+      void L_add_ke(Keemp keemp);
 
 }

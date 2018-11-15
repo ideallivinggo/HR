@@ -28,11 +28,18 @@
 
 <div class="demoTable layui-form">
     <div class="layui-inline">
+        <a href="L_zong_out"   style="color: #009688;" class="layui-btn layui-btn-primary">出差审批</a>
+    </div>
+    <div class="layui-inline">
+        <a href="L_zong_zhuan"  class="layui-btn layui-btn-primary">转正审批</a>
+    </div>
+    <div class="layui-inline">
         申请时间:<input readonly="readonly" type="text" id="test1"/>至
         <input readonly="readonly" type="text" id="test2"/>
         <input  id="deptid" hidden value="${emp.deptid}"/>
     </div>
     <div onclick="query()" class="layui-btn" data-type="reload">搜索</div>
+    <div  style="margin-left:450px" class="layui-btn" data-type="reload"><a href="L_ershen_out">已审批</a></div>
 </div>
 
 
@@ -46,7 +53,8 @@
 </body>
 </html>
 <script>
-
+    var strM = "undefined";
+    strM.replace("undefined","");
 
     laydate.render({
         elem: '#test1'
@@ -57,19 +65,14 @@
         elem: '#test2'
         ,type: 'datetime'
     });
-    var parentId=$("#deptid").val();
     layui.use('table', function(){
         var table = layui.table;
-        alert(parentId)
         //方法级渲染
         table.render({
             elem: '#test'
             ,url: 'L_query_out_tow'
             , limit: 1
             , limits: [1, 2, 3]
-            ,where:{
-                "deptid":parentId
-            }
             ,cols: [[
                 , {field: 'empname', width: 130, title: '姓名'}
                 , {field: 'shentime', width:200, title: '申请时间',sort: true}
