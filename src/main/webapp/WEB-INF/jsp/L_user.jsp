@@ -129,7 +129,11 @@
 
              <div class="bottom">
                  <div onclick="xin()">我的薪资</div>
+                  <div > <a href="http://localhost:8765/hi?name=${emp.empid}" style="color: white">我的薪资查询</a></div>
              </div>
+
+
+
 
          </div>
 
