@@ -58,8 +58,8 @@
 
     <!--添加简历-->
     <insert id="addResEntering" parameterType="Resume">
-        INSERT INTO resume(resumename, sex, education, age, phone, resmajor, resposition, emali, resdate, resstate)
-        VALUES (#{resumename}, #{sex}, #{education}, #{age}, #{phone}, #{resmajor}, #{resposition}, #{emali}, #{resdate}, #{resstate})
+        INSERT INTO resume(resumename, sex, education, age, phone, resmajor, resposition, emali, resdate,dizhi,jieshao, resstate)
+        VALUES (#{resumename}, #{sex}, #{education}, #{age}, #{phone}, #{resmajor}, #{resposition}, #{emali}, #{resdate}, #{dizhi}, #{jieshao}, #{resstate})
     </insert>
     <!--查看简历-->
     <select id="queryAllRes"  resultType="java.util.Map" parameterType="Map">

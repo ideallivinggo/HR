@@ -28,6 +28,18 @@
         width: 1000px;
         margin: 0px auto;
     }
+    #miantab td{
+        width: 130px;
+    }
+    #miantab tr{
+        height: 55px;
+    }
+    .inputss{
+        width: 90%;
+        height: 99%;
+        border: 0px solid ;
+        padding-left: 10px;
+    }
     #batchUpload {
         margin-left: 500px;
         margin-top: -57px;
@@ -216,6 +228,24 @@
                     </div>
                     <div class="layui-form-item">
                         <div class="layui-inline">
+                            <label class="layui-form-label">地址</label>
+                            <div class="layui-input-block" style="width: 520px;">
+                                <input name="dizhi" class="layui-input" >
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label">自我介绍</label>
+                            <div class="layui-input-block" style="width: 520px;">
+                                 <textarea  name="jieshao" class="layui-textarea">
+                                </textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
                             <label class="layui-form-label">录入时间</label>
                             <div class="layui-input-block">
                                 <input name="resdate" id="resdate" class="layui-input" >
@@ -237,6 +267,79 @@
             </div><!-- /.modal-content -->
         </div><!-- /.modal -->
     </div>
+
+    <!-- 模态框详情（Modal） -->
+    <div class="modal fade" id="myModal2" >
+        <div class="modal-dialog" style="width: 1000px;margin-bottom: 80px" >
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title"  style="font-size:28px;font-weight:bold;font-family:'楷体';margin-left: 50px">
+                        个人简历
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    <form class="layui-form" id="inteForm" >
+
+                        <p style="text-align: center;font-size: 28px;color: #000;margin-top: 20px;">个人简历 </p>
+
+                        <table border="1" style="margin: 10px auto;text-align: center; border-collapse:collapse;"  id="miantab">
+
+                            <tr>
+                                <td>姓名：</td>
+                                <td colspan="2"><input class="inputss" id="resumename" readOnly></td>
+                                <td>性别：</td>
+                                <td colspan="2"><input class="inputss" id="sex2" readOnly></td>
+                            </tr>
+                            <tr>
+                                <td>年龄：</td>
+                                <td colspan="2"><input class="inputss" id="age" readOnly></td>
+                                <td>学历：</td>
+                                <td colspan="2"><input class="inputss" id="education2" readOnly></td>
+                            </tr>
+                            <tr>
+                                <td>手机号：</td>
+                                <td colspan="2"><input class="inputss" id="phone" readOnly></td>
+                                <td>邮箱号：</td>
+                                <td colspan="2"><input class="inputss" id="emali" readOnly></td>
+                            </tr>
+                            <tr>
+                                <td>面试职位：</td>
+                                <td colspan="2"><input class="inputss" id="resposition" readOnly></td>
+
+                                <td>所学专业：</td>
+                                <td colspan="2"><input class="inputss" id="resmajor" readOnly></td>
+                            </tr>
+                            <tr>
+                                <td>现住地址</td>
+                                <td colspan="5"><input class="inputss" id="dizhi" readOnly style="width: 100%"></td>
+                            </tr>
+                            <tr>
+                                <td>自我介绍</td>
+                                <td colspan="5">
+                                    <textarea readOnly id="jieshao" class="layui-textarea"></textarea>
+                                </td>
+                            </tr>
+                            <tr style="border: 0px">
+                                <td>录入时间</td>
+                                <td style="border: 0px"><input class="inputss" id="resdate2" readOnly></td>
+                                <td style="border: 0px"></td>
+                                <td style="border: 0px"></td>
+                                <td style="border: 0px"></td>
+                                <td style="border: 0px"></td>
+                            </tr>
+                        </table>
+                    </form>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal -->
+    </div>
+
+
+
+
+
+
 </div>
 </body>
 <script>
@@ -262,8 +365,8 @@
                $("#mytab").html("");
                 for ( var i = 0; i < data.list.length; i++) {
                     var tr="<tr>";
-                    tr+="<td>"+data.list[i].resid+"</td>";
-                    tr+="<td>"+data.list[i].resumename+"</td>";
+                    tr+="<td data-toggle='modal' data-target='#myModal2' onclick='xq("+data.list[i].resid+")'>"+data.list[i].resid+"</td>";
+                    tr+="<td data-toggle='modal' data-target='#myModal2' onclick='xq("+data.list[i].resid+")'>"+data.list[i].resumename+"</td>";
                     tr+="<td>"+data.list[i].sex+"</td>";
                     tr+="<td>"+data.list[i].age+"</td>";
                     tr+="<td>"+data.list[i].phone+"</td>";
@@ -284,6 +387,32 @@
                 $("#nowPage").html(data.pageNum);
                 $("#total").html(data.total);//总条数
                 $("#pages").html(data.pages);//总页数
+            }
+        })
+    }
+    //单个信息
+    function xq(obj) {
+
+        $.ajax({
+            url: "queryAllResYLP",
+            type: "post",
+            data:{resid:obj,pageNum:1},
+            dataType: "json",
+            success: function (data) {
+                var data = data.list;
+                $("#resumename").val(data[0].resumename);
+                $("#sex2").val(data[0].sex);
+                $("#age").val(data[0].age);
+                $("#phone").val(data[0].phone);
+                $("#emali").val(data[0].emali);
+                $("#resposition").val(data[0].resposition);
+                $("#education2").val(data[0].education);
+                $("#resmajor").val(data[0].resmajor);
+
+                $("#dizhi").val(data[0].dizhi);
+                $("#jieshao").val(data[0].jieshao);
+                $("#resdate2").val(data[0].resdate);
+
             }
         })
     }

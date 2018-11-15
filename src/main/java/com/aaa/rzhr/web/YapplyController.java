@@ -113,6 +113,8 @@ public class YapplyController {
                 resume.setResposition(sheet.getCell(6,i).getContents());
                 resume.setEmali(sheet.getCell(7,i).getContents());
                 resume.setResdate(sheet.getCell(8,i).getContents());
+                resume.setDizhi(sheet.getCell(9,i).getContents());
+                resume.setJieshao(sheet.getCell(10,i).getContents());
                 resume.setResstate(0);
                 service.addResEntering(resume);
             }

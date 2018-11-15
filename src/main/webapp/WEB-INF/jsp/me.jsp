@@ -298,7 +298,7 @@
                 $("#peixin").html(data.countnum);
             }
         })
-        //培训课程审批
+        //录取
         $.ajax({
             url: "countInttwoYLP",
             type: "post",
