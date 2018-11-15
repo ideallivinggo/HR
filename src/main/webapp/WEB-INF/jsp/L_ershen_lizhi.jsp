@@ -102,7 +102,7 @@
                     title: '离职详情',
                     area: ['800px', '500px'],
                     btn: ['关闭'],
-                    content: '<div id="#cont">姓名：<span >'+data.empname+'</span>&nbsp&nbsp&nbsp&nbsp<span style="font-size: 12px">'+data.dimapplydate+'</span><br><br>' +
+                    content: '<div id="cont">姓名：<span >'+data.empname+'</span>&nbsp&nbsp&nbsp&nbsp<span style="font-size: 12px">'+data.dimapplydate+'</span><br><br>' +
                 '离职类型：<span>'+data.dimtype+'</span><br><br>' +
                 '离职理由：<span>'+data.dimdetails+'</span><br><br>' +
                 '对公司的建议：<span>'+data.dimsuggest+'</span><br><br>' +

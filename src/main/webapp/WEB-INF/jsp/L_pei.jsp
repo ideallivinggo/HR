@@ -25,21 +25,24 @@
         #t1 td{
             border: 1px solid #0A0A0A;
         }
+        #t1{
+            width:580px;
+            margin-top: 20px;
+        }
     </style>
 </head>
 <body style="background-color: #F3F3F3">
 <input hidden  id="aa"value="${emp.empid}">
 <input hidden id="deptid" value="${emp.deptid}">
-    <div id="left"  style="border:1px solid red;width:700px;height:600px">
+    <div id="left"  style="width:700px">
         <table class="layui-hide"  lay-filter="dome" id="test">
         </table >
         <script type="text/html" id="barDemo">
             <button data-method="offset" lay-event="edit" data-type="auto" id="deld" class="layui-btn layui-btn-normal">报名详情</button>
         </script>
     </div>
-    <div id="right" style="border:1px solid red;width:550px;height:600px">
+    <div id="right" style="width:570px">
         <table id="t1">
-
             <tr><td>课程名称</td><td>课程得分</td><td>状态</td><td>课程评语</td></tr>
         </table>
 
@@ -47,8 +50,6 @@
 </body>
 </html>
 <script>
-    var strM = "undefined";
-    strM.replace("undefined","");
     var parentId=$("#deptid").val();
     layui.use('table', function(){
         var table = layui.table;
@@ -114,7 +115,6 @@
              type: 'POST',
              dataType: "JSON",
              success: function (data) {
-           alert(data)
                  var state="";
                  for(var i=0;i<data.length;i++){
                      if(data[i].keokstate==0){
@@ -123,13 +123,16 @@
                      if(data[i].keokstate==1){
                          state="完成"
                      }
+
                  var tr="<tr>"
                  tr+="<td>"+data[i].kename+"</td>"
                  tr+="<td>"+data[i].kefenshuo+"</td>"
                  tr+="<td id='stat'>"+state+"</td>"
                  tr+="<td>"+data[i].kepingyu+"</td>"
                  tr+="</tr>";
-                 $("#t1").append(tr);
+                    $("#t1").append(tr);
+                    var str=$("#t1").html();
+                     $("#t1").html(str.replace(/undefined/g,""))
                  }
              }
          })

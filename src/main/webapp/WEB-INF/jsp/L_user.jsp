@@ -243,7 +243,6 @@
                data:$("#form1").serialize(),
                dataType:"text",
                success:function (data) {
-                  alert(data);
                   if(data=="ok"){
                       window.open('logout','_top');
                   }else{

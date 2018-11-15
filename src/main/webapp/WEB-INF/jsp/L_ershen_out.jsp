@@ -35,7 +35,7 @@
 <table class="layui-hide"  lay-filter="dome" id="test">
 </table >
 <script type="text/html" id="barDemo">
-    <button data-method="offset" lay-event="edit" data-type="auto" id="deld" class="layui-btn layui-btn-normal">审核</button>
+    <button data-method="offset" lay-event="edit" data-type="auto" id="deld" class="layui-btn layui-btn-normal">详情</button>
 </script>
 </body>
 </html>
