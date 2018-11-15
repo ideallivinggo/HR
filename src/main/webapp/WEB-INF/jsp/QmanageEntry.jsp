@@ -66,7 +66,7 @@
                 ,{field:'sex', title: '性别', align:'center'}
                 ,{field:'actnumber', title: '工号', align:'center'}
                 ,{field:'resmajor', title: '专业', align:'center'}
-                ,{field:'actpwd', title: '密码', align:'center'}
+                /*,{field:'actpwd', title: '密码', align:'center'}*/
                 ,{field:'phone', title: '手机', align:'center'}
                 ,{field:'emali', title: '邮箱', align:'center'}
                 ,{field:'right', title: '操作',toolbar: '#barDemo', align:'center'}

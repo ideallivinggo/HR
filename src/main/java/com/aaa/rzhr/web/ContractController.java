@@ -462,6 +462,7 @@ public class ContractController {
         apply_dimission.setRenshishen(name);
         apply_dimission.setRenshishendate(data);
         contractService.UpdateApplyDimissionYqx(apply_dimission);
+        empRoleService.delEmpRoleByempid(empid);
         return "true";
     }
     /**

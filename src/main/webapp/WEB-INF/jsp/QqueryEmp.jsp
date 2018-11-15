@@ -22,27 +22,25 @@
                         <div class="demoTable layui-form">
                             <%--姓名--%>
                             <div class="layui-inline">
-                                <input id="empname" class="layui-input">
+                                <input id="empname" class="layui-input" placeholder="姓名">
                             </div>
-                            <div class="layui-btn" data-type="reload"><i class="layui-icon"> &#xe615;</i></div>
                             <%--下拉--%>
                             <div class="layui-inline">
                                 <select id="ByType">
                                     <option value="">--部门--</option>
                                 </select>
                             </div>
-                            <div class="layui-btn" data-type="reload"><i class="layui-icon"> &#xe615;</i></div>
                             <%--员工类型--%>
                                 <div class="layui-inline">
                                     <select id="ByEmpType">
-                                        <option value="">全部</option>
+                                        <option value="">--员工类型--</option>
                                         <option value="1">实习期</option>
                                         <option value="2">已转正</option>
-                                        <option value="3">待离职</option>
                                         <option value="4">已离职</option>
                                     </select>
                                 </div>
                                 <div class="layui-btn" data-type="reload"><i class="layui-icon"> &#xe615;</i></div>
+                                <div class="layui-btn" onclick="Reload()">刷新</div>
                          </div>
                 </div>
                 <div class="layui-card-body" style="height:90%;">
@@ -80,8 +78,8 @@
                 elem: '#QueryEmp'
                 ,url:'QueryEmpYqx'
                 ,page: true//开启分页
-                ,limit :5//这个是每页面显示多少条，页面跳转后他会自动让下拉框里对应的值设为选中状态
-                ,limits: [ 5, 10, 20, 30, 40, 50]
+                ,limit :10//这个是每页面显示多少条，页面跳转后他会自动让下拉框里对应的值设为选中状态
+                ,limits: [ 10, 20, 30, 40, 50]
                 ,cellMinWidth: 50 //全局定义常规单元格的最小宽度
                 ,id:'a'
                 ,cols: [[
@@ -105,10 +103,9 @@
                     var demoReload = $('#ByType').val();
                     var empType=$('#ByEmpType').val();
                     var empname=$('#empname').val();
-                    alert(demoReload+"aaaaaaaaaaa"+empType)
+                   /* alert(demoReload+"aaaaaaaaaaa"+empType)*/
                     //执行重载
                     table.reload('a', {
-                        url:'QueryEmpYqx',
                         method:'post',
                         page: {
                             curr: 1 //重新从第 1 页开始
@@ -129,7 +126,7 @@
             table.on('tool(test)', function(obj){
                 var data = obj.data;
                 var empid = data.empid;
-                alert(empid)
+                /*alert(empid)*/
                 if(obj.event === 'edit'){
                         $.ajax({
                             url:'QqueryEmpIf',
@@ -142,24 +139,9 @@
                             }
                         })
                 }
-                var empstateid = data.empstateid;
-                if(obj.event === 'edit2'){
-                    alert("该员工是否确定离职？")
-                    $.ajax({
-                        url:'UpdateEmpState',
-                        type:'post',
-                        data:{"empstateid":empstateid,"empid":empid},
-                        dataType:'text',
-                        success:function (data) {
-                            alert("离职成功!")
-                            location.reload();
-                        }
-                    })
-                }
             });
 
         });
-
         QuerySelect();
     })
     /**
@@ -178,5 +160,9 @@
                 }
             }
         })
+    }
+    //刷新整个页面
+    function Reload(){
+        location=location;
     }
 </script>
