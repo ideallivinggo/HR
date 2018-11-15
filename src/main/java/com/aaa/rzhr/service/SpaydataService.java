@@ -123,4 +123,10 @@ public interface SpaydataService {
     public Map sgetallby(Map m);
     //添加员工月迟到记录
     public int saddycdj(List<Map> list);
+    //查询已申请的月请假
+    public List<Map> sgetyueqj();
+    //查询已申请的病假
+    public List<Map> sgetbingjia();
+    //查询所有的加班
+    public List<Map> sgetjball();
 }

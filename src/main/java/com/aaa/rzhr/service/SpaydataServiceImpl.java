@@ -443,5 +443,20 @@ public class SpaydataServiceImpl implements  SpaydataService {
         return mapper.saddycdj(list);
     }
 
+    @Override
+    public List<Map> sgetyueqj() {
+        return mapper.sgetyueqj();
+    }
+
+    @Override
+    public List<Map> sgetbingjia() {
+        return mapper.sgetbingjia();
+    }
+
+    @Override
+    public List<Map> sgetjball() {
+        return mapper.sgetjball();
+    }
+
 
 }
