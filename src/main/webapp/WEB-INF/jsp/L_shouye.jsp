@@ -108,7 +108,6 @@
                 data:{"empid":$("#empidid").val()},
                 dataType:"json",
                 success:function (data) {
-                    alert(data);
                     window.location.href="L_leave";
 
                 }
@@ -134,7 +133,6 @@ function d4() {
                 data:{"empid":$("#empidid").val()},
                 dataType:"json",
                 success:function (data) {
-                    alert(data);
                     window.location.href="L_user";
 
                 }
