@@ -17,5 +17,13 @@
 <%--  <br><br>
   出现异常的地址是：
   ${url}--%>
+
+<table>
+    <tr>
+        <td>姓名</td>
+        <td>工号</td>
+
+    </tr>
+</table>
 </body>
 </html>

@@ -41,7 +41,6 @@ public class PermissionServiceImpl implements PermissionService {
     }
 
     @Override
-    @Cacheable(value = "permission",keyGenerator = "wiselyKeyGenerator")
     public Set<String> listPermissionURLs(String empName) {
         Set<String> result=new HashSet<>();
       List<Role> roles=roleService.listRoles(empName);
@@ -62,13 +61,12 @@ public class PermissionServiceImpl implements PermissionService {
     }
 
     @Override
+    @Cacheable(value = "permission",keyGenerator = "wiselyKeyGenerator")
     public Permission getPermissionByid(Integer pid) {
-        System.out.println("55555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555");
         return permissionMapper.getPermissionByid(pid);
     }
 
     @Override
-    @Cacheable(value = "permission",keyGenerator = "wiselyKeyGenerator")
     public List<Permission> queryPermissionByRoleX(Role role) {
         List<Permission> result = new ArrayList<>();
         List<Role_Permission> allRPByRid = rolePermissionService.getAllRPByRid(role.getRoid());
