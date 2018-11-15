@@ -487,7 +487,6 @@ SpaydataService service;
                }
                      System.out.println(emplist.size()+"empppppp"+emplist);
             for (int g=0;g<kqlist.size();g++){
-                System.out.println("hhhhhhhhhhh");
                 if(kqlist.get(g).get("chidao").equals("1")){
                     System.out.println("true");
                    Map m= kqlist.get(g);
@@ -511,10 +510,239 @@ SpaydataService service;
                         maps.put("chidaofz",1);
                         latelist.add(map);
                         latelist.add(maps);*/
-                     int a=service.saddycdj(latelist);
-                        System.out.println(a);
+                    /// int a=service.saddycdj(latelist);
+                    ///    System.out.println(a);
                     }
-                     System.out.println(latelist.size()+"fffffffffffffffffffff");
+
+                    //计算请假 加班
+                     List<Map> qjlist=service.sgetyueqj();
+                     for (int t=0;t<emplist.size();t++) {
+                         Map yuemap = emplist.get(t);
+                         //1
+                         int qingjiasum = 0;
+                         if (qjlist.size() != 0) {
+                             for (int j = 0; j < qjlist.size(); j++) {
+
+                                 if (yuemap.get("empid").equals(qjlist.get(j).get("empid"))) {
+                                     String ldate = String.valueOf(qjlist.get(j).get("leaenterdate"));
+                                     int index = ldate.indexOf("到");
+                                     String lateq = ldate.substring(0, index);
+                                     String lateh = ldate.substring(index + 1);
+                                     SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+                                     int qqq = Integer.parseInt(lateq.substring(5, 7));
+                                     int hhh = Integer.parseInt(lateh.substring(6, 8));
+                                     int qqqd = Integer.parseInt(lateq.substring(8, 10));
+                                     int hhhd = Integer.parseInt(lateh.substring(9, 11));
+
+                                     //java获取上个前月的天数
+                                     Date dates = new Date();
+                                     Calendar calendar = Calendar.getInstance();
+                                     calendar.setTime(dates);
+                                     int day = calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
+                                     format.format(new Date());
+                                     Calendar cal = Calendar.getInstance();
+                                     int month = cal.get(Calendar.MONTH);
+                                     if (hhh > month && qqq < month) {
+                                         qingjiasum = qingjiasum + day * 8;
+                                         yuemap.put("qingjiasum", qingjiasum);
+                                     } else if (hhh > month && qqq > month) {
+                                         yuemap.put("qingjiasum", qingjiasum);
+                                     } else if (hhh > month && qqq == month) {
+                                         qingjiasum = qingjiasum + (day - qqqd + 1) * 8;
+                                         yuemap.put("qingjiasum", qingjiasum);
+                                     } else if (hhh == month && qqq == month) {
+                                         qingjiasum = qingjiasum + (hhhd - qqqd + 1) * 8;
+                                         yuemap.put("qingjiasum", qingjiasum);
+                                     } else if (hhh == month && qqq < month) {
+                                         qingjiasum = qingjiasum + hhhd * 8;
+                                         yuemap.put("qingjiasum", qingjiasum);
+                                     } else if (hhh < month && qqq < month) {
+                                         yuemap.put("qingjiasum", qingjiasum);
+                                     }
+                                 } else {
+                                     yuemap.put("qingjiasum", qingjiasum);
+                                 }
+                             }
+                         }else {
+                             yuemap.put("qingjiasum", qingjiasum);
+                         }
+
+
+
+                         //2
+                         List<Map> blist = service.sgetbingjia();
+                         int bingjiasum = 0;
+                         if(blist.size()!=0){
+                         for (int b = 0; b < blist.size(); b++) {
+                                 if (yuemap.get("empid").equals(blist.get(b).get("empid"))) {
+                                     String ldate = String.valueOf(blist.get(b).get("leaenterdate"));
+                                     int index = ldate.indexOf("到");
+                                     String lateq = ldate.substring(0, index);
+                                     String lateh = ldate.substring(index + 1);
+                                     SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+                                     int qqq = Integer.parseInt(lateq.substring(5, 7));
+                                     int hhh = Integer.parseInt(lateh.substring(6, 8));
+                                     int qqqd = Integer.parseInt(lateq.substring(8, 10));
+                                     int hhhd = Integer.parseInt(lateh.substring(9, 11));
+
+                                     //java获取上个前月的天数
+                                     Date dates = new Date();
+                                     Calendar calendar = Calendar.getInstance();
+                                     calendar.setTime(dates);
+                                     int day = calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
+                                     format.format(new Date());
+                                     Calendar cal = Calendar.getInstance();
+                                     int month = cal.get(Calendar.MONTH);
+                                     if (hhh > month && qqq < month) {
+                                         bingjiasum = bingjiasum + day * 8;
+                                         yuemap.put("bingjiasum", bingjiasum);
+                                     } else if (hhh > month && qqq > month) {
+                                         yuemap.put("bingjiasum", bingjiasum);
+                                     } else if (hhh > month && qqq == month) {
+                                         bingjiasum = bingjiasum + (day - qqqd + 1) * 8;
+                                         yuemap.put("bingjiasum", bingjiasum);
+                                     } else if (hhh == month && qqq == month) {
+                                         bingjiasum = bingjiasum + (hhhd - qqqd + 1) * 8;
+                                         yuemap.put("bingjiasum", bingjiasum);
+                                     } else if (hhh == month && qqq < month) {
+                                         bingjiasum = bingjiasum + hhhd * 8;
+                                         yuemap.put("bingjiasum", bingjiasum);
+                                     } else if (hhh < month && qqq < month) {
+                                         yuemap.put("bingjiasum", bingjiasum);
+                                     }
+                                 } else {
+                                     yuemap.put("bingjiasum", bingjiasum);
+                                 }
+                         }
+                     }else {
+                             yuemap.put("bingjiasum", bingjiasum);
+                         }
+             //3
+                     List<Map> jblist=service.sgetjball();
+                           double gzrjb=0;
+                         double fdrjb=0;
+                         double zmrjb=0;
+                         if(jblist.size()!=0) {
+                             for (int jb = 0; jb < jblist.size(); jb++) {
+                                     if (jblist.get(jb).get("apovtype").equals("工作日加班") && yuemap.get("empid").equals(jblist.get(jb).get("empid"))) {
+                                         System.out.println("kkkkkkkkkk");
+                                         String ldate = String.valueOf(jblist.get(jb).get("apovstartdate"));
+                                         int index = ldate.indexOf("到");
+                                         String lateq = ldate.substring(0, index);
+                                         String lateh = ldate.substring(index + 1);
+                                         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+                                         int qqq = Integer.parseInt(lateq.substring(5, 7));
+                                         int hhh = Integer.parseInt(lateh.substring(6, 8));
+                                         String hours = String.valueOf(jblist.get(jb).get("apovhour"));
+                                         double hour = Double.valueOf(hours);
+                                         System.out.println("hours" + hours);
+                                         //java获取上个前月的天数
+                                         Date dates = new Date();
+                                         Calendar calendar = Calendar.getInstance();
+                                         calendar.setTime(dates);
+                                         int day = calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
+                                         format.format(new Date());
+                                         Calendar cal = Calendar.getInstance();
+                                         int month = cal.get(Calendar.MONTH);
+                                         if (hhh > month && qqq < month) {
+                                             gzrjb = gzrjb + hour;
+                                             yuemap.put("gzrjb", gzrjb);
+                                         } else if (hhh > month && qqq == month) {
+                                             gzrjb = gzrjb + hour;
+                                             yuemap.put("gzrjb", gzrjb);
+                                         } else if (hhh == month && qqq == month) {
+                                             gzrjb = gzrjb + hour;
+                                             yuemap.put("gzrjb", gzrjb);
+                                         } else if (hhh == month && qqq < month) {
+                                             gzrjb = gzrjb;
+                                             yuemap.put("gzrjb", gzrjb);
+                                         }
+                                     }else{
+                                         gzrjb = gzrjb;
+                                         yuemap.put("gzrjb", gzrjb);
+                                     }
+
+                                     if (jblist.get(jb).get("apovtype").equals("周末日加班") && yuemap.get("empid").equals(jblist.get(jb).get("empid"))) {
+                                         System.out.println("kkkkkkkkkk");
+                                         String ldate = String.valueOf(jblist.get(jb).get("apovstartdate"));
+                                         int index = ldate.indexOf("到");
+                                         String lateq = ldate.substring(0, index);
+                                         String lateh = ldate.substring(index + 1);
+                                         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+                                         int qqq = Integer.parseInt(lateq.substring(5, 7));
+                                         int hhh = Integer.parseInt(lateh.substring(6, 8));
+                                         String hours = String.valueOf(jblist.get(jb).get("apovhour"));
+                                         double hour = Double.valueOf(hours);
+                                         System.out.println("hours" + hours);
+                                         //java获取上个前月的天数
+                                         Date dates = new Date();
+                                         Calendar calendar = Calendar.getInstance();
+                                         calendar.setTime(dates);
+                                         int day = calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
+                                         format.format(new Date());
+                                         Calendar cal = Calendar.getInstance();
+                                         int month = cal.get(Calendar.MONTH);
+                                         if (hhh > month && qqq < month) {
+                                             zmrjb = zmrjb + hour;
+                                             yuemap.put("zmrjb", zmrjb);
+                                         } else if (hhh > month && qqq == month) {
+                                             zmrjb = zmrjb + hour;
+                                             yuemap.put("zmrjb", zmrjb);
+                                         } else if (hhh == month && qqq == month) {
+                                             zmrjb = zmrjb + hour;
+                                             yuemap.put("zmrjb", zmrjb);
+                                         } else if (hhh == month && qqq < month) {
+                                             zmrjb = zmrjb;
+                                             yuemap.put("zmrjb", zmrjb);
+                                         }
+                                     }else{
+                                         yuemap.put("zmrjb", zmrjb);
+                                     }
+                               if (jblist.get(jb).get("apovtype").equals("法定日加班") && yuemap.get("empid").equals(jblist.get(jb).get("empid"))) {
+                                         System.out.println("kkkkkkkkkk");
+                                         String ldate = String.valueOf(jblist.get(jb).get("apovstartdate"));
+                                         int index = ldate.indexOf("到");
+                                         String lateq = ldate.substring(0, index);
+                                         String lateh = ldate.substring(index + 1);
+                                         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+                                         int qqq = Integer.parseInt(lateq.substring(5, 7));
+                                         int hhh = Integer.parseInt(lateh.substring(6, 8));
+                                         String hours = String.valueOf(jblist.get(jb).get("apovhour"));
+                                         double hour = Double.valueOf(hours);
+                                         System.out.println("hours" + hours);
+                                         //java获取上个前月的天数
+                                         Date dates = new Date();
+                                         Calendar calendar = Calendar.getInstance();
+                                         calendar.setTime(dates);
+                                         int day = calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
+                                         format.format(new Date());
+                                         Calendar cal = Calendar.getInstance();
+                                         int month = cal.get(Calendar.MONTH);
+                                         if (hhh > month && qqq < month) {
+                                             fdrjb = fdrjb + hour;
+                                             yuemap.put("fdrjb", fdrjb);
+                                         } else if (hhh > month && qqq == month) {
+                                             fdrjb = gzrjb + hour;
+                                             yuemap.put("fdrjb", fdrjb);
+                                         } else if (hhh == month && qqq == month) {
+                                             fdrjb = fdrjb + hour;
+                                             yuemap.put("fdrjb", fdrjb);
+                                         } else if (hhh == month && qqq < month) {
+                                             fdrjb = fdrjb;
+                                             yuemap.put("fdrjb", fdrjb);
+                                         }
+                                     }else{
+                                   yuemap.put("fdrjb", fdrjb);
+                               }
+
+                             }
+
+                         }else {
+                             yuemap.put("gzrjb", gzrjb);
+                         }
+                     }
+
+                     System.out.println(emplist);
                    int a= service.saddykq(emplist);
                sy=scal.get(Calendar.YEAR);
                sm=scal.get(Calendar.MONTH)+2;

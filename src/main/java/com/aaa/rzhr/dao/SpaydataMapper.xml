@@ -198,9 +198,9 @@ WHERE di.eddnumber='${empnumber}' GROUP BY ap.empid
 SELECT * FROM empdingd ed JOIN emp_empdingd eed ON ed.eddid=eed.eddid
     </select>
     <insert id="saddykq" parameterType="java.util.List">
-        INSERT INTO att_statisticsxq (staid,empid,worday,workzaotui,workyzchidao,worklatesum) VALUES
+        INSERT INTO att_statisticsxq (staid,empid,worday,worbelate,worpaffairs,worweekwork,worpswork,worhdaywork,workzaotui,workyzchidao,worklatesum) VALUES
         <foreach collection="list" item="m"  separator="," >
-            (#{m.staid},#{m.empid},#{m.queqincs},#{m.zaotuics},#{m.yzchidao},${m.chidaocs})
+            (#{m.staid},#{m.empid},#{m.queqincs},#{m.bingjiasum},#{m.qingjiasum},#{m.zmrjb},#{m.gzrjb},#{m.fdrjb},#{m.zaotuics},#{m.yzchidao},${m.chidaocs})
         </foreach>
     </insert>
     <insert id="saddyqkhdate" parameterType="String">
@@ -224,4 +224,13 @@ SELECT * FROM att_statisticsxq WHERE staid=#{staid}
             (#{m.staid},#{m.empids},#{m.chidao},#{m.chidaofz})
         </foreach>
     </insert>
+    <select id="sgetyueqj" resultType="java.util.Map">
+     SELECT leaenterdate,empid from apply_leave where leatype='事假'  AND leasate=4
+    </select>
+    <select id="sgetbingjia" resultType="java.util.Map">
+    SELECT leaenterdate,empid from apply_leave where leatype='病假' AND leasate=4
+    </select>
+    <select id="sgetjball" resultType="java.util.Map">
+   SELECT * from apply_overtime where apovstate=4
+    </select>
 </mapper>
